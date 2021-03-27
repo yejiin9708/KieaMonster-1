@@ -1,4 +1,4 @@
-## Spring Boot WebSocket Chat Appplication
+## Spring Boot WebSocket Chat Appplication: unknown error
 
 You can checkout the live version of the application at https://spring-ws-chat.herokuapp.com/
 
