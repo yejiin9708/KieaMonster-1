@@ -1,0 +1,56 @@
+
+
+server:
+  port: 8080
+  servlet.context-path: /v0.1
+
+
+spring:
+  datasource:
+    url: jdbc:oracle:thin:@idc.tainweb.com:11521/XE
+    driver-class-name: oracle.jdbc.OracleDriver
+    username: TMSAS
+    password: TMSAS
+    sql-script-encoding: UTF-8
+  jpa:
+    show-sql: true
+    database: oracle
+    database-platform: org.hibernate.dialect.Oracle10gDialect
+    generate-ddl: false
+    hibernate.ddl-auto: update
+  data.rest:
+    base-path: /api
+    default-page-size: 5
+    max-page-size: 20
+  thymeleaf:
+    enabled: true
+    encoding: utf-8
+    cache: false
+    prefix: classpath:templates/
+    suffix: .html
+  servlet.multipart:
+    enabled: true
+    location: ~/FILES
+    max-file-size: 5GB
+    max-request-size: 5GB
+  devtools:
+    livereload.enabled: true
+
+logging:
+  file:
+    path: logs/
+    max-size: 10MB
+  pattern:
+    console: "%clr(%d{HH:mm:ss}){magenta} %-5level - %m%n"
+    file: "%d %-5level [%-10thread] [%-30logger{30}] - %m%n"
+  level:
+    root: info
+    org.tain.*: info
+    org.hibernate: info
+    org.hibernate.SQL: info
+    org.hibernate.type: info
+    org.hibernate.type.descriptor.sql.BasicBinder: trace
+    org.thymeleaf: info
+    org.h2.server.web: info
+
+
