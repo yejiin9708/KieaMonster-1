@@ -15,6 +15,7 @@ import javax.persistence.Table;
 import org.hibernate.annotations.CreationTimestamp;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import lombok.Builder;
 import lombok.Data;
@@ -40,6 +41,7 @@ public class Board {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "board_seq")
 	@Column(name = "id")
+	@JsonProperty
 	private Long id;
 	
 	@Column(name = "title", length = 256)

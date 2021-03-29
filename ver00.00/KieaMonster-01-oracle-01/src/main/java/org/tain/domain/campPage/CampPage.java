@@ -9,6 +9,8 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.CreationTimestamp;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import lombok.Data;
 
 @Entity
@@ -18,6 +20,7 @@ public class CampPage {
 
 	@Id
 	@Column(name = "campaign_sk")
+	@JsonProperty
 	private Long campaignSk;
 	
 	@Column(name = "page_nm", length = 256)
