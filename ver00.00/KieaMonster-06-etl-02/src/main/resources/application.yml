@@ -1,0 +1,35 @@
+
+
+# --------------------------------
+# BASE
+
+server:
+  port: 8082
+  servlet.context-path: /v0.1
+
+
+spring:
+  devtools:
+    livereload.enabled: true
+
+
+logging:
+  file:
+    path: logs/httpclient/
+    max-size: 10MB
+    max-history: 30         # delete after a month
+  pattern:
+    console: "%clr(%d{HH:mm:ss} %p){magenta} - %m%n"
+    file: "%d %-5level [%-10thread] [%-30logger{30}] - %m%n"
+  level:
+    root: info
+    org.tain.*: info
+    org.hibernate.SQL: info
+    org.hibernate.type: info
+    org.hibernate.type.descriptor.sql.BasicBinder: trace
+    org.thymeleaf: info
+    org.h2.server.web: info
+    
+    #org.tain.utils.TransferStrAndJson: trace
+
+
