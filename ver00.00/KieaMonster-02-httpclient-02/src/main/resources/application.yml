@@ -9,6 +9,9 @@ server:
 
 
 spring:
+#  jackson:
+#    serialization:
+#      write-dates-as-timestamps: false
   h2.console:
     enabled: true
     path: /h2

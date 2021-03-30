@@ -17,9 +17,9 @@ public class Working {
 	public void work() throws Exception {
 		log.info("KANG-20210320 >>>>> {} {}", CurrentInfo.get());
 		
-		if (!Flag.flag) job01();
-		if (Flag.flag) job02();
-		if (!Flag.flag) job03();
+		if (!Flag.flag) job01();  // for test
+		if (!Flag.flag) job02();  // for board
+		if (Flag.flag) job03();  // for campPage
 	}
 	
 	///////////////////////////////////////////////////////////////////////////
@@ -52,8 +52,7 @@ public class Working {
 	private void job02() throws Exception {
 		log.info("KANG-20210320 >>>>> {} {}", CurrentInfo.get());
 		
-		if (Flag.flag) this.boardWorking.selectAll();
-		//if (Flag.flag) this.boardWorking.jobEtl();
+		if (Flag.flag) this.boardWorking.selectAllAndSave();
 	}
 	
 	///////////////////////////////////////////////////////////////////////////
@@ -66,7 +65,6 @@ public class Working {
 	private void job03() throws Exception {
 		log.info("KANG-20210320 >>>>> {} {}", CurrentInfo.get());
 		
-		if (Flag.flag) this.campPageWorking.selectAll();
-		//if (Flag.flag) this.campPageWorking.jobEtl();
+		if (Flag.flag) this.campPageWorking.selectAllAndSave();
 	}
 }

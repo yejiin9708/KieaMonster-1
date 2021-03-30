@@ -8,8 +8,11 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.CreationTimestamp;
+import org.tain.utils.LocalDateDeserializer;
+import org.tain.utils.LocalDateSerializer;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import lombok.Data;
 
@@ -20,7 +23,6 @@ public class CampPage {
 
 	@Id
 	@Column(name = "campaign_sk")
-	@JsonProperty
 	private Long campaignSk;
 	
 	@Column(name = "page_nm", length = 256)
@@ -30,6 +32,8 @@ public class CampPage {
 	private String pageStatusFlg;
 	
 	@Column(name = "processed_dttm")
+	@JsonSerialize(using = LocalDateSerializer.class)
+	@JsonDeserialize(using = LocalDateDeserializer.class)
 	@CreationTimestamp
 	private LocalDate processedDttm;
 }

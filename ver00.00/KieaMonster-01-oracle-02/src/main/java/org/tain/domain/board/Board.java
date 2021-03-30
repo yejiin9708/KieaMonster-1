@@ -13,9 +13,12 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.CreationTimestamp;
+import org.tain.utils.LocalDateTimeDeserializer;
+import org.tain.utils.LocalDateTimeSerializer;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import lombok.Builder;
 import lombok.Data;
@@ -41,7 +44,6 @@ public class Board {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "board_seq")
 	@Column(name = "id")
-	@JsonProperty
 	private Long id;
 	
 	@Column(name = "title", length = 256)
@@ -58,9 +60,13 @@ public class Board {
 	private String userId;
 	
 	
+	// "yyyy-MM-dd'T'hh:mm:ss.SSSZ"
 	@Column(name = "create_date")
 	//@JsonFormat(shape = Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss", timezone = "Asia/Seoul")
-	//@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	//@JsonFormat(shape = Shape.STRING, pattern = "yyyy-MM-dd HH:mm", timezone = "Asia/Seoul")
+	//@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
+	@JsonSerialize(using = LocalDateTimeSerializer.class)
+	@JsonDeserialize(using = LocalDateTimeDeserializer.class)
 	@CreationTimestamp
 	private LocalDateTime createdDate;
 	

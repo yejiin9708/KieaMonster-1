@@ -30,6 +30,6 @@ public class KieaMonster02Httpclient02Application implements CommandLineRunner {
 		
 		if (Flag.flag) this.working.work();
 		
-		System.exit(0);
+		//System.exit(0);
 	}
 }

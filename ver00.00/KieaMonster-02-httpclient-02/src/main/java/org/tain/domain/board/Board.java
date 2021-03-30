@@ -4,17 +4,17 @@ import java.time.LocalDateTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Index;
 import javax.persistence.Lob;
-import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
-import org.hibernate.annotations.CreationTimestamp;
+import org.tain.utils.LocalDateTimeDeserializer;
+import org.tain.utils.LocalDateTimeSerializer;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import lombok.Builder;
 import lombok.Data;
@@ -27,18 +27,20 @@ import lombok.NoArgsConstructor;
 			@Index(name = "board_idx1", unique = false, columnList = "user_id"),
 	}
 )
+/*
 @SequenceGenerator(name = "board_seq"
 	, sequenceName = "board_seq"
 	, initialValue = 1
 	, allocationSize = 1
 )
+*/
 @Data
 @NoArgsConstructor
 @JsonIgnoreProperties(value = {})
 public class Board {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "board_seq")
+	/* @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "board_seq") */
 	@Column(name = "id")
 	private Long id;
 	
@@ -57,9 +59,14 @@ public class Board {
 	
 	
 	@Column(name = "create_date")
-	//@JsonFormat(shape = Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss", timezone = "Asia/Seoul")
+	//@JsonFormat(shape = Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
+	//@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	//@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-	@CreationTimestamp
+	@JsonSerialize(using = LocalDateTimeSerializer.class)
+	@JsonDeserialize(using = LocalDateTimeDeserializer.class)
+	//@JsonFormat(shape = Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss", timezone = "Asia/Seoul")
+	//@DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
+	//@CreationTimestamp
 	private LocalDateTime createdDate;
 	
 	/*
@@ -82,14 +89,18 @@ public class Board {
 	
 	@Builder
 	public Board(
+			Long id,
 			String title,
 			String subTitle,
 			String content,
-			String userId
+			String userId,
+			LocalDateTime createdDate
 			) {
+		this.id = id;
 		this.title = title;
 		this.subTitle = subTitle;
 		this.content = content;
 		this.userId = userId;
+		this.createdDate = createdDate;
 	}
 }
