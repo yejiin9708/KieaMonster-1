@@ -1,9 +1,17 @@
 package org.tain.domain.campaign;
 
+import java.time.LocalDate;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+
+import org.tain.utils.LocalDateDeserializer;
+import org.tain.utils.LocalDateSerializer;
+
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import lombok.Data;
 
@@ -25,11 +33,9 @@ public class Campaign {
 	@Column(name = "campaign_owner_nm", length = 256)
 	private String campaignOwnerNm;
 	
-	/*
-	@Column(name = "processed_dttm")
+	
+	@Column(name = "last_modified_dttm")
 	@JsonSerialize(using = LocalDateSerializer.class)
 	@JsonDeserialize(using = LocalDateDeserializer.class)
-	@CreationTimestamp
-	private LocalDate processedDttm;
-	*/
+	private LocalDate lastModifiedDttm;
 }
