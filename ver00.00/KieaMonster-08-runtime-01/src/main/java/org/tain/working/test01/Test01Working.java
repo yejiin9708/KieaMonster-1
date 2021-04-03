@@ -35,6 +35,9 @@ public class Test01Working {
 		ProcessUtils.printStream(process);
 	}
 	
+	/*
+	 * method-3
+	 */
 	public void jobForCommandsExec() throws Exception {
 		String[] command = new String[] { "echo", ">>>>>>>>>>> Hello, world!!!" };
 		
@@ -48,6 +51,9 @@ public class Test01Working {
 		executor.execute(commandLine);
 	}
 	
+	/*
+	 * method-4
+	 */
 	public void jobForProcessBuilderRedirect() throws Exception {
 		String[] command = new String[] { "echo", ">>>>>>>>>>> Hello, world!!!" };
 		
