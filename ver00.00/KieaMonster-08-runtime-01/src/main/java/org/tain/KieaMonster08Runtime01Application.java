@@ -1,9 +1,11 @@
 package org.tain;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.tain.working.MonProcess;
+import org.tain.util.Flag;
+import org.tain.working.Working;
 
 @SpringBootApplication
 public class KieaMonster08Runtime01Application implements CommandLineRunner {
@@ -12,11 +14,18 @@ public class KieaMonster08Runtime01Application implements CommandLineRunner {
 		SpringApplication.run(KieaMonster08Runtime01Application.class, args);
 	}
 
+	///////////////////////////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////////////////////////
+	
+	@Autowired
+	private Working working;
+
 	@Override
 	public void run(String... args) throws Exception {
-		// TODO Auto-generated method stub
-		String[] command = new String[] { "echo", ">>>>>>>>>>>>> Hello.. Kiea" };
-		new MonProcess().execute(command);
+		
+		if (Flag.flag) this.working.work();
+		
 		System.exit(0);
 	}
 }
