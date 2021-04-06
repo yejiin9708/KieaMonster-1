@@ -1,6 +1,6 @@
 [
 	{
-		"svr_code": "TEST01",
+		"svr_code": "TEST02",
 		"cmd_code": "uname",
 		"cmd_name": "uname all",
 		"cmd_desc": "svr desc",
