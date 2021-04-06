@@ -1,0 +1,16 @@
+[
+	{
+		"grp_code": "MCI",
+		"svr_code": "TEST01",
+		"svr_name": "TEST01 server",
+		"svr_desc": "svr desc",
+		"svr_comment": "svr comment"
+	},{
+		"grp_code": "MCI",
+		"svr_code": "TEST02",
+		"svr_name": "TEST02 server",
+		"svr_desc": "svr desc",
+		"svr_comment": "svr comment"
+	}
+]
+

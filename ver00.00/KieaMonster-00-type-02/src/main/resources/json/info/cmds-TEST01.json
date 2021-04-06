@@ -1,0 +1,15 @@
+[
+	{
+		"svr_code": "TEST01",
+		"cmd_code": "uname",
+		"cmd_name": "uname all",
+		"cmd_desc": "svr desc",
+		"cmd_period": 60,
+		"cmd_type": "CMD_NORMAL",
+		"cmd_arr": [
+			"sh",
+			"uname",
+			"-a"
+		]
+	}
+]
