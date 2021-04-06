@@ -1,16 +1,16 @@
 [
 	{
-		"grp_code": "MCI",
-		"svr_code": "TEST01",
-		"svr_name": "TEST01 server",
-		"svr_desc": "svr desc",
-		"svr_comment": "svr comment"
+		"grpCode": "MCI",
+		"svrCode": "TEST01",
+		"svrName": "TEST01 server",
+		"svrDesc": "svr desc",
+		"svrComment": "svr comment"
 	},{
-		"grp_code": "MCI",
-		"svr_code": "TEST02",
-		"svr_name": "TEST02 server",
-		"svr_desc": "svr desc",
-		"svr_comment": "svr comment"
+		"grpCode": "MCI",
+		"svrCode": "TEST02",
+		"svrName": "TEST02 server",
+		"svrDesc": "svr desc",
+		"svrComment": "svr comment"
 	}
 ]
 

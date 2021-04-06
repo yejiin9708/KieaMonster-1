@@ -1,9 +1,9 @@
 [
 	{
-		"org_code": "HANWHA",
-		"grp_code": "MCI",
-		"grp_name": "Hanswha IS MCI",
-		"grp_desc": "grp desc",
-		"grp_comment": "grp comment"
+		"orgCode": "HANWHA",
+		"grpCode": "MCI",
+		"grpName": "Hanswha IS MCI",
+		"grpDesc": "grp desc",
+		"grpComment": "grp comment"
 	}
 ]

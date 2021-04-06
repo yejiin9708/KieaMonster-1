@@ -1,9 +1,9 @@
 [
 	{
-		"org_code": "HANWHA",
-		"org_name": "Hanswha IS",
-		"org_desc": "org desc",
-		"org_comment": "org comment"
+		"orgCode": "HANWHA",
+		"orgName": "Hanswha IS",
+		"orgDesc": "org desc",
+		"orgComment": "org comment"
 	}
 ]
 
