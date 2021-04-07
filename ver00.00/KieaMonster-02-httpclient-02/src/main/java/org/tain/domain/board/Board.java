@@ -9,8 +9,8 @@ import javax.persistence.Index;
 import javax.persistence.Lob;
 import javax.persistence.Table;
 
-import org.tain.utils.LocalDateTimeDeserializer;
-import org.tain.utils.LocalDateTimeSerializer;
+import org.tain.domain.serializer.LocalDateTimeDeserializer;
+import org.tain.domain.serializer.LocalDateTimeSerializer;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;

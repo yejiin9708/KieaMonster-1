@@ -8,8 +8,8 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.CreationTimestamp;
-import org.tain.utils.LocalDateDeserializer;
-import org.tain.utils.LocalDateSerializer;
+import org.tain.domain.serializer.LocalDateDeserializer;
+import org.tain.domain.serializer.LocalDateSerializer;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
