@@ -4,8 +4,8 @@
 # BASE
 
 server:
-  port: 18087
-  servlet.context-path: /v1.1
+  port: 8080
+  servlet.context-path: /v0.1
 
 
 spring:
@@ -23,7 +23,7 @@ spring:
       trace: false
       web-allow-others: true
   datasource:
-    url: jdbc:h2:tcp://localhost:9092/lightnetdb;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+    url: jdbc:h2:tcp://localhost:9092/monsterdb;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
     driverClassName: org.h2.Driver
     username: sa
     password:
@@ -62,7 +62,7 @@ spring:
 
 logging:
   file:
-    path: logs/mapper/
+    path: logs/type/
     max-size: 10MB
     max-history: 30         # delete after a month
   pattern:
@@ -88,10 +88,10 @@ spring.profiles: proj-default
 
 proj-env:
   base:
-    name: Lightnet API project
-    program: KieaLightnet API program
-    version: ver 1.1_2020.11.11
-    comment: This is Lightnet API project.
+    name: Monster API project
+    program: KieaMonster API program
+    version: ver 1.1_2021.04.01
+    comment: This is Monster API project.
     test-flag: true
   param:
     name: PARAM (default)
@@ -111,24 +111,19 @@ proj-env:
   param:
     name: PARAM (air)
     home: /Users/kang-air
-    base: /KANG/lightnet/20201120
-    info-path: /jsonInfo
-    data-path: /jsonData
+    base: /KANG/monster/20210320
+    info-path: /json/info
+    data-path: /json/data
   job:
     name: JOB (air)
   json:
     name: JSON (air)
-    apis-info-file: apis.json
-    error-info-file: error.json
+    org-info-file: org.json
+    grp-info-file: grp.json
+    svr-info-file: svr.json
+    cmd-info-file: cmd-*.json
   url:
     name: URL (air)
-    # lightnet1: http://localhost:18888
-    # lightnet11: http://localhost:18888
-    lightnet1: https://test-public.lightnetapis.io/v1
-    lightnet11: https://test-public.lightnetapis.io/v1.1
-    auth: http://localhost:18081/v1.1
-    link: http://localhost:18082/v1.1
-    mapper: http://localhost:18087/v1.1
 
 ---
 # --------------------------------------------------------
@@ -139,22 +134,19 @@ proj-env:
   param:
     name: PARAM (pro)
     home: /Users/kangmac
-    base: /KANG/lightnet/20201120
-    info-path: /jsonInfo
-    data-path: /jsonData
+    base: /KANG/monster/20210320
+    info-path: /json/info
+    data-path: /json/data
   job:
     name: JOB (pro)
   json:
     name: JSON (pro)
-    apis-info-file: apis.json
-    error-info-file: error.json
+    org-info-file: org.json
+    grp-info-file: grp.json
+    svr-info-file: svr.json
+    cmd-info-file: cmd-*.json
   url:
     name: URL (pro)
-    lightnet1: https://test-public.lightnetapis.io/v1
-    lightnet11: https://test-public.lightnetapis.io/v1.1
-    auth: http://localhost:18081/v1.1
-    link: http://localhost:18082/v1.1
-    mapper: http://localhost:18087/v1.1
 
 ---
 # --------------------------------------------------------
@@ -180,22 +172,19 @@ proj-env:
   param:
     name: PARAM (dfep)
     home: /hw01/ibridge
-    base: /KANG/lightnet/20201120
-    info-path: /jsonInfo
-    data-path: /jsonData
+    base: /KANG/monster/20210320
+    info-path: /json/info
+    data-path: /json/data
   job:
     name: JOB (dfep)
   json:
     name: JSON (dfep)
-    apis-info-file: apis.json
-    error-info-file: error.json
+    org-info-file: org.json
+    grp-info-file: grp.json
+    svr-info-file: svr.json
+    cmd-info-file: cmd-*.json
   url:
     name: URL (dfep)
-    lightnet1: https://test-hawis.lightnetapis.io/v1
-    lightnet11: https://test-hawis.lightnetapis.io/v1.1
-    auth: http://localhost:18081/v1.1
-    link: http://localhost:18082/v1.1
-    mapper: http://localhost:18087/v1.1
 
 ---
 # --------------------------------------------------------
