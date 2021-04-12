@@ -95,7 +95,7 @@ public class StringTools {
 				br = new BufferedReader(new FileReader(filePath));
 				String line = null;
 				while ((line = br.readLine()) != null) {
-					if (line.trim().charAt(0) == '#')
+					if ("".equals(line.trim()) || line.trim().charAt(0) == '#')
 						continue;
 					sb.append(line).append("\n");
 				}

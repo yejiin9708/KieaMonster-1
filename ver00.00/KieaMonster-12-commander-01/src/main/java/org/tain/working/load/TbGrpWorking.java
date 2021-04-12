@@ -44,6 +44,7 @@ public class TbGrpWorking {
 					+ this.projEnvParamProperties.getInfoPath()
 					+ File.separator
 					+ this.projEnvJsonProperties.getGrpInfoFile();
+			if (Flag.flag) log.info("KANG-20210406 >>>>> {} {}", CurrentInfo.get(), filePath);
 
 			String strJson = StringTools.stringFromFile(filePath);
 			if (Flag.flag) log.info("KANG-20210406 >>>>> {} {}", CurrentInfo.get(), strJson);
