@@ -1,4 +1,4 @@
-package org.tain.utils.enums;
+package org.tain.enums;
 
 public enum JsonPrintType {
 	NORMAL("Normal"),
