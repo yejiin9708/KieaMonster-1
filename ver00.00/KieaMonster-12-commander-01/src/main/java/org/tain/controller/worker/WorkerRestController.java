@@ -2,6 +2,8 @@ package org.tain.controller.worker;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -69,8 +71,8 @@ public class WorkerRestController {
 	}
 	
 	@RequestMapping(value = {"/tbCmd2"}, method = {RequestMethod.GET, RequestMethod.POST})
-	public List<TbCmd> list2() throws Exception {
-		log.info("KANG-20200730 >>>>> {} {}", CurrentInfo.get());
+	public List<TbCmd> list2(HttpServletRequest request) throws Exception {
+		log.info("KANG-20200730 >>>>> {} charSet={}", CurrentInfo.get(), request.getCharacterEncoding());
 		return this.tbCmdRepository.findAll();
 	}
 	
