@@ -10,6 +10,7 @@ import org.tain.node.MonJsonNode;
 import org.tain.properties.ProjEnvBaseProperties;
 import org.tain.utils.CurrentInfo;
 import org.tain.utils.Flag;
+import org.tain.utils.Sleep;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -29,27 +30,47 @@ public class CommandsWorking {
 		log.info("KANG-20210412 >>>>> {} {}", CurrentInfo.get());
 		
 		if (Flag.flag) {
+			// get svrCode
 			this.svrCode = this.projEnvBaseProperties.getSvrCode();
 		}
 		
 		if (Flag.flag) {
-			// httpClient
+			// init
+			this.asyncCommands.jobInit();
+		}
+		
+		if (Flag.flag) {
+			// httpClient to get the commands of this server
 			MonJsonNode nodeCmds = this.asyncCommands.jobHttpClient(svrCode);
 			log.info("KANG-20210412 >>>>> nodeCmds node: " + nodeCmds.toPrettyString());
 		}
 		
+		int asyncSize = 0;
 		if (Flag.flag) {
 			// to List<Cmd>
 			List<Cmd> lstCmds = this.asyncCommands.jobToListCmds();
 			lstCmds.forEach(cmd -> {
 				log.info("KANG-20210412 >>>>> cmd = {}", cmd);
 			});
+			asyncSize = lstCmds.size();
 		}
 		
 		if (Flag.flag) {
+			/*
+			// no async thread
 			// cmds to async
-			int asyncSize = this.asyncCommands.jobToAsyncCommands();
+			asyncSize = this.asyncCommands.jobToStartAsyncCommands();
 			log.info("KANG-20210412 >>>>> asyncSize: " + asyncSize);
+			 */
+		}
+		
+		if (Flag.flag) {
+			// async thread
+			for (int i=0; i < asyncSize; i++) {
+				this.asyncCommands.asyncCommand(i);  // run async thread
+				
+				if (Flag.flag) Sleep.run(1000);
+			}
 		}
 	}
 }

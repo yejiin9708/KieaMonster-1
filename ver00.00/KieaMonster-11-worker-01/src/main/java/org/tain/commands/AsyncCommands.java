@@ -1,6 +1,8 @@
 package org.tain.commands;
 
+import java.util.Date;
 import java.util.List;
+import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
@@ -8,6 +10,7 @@ import org.springframework.stereotype.Component;
 import org.tain.data.Cmd;
 import org.tain.httpClient.MonHttpClient;
 import org.tain.node.MonJsonNode;
+import org.tain.queue.ResultQueue;
 import org.tain.utils.CurrentInfo;
 import org.tain.utils.Flag;
 import org.tain.utils.Sleep;
@@ -26,6 +29,23 @@ public class AsyncCommands {
 	
 	private MonJsonNode nodeCmds = null;
 	private List<Cmd> lstCmds = null;
+	
+	@Autowired
+	private SendResult sendResult;
+	private ResultQueue resultQueue;
+	
+	public void jobInit() throws Exception {
+		log.info("KANG-20210412 >>>>> {} {}", CurrentInfo.get());
+		
+		if (Flag.flag) {
+			this.resultQueue = this.sendResult.getResultQueue();
+			this.resultQueue.clear();
+		}
+		
+		if (Flag.flag) {
+			this.resultQueue.set("Hello, world!!!");
+		}
+	}
 	
 	public MonJsonNode jobHttpClient(String svrCode) throws Exception {
 		log.info("KANG-20210412 >>>>> {} {}", CurrentInfo.get());
@@ -91,30 +111,45 @@ public class AsyncCommands {
 		return this.lstCmds;
 	}
 	
-	public int jobToAsyncCommands() throws Exception {
+	// no async running... logic error
+	public int jobToStartAsyncCommands() throws Exception {
 		log.info("KANG-20210412 >>>>> {} {}", CurrentInfo.get());
 		
 		int asyncSize = this.lstCmds.size();
 		if (Flag.flag) {
 			for (int i=0; i < asyncSize; i++) {
-				String param = String.valueOf(i);
-				this.asyncCommand(param);
+				this.asyncCommand(i);  // run async(=thread)
 				
-				if (!Flag.flag) Sleep.run(1000);
+				if (Flag.flag) Sleep.run(1000);
 			}
 		}
 		
 		return asyncSize;
 	}
 	
+	//@Async
 	@Async(value = "async_Job_Commands")
-	private void asyncCommand(String param) throws Exception {
-		log.info("KANG-20200721 >>>>> {} {}", param, CurrentInfo.get());
+	public void asyncCommand(Integer index) throws Exception {
+		log.info("KANG-20200721 >>>>> START {} {}", index, CurrentInfo.get());
 	
 		if (Flag.flag) {
-			
+			Random rand = new Random(new Date().getTime() + index * 10);
+			for (int i=0; i < 10; i++) {
+				log.info("KANG-20200721 >>>>> {}-{}", index, i);
+				
+				// message to queue
+				this.resultQueue.set(String.format("%d-%d", index, i));
+				
+				if (Flag.flag) {
+					// wait
+					long wait = rand.nextInt(5) + 3;
+					Sleep.run(wait * 1000);
+				}
+			}
 		}
 		
-		Sleep.run(3000);
+		// if (Flag.flag) Sleep.run(5 * 1000);
+		
+		log.info("KANG-20200721 >>>>> END   {} {}", index, CurrentInfo.get());
 	}
 }

@@ -6,6 +6,7 @@ import org.tain.utils.CurrentInfo;
 import org.tain.utils.Flag;
 import org.tain.working.commands.CommandsWorking;
 import org.tain.working.properties.PropertiesWorking;
+import org.tain.working.result.ResultWorking;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -18,6 +19,7 @@ public class Working {
 		
 		if (Flag.flag) jobForProperties();
 		if (Flag.flag) jobForCommands();
+		if (Flag.flag) jobForResult();
 	}
 	
 	///////////////////////////////////////////////////////////////////////////
@@ -44,5 +46,18 @@ public class Working {
 		log.info("KANG-20210405 >>>>> {} {}", CurrentInfo.get());
 		
 		if (Flag.flag) this.commandsWorking.test01();
+	}
+	
+	///////////////////////////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////////////////////////
+	
+	@Autowired
+	private ResultWorking resultWorking;
+	
+	private void jobForResult() throws Exception {
+		log.info("KANG-20210405 >>>>> {} {}", CurrentInfo.get());
+		
+		if (Flag.flag) this.resultWorking.test01();
 	}
 }

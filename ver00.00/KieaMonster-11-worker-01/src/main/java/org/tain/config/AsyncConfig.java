@@ -36,9 +36,9 @@ public class AsyncConfig extends AsyncConfigurerSupport {
 		final int asyncSize = this.projEnvBaseProperties.getAsyncSize();
 		log.info("KANG-20210412 >>>>> {} asyncSize = {}", CurrentInfo.get(), asyncSize);
 		ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
-		executor.setCorePoolSize(1);
+		executor.setCorePoolSize(asyncSize);
 		executor.setMaxPoolSize(asyncSize);
-		executor.setQueueCapacity(2);
+		executor.setQueueCapacity(asyncSize);
 		executor.setThreadNamePrefix("async_Job_Commands-");
 		executor.initialize();
 		return executor;
