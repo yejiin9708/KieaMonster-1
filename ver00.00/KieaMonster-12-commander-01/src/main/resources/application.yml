@@ -17,12 +17,8 @@ server:
 
 
 spring:
-  config.use-legacy-processing: true
-  #config:
-  #  activate:
-  #    on-profile:
-  #      - proj-default
-  #      - proj-air
+  # legacy method
+  #config.use-legacy-processing: true
   profiles.active:
   - proj-default
   - proj-air
@@ -49,6 +45,7 @@ spring:
 #      username: sa
 #      password:
   jpa:
+    open-in-view: true
     show-sql: true
     database: h2
     database-platform: org.hibernate.dialect.H2Dialect
@@ -118,7 +115,9 @@ logging:
 # --------------------------------------------------------
 # --------------------------------------------------------
 # --------------------------------------------------------
-spring.profiles: proj-default
+spring:
+  #profiles: proj-default
+  config.activate.on-profile: proj-default
 
 proj-env:
   base:
@@ -140,7 +139,9 @@ proj-env:
 ---
 # --------------------------------------------------------
 # proj-local
-spring.profiles: proj-air
+spring:
+  # profiles: proj-air
+  config.activate.on-profile: proj-air
 
 proj-env:
   param:
@@ -163,7 +164,9 @@ proj-env:
 ---
 # --------------------------------------------------------
 # proj-test
-spring.profiles: proj-pro
+spring:
+  # profiles: proj-pro
+  config.activate.on-profile: proj-pro
 
 proj-env:
   param:
@@ -186,7 +189,9 @@ proj-env:
 ---
 # --------------------------------------------------------
 # proj-aws
-spring.profiles: proj-aws
+spring:
+  # profiles: proj-aws
+  config.activate.on-profile: proj-aws
 
 proj-env:
   param:
@@ -201,7 +206,9 @@ proj-env:
 ---
 # --------------------------------------------------------
 # proj-dfep
-spring.profiles: proj-dfep
+spring:
+  # profiles: proj-dfep
+  config.activate.on-profile: proj-dfep
 
 proj-env:
   param:
@@ -224,7 +231,9 @@ proj-env:
 ---
 # --------------------------------------------------------
 # proj-real
-spring.profiles: proj-real
+spring:
+  # profiles: proj-real
+  config.activate.on-profile: proj-real
 
 proj-env:
   param:
