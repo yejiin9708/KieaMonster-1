@@ -1,10 +1,10 @@
 
 
 # --------------------------------
-# BASE of type
+# BASE of worker
 
 server:
-  port: 8080
+  port: 8081
   servlet:
     context-path: /v0.1
     encoding:
@@ -93,10 +93,10 @@ spring:
 # %n : 줄바꿈(new line)
 # %% : %를 출력
 # %r : 애플리케이션 시작 이후부터 로깅이 발생한 시점까지의 시간(ms)
-#
+# 
 logging:
   file:
-    path: logs/type/
+    path: logs/commander/
     max-size: 10MB
     max-history: 30         # delete after a month
   pattern:

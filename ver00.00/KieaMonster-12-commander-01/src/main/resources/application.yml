@@ -1,7 +1,7 @@
 
 
 # --------------------------------
-# BASE
+# BASE of commander
 
 server:
   port: 8080
@@ -17,6 +17,12 @@ server:
 
 
 spring:
+  config.use-legacy-processing: true
+  #config:
+  #  activate:
+  #    on-profile:
+  #      - proj-default
+  #      - proj-air
   profiles.active:
   - proj-default
   - proj-air
@@ -121,7 +127,7 @@ proj-env:
     version: ver 1.1_2021.04.01
     comment: This is Monster API project.
     char-set: utf-8
-    #test-flag: true
+    test-flag: true
   param:
     name: PARAM (default)
   job:
