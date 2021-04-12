@@ -127,6 +127,7 @@ proj-env:
     comment: This is Monster API project.
     char-set: utf-8
     test-flag: true
+    svr-code: TEST01
   param:
     name: PARAM (default)
   job:

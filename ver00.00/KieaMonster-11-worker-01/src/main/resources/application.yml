@@ -18,11 +18,6 @@ server:
 
 spring:
   config.use-legacy-processing: true
-  #config:
-  #  activate:
-  #    on-profile:
-  #      - proj-default
-  #      - proj-air
   profiles.active:
   - proj-default
   - proj-air
@@ -129,6 +124,9 @@ proj-env:
     comment: This is Monster API project.
     char-set: utf-8
     test-flag: true
+    svr-code: TEST02
+    async-size: 20
+    
   param:
     name: PARAM (default)
   job:

@@ -19,6 +19,7 @@ public class ProjEnvBaseProperties {
 	private String charSet;
 	private boolean testFlag;
 	private String svrCode;
+	private int asyncSize;
 	
 	/*
 	@Value("${proj-env.job.loading.source.path}")

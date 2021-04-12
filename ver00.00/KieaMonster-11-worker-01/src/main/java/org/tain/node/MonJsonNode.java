@@ -18,8 +18,30 @@ public class MonJsonNode {
 	private ObjectNode objectNode = null;  // {}
 	private ArrayNode arrayNode = null;    // []
 
-	private ObjectMapper objectMapper = new ObjectMapper();
+	private static final ObjectMapper objectMapper = new ObjectMapper();
 
+	///////////////////////////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////////////////////////
+	
+	public static String getPrettyJson(Object object) {
+		try {
+			return objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(object);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "{}";
+	}
+	
+	public static String getJson(Object object) {
+		try {
+			return objectMapper.writeValueAsString(object);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "{}";
+	}
+	
 	///////////////////////////////////////////////////////////////////////////
 	///////////////////////////////////////////////////////////////////////////
 	///////////////////////////////////////////////////////////////////////////
@@ -227,11 +249,11 @@ public class MonJsonNode {
 	///////////////////////////////////////////////////////////////////////////
 
 	public ObjectNode blankObjectNode() throws Exception {
-		return (ObjectNode) this.objectMapper.readTree("{}");
+		return (ObjectNode) objectMapper.readTree("{}");
 	}
 	
 	public ArrayNode blankArrayNode() throws Exception {
-		return (ArrayNode) this.objectMapper.readTree("[]");
+		return (ArrayNode) objectMapper.readTree("[]");
 	}
 	
 	///////////////////////////////////////////////////////////////////////////
@@ -287,7 +309,7 @@ public class MonJsonNode {
 	}
 
 	public Map<String,?> getMap(String fieldName) throws Exception {
-		return this.objectMapper.readValue(this.jsonNode.get(fieldName).toString()
+		return objectMapper.readValue(this.jsonNode.get(fieldName).toString()
 				, new TypeReference<Map<String,?>>(){});
 	}
 	
@@ -324,7 +346,7 @@ public class MonJsonNode {
 	}
 
 	public Map<String,?> getMap(String branch, String fieldName) throws Exception {
-		return this.objectMapper.readValue(this.jsonNode.at(branch).get(fieldName).toString()
+		return objectMapper.readValue(this.jsonNode.at(branch).get(fieldName).toString()
 				, new TypeReference<Map<String,?>>(){});
 	}
 	
