@@ -3,7 +3,7 @@
 		"svrCode": "TEST02",
 		"cmdCode": "uname",
 		"cmdName": "uname all",
-		"cmdDesc": "svr desc",
+		"cmdDesc": "svr desc (연습:utf-8)",
 		"cmdPeriod": 60,
 		"cmdType": "CMD_NORMAL",
 		"cmdArr": " sh uname -a   "
@@ -11,7 +11,7 @@
 		"svrCode": "TEST02",
 		"cmdCode": "disk",
 		"cmdName": "disk space",
-		"cmdDesc": "disk space",
+		"cmdDesc": "disk space (연습:utf-8)",
 		"cmdPeriod": 60,
 		"cmdType": "CMD_NORMAL",
 		"cmdArr": " df -h "
@@ -19,9 +19,10 @@
 		"svrCode": "TEST02",
 		"cmdCode": "memory",
 		"cmdName": "memory space",
-		"cmdDesc": "memory space",
+		"cmdDesc": "memory space (연습:utf-8)",
 		"cmdPeriod": 60,
 		"cmdType": "CMD_NORMAL",
 		"cmdArr": " free -a "
 	}
 ]
+

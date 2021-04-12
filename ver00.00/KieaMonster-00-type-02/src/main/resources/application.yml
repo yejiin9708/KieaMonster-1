@@ -92,6 +92,7 @@ proj-env:
     program: KieaMonster API program
     version: ver 1.1_2021.04.01
     comment: This is Monster API project.
+    char-set: utf-8
     test-flag: true
   param:
     name: PARAM (default)

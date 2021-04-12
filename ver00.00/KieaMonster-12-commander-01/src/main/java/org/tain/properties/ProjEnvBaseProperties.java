@@ -16,6 +16,7 @@ public class ProjEnvBaseProperties {
 	private String version;
 	private String comment;
 	
+	private String charSet;
 	private boolean testFlag;
 	
 	/*
