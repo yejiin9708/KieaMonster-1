@@ -1,8 +1,4 @@
-package org.tain.controller.worker;
-
-import java.util.List;
-
-import javax.servlet.http.HttpServletRequest;
+package org.tain.controller.result;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
@@ -11,23 +7,19 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-import org.tain.domain.TbCmd;
 import org.tain.properties.ProjEnvBaseProperties;
-import org.tain.repository.TbCmdRepository;
-import org.tain.service.worker.TbCmdService;
+import org.tain.repository.TbResultRepository;
 import org.tain.utils.CurrentInfo;
 
 import lombok.extern.slf4j.Slf4j;
 
 @RestController
-@RequestMapping(value = {"/rest/worker"})
+@RequestMapping(value = {"/rest/result"})
 @Slf4j
-public class WorkerRestController {
+public class ResultRestController {
 
 	@Autowired
 	private ProjEnvBaseProperties projEnvBaseProperties;
@@ -36,44 +28,20 @@ public class WorkerRestController {
 	///////////////////////////////////////////////////////////////////////////
 	///////////////////////////////////////////////////////////////////////////
 	
+	@SuppressWarnings("unused")
 	@Autowired
-	private TbCmdService tbCmdService;
+	private TbResultRepository tbResultRepository;
 	
-	@GetMapping(value = {"/tbCmd/{svrCode}"})
-	public ResponseEntity<?> listBySvrCode(@PathVariable(value = "svrCode") String svrCode) throws Exception {
-		log.info("KANG-20210412 >>>>> {} {}", CurrentInfo.get());
-		
-		List<TbCmd> list = this.tbCmdService.listBySvrCode(svrCode);
-		
-		MultiValueMap<String,String> headers = new LinkedMultiValueMap<>();
-		headers.add(HttpHeaders.CONTENT_TYPE, "application/json; charset=" + this.projEnvBaseProperties.getCharSet());
-		
-		return new ResponseEntity<>(list, headers, HttpStatus.OK);
-	}
-	
-	///////////////////////////////////////////////////////////////////////////
-	///////////////////////////////////////////////////////////////////////////
-	///////////////////////////////////////////////////////////////////////////
-	
-	@Autowired
-	private TbCmdRepository tbCmdRepository;
-	
-	@RequestMapping(value = {"/tbCmd"}, method = {RequestMethod.GET, RequestMethod.POST})
+	@RequestMapping(value = {"/tbResult"}, method = {RequestMethod.GET, RequestMethod.POST})
 	public ResponseEntity<?> list(HttpEntity<String> httpEntity) throws Exception {
 		log.info("KANG-20200730 >>>>> {} {}", CurrentInfo.get());
 		
-		List<TbCmd> list = this.tbCmdRepository.findAll();
+		System.out.println(">>>>> httpEntity: " + httpEntity);
 		
 		MultiValueMap<String,String> headers = new LinkedMultiValueMap<>();
 		headers.add(HttpHeaders.CONTENT_TYPE, "application/json; charset=" + this.projEnvBaseProperties.getCharSet());
 		
-		return new ResponseEntity<>(list, headers, HttpStatus.OK);
-	}
-	
-	@RequestMapping(value = {"/tbCmd2"}, method = {RequestMethod.GET, RequestMethod.POST})
-	public List<TbCmd> list2(HttpServletRequest request) throws Exception {
-		log.info("KANG-20200730 >>>>> {} charSet={}", CurrentInfo.get(), request.getCharacterEncoding());
-		return this.tbCmdRepository.findAll();
+		return new ResponseEntity<>("{}", headers, HttpStatus.OK);
 	}
 	
 	///////////////////////////////////////////////////////////////////////////

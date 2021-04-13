@@ -35,6 +35,7 @@ public class TbOrgWorking {
 		log.info("KANG-20210405 >>>>> {} {}", CurrentInfo.get());
 
 		if (Flag.flag) {
+			// delete all
 			this.tbOrgRepository.deleteAll();
 		}
 		

@@ -7,6 +7,7 @@ import org.tain.utils.Flag;
 import org.tain.working.load.TbCmdWorking;
 import org.tain.working.load.TbGrpWorking;
 import org.tain.working.load.TbOrgWorking;
+import org.tain.working.load.TbResultWorking;
 import org.tain.working.load.TbSvrWorking;
 import org.tain.working.properties.PropertiesWorking;
 
@@ -20,10 +21,12 @@ public class Working {
 		log.info("KANG-20210405 >>>>> {} {}", CurrentInfo.get());
 		
 		if (Flag.flag) jobForProperties();
+		
 		if (Flag.flag) jobForTbOrgLoad();
 		if (Flag.flag) jobForTbGrpLoad();
 		if (Flag.flag) jobForTbSvrLoad();
 		if (Flag.flag) jobForTbCmdLoad();
+		if (Flag.flag) jobForTbResultLoad();
 	}
 	
 	///////////////////////////////////////////////////////////////////////////
@@ -89,5 +92,18 @@ public class Working {
 		log.info("KANG-20210405 >>>>> {} {}", CurrentInfo.get());
 		
 		if (Flag.flag) this.tbCmdWorking.load();
+	}
+	
+	///////////////////////////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////////////////////////
+	
+	@Autowired
+	private TbResultWorking tbResultWorking;
+	
+	private void jobForTbResultLoad() throws Exception {
+		log.info("KANG-20210405 >>>>> {} {}", CurrentInfo.get());
+		
+		if (Flag.flag) this.tbResultWorking.load();
 	}
 }
