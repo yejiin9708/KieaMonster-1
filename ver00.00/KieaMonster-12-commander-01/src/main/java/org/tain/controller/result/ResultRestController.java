@@ -36,7 +36,8 @@ public class ResultRestController {
 	public ResponseEntity<?> list(HttpEntity<String> httpEntity) throws Exception {
 		log.info("KANG-20200730 >>>>> {} {}", CurrentInfo.get());
 		
-		System.out.println(">>>>> httpEntity: " + httpEntity);
+		System.out.println(">>>>> 1. httpEntity.getHeaders(): " + httpEntity.getHeaders());
+		System.out.println(">>>>> 2. httpEntity.getBody(): " + httpEntity.getBody());
 		
 		MultiValueMap<String,String> headers = new LinkedMultiValueMap<>();
 		headers.add(HttpHeaders.CONTENT_TYPE, "application/json; charset=" + this.projEnvBaseProperties.getCharSet());
