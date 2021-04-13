@@ -59,7 +59,7 @@ public class ResultWorking {
 				///////////////////////////////////////////////
 				// 
 				MonJsonNode info = new MonJsonNode("{}");
-				if (Flag.flag) info.put("url", "http://localhost:8080/v0.1/rest/result/tbResult");
+				if (Flag.flag) info.put("url", "http://localhost:8012/v0.1/rest/result/tbResult");
 				
 				info.put("method", "POST");
 				
