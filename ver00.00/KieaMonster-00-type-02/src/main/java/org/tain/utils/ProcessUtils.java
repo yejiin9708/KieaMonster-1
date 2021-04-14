@@ -1,4 +1,4 @@
-package org.tain.util;
+package org.tain.utils;
 
 import java.io.IOException;
 import java.io.InputStream;

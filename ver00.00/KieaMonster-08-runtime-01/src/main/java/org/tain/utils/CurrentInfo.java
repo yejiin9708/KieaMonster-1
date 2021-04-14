@@ -1,4 +1,4 @@
-package org.tain.util;
+package org.tain.utils;
 
 public class CurrentInfo {
 
