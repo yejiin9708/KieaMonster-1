@@ -55,10 +55,12 @@ public class AsyncCommands {
 			///////////////////////////////////////////////
 			// 
 			MonJsonNode info = new MonJsonNode("{}");
+			/*
 			if (!Flag.flag) info.put("url", "http://localhost:8012/v0.1/rest/worker/tbCmd/TEST01");
 			if (!Flag.flag) info.put("url", "http://localhost:8012/v0.1/rest/worker/tbCmd/TEST02");
 			if (!Flag.flag) info.put("url", "http://localhost:8012/v0.1/rest/worker/tbCmd/TEST03");  // return returnCode=00000, empty array
 			if (!Flag.flag) info.put("url", "http://localhost:8012/v0.1/rest/worker/tbCmd/TEST01");  // return returnCode=99999
+			*/
 			if (Flag.flag) info.put("url", "http://localhost:8012/v0.1/rest/worker/tbCmd/" + svrCode);
 			
 			info.put("method", "GET");
