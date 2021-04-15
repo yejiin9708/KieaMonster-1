@@ -10,8 +10,8 @@ import org.tain.domain.HelloMessage;
 @Controller
 public class GreetingController {
 
-	@MessageMapping("/hello")
-	@SendTo("/topic/greetings")
+	@MessageMapping("/hello")      // client -> server.controller "/app/hello"
+	@SendTo("/topic/greetings")    // server -> client.subscribe  "/topic/greetings"
 	public Greeting greeting(HelloMessage message) throws Exception {
 		Thread.sleep(1000);
 		return new Greeting("Hello, " + HtmlUtils.htmlEscape(message.getName()) + " !");
