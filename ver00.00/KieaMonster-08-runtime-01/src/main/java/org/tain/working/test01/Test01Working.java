@@ -41,13 +41,13 @@ public class Test01Working {
 	public void jobForCommandsExec() throws Exception {
 		String[] command = new String[] { "echo", ">>>>>>>>>>> Hello, world!!!" };
 		
-		DefaultExecutor executor = new DefaultExecutor();
 		int size = command.length;
-		
 		CommandLine commandLine = CommandLine.parse(command[0]);
 		for (int i=1; i < size; i++) {
 			commandLine.addArgument(command[i]);
 		}
+		
+		DefaultExecutor executor = new DefaultExecutor();
 		executor.execute(commandLine);
 	}
 	
