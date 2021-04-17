@@ -20,8 +20,8 @@ function connect() {
 	var socket = new SockJS('/v0.2/gs-guide-websocket');
 	stompClient = Stomp.over(socket);
 	stompClient.connect({}, function (frame) {
-		_setConnected(true);
 		console.log('Connected: ' + frame);
+		_setConnected(true);
 		// recv subscribe
 		stompClient.subscribe('/topic/greetings', function (greeting) {
 			_showGreeting(JSON.parse(greeting.body).content);
@@ -33,8 +33,8 @@ function disconnect() {
 	if (stompClient !== null) {
 		stompClient.disconnect();
 	}
-	_setConnected(false);
 	console.log("Disconnected");
+	_setConnected(false);
 }
 
 function sendName() {
