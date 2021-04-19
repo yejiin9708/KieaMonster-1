@@ -45,6 +45,5 @@ public class WebSocketTextHandler extends TextWebSocketHandler {
 
 		this.sessions.remove(session.getId());
 		super.afterConnectionClosed(session, status);
-
 	}
 }

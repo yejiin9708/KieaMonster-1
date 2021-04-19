@@ -9,7 +9,7 @@ public class MainController {
 
 	@RequestMapping("/")
 	public ModelAndView index() {
-		ModelAndView modelAndView = new ModelAndView("chat");
+		ModelAndView modelAndView = new ModelAndView("index");
 		return modelAndView;
 	}
 }

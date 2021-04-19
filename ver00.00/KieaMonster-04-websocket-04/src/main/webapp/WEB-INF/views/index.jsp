@@ -13,6 +13,7 @@
 		ws = new WebSocket('ws://' + location.host + '/v0.4/chat');
 		ws.onmessage = function(data) {
 			console.log(data.data);
+			//$('#chat').append("<p>"+data.data+"</p>");
 			$("<p>"+data.data+"</p>").prependTo('#chat');
 		}
 		$('#startBtn').hide();
