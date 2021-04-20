@@ -9,7 +9,9 @@ public class MainController {
 
 	@RequestMapping("/")
 	public ModelAndView index() {
-		ModelAndView modelAndView = new ModelAndView("index");
-		return modelAndView;
+		ModelAndView mav = new ModelAndView("index2");
+		mav.setViewName("index");
+		mav.addObject("name", "Kiea");
+		return mav;
 	}
 }

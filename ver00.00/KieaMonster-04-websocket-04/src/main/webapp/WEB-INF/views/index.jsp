@@ -26,7 +26,7 @@
 </script>
 
 <body>
-	<h1>채팅 방 입니다</h1>
+	<h1>채팅 방 입니다. by ${name}</h1>
 	<button onclick="connectWs()" id="startBtn"> 채팅 시작하기</button>
 	<input id="chatting"></input><button onclick="send()"> 보내기 </button>
 	<div>
