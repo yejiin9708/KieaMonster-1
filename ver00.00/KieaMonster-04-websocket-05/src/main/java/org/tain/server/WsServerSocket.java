@@ -14,7 +14,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 @ServerEndpoint("/websocket")
-public class TestSocket {
+public class WsServerSocket {
 
 	private Session session;
 	
@@ -54,11 +54,11 @@ public class TestSocket {
 		}
 	}
 	
-	public static Set<TestSocket> listeners = new CopyOnWriteArraySet<>();
+	public static Set<WsServerSocket> listeners = new CopyOnWriteArraySet<>();
 	private static int onlineCount = 0;
 	
 	public static void broadcast(String message) {
-		for (TestSocket listener : listeners) {
+		for (WsServerSocket listener : listeners) {
 			listener.sendMessage(message);
 		}
 	}
