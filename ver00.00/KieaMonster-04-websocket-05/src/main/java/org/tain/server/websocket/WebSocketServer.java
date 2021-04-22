@@ -10,10 +10,15 @@ import javax.websocket.OnOpen;
 import javax.websocket.Session;
 import javax.websocket.server.ServerEndpoint;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.tain.server.component.TestComponent;
+import org.tain.server.config.CustomSpringConfig;
 
 @Component
-@ServerEndpoint("/websocket")
+//@ServerEndpoint(value = "/websocket")
+//@ServerEndpoint(value = "/websocket", configurator = SpringContext.class)
+@ServerEndpoint(value = "/websocket", configurator = CustomSpringConfig.class)
 public class WebSocketServer {
 
 	private Session session;
@@ -33,9 +38,17 @@ public class WebSocketServer {
 		System.out.println(">>>>> onClose called, onlineCount: " + onlineCount);
 	}
 	
+	@Autowired
+	private TestComponent testComponent;
+	
 	@OnMessage
 	public void onMessage(String message) {
 		System.out.println(">>>>> onMessage called, message: " + message);
+		try {
+			this.testComponent.print(message);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		broadcast(message);
 	}
 	
