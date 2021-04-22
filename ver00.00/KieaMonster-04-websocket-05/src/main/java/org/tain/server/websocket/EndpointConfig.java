@@ -1,4 +1,4 @@
-package org.tain.server.config;
+package org.tain.server.websocket;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;

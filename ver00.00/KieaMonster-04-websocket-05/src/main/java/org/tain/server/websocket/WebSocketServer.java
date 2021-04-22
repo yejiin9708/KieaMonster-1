@@ -12,8 +12,7 @@ import javax.websocket.server.ServerEndpoint;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.tain.server.component.TestComponent;
-import org.tain.server.config.CustomSpringConfig;
+import org.tain.server.test.TestComponent;
 
 @Component
 //@ServerEndpoint(value = "/websocket")

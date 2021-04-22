@@ -1,4 +1,4 @@
-package org.tain.server.component;
+package org.tain.server.test;
 
 import org.springframework.stereotype.Component;
 
