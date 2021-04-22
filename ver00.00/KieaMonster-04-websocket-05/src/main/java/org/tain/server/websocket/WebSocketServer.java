@@ -1,4 +1,4 @@
-package org.tain.server;
+package org.tain.server.websocket;
 
 import java.util.Set;
 import java.util.concurrent.CopyOnWriteArraySet;
@@ -14,7 +14,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 @ServerEndpoint("/websocket")
-public class WsServerSocket {
+public class WebSocketServer {
 
 	private Session session;
 	
@@ -54,11 +54,11 @@ public class WsServerSocket {
 		}
 	}
 	
-	public static Set<WsServerSocket> listeners = new CopyOnWriteArraySet<>();
+	public static Set<WebSocketServer> listeners = new CopyOnWriteArraySet<>();
 	private static int onlineCount = 0;
 	
 	public static void broadcast(String message) {
-		for (WsServerSocket listener : listeners) {
+		for (WebSocketServer listener : listeners) {
 			listener.sendMessage(message);
 		}
 	}
