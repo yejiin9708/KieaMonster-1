@@ -1,4 +1,4 @@
-package org.tain.working.ws;
+package org.tain.ws;
 
 import java.net.InetSocketAddress;
 import java.util.HashSet;
@@ -7,7 +7,6 @@ import java.util.Set;
 import org.java_websocket.WebSocket;
 import org.java_websocket.handshake.ClientHandshake;
 import org.java_websocket.server.WebSocketServer;
-import org.tain.utils.Flag;
 
 public class SimpleServer extends WebSocketServer {
 
@@ -16,14 +15,14 @@ public class SimpleServer extends WebSocketServer {
 	public SimpleServer(InetSocketAddress inetSocketAddress) {
 		super(inetSocketAddress);
 	}
-
+	
 	@Override
 	public void onOpen(WebSocket conn, ClientHandshake handshake) {
 		this.sessions.add(conn);
 		int size = this.sessions.size();
 		
 		conn.send("Welcome to the server!");  // this method sends a message to the new client.
-		this.broadcast("new connection: " + handshake.getResourceDescriptor(), this.sessions); // this method sends a message to all clients connected.
+		this.broadcast("new connection: " + handshake.getResourceDescriptor(), this.sessions);  // this method sends a message to all clients connected.
 		System.out.println("SIZE: (" + size + ") new connection to " + conn.getRemoteSocketAddress() + " " + handshake.getResourceDescriptor());
 	}
 
@@ -37,7 +36,7 @@ public class SimpleServer extends WebSocketServer {
 
 	@Override
 	public void onMessage(WebSocket conn, String message) {
-		System.out.println("received ByteBuffer from " + conn.getRemoteSocketAddress() + " -> " + message);
+		System.out.println("received ByteBuffer from " + conn.getRemoteSocketAddress());
 		if ("quit".equals(message)) {
 			conn.close();
 		}
@@ -50,20 +49,6 @@ public class SimpleServer extends WebSocketServer {
 
 	@Override
 	public void onStart() {
-		System.out.println("server started successfully!");
-		
-		if (!Flag.flag) {
-			/*
-			for (int idx=0; ; idx++) {
-				String message = String.format(">>>> (%d) TIME [%s]", idx, new Date());
-				
-				System.out.println("Before broadcast: " + message);
-				this.broadcast(message, this.sessions);
-				System.out.println("After broadcast... size: " + this.sessions.size());
-				
-				try { Thread.sleep(3 * 1000); } catch (InterruptedException e) {}
-			}
-			*/
-		}
+		System.out.println(">>>>> SERVER started successfully!");
 	}
 }

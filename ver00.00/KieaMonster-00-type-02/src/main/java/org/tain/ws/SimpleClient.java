@@ -1,4 +1,4 @@
-package org.tain.working.ws;
+package org.tain.ws;
 
 import java.net.URI;
 import java.nio.ByteBuffer;
@@ -7,19 +7,19 @@ import org.java_websocket.client.WebSocketClient;
 import org.java_websocket.drafts.Draft;
 import org.java_websocket.handshake.ServerHandshake;
 
-public class EmptyClient extends WebSocketClient {
+public class SimpleClient extends WebSocketClient {
 
-	public EmptyClient(URI serverUri, Draft draft) {
-		super(serverUri, draft);
+	public SimpleClient(URI uri, Draft draft) {
+		super(uri, draft);
 	}
 	
-	public EmptyClient(URI serverUri) {
-		super(serverUri);
+	public SimpleClient(URI uri) {
+		super(uri);
 	}
 
 	@Override
 	public void onOpen(ServerHandshake handshakedata) {
-		send("Hello, it is me. Mario :)");
+		this.send("Hello, it is me. Mario :)");
 		System.out.println("new connection opened");
 	}
 
@@ -31,13 +31,16 @@ public class EmptyClient extends WebSocketClient {
 	@Override
 	public void onMessage(String message) {
 		System.out.println("received message: " + message);
+		if ("quit".equals(message)) {
+			this.close();
+		}
 	}
-	
+
 	@Override
 	public void onMessage(ByteBuffer bytes) {
 		System.out.println("received ByteBuffer.");
 	}
-
+	
 	@Override
 	public void onError(Exception ex) {
 		System.out.println("an error occurred: " + ex);
