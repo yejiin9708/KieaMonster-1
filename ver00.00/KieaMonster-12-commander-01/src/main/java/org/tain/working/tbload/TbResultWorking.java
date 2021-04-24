@@ -1,4 +1,4 @@
-package org.tain.working.load;
+package org.tain.working.tbload;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

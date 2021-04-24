@@ -4,12 +4,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.tain.utils.CurrentInfo;
 import org.tain.utils.Flag;
-import org.tain.working.load.TbCmdWorking;
-import org.tain.working.load.TbGrpWorking;
-import org.tain.working.load.TbOrgWorking;
-import org.tain.working.load.TbResultWorking;
-import org.tain.working.load.TbSvrWorking;
 import org.tain.working.properties.PropertiesWorking;
+import org.tain.working.tbload.TbCmdWorking;
+import org.tain.working.tbload.TbGrpWorking;
+import org.tain.working.tbload.TbOrgWorking;
+import org.tain.working.tbload.TbResultWorking;
+import org.tain.working.tbload.TbSvrWorking;
 
 import lombok.extern.slf4j.Slf4j;
 
