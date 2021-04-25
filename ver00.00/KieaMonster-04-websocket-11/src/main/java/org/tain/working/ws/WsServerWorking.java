@@ -5,6 +5,7 @@ import java.net.InetSocketAddress;
 import org.java_websocket.server.WebSocketServer;
 import org.springframework.stereotype.Component;
 import org.tain.utils.CurrentInfo;
+import org.tain.ws.SimpleServer;
 
 import lombok.extern.slf4j.Slf4j;
 

@@ -1,4 +1,4 @@
-package org.tain.working.ws;
+package org.tain.ws;
 
 import java.net.URI;
 import java.nio.ByteBuffer;

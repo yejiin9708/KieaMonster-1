@@ -6,6 +6,7 @@ import org.java_websocket.client.WebSocketClient;
 import org.springframework.stereotype.Component;
 import org.tain.utils.CurrentInfo;
 import org.tain.utils.Flag;
+import org.tain.ws.SimpleClient;
 
 import lombok.extern.slf4j.Slf4j;
 
