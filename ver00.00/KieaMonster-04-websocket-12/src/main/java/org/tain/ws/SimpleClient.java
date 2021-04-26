@@ -19,30 +19,39 @@ public class SimpleClient extends WebSocketClient {
 
 	@Override
 	public void onOpen(ServerHandshake handshakedata) {
-		this.send("Hello, it is me. Mario :)");
-		System.out.println("new connection opened");
+		System.out.println("[onOpen] new connection opened");
+		
+		String msg = "Hello, it is me. Mario :)";
+		this.send(msg);
+		System.out.println("[onOpen] [CLI -> SVR] " + msg);
 	}
 
 	@Override
 	public void onClose(int code, String reason, boolean remote) {
-		System.out.println("closed with exit code: " + code + " additional info: " + reason);
+		System.out.println("[onClose] closed with exit code: " + code + " additional info: " + reason);
+		System.exit(0);
 	}
 	
 	@Override
 	public void onMessage(String message) {
-		System.out.println("received message: " + message);
-		if ("quit".equals(message)) {
-			this.close();
-		}
+		System.out.println("[onMessage] [SVR -> CLI] " + message);
+		//if ("quit".equals(message)) {
+		//	this.close();
+		//}
 	}
 	
 	@Override
 	public void onMessage(ByteBuffer bytes) {
-		System.out.println("received ByteBuffer.");
+		System.out.println("[onMessage] [SVR -> CLI].ByteBuffer " + bytes.toString());
 	}
 
 	@Override
 	public void onError(Exception ex) {
-		System.out.println("an error occurred: " + ex);
+		System.out.println("[onError] an error occurred: " + ex);
+	}
+	
+	public void sendMessage(String message) {
+		this.send(message);
+		System.out.println("[sendMessage] [CLI -> SVR] " + message);
 	}
 }
