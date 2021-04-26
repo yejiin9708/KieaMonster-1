@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.tain.utils.CurrentInfo;
 import org.tain.utils.Flag;
+import org.tain.working.basket.BasketWorking;
 import org.tain.working.board.BoardWorking;
 import org.tain.working.campPage.CampPageWorking;
 import org.tain.working.campaign.CampaignWorking;
@@ -22,6 +23,7 @@ public class Working {
 		if (Flag.flag) job02();  // for board
 		if (Flag.flag) job03();  // for campPage
 		if (Flag.flag) job04();  // for campaign
+		if (Flag.flag) job05();  // for curl -X GET http://alpha-recsy.11st.co.kr/basket/suggest/gt/2245614696
 	}
 	
 	///////////////////////////////////////////////////////////////////////////
@@ -81,5 +83,18 @@ public class Working {
 		log.info("KANG-20210320 >>>>> {} {}", CurrentInfo.get());
 		
 		if (Flag.flag) this.campaignWorking.selectAllAndSend();
+	}
+	
+	///////////////////////////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////////////////////////
+	
+	@Autowired
+	private BasketWorking basketWorking;
+	
+	private void job05() throws Exception {
+		log.info("KANG-20210320 >>>>> {} {}", CurrentInfo.get());
+		
+		if (Flag.flag) this.basketWorking.selectSuggest();
 	}
 }
