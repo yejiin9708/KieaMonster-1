@@ -23,11 +23,11 @@ public class Working {
 	///////////////////////////////////////////////////////////////////////////
 	
 	@Autowired
-	private WsServerWorking simpleServer;
+	private WsServerWorking wsServerWorking;
 	
 	private void jobForSimpleServer() throws Exception {
 		log.info("KANG-20210405 >>>>> {} {}", CurrentInfo.get());
 		
-		if (Flag.flag) this.simpleServer.test();
+		if (Flag.flag) this.wsServerWorking.test();
 	}
 }
