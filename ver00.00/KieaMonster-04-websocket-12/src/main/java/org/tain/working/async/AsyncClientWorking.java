@@ -20,7 +20,7 @@ public class AsyncClientWorking {
 		log.info("KANG-20210405 >>>>> {} {}", CurrentInfo.get());
 		
 		if (Flag.flag) {
-			this.taskSimpleClient.asyncTask01Job01("ASYNC_TASK01_JOB01");
+			this.taskSimpleClient.asyncTask01Client01("ASYNC_TASK01_CLIENT01");
 		}
 	}
 	
