@@ -40,9 +40,19 @@ public class TaskSimpleServer {
 		log.info("KANG-20200721 >>>>> {} {}", CurrentInfo.get());
 		
 		if (Flag.flag) {
+			this.server.broadcast(message);
+		}
+		
+		if (!Flag.flag) {
 			Set<WebSocket> sessions = this.server.getSessions();
 			for (WebSocket session : sessions) {
-				//this.server.onWebsocketMessage(session, message);
+				this.server.onWebsocketMessage(session, message);
+			}
+		}
+		
+		if (!Flag.flag) {
+			Set<WebSocket> sessions = this.server.getSessions();
+			for (WebSocket session : sessions) {
 				this.server.sendMessage(session, message);
 			}
 		}
