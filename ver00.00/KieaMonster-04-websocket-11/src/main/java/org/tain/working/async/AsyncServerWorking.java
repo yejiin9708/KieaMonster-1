@@ -2,7 +2,7 @@ package org.tain.working.async;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.tain.tasks.wssvr.TaskSimpleServer;
+import org.tain.tasks.ws.TaskSimpleServer;
 import org.tain.utils.CurrentInfo;
 import org.tain.utils.Flag;
 import org.tain.utils.Sleep;
@@ -11,7 +11,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Component
 @Slf4j
-public class AsyncWorking {
+public class AsyncServerWorking {
 
 	@Autowired
 	private TaskSimpleServer taskSimpleServer;

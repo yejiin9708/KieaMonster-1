@@ -1,4 +1,4 @@
-package org.tain.tasks.wssvr;
+package org.tain.tasks.ws;
 
 import java.net.InetSocketAddress;
 import java.util.Set;
