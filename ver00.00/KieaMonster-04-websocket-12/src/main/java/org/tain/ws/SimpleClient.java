@@ -16,7 +16,14 @@ public class SimpleClient extends WebSocketClient {
 	public SimpleClient(URI serverUri) {
 		super(serverUri);
 	}
-
+	
+	public void sendMessage(String message) {
+		this.send(message);
+		System.out.println("[sendMessage] [CLI -> SVR] " + message);
+	}
+	
+	///////////////////////////////////////////////////////////////////////////
+	
 	@Override
 	public void onOpen(ServerHandshake handshakedata) {
 		System.out.println("[onOpen] new connection opened");
@@ -48,10 +55,5 @@ public class SimpleClient extends WebSocketClient {
 	@Override
 	public void onError(Exception ex) {
 		System.out.println("[onError] an error occurred: " + ex);
-	}
-	
-	public void sendMessage(String message) {
-		this.send(message);
-		System.out.println("[sendMessage] [CLI -> SVR] " + message);
 	}
 }

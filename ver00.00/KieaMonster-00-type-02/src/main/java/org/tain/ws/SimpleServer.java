@@ -10,20 +10,37 @@ import org.java_websocket.server.WebSocketServer;
 
 public class SimpleServer extends WebSocketServer {
 
-	private Set<WebSocket> sessions = new HashSet<>();
-	
 	public SimpleServer(InetSocketAddress inetSocketAddress) {
 		super(inetSocketAddress);
 	}
+	
+	///////////////////////////////////////////////////////////////////////////
+	
+	private Set<WebSocket> sessions = new HashSet<>();
+	
+	public Set<WebSocket> getSessions() {
+		return this.sessions;
+	}
+	
+	public void sendMessage(WebSocket webSocket, String message) {
+		webSocket.send(message);
+		System.out.println("[sendMessage] [SVR -> CLI] " + message);
+	}
+	
+	///////////////////////////////////////////////////////////////////////////
 	
 	@Override
 	public void onOpen(WebSocket conn, ClientHandshake handshake) {
 		this.sessions.add(conn);
 		int size = this.sessions.size();
 		
-		conn.send("Welcome to the server!");  // this method sends a message to the new client.
-		this.broadcast("new connection: " + handshake.getResourceDescriptor(), this.sessions);  // this method sends a message to all clients connected.
-		System.out.println("SIZE: (" + size + ") new connection to " + conn.getRemoteSocketAddress() + " " + handshake.getResourceDescriptor());
+		String msg = "Welcome to the server!";
+		conn.send(msg);  // this method sends a message to the new client.
+		System.out.println("[onOpen] [SVR -> CLI] [send] " + msg);
+		
+		msg = "SIZE: (" + size + ") new connection to " + conn.getRemoteSocketAddress() + " " + handshake.getResourceDescriptor();
+		this.broadcast(msg, this.sessions); // this method sends a message to all clients connected.
+		System.out.println("[onOpen] [SVR -> CLI] [broadcast] " + msg);
 	}
 
 	@Override
@@ -31,24 +48,24 @@ public class SimpleServer extends WebSocketServer {
 		this.sessions.remove(conn);
 		int size = this.sessions.size();
 		
-		System.out.println("SIZE: (" + size + ") closed " + conn.getRemoteSocketAddress() + " with exit code " + code + " additional info: " + reason);
+		System.out.println("[onClose] SIZE: (" + size + ") closed " + conn.getRemoteSocketAddress() + " with exit code " + code + " additional info: " + reason);
 	}
 
 	@Override
 	public void onMessage(WebSocket conn, String message) {
-		System.out.println("received ByteBuffer from " + conn.getRemoteSocketAddress());
-		if ("quit".equals(message)) {
-			conn.close();
-		}
+		System.out.println("[onMessage] [CLI -> SVR] " + conn.getRemoteSocketAddress() + " -> " + message);
+		//if ("quit".equals(message)) {
+		//	conn.close();
+		//}
 	}
 
 	@Override
 	public void onError(WebSocket conn, Exception ex) {
-		System.out.println("an error occurred on connection " + conn.getRemoteSocketAddress() + ":" + ex);
+		System.out.println("[onError] an error occurred on connection " + conn.getRemoteSocketAddress() + ":" + ex);
 	}
 
 	@Override
 	public void onStart() {
-		System.out.println(">>>>> SERVER started successfully!");
+		System.out.println("[onStart] server started successfully!");
 	}
 }
