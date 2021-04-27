@@ -4,8 +4,10 @@ import java.net.InetSocketAddress;
 import java.util.Set;
 
 import org.java_websocket.WebSocket;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
+import org.tain.service.worker.TbCmdService;
 import org.tain.utils.CurrentInfo;
 import org.tain.utils.Flag;
 import org.tain.ws.SimpleServer;
@@ -16,6 +18,9 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class TaskSimpleServer {
 
+	@Autowired
+	private TbCmdService tbCmdService;
+	
 	private int index = 0;
 	
 	private SimpleServer server = null;
@@ -29,7 +34,7 @@ public class TaskSimpleServer {
 			String host = "localhost";
 			int port = 8887;
 			
-			this.server = new SimpleServer(new InetSocketAddress(host, port));
+			this.server = new SimpleServer(new InetSocketAddress(host, port), this.tbCmdService);
 			this.server.run();  // run blocking
 		}
 		

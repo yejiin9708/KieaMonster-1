@@ -44,6 +44,18 @@ public class AsyncConfig extends AsyncConfigurerSupport {
 		return executor;
 	}
 	
+	@Bean(name = "async_Task01_Command01")
+	public Executor asyncJobCommands() {
+		final int asyncSize = 10;
+		ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
+		executor.setCorePoolSize(asyncSize);
+		executor.setMaxPoolSize(asyncSize);
+		executor.setQueueCapacity(asyncSize);
+		executor.setThreadNamePrefix("async_Task01_Command01-");
+		executor.initialize();
+		return executor;
+	}
+	
 	/*
 	@Bean(name = "async_mapperReaderJob")
 	public Executor mapperMainTask() {

@@ -1,17 +1,29 @@
 package org.tain.ws;
 
 import java.net.InetSocketAddress;
+import java.nio.ByteBuffer;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import org.java_websocket.WebSocket;
 import org.java_websocket.handshake.ClientHandshake;
 import org.java_websocket.server.WebSocketServer;
+import org.tain.domain.TbCmd;
+import org.tain.node.MonJsonNode;
+import org.tain.service.worker.TbCmdService;
+import org.tain.utils.Flag;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 public class SimpleServer extends WebSocketServer {
 
-	public SimpleServer(InetSocketAddress inetSocketAddress) {
+	private TbCmdService tbCmdService;
+	
+	public SimpleServer(InetSocketAddress inetSocketAddress, TbCmdService tbCmdService) {
 		super(inetSocketAddress);
+		this.tbCmdService = tbCmdService;
 	}
 	
 	///////////////////////////////////////////////////////////////////////////
@@ -22,50 +34,105 @@ public class SimpleServer extends WebSocketServer {
 		return this.sessions;
 	}
 	
+	private int addSession(WebSocket session) {
+		this.sessions.add(session);
+		return this.sessions.size();
+	}
+	
+	private int delSession(WebSocket session) {
+		this.sessions.remove(session);
+		return this.sessions.size();
+	}
+	
 	public void sendMessage(WebSocket session, String message) {
 		session.send(message);
-		System.out.println("[sendMessage] [SVR -> CLI] " + message);
+		if (Flag.flag) log.info("[SVR -> CLI] " + message);
 	}
 	
 	///////////////////////////////////////////////////////////////////////////
 	
 	@Override
 	public void onStart() {
-		System.out.println("[onStart] server started successfully!");
+		if (Flag.flag) log.info("[onStart] server started successfully!");
 	}
 	
 	@Override
 	public void onOpen(WebSocket session, ClientHandshake handshake) {
-		this.sessions.add(session);
-		int size = this.sessions.size();
+		int size = this.addSession(session);
 		
-		String msg = "Welcome to the server!";
-		session.send(msg);  // this method sends a message to the new client.
-		System.out.println("[onOpen] [SVR -> CLI] [send] " + msg);
-		
-		msg = "SIZE: (" + size + ") new connection to " + session.getRemoteSocketAddress() + " " + handshake.getResourceDescriptor();
-		this.broadcast(msg, this.sessions); // this method sends a message to all clients connected.
-		System.out.println("[onOpen] [SVR -> CLI] [broadcast] " + msg);
+		String msg = "(SZ:" + size + ") new connection to " + session.getRemoteSocketAddress() + " " + handshake.getResourceDescriptor();
+		if (Flag.flag) log.info("[onOpen] {}", msg);
 	}
 
 	@Override
 	public void onClose(WebSocket session, int code, String reason, boolean remote) {
-		this.sessions.remove(session);
-		int size = this.sessions.size();
+		int size = this.delSession(session);
 		
-		System.out.println("[onClose] SIZE: (" + size + ") closed " + session.getRemoteSocketAddress() + " with exit code " + code + " additional info: " + reason);
+		String msg = "(SZ:" + size + ") closed. " + session.getRemoteSocketAddress() + " with exit code " + code + " additional info: " + reason;
+		if (Flag.flag) log.info("[onClose] {}", msg);
 	}
 
 	@Override
 	public void onMessage(WebSocket session, String message) {
-		System.out.println("[onMessage] [CLI -> SVR] " + session.getRemoteSocketAddress() + " -> " + message);
-		//if ("quit".equals(message)) {
-		//	conn.close();
-		//}
+		if (Flag.flag) log.info("[onMessage] received message of String...");
+		
+		try {
+			MonJsonNode node = null;
+			String svrName = null;
+			String reqCode = null;
+			
+			//////////////////////////////////////////////
+			if (Flag.flag) {
+				// recv
+				if (Flag.flag) log.info("[SVR <- CLI] " + message);
+				node = new MonJsonNode(message);
+				if (Flag.flag) log.info("REQ: {} ", node.toPrettyString());
+				svrName = node.getText("svrName");
+				reqCode = node.getText("reqCode");
+			}
+			
+			if (Flag.flag) log.info(">>>>> svrName: {}, reqCode: {}", svrName, reqCode);
+			
+			switch (reqCode) {
+			case "GETCMDS":
+				//////////////////////////////////////////////
+				if (Flag.flag) {
+					// send test 2
+					List<TbCmd> list = this.tbCmdService.listBySvrCode(svrName);
+					System.out.println("list.size() = " + list.size());
+					
+					MonJsonNode cmds = new MonJsonNode(MonJsonNode.getJson(list));
+					node.put("resResult", cmds);
+					if (Flag.flag) log.info("RES: {} ", node.toPrettyString());
+					this.sendMessage(session, node.toString());
+				}
+				break;
+			default:
+				//////////////////////////////////////////////
+				if (Flag.flag) {
+					// send test 1
+					MonJsonNode cmds = new MonJsonNode("[]");
+					cmds.add("CMD01");
+					cmds.add("CMD02");
+					cmds.add("CMD03");
+					node.put("resResult", cmds);
+					if (Flag.flag) log.info("RES: {} ", node.toPrettyString());
+					this.sendMessage(session, node.toString());
+				}
+				break;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	@Override
+	public void onMessage(WebSocket session, ByteBuffer bytes) {
+		// TODO: KANG-20210427
 	}
 
 	@Override
 	public void onError(WebSocket session, Exception ex) {
-		System.out.println("[onError] an error occurred on connection " + session.getRemoteSocketAddress() + ":" + ex);
+		if (Flag.flag) log.info("[onError] an error occurred on connection " + session.getRemoteSocketAddress() + ":" + ex);
 	}
 }

@@ -122,7 +122,7 @@ public class Working {
 		
 		if (Flag.flag) this.asyncServerWorking.test00();  // create thread
 		
-		if (Flag.flag) Sleep.run(10 * 1000);
-		if (Flag.flag) this.asyncServerWorking.test01();  // send messages
+		if (!Flag.flag) Sleep.run(10 * 1000);
+		if (!Flag.flag) this.asyncServerWorking.test01();  // send messages
 	}
 }

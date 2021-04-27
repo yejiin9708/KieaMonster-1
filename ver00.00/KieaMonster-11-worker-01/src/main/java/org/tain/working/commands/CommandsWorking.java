@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.tain.commands.AsyncCommands;
+import org.tain.commands._AsyncCommands;
 import org.tain.data.Cmd;
 import org.tain.node.MonJsonNode;
 import org.tain.properties.ProjEnvBaseProperties;
@@ -22,7 +22,7 @@ public class CommandsWorking {
 	private ProjEnvBaseProperties projEnvBaseProperties;
 	
 	@Autowired
-	private AsyncCommands asyncCommands;
+	private _AsyncCommands asyncCommands;
 	
 	private String svrCode = null;
 	
