@@ -22,50 +22,50 @@ public class SimpleServer extends WebSocketServer {
 		return this.sessions;
 	}
 	
-	public void sendMessage(WebSocket webSocket, String message) {
-		webSocket.send(message);
+	public void sendMessage(WebSocket session, String message) {
+		session.send(message);
 		System.out.println("[sendMessage] [SVR -> CLI] " + message);
 	}
 	
 	///////////////////////////////////////////////////////////////////////////
 	
 	@Override
-	public void onOpen(WebSocket conn, ClientHandshake handshake) {
-		this.sessions.add(conn);
+	public void onStart() {
+		System.out.println("[onStart] server started successfully!");
+	}
+	
+	@Override
+	public void onOpen(WebSocket session, ClientHandshake handshake) {
+		this.sessions.add(session);
 		int size = this.sessions.size();
 		
 		String msg = "Welcome to the server!";
-		conn.send(msg);  // this method sends a message to the new client.
+		session.send(msg);  // this method sends a message to the new client.
 		System.out.println("[onOpen] [SVR -> CLI] [send] " + msg);
 		
-		msg = "SIZE: (" + size + ") new connection to " + conn.getRemoteSocketAddress() + " " + handshake.getResourceDescriptor();
+		msg = "SIZE: (" + size + ") new connection to " + session.getRemoteSocketAddress() + " " + handshake.getResourceDescriptor();
 		this.broadcast(msg, this.sessions); // this method sends a message to all clients connected.
 		System.out.println("[onOpen] [SVR -> CLI] [broadcast] " + msg);
 	}
 
 	@Override
-	public void onClose(WebSocket conn, int code, String reason, boolean remote) {
-		this.sessions.remove(conn);
+	public void onClose(WebSocket session, int code, String reason, boolean remote) {
+		this.sessions.remove(session);
 		int size = this.sessions.size();
 		
-		System.out.println("[onClose] SIZE: (" + size + ") closed " + conn.getRemoteSocketAddress() + " with exit code " + code + " additional info: " + reason);
+		System.out.println("[onClose] SIZE: (" + size + ") closed " + session.getRemoteSocketAddress() + " with exit code " + code + " additional info: " + reason);
 	}
 
 	@Override
-	public void onMessage(WebSocket conn, String message) {
-		System.out.println("[onMessage] [CLI -> SVR] " + conn.getRemoteSocketAddress() + " -> " + message);
+	public void onMessage(WebSocket session, String message) {
+		System.out.println("[onMessage] [CLI -> SVR] " + session.getRemoteSocketAddress() + " -> " + message);
 		//if ("quit".equals(message)) {
 		//	conn.close();
 		//}
 	}
 
 	@Override
-	public void onError(WebSocket conn, Exception ex) {
-		System.out.println("[onError] an error occurred on connection " + conn.getRemoteSocketAddress() + ":" + ex);
-	}
-
-	@Override
-	public void onStart() {
-		System.out.println("[onStart] server started successfully!");
+	public void onError(WebSocket session, Exception ex) {
+		System.out.println("[onError] an error occurred on connection " + session.getRemoteSocketAddress() + ":" + ex);
 	}
 }

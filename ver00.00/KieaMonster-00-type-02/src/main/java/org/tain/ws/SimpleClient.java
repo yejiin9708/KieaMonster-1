@@ -17,6 +17,8 @@ public class SimpleClient extends WebSocketClient {
 		super(serverUri);
 	}
 	
+	///////////////////////////////////////////////////////////////////////////
+	
 	public void sendMessage(String message) {
 		this.send(message);
 		System.out.println("[sendMessage] [CLI -> SVR] " + message);
