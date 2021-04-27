@@ -1,4 +1,4 @@
-package org.tain.config;
+package org.tain.config.async;
 
 import java.util.concurrent.Executor;
 
