@@ -1,4 +1,4 @@
-package org.tain.config;
+package org.tain.config.async;
 
 import java.util.concurrent.Executor;
 
@@ -23,7 +23,7 @@ import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 public class AsyncConfig extends AsyncConfigurerSupport {
 
 	@Bean(name = "async_Task01_Job01")
-	public Executor mapperAsyncTask01Job01() {
+	public Executor mapperAsyncMain01Job01() {
 		ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
 		executor.setCorePoolSize(1);
 		executor.setMaxPoolSize(10);
