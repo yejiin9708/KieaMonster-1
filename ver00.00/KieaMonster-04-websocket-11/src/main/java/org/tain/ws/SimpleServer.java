@@ -22,6 +22,11 @@ public class SimpleServer extends WebSocketServer {
 		return this.sessions;
 	}
 	
+	public void sendMessage(WebSocket webSocket, String message) {
+		webSocket.send(message);
+		System.out.println("[sendMessage] [SVR -> CLI] " + message);
+	}
+	
 	///////////////////////////////////////////////////////////////////////////
 	
 	@Override
@@ -62,10 +67,5 @@ public class SimpleServer extends WebSocketServer {
 	@Override
 	public void onStart() {
 		System.out.println("[onStart] server started successfully!");
-	}
-	
-	public void sendMessage(WebSocket webSocket, String message) {
-		webSocket.send(message);
-		System.out.println("[sendMessage] [SVR -> CLI] " + message);
 	}
 }
