@@ -20,9 +20,9 @@ public class TaskSimpleServer {
 	
 	private SimpleServer server = null;
 	
-	@Async
-	//@Async("async_Task01_Job01")
-	public void asyncTask01Job01(String param) throws Exception {
+	//@Async
+	@Async("async_Task01_Server01")
+	public void asyncTask01Server01(String param) throws Exception {
 		log.info("KANG-20200721 >>>>> START {} {} {}", param, index++, CurrentInfo.get());
 		
 		if (Flag.flag) {
