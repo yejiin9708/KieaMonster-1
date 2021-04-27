@@ -129,8 +129,8 @@ public class AsyncCommands {
 		return asyncSize;
 	}
 	
-	//@Async
-	@Async(value = "async_Job_Commands")
+	@Async
+	//@Async(value = "async_Job_Commands")
 	public void asyncCommand(Integer index) throws Exception {
 		log.info("KANG-20200721 >>>>> START {} {}", index, CurrentInfo.get());
 	

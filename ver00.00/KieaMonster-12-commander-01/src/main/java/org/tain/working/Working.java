@@ -4,6 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.tain.utils.CurrentInfo;
 import org.tain.utils.Flag;
+import org.tain.utils.Sleep;
+import org.tain.working.async.AsyncServerWorking;
 import org.tain.working.properties.PropertiesWorking;
 import org.tain.working.tbload.TbCmdWorking;
 import org.tain.working.tbload.TbGrpWorking;
@@ -20,13 +22,22 @@ public class Working {
 	public void work() throws Exception {
 		log.info("KANG-20210405 >>>>> {} {}", CurrentInfo.get());
 		
+		// properties
 		if (Flag.flag) jobForProperties();
 		
-		if (Flag.flag) jobForTbOrgLoad();
-		if (Flag.flag) jobForTbGrpLoad();
-		if (Flag.flag) jobForTbSvrLoad();
-		if (Flag.flag) jobForTbCmdLoad();
-		if (Flag.flag) jobForTbResultLoad();
+		// table loader
+		if (Flag.flag) {
+			if (Flag.flag) jobForTbOrgLoad();
+			if (Flag.flag) jobForTbGrpLoad();
+			if (Flag.flag) jobForTbSvrLoad();
+			if (Flag.flag) jobForTbCmdLoad();
+			if (Flag.flag) jobForTbResultLoad();
+		}
+		
+		// websocket server
+		if (Flag.flag) {
+			if (Flag.flag) jobForAsyncServer();
+		}
 	}
 	
 	///////////////////////////////////////////////////////////////////////////
@@ -56,8 +67,6 @@ public class Working {
 	}
 	
 	///////////////////////////////////////////////////////////////////////////
-	///////////////////////////////////////////////////////////////////////////
-	///////////////////////////////////////////////////////////////////////////
 	
 	@Autowired
 	private TbGrpWorking tbGrpWorking;
@@ -68,8 +77,6 @@ public class Working {
 		if (Flag.flag) this.tbGrpWorking.load();
 	}
 	
-	///////////////////////////////////////////////////////////////////////////
-	///////////////////////////////////////////////////////////////////////////
 	///////////////////////////////////////////////////////////////////////////
 	
 	@Autowired
@@ -82,8 +89,6 @@ public class Working {
 	}
 	
 	///////////////////////////////////////////////////////////////////////////
-	///////////////////////////////////////////////////////////////////////////
-	///////////////////////////////////////////////////////////////////////////
 	
 	@Autowired
 	private TbCmdWorking tbCmdWorking;
@@ -95,8 +100,6 @@ public class Working {
 	}
 	
 	///////////////////////////////////////////////////////////////////////////
-	///////////////////////////////////////////////////////////////////////////
-	///////////////////////////////////////////////////////////////////////////
 	
 	@Autowired
 	private TbResultWorking tbResultWorking;
@@ -105,5 +108,21 @@ public class Working {
 		log.info("KANG-20210405 >>>>> {} {}", CurrentInfo.get());
 		
 		if (Flag.flag) this.tbResultWorking.load();
+	}
+	
+	///////////////////////////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////////////////////////
+	
+	@Autowired
+	private AsyncServerWorking asyncServerWorking;
+	
+	private void jobForAsyncServer() throws Exception {
+		log.info("KANG-20210405 >>>>> {} {}", CurrentInfo.get());
+		
+		if (Flag.flag) this.asyncServerWorking.test00();  // create thread
+		
+		if (Flag.flag) Sleep.run(10 * 1000);
+		if (Flag.flag) this.asyncServerWorking.test01();  // send messages
 	}
 }

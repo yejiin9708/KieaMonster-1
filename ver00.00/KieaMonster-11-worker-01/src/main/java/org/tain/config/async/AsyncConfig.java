@@ -1,17 +1,12 @@
-package org.tain.config;
+package org.tain.config.async;
 
 import java.util.concurrent.Executor;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.AsyncConfigurerSupport;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
-import org.tain.properties.ProjEnvBaseProperties;
-import org.tain.utils.CurrentInfo;
-
-import lombok.extern.slf4j.Slf4j;
 
 /*
  * CorePoolSize: 기본 쓰레드 갯수
@@ -23,23 +18,28 @@ import lombok.extern.slf4j.Slf4j;
  * 10개의 쓰레드가 모두 실행되고 있는 도중에 추가 요청이 들어오면 QueueCapacity에서 설정한 사이즈 만큼
  * 대기열에서 기다리고 있습니다. 실행되고 있는 쓰레드가 종료되면 순차적으로 처리됩니다.
  */
-//@Configuration
-//@EnableAsync
-@Slf4j
+@Configuration
+@EnableAsync
 public class AsyncConfig extends AsyncConfigurerSupport {
 
-	@Autowired
-	private ProjEnvBaseProperties projEnvBaseProperties;
-	
-	//@Bean(name = "async_Job_Commands")
-	public Executor asyncJobCommands() {
-		final int asyncSize = this.projEnvBaseProperties.getAsyncSize();
-		log.info("KANG-20210412 >>>>> {} asyncSize = {}", CurrentInfo.get(), asyncSize);
+	@Bean(name = "async_Task01_Server01")
+	public Executor setTask01Server01() {
 		ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
-		executor.setCorePoolSize(asyncSize);
-		executor.setMaxPoolSize(asyncSize);
-		executor.setQueueCapacity(asyncSize);
-		executor.setThreadNamePrefix("async_Job_Commands-");
+		executor.setCorePoolSize(1);
+		executor.setMaxPoolSize(10);
+		executor.setQueueCapacity(2);
+		executor.setThreadNamePrefix("async_Task01_Server01-");
+		executor.initialize();
+		return executor;
+	}
+	
+	@Bean(name = "async_Task01_Client01")
+	public Executor setTask01Client01() {
+		ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
+		executor.setCorePoolSize(1);
+		executor.setMaxPoolSize(10);
+		executor.setQueueCapacity(2);
+		executor.setThreadNamePrefix("async_Task01_Client01-");
 		executor.initialize();
 		return executor;
 	}
