@@ -1,4 +1,4 @@
-package org.tain.tasks.wscli;
+package org.tain.tasks.ws;
 
 import java.net.URI;
 
