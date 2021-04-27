@@ -18,9 +18,9 @@ public class TaskSimpleClient {
 	
 	private SimpleClient client = null;
 	
-	@Async
-	//@Async("async_Task01_Job01")
-	public void asyncTask01Job01(String param) throws Exception {
+	//@Async
+	@Async("async_Task01_Client01")
+	public void asyncTask01Client01(String param) throws Exception {
 		log.info("KANG-20200721 >>>>> START {} {} {}", param, index++, CurrentInfo.get());
 		
 		if (Flag.flag) {
