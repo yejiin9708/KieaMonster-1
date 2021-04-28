@@ -7,6 +7,7 @@ import org.java_websocket.WebSocket;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
+import org.tain.repository.TbResultRepository;
 import org.tain.service.worker.TbCmdService;
 import org.tain.utils.CurrentInfo;
 import org.tain.utils.Flag;
@@ -18,6 +19,9 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class TaskSimpleServer {
 
+	@Autowired
+	private TbResultRepository tbResultRepository;
+	
 	@Autowired
 	private TbCmdService tbCmdService;
 	
@@ -34,7 +38,7 @@ public class TaskSimpleServer {
 			String host = "localhost";
 			int port = 8887;
 			
-			this.server = new SimpleServer(new InetSocketAddress(host, port), this.tbCmdService);
+			this.server = new SimpleServer(new InetSocketAddress(host, port), this.tbCmdService, this.tbResultRepository);
 			this.server.run();  // run blocking
 		}
 		

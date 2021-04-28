@@ -42,8 +42,8 @@ public class SimpleClient extends WebSocketClient {
 		if (Flag.flag) {
 			try {
 				MonJsonNode send = new MonJsonNode("{}");
-				send.put("svrName", "TEST01");
-				send.put("reqCode", "GETCMDS");
+				send.put("svrCode", "TEST01");
+				send.put("msgCode", "GET_CMDS");
 				if (Flag.flag) log.info("REQ: {}", send.toPrettyString());
 				
 				this.sendMessage(send.toString());
@@ -79,13 +79,13 @@ public class SimpleClient extends WebSocketClient {
 			}
 		}
 		
-		String reqCode = null;
+		String msgCode = null;
 		if (Flag.flag) {
-			reqCode = recv.getText("reqCode");
-			if (Flag.flag) log.info(">>>>> reqCode: {}", reqCode);
+			msgCode = recv.getText("msgCode");
+			if (Flag.flag) log.info(">>>>> msgCode: {}", msgCode);
 			
-			switch (reqCode) {
-			case "GETCMDS":
+			switch (msgCode) {
+			case "GET_CMDS":
 				this.recvCommands.convertToMap(recv);
 				break;
 			default:

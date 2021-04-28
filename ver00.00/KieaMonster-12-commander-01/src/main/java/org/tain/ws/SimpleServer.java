@@ -10,9 +10,13 @@ import org.java_websocket.WebSocket;
 import org.java_websocket.handshake.ClientHandshake;
 import org.java_websocket.server.WebSocketServer;
 import org.tain.domain.TbCmd;
+import org.tain.domain.TbResult;
 import org.tain.node.MonJsonNode;
+import org.tain.repository.TbResultRepository;
 import org.tain.service.worker.TbCmdService;
 import org.tain.utils.Flag;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -20,10 +24,14 @@ import lombok.extern.slf4j.Slf4j;
 public class SimpleServer extends WebSocketServer {
 
 	private TbCmdService tbCmdService;
+	private TbResultRepository tbResultRepository;
 	
-	public SimpleServer(InetSocketAddress inetSocketAddress, TbCmdService tbCmdService) {
+	public SimpleServer(InetSocketAddress inetSocketAddress
+			, TbCmdService tbCmdService
+			, TbResultRepository tbResultRepository) {
 		super(inetSocketAddress);
 		this.tbCmdService = tbCmdService;
+		this.tbResultRepository = tbResultRepository;
 	}
 	
 	///////////////////////////////////////////////////////////////////////////
@@ -78,27 +86,48 @@ public class SimpleServer extends WebSocketServer {
 		
 		try {
 			MonJsonNode node = null;
-			String svrName = null;
-			String reqCode = null;
+			String svrCode = null;
+			String msgCode = null;
 			
 			//////////////////////////////////////////////
 			if (Flag.flag) {
 				// recv
 				if (Flag.flag) log.info("[SVR <- CLI] " + message);
 				node = new MonJsonNode(message);
-				if (Flag.flag) log.info("REQ: {} ", node.toPrettyString());
-				svrName = node.getText("svrName");
-				reqCode = node.getText("reqCode");
+				if (!Flag.flag) log.info("REQ: {} ", node.toPrettyString());
+				svrCode = node.getText("svrCode");
+				msgCode = node.getText("msgCode");
 			}
 			
-			if (Flag.flag) log.info(">>>>> svrName: {}, reqCode: {}", svrName, reqCode);
+			if (Flag.flag) log.info(">>>>> svrCode: {}, msgCode: {}", svrCode, msgCode);
 			
-			switch (reqCode) {
-			case "GETCMDS":
+			switch (msgCode) {
+			case "GET_CMDS":
 				//////////////////////////////////////////////
 				if (Flag.flag) {
 					// send test 2
-					List<TbCmd> list = this.tbCmdService.listBySvrCode(svrName);
+					List<TbCmd> list = this.tbCmdService.listBySvrCode(svrCode);
+					System.out.println("list.size() = " + list.size());
+					
+					MonJsonNode cmds = new MonJsonNode(MonJsonNode.getJson(list));
+					node.put("resResult", cmds);
+					if (Flag.flag) log.info("RES: {} ", node.toPrettyString());
+					this.sendMessage(session, node.toString());
+				}
+				break;
+			case "CMD_RET":
+				//////////////////////////////////////////////
+				if (Flag.flag) {
+					// table insert
+					TbResult result = new ObjectMapper().readValue(message, TbResult.class);
+					this.tbResultRepository.save(result);
+				}
+				if (Flag.flag) {
+					// signal to websocket client
+				}
+				//////////////////////////////////////////////
+				if (!Flag.flag) {
+					List<TbCmd> list = this.tbCmdService.listBySvrCode(svrCode);
 					System.out.println("list.size() = " + list.size());
 					
 					MonJsonNode cmds = new MonJsonNode(MonJsonNode.getJson(list));

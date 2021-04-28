@@ -6,7 +6,6 @@ import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
-import org.springframework.stereotype.Component;
 import org.tain.data.Cmd;
 import org.tain.httpClient.MonHttpClient;
 import org.tain.node.MonJsonNode;
@@ -21,7 +20,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 
 @Deprecated
-@Component
+//@Component
 @Slf4j
 public class _AsyncCommands {
 
@@ -31,15 +30,15 @@ public class _AsyncCommands {
 	private MonJsonNode nodeCmds = null;
 	private List<Cmd> lstCmds = null;
 	
-	@Autowired
-	private SendResult sendResult;
+	//@Autowired
+	//private SendResult sendResult;
 	private ResultQueue resultQueue;
 	
 	public void jobInit() throws Exception {
 		log.info("KANG-20210412 >>>>> {} {}", CurrentInfo.get());
 		
 		if (Flag.flag) {
-			this.resultQueue = this.sendResult.getResultQueue();
+			//this.resultQueue = this.sendResult.getResultQueue();
 			this.resultQueue.clear();
 		}
 		

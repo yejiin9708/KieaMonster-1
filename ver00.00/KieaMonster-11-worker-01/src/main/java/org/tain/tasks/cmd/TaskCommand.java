@@ -8,6 +8,8 @@ import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 import org.tain.commands.RecvCommands;
 import org.tain.data.Cmd;
+import org.tain.node.MonJsonNode;
+import org.tain.tasks.result.TaskSendResult;
 import org.tain.utils.Flag;
 import org.tain.utils.Sleep;
 
@@ -19,6 +21,9 @@ public class TaskCommand {
 
 	@Autowired
 	private RecvCommands recvCommands;
+	
+	@Autowired
+	private TaskSendResult taskSendResult;
 	
 	@Async("async_Task01_Command01")
 	public void asyncTask01Command01(String key) throws Exception {
@@ -33,6 +38,18 @@ public class TaskCommand {
 		if (Flag.flag) {
 			for (int i=0; ; i++) {
 				//log.info(">>>>> cmd-{}: {} {}", key, cmd, i);
+				MonJsonNode nodeResult = new MonJsonNode("{}");
+				if (Flag.flag) {
+					nodeResult.put("svrCode", cmd.getSvrCode());
+					nodeResult.put("msgCode", "CMD_RET");
+					nodeResult.put("cmdCode", cmd.getCmdCode());
+					nodeResult.put("cmdName", cmd.getCmdName());
+					nodeResult.put("cmdDesc", cmd.getCmdDesc());
+					nodeResult.put("cmdArr", cmd.getCmdArr());
+					nodeResult.put("cmdPeriod", cmd.getCmdPeriod());
+					//nodeResult.put("cmdDttm", LocalDateTime.now());
+				}
+				
 				if (Flag.flag) {
 					Process process = Runtime.getRuntime().exec(cmd.getCmdArr());
 					
@@ -52,10 +69,15 @@ public class TaskCommand {
 					sb.append(String.format("(%d) Process exitValue = %d", i, exitVal)).append("\n\n");
 					process.destroy();
 					
-					System.out.println(sb.toString());
+					//System.out.println(sb.toString());
+					nodeResult.put("cmdResult", sb.toString());
 				}
 				
-				// period
+				if (Flag.flag) {
+					this.taskSendResult.setQueue(nodeResult);
+				}
+				
+				// wait for period
 				Sleep.run(Integer.parseInt(cmd.getCmdPeriod()) * 1000);
 			}
 		}

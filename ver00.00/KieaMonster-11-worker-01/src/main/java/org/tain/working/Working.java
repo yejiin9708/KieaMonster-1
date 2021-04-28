@@ -6,9 +6,8 @@ import org.tain.utils.CurrentInfo;
 import org.tain.utils.Flag;
 import org.tain.utils.Sleep;
 import org.tain.working.async.AsyncClientWorking;
-import org.tain.working.commands.CommandsWorking;
 import org.tain.working.properties.PropertiesWorking;
-import org.tain.working.result.ResultWorking;
+import org.tain.working.result.AsyncTaskSendResultWorking;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -21,14 +20,13 @@ public class Working {
 		
 		if (Flag.flag) jobForProperties();
 		
-		if (!Flag.flag) jobForCommands();
+		//if (!Flag.flag) jobForCommands();
 		
-		if (!Flag.flag) jobForResult();
+		//if (!Flag.flag) jobForResult();
 		
 		// websocket client
-		if (Flag.flag) {
-			if (Flag.flag) jobForAsyncClient();
-		}
+		if (Flag.flag) jobForAsyncClient();
+		if (Flag.flag) jobForAsyncTaskSendResult();
 	}
 	
 	///////////////////////////////////////////////////////////////////////////
@@ -48,6 +46,7 @@ public class Working {
 	///////////////////////////////////////////////////////////////////////////
 	///////////////////////////////////////////////////////////////////////////
 	
+	/*
 	@Autowired
 	private CommandsWorking commandsWorking;
 	
@@ -56,11 +55,13 @@ public class Working {
 		
 		if (Flag.flag) this.commandsWorking.test01();
 	}
+	*/
 	
 	///////////////////////////////////////////////////////////////////////////
 	///////////////////////////////////////////////////////////////////////////
 	///////////////////////////////////////////////////////////////////////////
 	
+	/*
 	@Autowired
 	private ResultWorking resultWorking;
 	
@@ -69,6 +70,7 @@ public class Working {
 		
 		if (Flag.flag) this.resultWorking.test01();
 	}
+	*/
 	
 	///////////////////////////////////////////////////////////////////////////
 	///////////////////////////////////////////////////////////////////////////
@@ -84,5 +86,18 @@ public class Working {
 		
 		if (!Flag.flag) Sleep.run(10 * 1000);
 		if (!Flag.flag) this.asyncClientWorking.test01();  // send messages
+	}
+	
+	///////////////////////////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////////////////////////
+	
+	@Autowired
+	private AsyncTaskSendResultWorking asyncTaskSendResultWorking;
+	
+	private void jobForAsyncTaskSendResult() throws Exception {
+		log.info("KANG-20210405 >>>>> {} {}", CurrentInfo.get());
+		
+		if (Flag.flag) this.asyncTaskSendResultWorking.test00();  //
 	}
 }

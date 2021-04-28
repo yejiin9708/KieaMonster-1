@@ -1,8 +1,6 @@
 package org.tain.working.result;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-import org.tain.commands.SendResult;
 import org.tain.httpClient.MonHttpClient;
 import org.tain.node.MonJsonNode;
 import org.tain.queue.ResultQueue;
@@ -11,19 +9,20 @@ import org.tain.utils.Flag;
 
 import lombok.extern.slf4j.Slf4j;
 
-@Component
+//@Component
 @Slf4j
+@Deprecated
 public class ResultWorking {
 	
-	@Autowired
-	private SendResult sendResult;
+	//@Autowired
+	//private SendResult sendResult;
 	private ResultQueue resultQueue;
 	
 	public void test01() throws Exception {
 		log.info("KANG-20210412 >>>>> {} {}", CurrentInfo.get());
 		
 		if (Flag.flag) {
-			this.resultQueue = this.sendResult.getResultQueue();
+			//this.resultQueue = this.sendResult.getResultQueue();
 		}
 		
 		if (Flag.flag) {
