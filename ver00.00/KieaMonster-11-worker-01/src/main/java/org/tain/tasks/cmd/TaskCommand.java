@@ -6,6 +6,7 @@ import org.springframework.stereotype.Component;
 import org.tain.commands.RecvCommands;
 import org.tain.data.Cmd;
 import org.tain.utils.Flag;
+import org.tain.utils.Sleep;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -20,11 +21,17 @@ public class TaskCommand {
 	public void asyncTask01Command01(String key) throws Exception {
 		log.info(">>>>> TaskCommand.asyncTask01Command01: {}", key);
 		
+		Cmd cmd = null;
 		if (Flag.flag) {
-			Cmd cmd = this.recvCommands.getCmd(key);
+			cmd = this.recvCommands.getCmd(key);
 			log.info(">>>>> cmd-{}: {}", key, cmd);
-			
-			// TODO: KANG-2021-04-27
+		}
+		
+		if (Flag.flag) {
+			for (int i=0; ; i++) {
+				log.info(">>>>> cmd-{}: {} {}", key, cmd, i);
+				Sleep.run(3 * 1000);
+			}
 		}
 	}
 }
