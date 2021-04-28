@@ -19,7 +19,7 @@ public class Working {
 		
 		if (Flag.flag) jobForProperties();
 		
-		if (Flag.flag) job01();  // for test01
+		if (!Flag.flag) job01();  // for test01
 		if (Flag.flag) job02();  // for test02
 	}
 	
@@ -58,6 +58,6 @@ public class Working {
 	private Test02Working test02Working;
 	
 	private void job02() throws Exception {
-		if (Flag.flag) this.test02Working.jobFor();
+		if (Flag.flag) this.test02Working.jobForStream();
 	}
 }

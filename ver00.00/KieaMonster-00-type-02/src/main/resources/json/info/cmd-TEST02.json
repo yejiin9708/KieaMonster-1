@@ -6,7 +6,7 @@
 		"cmdDesc": "svr desc (연습:utf-8)",
 		"cmdPeriod": 60,
 		"cmdType": "CMD_NORMAL",
-		"cmdArr": " sh uname -a   "
+		"cmdArr": " uname -a   "
 	},{
 		"svrCode": "TEST02",
 		"cmdCode": "disk",
@@ -22,7 +22,7 @@
 		"cmdDesc": "memory space (연습:utf-8)",
 		"cmdPeriod": 60,
 		"cmdType": "CMD_NORMAL",
-		"cmdArr": " free -a "
+		"cmdArr": " ps -ef "
 	}
 ]
 
