@@ -31,6 +31,10 @@ dependencies {
 	// import org.apache.commons.io.filefilter.WildcardFileFilter;
 	implementation 'commons-io:commons-io:2.6'
 	
+	// Java-WebSocket
+	implementation 'org.java-websocket:Java-WebSocket:1.5.1'
+	//implementation 'org.springframework.boot:spring-boot-starter-websocket'
+	
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'org.springframework.boot:spring-boot-starter-data-rest'
 	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
