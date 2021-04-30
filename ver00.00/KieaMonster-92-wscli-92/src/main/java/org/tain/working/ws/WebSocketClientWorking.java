@@ -20,7 +20,7 @@ public class WebSocketClientWorking {
 		log.info("KANG-20210405 >>>>> {} {}", CurrentInfo.get());
 		
 		if (Flag.flag) {
-			for (int i=0; i < 10; i++) {
+			for (int i=0;; i++) {
 				this.monWebSocketClient.sendMessage("Hello, world!!! - " + i);
 				Sleep.run(5 * 1000);
 			}

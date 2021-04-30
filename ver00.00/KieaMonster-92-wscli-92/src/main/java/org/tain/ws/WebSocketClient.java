@@ -19,21 +19,21 @@ public class WebSocketClient {
 		this.monWebSocketClient = monWebSocketClient;
 	}
 	
-	@OnClose
-	public void onClose() {
-		this.simplePrint.print("[OnClose] session close");
-		try {
-			this.monWebSocketClient.close();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-	
 	@OnMessage
 	public void onMessage(String message) {
 		//System.out.println("[OnMessage] recv message: " + message);
 		try {
 			this.monWebSocketClient.recvMessage(message);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	@OnClose
+	public void onClose() {
+		this.simplePrint.print("[OnClose] session close");
+		try {
+			this.monWebSocketClient.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
