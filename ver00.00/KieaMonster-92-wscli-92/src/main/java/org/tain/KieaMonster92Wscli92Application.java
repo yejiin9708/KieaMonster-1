@@ -1,20 +1,23 @@
 package org.tain;
 
-import java.net.URI;
+import java.time.LocalDateTime;
 
-import javax.websocket.ContainerProvider;
-import javax.websocket.Session;
-import javax.websocket.WebSocketContainer;
-
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.tain.working.WebSocketClient;
+import org.tain.utils.CurrentInfo;
+import org.tain.utils.Flag;
+import org.tain.working.Working;
+
+import lombok.extern.slf4j.Slf4j;
 
 @SpringBootApplication
-public class KieaMonster92Wscli92Application {
-//public class KieaMonster92Wscli92Application implements CommandLineRunner {
+@Slf4j
+public class KieaMonster92Wscli92Application implements CommandLineRunner {
 
 	public static void main(String[] args) {
+		log.info("KANG-20210405 >>>>> {} {}", CurrentInfo.get(), LocalDateTime.now());
 		SpringApplication.run(KieaMonster92Wscli92Application.class, args);
 	}
 	
@@ -22,29 +25,21 @@ public class KieaMonster92Wscli92Application {
 	///////////////////////////////////////////////////////////////////////////
 	///////////////////////////////////////////////////////////////////////////
 	
-	private static Object waitLock = new Object();
-	
-	//@Override
+	@Autowired
+	private Working working;
+
+	@Override
 	public void run(String... args) throws Exception {
-		//this.startWebSocket.start();
+		log.info("KANG-20210405 >>>>> {} {}", CurrentInfo.get());
 		
-		Session session = null;
 		try {
-			WebSocketContainer container = ContainerProvider.getWebSocketContainer();
-			//session = container.connectToServer(WebSocketClient.class, URI.create("ws://localhost:8091/v0.1/websocket"));
-			session = container.connectToServer(new WebSocketClient(), URI.create("ws://localhost:8091/v0.1/websocket"));
-			session.getAsyncRemote().sendText("Hello, world!!!!");
-			
-			synchronized (waitLock) {
-				try {
-					waitLock.wait();
-				} catch (InterruptedException e) {}
-			}
+			if (Flag.flag) this.working.work();
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
-			if (session != null) {
-				try { session.close(); } catch (Exception e) {}
+			if (Flag.flag) {
+				System.out.println("\n==========================  SYSTEM EXIT by TestFlag  ===========================\n");
+				System.exit(0);
 			}
 		}
 	}
