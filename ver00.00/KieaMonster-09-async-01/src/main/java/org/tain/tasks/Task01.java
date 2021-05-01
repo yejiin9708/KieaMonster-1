@@ -1,4 +1,4 @@
-package org.tain.working.async;
+package org.tain.tasks;
 
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
