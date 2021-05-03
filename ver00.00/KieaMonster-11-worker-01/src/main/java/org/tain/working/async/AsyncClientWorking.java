@@ -24,6 +24,7 @@ public class AsyncClientWorking {
 		}
 	}
 	
+	// not use, because of testing
 	public void test01() throws Exception {
 		log.info("KANG-20210405 >>>>> {} {}", CurrentInfo.get());
 		
