@@ -1,4 +1,4 @@
-package org.tain.tasks.loader;
+package org.tain.tasks.loadtables;
 
 import java.io.File;
 import java.io.FileFilter;

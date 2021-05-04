@@ -1,4 +1,4 @@
-package org.tain.tasks.loader;
+package org.tain.tasks.loadtables;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

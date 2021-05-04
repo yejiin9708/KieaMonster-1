@@ -1,4 +1,4 @@
-package org.tain.tasks.loader;
+package org.tain.tasks.loadtables;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -9,13 +9,13 @@ import org.tain.utils.Flag;
 
 import lombok.extern.slf4j.Slf4j;
 
-@Component
+@Component("LoadTablesTask")
 @Slf4j
 public class LoadTablesTask {
 
 	@Bean
 	public void startLoaderTask() throws Exception {
-		System.out.println("KANG-20210405 >>>>> Hello, Starting of LoaderTask.");
+		System.out.println("KANG-20210405 >>>>> Hello, Starting of LoadTablesTask.");
 		
 		if (Flag.flag) {
 		}
@@ -37,6 +37,8 @@ public class LoadTablesTask {
 			if (Flag.flag) jobForTbCmdLoad();
 			if (Flag.flag) jobForTbResultLoad();
 		}
+		
+		log.info("KANG-20200721 >>>>> async_0101 END   {} {}", param, CurrentInfo.get());
 	}
 	
 	///////////////////////////////////////////////////////////////////////////

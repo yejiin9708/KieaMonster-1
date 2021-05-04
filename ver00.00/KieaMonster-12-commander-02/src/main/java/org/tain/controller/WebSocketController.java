@@ -10,12 +10,16 @@ import javax.websocket.OnOpen;
 import javax.websocket.Session;
 import javax.websocket.server.ServerEndpoint;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Controller;
+import org.tain.tasks.recvresult.RecvResultTask;
 import org.tain.utils.Flag;
 
 @Controller
 @ServerEndpoint(value = "/websocket")
+@DependsOn(value = {"LoadTablesTask", "RecvResultTask", "SendResultTask"})
 public class WebSocketController {
 
 	@Bean
@@ -30,39 +34,38 @@ public class WebSocketController {
 	///////////////////////////////////////////////////////////////////////////
 	///////////////////////////////////////////////////////////////////////////
 	
-	//@Autowired
-	//private SimplePrint simplePrint;
+	@Autowired
+	private RecvResultTask recvResultTask;
 	
 	private static Set<Session> sessions = new HashSet<>();
 	
 	@OnOpen
 	public void onOpen(Session session) {
 		System.out.println(">>>>> [OnOpen] connection from " + session.getId());
-		//this.simplePrint.print(">>>>> [OnOpen] connection from " + session.getId());
 		WebSocketController.sessions.add(session);
 	}
 	
 	@OnClose
 	public void onClose(Session session) {
 		System.out.println(">>>>> [OnClose] disconnection from " + session.getId());
-		//this.simplePrint.print(">>>>> [OnClose] disconnection from " + session.getId());
 		WebSocketController.sessions.remove(session);
 	}
 	
+	//@PostConstruct
 	@OnMessage
 	public void onMessage(Session session, String message) {
 		System.out.println(">>>>> [OnMessage] recv message: " + message);
-		//this.simplePrint.print(">>>>> [OnMessage] recv message: " + message);
+		this.recvResultTask.setQueueLoadResult(message);
+		
 		String replyMessage = "echo .... " + message;
 		System.out.println(">>>>> [OnMessage] send message: " + replyMessage);
-		//this.simplePrint.print(">>>>> [OnMessage] send message: " + replyMessage);
 		//this.broadCast(replyMessage);
+		this.sendMessage(session, replyMessage);
 	}
 	
 	@OnError
 	public void onError(Session session, Throwable t) {
 		System.out.println(">>>>> [OnError]");
-		//this.simplePrint.print(">>>>> [OnError]");
 		t.printStackTrace();
 	}
 	
@@ -70,7 +73,6 @@ public class WebSocketController {
 	
 	public void broadCast(String message) {
 		System.out.println(">>>>> broadcast: " + message);
-		//this.simplePrint.print(">>>>> broadcast: " + message);
 		WebSocketController.sessions.forEach(session -> {
 			this.sendMessage(session, message);
 		});

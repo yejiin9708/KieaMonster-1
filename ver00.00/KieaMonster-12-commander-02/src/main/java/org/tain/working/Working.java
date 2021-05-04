@@ -20,7 +20,7 @@ public class Working {
 		if (Flag.flag) jobForProperties();
 		
 		// async queue test
-		if (Flag.flag) jobForTestAsyncQueue();
+		if (!Flag.flag) jobForTestAsyncQueue();
 	}
 	
 	///////////////////////////////////////////////////////////////////////////

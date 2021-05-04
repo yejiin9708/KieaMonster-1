@@ -1,4 +1,4 @@
-package org.tain.tasks.commander;
+package org.tain.tasks.sendresult;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.scheduling.annotation.Async;
@@ -9,48 +9,15 @@ import org.tain.utils.Flag;
 
 import lombok.extern.slf4j.Slf4j;
 
-@Component
+@Component("SendResultTask")
 @Slf4j
-public class CommanderTask {
+public class SendResultTask {
 
 	@Bean
-	public void startCommanderTask() throws Exception {
-		System.out.println("KANG-20210405 >>>>> Hello, Starting of CommanderTasks.");
+	public void startSendResultTask() throws Exception {
+		System.out.println("KANG-20210405 >>>>> Hello, Starting of SendResultTask.");
 		
 		if (Flag.flag) {
-		}
-	}
-	
-	///////////////////////////////////////////////////////////////////////////
-	///////////////////////////////////////////////////////////////////////////
-	///////////////////////////////////////////////////////////////////////////
-	
-	private ObjectQueue queueLoadResult = new ObjectQueue();
-	
-	public void setQueueLoadResult(Object object) {
-		this.queueLoadResult.set(object);
-	}
-	
-	public Object getQueueLoadResult() {
-		return this.queueLoadResult.get();
-	}
-	
-	// loadResult
-	@Async(value = "async_0101")
-	public void async0101(String param) throws Exception {
-		log.info("KANG-20200721 >>>>> async_0101 START {} {}", param, CurrentInfo.get());
-	
-		if (Flag.flag) {
-			while (true) {
-				// get result from the queueLoadResult
-				String msg = (String) this.getQueueLoadResult();
-				System.out.println(">>>>> 1. async " + param + ": " + msg);
-				
-				// load result to tbResult
-				
-				// set result to the queueSendResult
-				this.setQueueSendResult(msg);
-			}
 		}
 	}
 	
