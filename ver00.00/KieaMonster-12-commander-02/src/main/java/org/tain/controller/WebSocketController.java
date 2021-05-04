@@ -1,7 +1,7 @@
 package org.tain.controller;
 
-import java.util.HashSet;
 import java.util.Set;
+import java.util.concurrent.CopyOnWriteArraySet;
 
 import javax.websocket.OnClose;
 import javax.websocket.OnError;
@@ -12,16 +12,21 @@ import javax.websocket.server.ServerEndpoint;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Controller;
-import org.tain.tasks.recvresult.RecvResultTask;
+import org.tain.config.ws.CustomSpringConfigurator;
+import org.tain.tasks.parse.ParseTask;
 import org.tain.utils.Flag;
 
 @Controller
-@ServerEndpoint(value = "/websocket")
-@DependsOn(value = {"LoadTablesTask", "RecvResultTask", "SendResultTask"})
+@ServerEndpoint(value = "/websocket", configurator = CustomSpringConfigurator.class)
 public class WebSocketController {
 
+	//private static Set<Session> sessions = new HashSet<>();
+	private static Set<Session> sessions = new CopyOnWriteArraySet<>();
+	
+	@Autowired
+	private ParseTask parseTask;
+	
 	@Bean
 	public void startWebSocketController() throws Exception {
 		System.out.println("KANG-20210405 >>>>> Hello, Starting of WebSocketController.");
@@ -33,11 +38,6 @@ public class WebSocketController {
 	///////////////////////////////////////////////////////////////////////////
 	///////////////////////////////////////////////////////////////////////////
 	///////////////////////////////////////////////////////////////////////////
-	
-	@Autowired
-	private RecvResultTask recvResultTask;
-	
-	private static Set<Session> sessions = new HashSet<>();
 	
 	@OnOpen
 	public void onOpen(Session session) {
@@ -51,16 +51,17 @@ public class WebSocketController {
 		WebSocketController.sessions.remove(session);
 	}
 	
-	//@PostConstruct
 	@OnMessage
-	public void onMessage(Session session, String message) {
-		System.out.println(">>>>> [OnMessage] recv message: " + message);
-		this.recvResultTask.setQueueLoadResult(message);
+	public void onMessage(Session session, String reqMessage) {
+		System.out.println(">>>>> [OnMessage] recv reqMessage: " + reqMessage);
+		//this.recvResultTask.setQueueLoadResult(reqMessage);
 		
-		String replyMessage = "echo .... " + message;
-		System.out.println(">>>>> [OnMessage] send message: " + replyMessage);
+		// parsing and processing
+		this.parseTask.parsing(session, reqMessage);
+		//System.out.println(">>>>> [OnMessage] send resMessage: " + resMessage);
+		
 		//this.broadCast(replyMessage);
-		this.sendMessage(session, replyMessage);
+		//this.sendMessage(session, resMessage);
 	}
 	
 	@OnError

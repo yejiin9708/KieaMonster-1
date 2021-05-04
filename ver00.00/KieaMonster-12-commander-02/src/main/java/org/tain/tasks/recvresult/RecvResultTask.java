@@ -4,10 +4,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
+import org.tain.domain.TbResult;
 import org.tain.queue.ObjectQueue;
+import org.tain.repository.TbResultRepository;
 import org.tain.tasks.sendresult.SendResultTask;
 import org.tain.utils.CurrentInfo;
 import org.tain.utils.Flag;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -15,6 +19,9 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class RecvResultTask {
 
+	@Autowired
+	private TbResultRepository tbResultRepository;
+	
 	@Bean
 	public void startRecvResultTask() throws Exception {
 		System.out.println("KANG-20210405 >>>>> Hello, Starting of RecvResultTask.");
@@ -51,7 +58,13 @@ public class RecvResultTask {
 				String msg = (String) this.getQueueLoadResult();
 				System.out.println(">>>>> 1. async " + param + ": " + msg);
 				
-				// load result to tbResult
+				//////////////////////////////////////////////
+				if (Flag.flag) {
+					// load result to tbResult
+					// table insert
+					TbResult result = new ObjectMapper().readValue(msg, TbResult.class);
+					this.tbResultRepository.save(result);
+				}
 				
 				// set result to the queueSendResult
 				this.sendResultTask.setQueueSendResult(msg);
