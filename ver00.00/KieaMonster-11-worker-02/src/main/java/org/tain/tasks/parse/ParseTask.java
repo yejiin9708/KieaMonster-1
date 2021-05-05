@@ -2,16 +2,19 @@ package org.tain.tasks.parse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
-import org.tain.tasks.splitCommands.SplitCommandsTask;
 import org.tain.tools.node.MonJsonNode;
+import org.tain.tools.queue.MonQueueBox;
 import org.tain.utils.CurrentInfo;
 import org.tain.utils.Flag;
 
 import lombok.extern.slf4j.Slf4j;
 
-@Component("ParseTask")
+@Component("parseTask")
 @Slf4j
+@DependsOn({"MonQueueBox"})
+//@Lazy
 public class ParseTask {
 
 	@Bean
@@ -27,7 +30,7 @@ public class ParseTask {
 	///////////////////////////////////////////////////////////////////////////
 	
 	@Autowired
-	private SplitCommandsTask splitCommandsTask;
+	private MonQueueBox monQueueBox;
 	
 	public void parsing(String message) {
 		log.info("KANG-20210405 >>>>> {} {}", CurrentInfo.get());
@@ -42,7 +45,7 @@ public class ParseTask {
 				switch (msgCode) {
 				case "GET_CMDS":
 					// transfer to SplitCommandsTask
-					this.splitCommandsTask.setQueue(node);
+					this.monQueueBox.setQueueSplitCommands(node);
 					break;
 				default:
 					throw new Exception("ERROR: couldn't parse the msgCode [" + msgCode + "]");

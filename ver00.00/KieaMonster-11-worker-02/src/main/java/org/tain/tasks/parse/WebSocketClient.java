@@ -13,6 +13,7 @@ public class WebSocketClient {
 	private ParseTask parseTask;
 	
 	public WebSocketClient(ParseTask parseTask) {
+		System.out.println("KANG-20210405 >>>>> Hello, Starting of WebSocketClient.");
 		this.parseTask = parseTask;
 	}
 	

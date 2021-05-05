@@ -1,9 +1,10 @@
 package org.tain.working.sendInfo;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
-import org.tain.tasks.sendResult.SendResultTask;
 import org.tain.tools.node.MonJsonNode;
+import org.tain.tools.queue.MonQueueBox;
 import org.tain.utils.CurrentInfo;
 import org.tain.utils.Flag;
 
@@ -11,10 +12,11 @@ import lombok.extern.slf4j.Slf4j;
 
 @Component
 @Slf4j
+@DependsOn({"MonQueueBox"})
 public class SendInfoWorking {
 
 	@Autowired
-	private SendResultTask sendResultTask;
+	private MonQueueBox monQueueBox;
 	
 	public void sendInfoMessage() throws Exception {
 		log.info("KANG-20210405 >>>>> {} {}", CurrentInfo.get());
@@ -27,7 +29,7 @@ public class SendInfoWorking {
 			System.out.println(">>>>> infoNode: " + infoNode.toPrettyString());
 			
 			// send result
-			this.sendResultTask.setQueue(infoNode);
+			this.monQueueBox.setQueueSendResult(infoNode);
 		}
 	}
 }

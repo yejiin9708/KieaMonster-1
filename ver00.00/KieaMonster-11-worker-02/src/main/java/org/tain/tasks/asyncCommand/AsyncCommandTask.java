@@ -4,24 +4,25 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.DependsOn;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 import org.tain.data.Cmd;
-import org.tain.tasks.sendResult.SendResultTask;
-import org.tain.tasks.splitCommands.SplitCommandsTask;
 import org.tain.tools.node.MonJsonNode;
+import org.tain.tools.queue.MonQueueBox;
 import org.tain.utils.CurrentInfo;
 import org.tain.utils.Flag;
 import org.tain.utils.Sleep;
 
 import lombok.extern.slf4j.Slf4j;
 
-@Component("SplitCommandsTask")
+@Component("AsyncCommandTask")
 @Slf4j
+@DependsOn({"MonQueueBox"})
+//@Lazy
 public class AsyncCommandTask {
 
-	@Bean
+	//@Bean
 	public void startAsyncCommandTask() throws Exception {
 		System.out.println("KANG-20210405 >>>>> Hello, Starting of AsyncCommandTask.");
 		
@@ -34,25 +35,17 @@ public class AsyncCommandTask {
 	///////////////////////////////////////////////////////////////////////////
 	
 	@Autowired
-	private SplitCommandsTask splitCommandsTask;
-	
-	@Autowired
-	private SendResultTask sendResultTask;
+	private MonQueueBox monQueueBox;
 	
 	// AsyncCommandTask
 	@Async(value = "async_0101")
-	public void async0103(String key) throws Exception {
-		log.info("KANG-20200721 >>>>> async_0101 START {} {}", key, CurrentInfo.get());
+	public void async0103(Cmd cmd) throws Exception {
+		log.info("KANG-20200721 >>>>> async_0101 START cmd:{} {}", cmd, CurrentInfo.get());
 	
-		Cmd cmd = null;
 		if (Flag.flag) {
-			cmd = this.splitCommandsTask.getCmd(key);
-			log.info(">>>>> cmd-{}: {}", key, cmd);
-		}
-		
-		if (Flag.flag) {
+			// spring async kill thread
 			for (int i=0; ; i++) {
-				log.info(">>>>> cmd-{}: {} {}", key, cmd, i);
+				log.info(">>>>> cmd: {} {}", cmd, i);
 				MonJsonNode nodeResult = new MonJsonNode("{}");
 				if (Flag.flag) {
 					nodeResult.put("svrCode", cmd.getSvrCode());
@@ -66,6 +59,7 @@ public class AsyncCommandTask {
 				}
 				
 				if (Flag.flag) {
+					// run process and get the result
 					Process process = Runtime.getRuntime().exec(cmd.getCmdArr());
 					
 					BufferedReader br = new BufferedReader(new InputStreamReader(process.getInputStream(), "UTF-8"));
@@ -91,7 +85,7 @@ public class AsyncCommandTask {
 				}
 				
 				if (Flag.flag) {
-					this.sendResultTask.setQueue(nodeResult);
+					this.monQueueBox.setQueueSendResult(nodeResult);
 				}
 				
 				// wait for period

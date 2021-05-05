@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.scheduling.annotation.EnableAsync;
 import org.tain.tools.properties.ProjEnvBaseProperties;
 import org.tain.utils.CurrentInfo;
 import org.tain.utils.Flag;
@@ -15,6 +16,7 @@ import org.tain.working.Working;
 import lombok.extern.slf4j.Slf4j;
 
 @SpringBootApplication
+@EnableAsync
 @Slf4j
 public class KieaMonster13Monitor02Application implements CommandLineRunner {
 

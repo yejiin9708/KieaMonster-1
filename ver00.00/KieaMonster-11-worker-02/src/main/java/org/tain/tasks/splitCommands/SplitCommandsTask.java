@@ -6,12 +6,13 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.DependsOn;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 import org.tain.data.Cmd;
 import org.tain.tasks.asyncCommand.AsyncCommandTask;
 import org.tain.tools.node.MonJsonNode;
-import org.tain.tools.queue.MonQueue;
+import org.tain.tools.queue.MonQueueBox;
 import org.tain.utils.CurrentInfo;
 import org.tain.utils.Flag;
 
@@ -22,6 +23,8 @@ import lombok.extern.slf4j.Slf4j;
 
 @Component("SplitCommandsTask")
 @Slf4j
+@DependsOn({"MonQueueBox"})
+//@Lazy
 public class SplitCommandsTask {
 
 	@Bean
@@ -36,29 +39,8 @@ public class SplitCommandsTask {
 	///////////////////////////////////////////////////////////////////////////
 	///////////////////////////////////////////////////////////////////////////
 	
-	private MonQueue<MonJsonNode> queue = new MonQueue<>();
-	
-	public void setQueue(MonJsonNode object) {
-		this.queue.set(object);
-	}
-	
-	public MonJsonNode getQueue() {
-		return this.queue.get();
-	}
-	
-	///////////////////////////////////////////////////////////////////////////
-	///////////////////////////////////////////////////////////////////////////
-	///////////////////////////////////////////////////////////////////////////
-	
-	private Map<String, Cmd> mapCmds = new HashMap<>();
-	
-	public Cmd getCmd(String key) {
-		return this.mapCmds.get(key);
-	}
-	
-	///////////////////////////////////////////////////////////////////////////
-	///////////////////////////////////////////////////////////////////////////
-	///////////////////////////////////////////////////////////////////////////
+	@Autowired
+	private MonQueueBox monQueueBox;
 	
 	@Autowired
 	private AsyncCommandTask asyncCommandTask;
@@ -69,9 +51,11 @@ public class SplitCommandsTask {
 		log.info("KANG-20200721 >>>>> async_0103 START {} {}", param, CurrentInfo.get());
 	
 		if (Flag.flag) {
+			Map<String, Cmd> mapCmds = new HashMap<>();
 			while (true) {
 				// get resNode
-				MonJsonNode node = this.getQueue();
+				mapCmds.clear();
+				MonJsonNode node = this.monQueueBox.getQueueSplitCommands();
 				System.out.println(">>>>> 3. async " + param + " resNode: " + node.toPrettyString());
 				
 				if (Flag.flag) {
@@ -81,7 +65,7 @@ public class SplitCommandsTask {
 						for (Cmd cmd : lstCmds) {
 							System.out.println(">>>>> " + cmd);
 							String key = String.valueOf(cmd.getId());
-							this.mapCmds.put(key, cmd);
+							mapCmds.put(key, cmd);
 						}
 					} catch (Exception e) {
 						e.printStackTrace();
@@ -91,29 +75,15 @@ public class SplitCommandsTask {
 				if (Flag.flag) {
 					// create async cmds
 					try {
-						for (Map.Entry<String, Cmd> entry : this.mapCmds.entrySet()) {
-							this.asyncCommandTask.async0103(entry.getKey());
+						for (Map.Entry<String, Cmd> entry : mapCmds.entrySet()) {
+							//this.asyncCommandTask.async0103(entry.getKey());
+							this.asyncCommandTask.async0103(entry.getValue());
 						}
 					} catch (Exception e) {
 						e.printStackTrace();
 					}
 				}
-				
-				
-				/*
-				// clone copy reqNode to resNode
-				MonJsonNode resNode = null;
-				try {
-					resNode = reqNode.clone();
-				} catch (CloneNotSupportedException e) {
-					throw e;
-				}
-				resNode.put("status", "SUCCESS");
-				System.out.println(">>>>> 3. async " + param + " resNode: " + resNode.toPrettyString());
-				
-				// send resNode to the client
-				//WebSocketServerController.broadCast(resNode.toString());
-				*/
+				break;
 			}
 		}
 	}
