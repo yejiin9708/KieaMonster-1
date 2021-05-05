@@ -4,7 +4,7 @@
 # BASE of commander
 
 server:
-  port: 8091
+  port: 8092
   servlet:
     context-path: /v0.1
     encoding:

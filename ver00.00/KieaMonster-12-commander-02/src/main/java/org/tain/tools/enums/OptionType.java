@@ -1,4 +1,4 @@
-package org.tain.enums;
+package org.tain.tools.enums;
 
 public enum OptionType {
 	RM_NULL  ("RM_NULL"          , 1),

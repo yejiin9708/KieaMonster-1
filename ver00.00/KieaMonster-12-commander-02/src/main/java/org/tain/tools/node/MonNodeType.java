@@ -1,4 +1,4 @@
-package org.tain.node;
+package org.tain.tools.node;
 
 public enum MonNodeType {
 	OBJECT_NODE("ObjectNode"),

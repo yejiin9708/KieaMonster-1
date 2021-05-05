@@ -9,7 +9,7 @@ import javax.websocket.WebSocketContainer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
-import org.tain.queue.ObjectQueue;
+import org.tain.tools.queue.ObjectQueue;
 import org.tain.utils.CurrentInfo;
 import org.tain.utils.Flag;
 import org.tain.utils.Sleep;
