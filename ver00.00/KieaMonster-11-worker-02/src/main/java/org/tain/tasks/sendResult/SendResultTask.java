@@ -6,9 +6,12 @@ import javax.websocket.ContainerProvider;
 import javax.websocket.Session;
 import javax.websocket.WebSocketContainer;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
+import org.tain.tasks.parse.ParseTask;
+import org.tain.tasks.parse.WebSocketClient;
 import org.tain.tools.node.MonJsonNode;
 import org.tain.tools.queue.MonQueue;
 import org.tain.utils.CurrentInfo;
@@ -32,6 +35,7 @@ public class SendResultTask {
 	///////////////////////////////////////////////////////////////////////////
 	///////////////////////////////////////////////////////////////////////////
 	
+	// queue for sending message
 	private MonQueue<MonJsonNode> queue = new MonQueue<>();
 	
 	public void setQueue(MonJsonNode object) {
@@ -46,24 +50,10 @@ public class SendResultTask {
 	///////////////////////////////////////////////////////////////////////////
 	///////////////////////////////////////////////////////////////////////////
 	
+	@Autowired
+	private ParseTask parseTask;
+	
 	private Session session;
-	
-	public void recvMessage(String message) throws Exception {
-		System.out.println("[recvMessage] message: " + message);
-	}
-	
-	public void sendMessage(String message) throws Exception {
-		System.out.println("[sendMessage] message: " + message);
-		this.session.getAsyncRemote().sendText(message);
-	}
-	
-	public void close() throws Exception {
-		this.session.close();
-	}
-	
-	///////////////////////////////////////////////////////////////////////////
-	///////////////////////////////////////////////////////////////////////////
-	///////////////////////////////////////////////////////////////////////////
 	
 	// sendResult
 	@Async(value = "async_0102")
@@ -73,24 +63,13 @@ public class SendResultTask {
 		if (Flag.flag) {
 			// create a connection with websocket
 			try {
-				WebSocketClient webSocketClient = new WebSocketClient();
+				WebSocketClient webSocketClient = new WebSocketClient(this.parseTask);
 				WebSocketContainer container = ContainerProvider.getWebSocketContainer();
 				this.session = container.connectToServer(webSocketClient, URI.create("ws://localhost:8092/v0.1/websocket"));
 			} catch (Exception e) {
 				throw e;
 			}
 			System.out.println(">>>>> Start WebSocketClient.....");
-		}
-		
-		if (Flag.flag) {
-			// send info to the commander
-			MonJsonNode infoNode = new MonJsonNode("{}");
-			infoNode.put("svrCode", "TEST01");
-			infoNode.put("msgCode", "GET_CMDS");
-			System.out.println(">>>>> 2. async " + param + ": " + infoNode.toPrettyString());
-			
-			// send result
-			this.session.getAsyncRemote().sendText(infoNode.toString());
 		}
 		
 		if (Flag.flag) {

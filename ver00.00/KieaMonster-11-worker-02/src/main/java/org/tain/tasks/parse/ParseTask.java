@@ -14,9 +14,6 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class ParseTask {
 
-	@Autowired
-	private SplitCommandsTask splitCommandsTask;
-	
 	@Bean
 	public void startParseTask() throws Exception {
 		System.out.println("KANG-20210405 >>>>> Hello, Starting of ParseTask.");
@@ -29,20 +26,23 @@ public class ParseTask {
 	///////////////////////////////////////////////////////////////////////////
 	///////////////////////////////////////////////////////////////////////////
 	
-	public void parsing(String reqMessage) {
+	@Autowired
+	private SplitCommandsTask splitCommandsTask;
+	
+	public void parsing(String message) {
 		log.info("KANG-20210405 >>>>> {} {}", CurrentInfo.get());
 		
 		if (Flag.flag) {
-			MonJsonNode reqNode = null;
+			MonJsonNode node = null;
 			try {
-				reqNode = new MonJsonNode(reqMessage);
-				log.info("KANG-20210405 >>>>> {} reqNode = {}", CurrentInfo.get(), reqNode.toPrettyString());
+				node = new MonJsonNode(message);
+				log.info("KANG-20210405 >>>>> {} reqNode = {}", CurrentInfo.get(), node.toPrettyString());
 				
-				String msgCode = reqNode.getText("msgCode");
+				String msgCode = node.getText("msgCode");
 				switch (msgCode) {
 				case "GET_CMDS":
 					// transfer to SplitCommandsTask
-					this.splitCommandsTask.setQueue(reqNode);
+					this.splitCommandsTask.setQueue(node);
 					break;
 				default:
 					throw new Exception("ERROR: couldn't parse the msgCode [" + msgCode + "]");

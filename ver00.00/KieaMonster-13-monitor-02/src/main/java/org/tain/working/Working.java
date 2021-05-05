@@ -20,7 +20,7 @@ public class Working {
 		if (Flag.flag) jobForProperties();
 		
 		// task
-		if (Flag.flag) jobForTasksWorking();
+		if (!Flag.flag) jobForTasksWorking();
 	}
 	
 	///////////////////////////////////////////////////////////////////////////

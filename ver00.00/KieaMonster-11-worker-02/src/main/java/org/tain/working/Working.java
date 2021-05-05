@@ -5,6 +5,7 @@ import org.springframework.stereotype.Component;
 import org.tain.utils.CurrentInfo;
 import org.tain.utils.Flag;
 import org.tain.working.properties.PropertiesWorking;
+import org.tain.working.sendInfo.SendInfoWorking;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -17,6 +18,9 @@ public class Working {
 		
 		// properties
 		if (Flag.flag) jobForProperties();
+		
+		// send info message
+		if (Flag.flag) jobForSendInfo();
 	}
 	
 	///////////////////////////////////////////////////////////////////////////
@@ -30,5 +34,18 @@ public class Working {
 		log.info("KANG-20210405 >>>>> {} {}", CurrentInfo.get());
 		
 		if (Flag.flag) this.propertiesWorking.print();
+	}
+	
+	///////////////////////////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////////////////////////
+	
+	@Autowired
+	private SendInfoWorking sendInfoWorking;
+	
+	private void jobForSendInfo() throws Exception {
+		log.info("KANG-20210405 >>>>> {} {}", CurrentInfo.get());
+		
+		if (Flag.flag) this.sendInfoWorking.sendInfoMessage();
 	}
 }

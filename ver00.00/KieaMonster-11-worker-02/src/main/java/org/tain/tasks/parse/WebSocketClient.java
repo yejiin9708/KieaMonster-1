@@ -1,23 +1,35 @@
-package org.tain.tasks.sendResult;
+package org.tain.tasks.parse;
 
 import javax.websocket.ClientEndpoint;
 import javax.websocket.OnClose;
 import javax.websocket.OnError;
 import javax.websocket.OnMessage;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.tain.tasks.parse.ParseTask;
+import org.tain.utils.Flag;
 
 @ClientEndpoint
 public class WebSocketClient {
 
-	@Autowired
 	private ParseTask parseTask;
+	
+	public WebSocketClient(ParseTask parseTask) {
+		this.parseTask = parseTask;
+	}
+	
+	///////////////////////////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////////////////////////
 	
 	@OnMessage
 	public void onMessage(String message) {
 		System.out.println(">>>>> [OnMessage] recv message: " + message);
-		this.parseTask.parsing(message);
+		
+		if (Flag.flag) {
+			if (this.parseTask == null) {
+				System.out.println("##### WebSocketClient.parseTask is null");
+			}
+			this.parseTask.parsing(message);
+		}
 	}
 	
 	@OnClose

@@ -23,7 +23,7 @@ public class TestWorking {
 			Sleep.run(3 * 1000);
 			for (int i=0; i < 3; i++) {
 				String msg = String.format("message is the number %03d.", i);
-				this.recvResultTask.setQueueLoadResult(msg);
+				this.recvResultTask.setQueue(msg);
 				Sleep.run(2 * 1000);
 			}
 		}

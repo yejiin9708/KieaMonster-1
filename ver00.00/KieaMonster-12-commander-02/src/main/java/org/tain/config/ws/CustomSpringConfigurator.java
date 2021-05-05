@@ -1,9 +1,5 @@
 package org.tain.config.ws;
 
-import javax.servlet.ServletContext;
-import javax.servlet.http.HttpSession;
-import javax.websocket.HandshakeResponse;
-import javax.websocket.server.HandshakeRequest;
 import javax.websocket.server.ServerEndpointConfig;
 
 import org.springframework.beans.BeansException;
@@ -37,6 +33,7 @@ public class CustomSpringConfigurator extends ServerEndpointConfig.Configurator 
 	///////////////////////////////////////////////////////////////////////////
 	///////////////////////////////////////////////////////////////////////////
 	
+	/*
 	// WebSocket에서 HttpSession 얻기 (ref: https://nowonbun.tistory.com/621)
 	public static final String Session = "Session";
 	public static final String Context = "Context";
@@ -50,4 +47,5 @@ public class CustomSpringConfigurator extends ServerEndpointConfig.Configurator 
 		config.getUserProperties().put(CustomSpringConfigurator.Session, session);
 		config.getUserProperties().put(CustomSpringConfigurator.Context, context);
 	}
+	*/
 }

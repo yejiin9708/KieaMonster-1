@@ -52,12 +52,12 @@ public class WebSocketServerController {
 	}
 	
 	@OnMessage
-	public void onMessage(Session session, String reqMessage) {
-		System.out.println(">>>>> [OnMessage] recv reqMessage: " + reqMessage);
+	public void onMessage(Session session, String message) {
+		System.out.println(">>>>> [OnMessage] recv reqMessage: " + message);
 		//this.recvResultTask.setQueueLoadResult(reqMessage);
 		
 		// parsing and processing
-		this.parseTask.parsing(session, reqMessage);
+		this.parseTask.parsing(session, message);
 		//System.out.println(">>>>> [OnMessage] send resMessage: " + resMessage);
 		
 		//this.broadCast(replyMessage);

@@ -21,15 +21,6 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class ParseTask {
 
-	@Autowired
-	private RecvResultTask recvResultTask;
-	
-	@Autowired
-	private TbCmdService tbCmdService;
-	
-	@Autowired
-	private WebSocketServerController webSocketController;
-	
 	@Bean
 	public void startParseTask() throws Exception {
 		System.out.println("KANG-20210405 >>>>> Hello, Starting of ParseTask.");
@@ -42,15 +33,24 @@ public class ParseTask {
 	///////////////////////////////////////////////////////////////////////////
 	///////////////////////////////////////////////////////////////////////////
 	
-	public void parsing(Session session, String reqMessage) {
+	@Autowired
+	private RecvResultTask recvResultTask;
+	
+	@Autowired
+	private TbCmdService tbCmdService;
+	
+	@Autowired
+	private WebSocketServerController webSocketController;
+	
+	public void parsing(Session session, String message) {
 		log.info("KANG-20210405 >>>>> {} {}", CurrentInfo.get());
 		
 		if (Flag.flag) {
 			MonJsonNode reqNode = null;
 			MonJsonNode resNode = null;
 			try {
-				resNode = new MonJsonNode("{}");
-				reqNode = new MonJsonNode(reqMessage);
+				reqNode = new MonJsonNode(message);
+				resNode = reqNode.clone();
 				log.info("KANG-20210405 >>>>> {} reqNode = {}", CurrentInfo.get(), reqNode.toPrettyString());
 				
 				String svrCode = reqNode.getText("svrCode");
@@ -63,13 +63,14 @@ public class ParseTask {
 					MonJsonNode cmds = new MonJsonNode(MonJsonNode.getJson(lstCmds));
 					// set resNode
 					resNode.put("resResult", cmds);
+					resNode.put("status", "SUCCESS");
 					log.info("KANG-20210405 >>>>> {} resNode: {} ", CurrentInfo.get(), resNode.toPrettyString());
 					// send message
 					this.webSocketController.sendMessage(session, resNode.toString());
 					break;
 				case "CMD_RET":
 					// send result to load
-					this.recvResultTask.setQueueLoadResult(reqMessage);
+					this.recvResultTask.setQueue(message);
 					break;
 				default:
 					throw new Exception("ERROR: couldn't parse the msgCode [" + msgCode + "]");

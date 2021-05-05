@@ -64,14 +64,14 @@ public class SendResultTask {
 	///////////////////////////////////////////////////////////////////////////
 	///////////////////////////////////////////////////////////////////////////
 	
-	private MonQueue<Object> queueSendResult = new MonQueue<>();
+	private MonQueue<String> queue = new MonQueue<>();
 	
-	public void setQueueSendResult(Object object) {
-		this.queueSendResult.set(object);
+	public void setQueue(String object) {
+		this.queue.set(object);
 	}
 	
-	public Object getQueueSendResult() {
-		return this.queueSendResult.get();
+	public String getQueue() {
+		return this.queue.get();
 	}
 	
 	// sendToMonster
@@ -101,7 +101,7 @@ public class SendResultTask {
 		if (Flag.flag) {
 			while (true) {
 				// get result from the queueSendResult
-				String msg = (String) this.getQueueSendResult();
+				String msg = this.getQueue();
 				System.out.println(">>>>> 2. async " + param + ": " + msg);
 				
 				// send result to the monitor

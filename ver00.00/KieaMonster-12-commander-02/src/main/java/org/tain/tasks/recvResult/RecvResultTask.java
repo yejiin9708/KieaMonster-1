@@ -19,9 +19,6 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class RecvResultTask {
 
-	@Autowired
-	private TbResultRepository tbResultRepository;
-	
 	@Bean
 	public void startRecvResultTask() throws Exception {
 		System.out.println("KANG-20210405 >>>>> Hello, Starting of RecvResultTask.");
@@ -34,15 +31,22 @@ public class RecvResultTask {
 	///////////////////////////////////////////////////////////////////////////
 	///////////////////////////////////////////////////////////////////////////
 	
-	private MonQueue<Object> queueLoadResult = new MonQueue<>();
+	private MonQueue<String> queue = new MonQueue<>();
 	
-	public void setQueueLoadResult(Object object) {
-		this.queueLoadResult.set(object);
+	public void setQueue(String object) {
+		this.queue.set(object);
 	}
 	
-	public Object getQueueLoadResult() {
-		return this.queueLoadResult.get();
+	public String getQueue() {
+		return this.queue.get();
 	}
+	
+	///////////////////////////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////////////////////////
+	
+	@Autowired
+	private TbResultRepository tbResultRepository;
 	
 	@Autowired
 	private SendResultTask sendResultTask;
@@ -55,7 +59,7 @@ public class RecvResultTask {
 		if (Flag.flag) {
 			while (true) {
 				// get result from the queueLoadResult
-				String msg = (String) this.getQueueLoadResult();
+				String msg = (String) this.getQueue();
 				System.out.println(">>>>> 1. async " + param + ": " + msg);
 				
 				//////////////////////////////////////////////
@@ -67,7 +71,7 @@ public class RecvResultTask {
 				}
 				
 				// set result to the queueSendResult
-				this.sendResultTask.setQueueSendResult(msg);
+				this.sendResultTask.setQueue(msg);
 			}
 		}
 	}
