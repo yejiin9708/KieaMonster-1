@@ -1,4 +1,4 @@
-package org.tain.tasks.recvresult;
+package org.tain.tasks.recvResult;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -6,7 +6,7 @@ import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 import org.tain.domain.TbResult;
 import org.tain.repository.TbResultRepository;
-import org.tain.tasks.sendresult.SendResultTask;
+import org.tain.tasks.sendResult.SendResultTask;
 import org.tain.tools.queue.MonQueue;
 import org.tain.utils.CurrentInfo;
 import org.tain.utils.Flag;

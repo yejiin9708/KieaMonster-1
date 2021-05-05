@@ -2,7 +2,7 @@ package org.tain.working.test;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.tain.tasks.recvresult.RecvResultTask;
+import org.tain.tasks.recvResult.RecvResultTask;
 import org.tain.utils.CurrentInfo;
 import org.tain.utils.Flag;
 import org.tain.utils.Sleep;

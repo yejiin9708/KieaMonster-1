@@ -54,7 +54,6 @@ public class DemoTask {
 	// DemoTask
 	@Async(value = "async_0103")
 	public void async0103(String param) throws Exception {
-		//Sleep.run(2 * 1000);
 		log.info("KANG-20200721 >>>>> async_0103 START {} {}", param, CurrentInfo.get());
 		
 		if (Flag.flag) {

@@ -1,4 +1,4 @@
-package org.tain.tasks.sendresult;
+package org.tain.tasks.sendResult;
 
 import javax.websocket.ClientEndpoint;
 import javax.websocket.OnClose;

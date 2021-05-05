@@ -1,16 +1,9 @@
 package org.tain.tasks.parse;
 
-import java.util.List;
-
-import javax.websocket.Session;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
-import org.tain.controller.WebSocketServerController;
-import org.tain.domain.TbCmd;
-import org.tain.service.TbCmdService;
-import org.tain.tasks.recvResult.RecvResultTask;
+import org.tain.tasks.splitCommands.SplitCommandsTask;
 import org.tain.tools.node.MonJsonNode;
 import org.tain.utils.CurrentInfo;
 import org.tain.utils.Flag;
@@ -22,13 +15,7 @@ import lombok.extern.slf4j.Slf4j;
 public class ParseTask {
 
 	@Autowired
-	private RecvResultTask recvResultTask;
-	
-	@Autowired
-	private TbCmdService tbCmdService;
-	
-	@Autowired
-	private WebSocketServerController webSocketController;
+	private SplitCommandsTask splitCommandsTask;
 	
 	@Bean
 	public void startParseTask() throws Exception {
@@ -42,34 +29,20 @@ public class ParseTask {
 	///////////////////////////////////////////////////////////////////////////
 	///////////////////////////////////////////////////////////////////////////
 	
-	public void parsing(Session session, String reqMessage) {
+	public void parsing(String reqMessage) {
 		log.info("KANG-20210405 >>>>> {} {}", CurrentInfo.get());
 		
 		if (Flag.flag) {
 			MonJsonNode reqNode = null;
-			MonJsonNode resNode = null;
 			try {
-				resNode = new MonJsonNode("{}");
 				reqNode = new MonJsonNode(reqMessage);
 				log.info("KANG-20210405 >>>>> {} reqNode = {}", CurrentInfo.get(), reqNode.toPrettyString());
 				
-				String svrCode = reqNode.getText("svrCode");
 				String msgCode = reqNode.getText("msgCode");
-				
 				switch (msgCode) {
 				case "GET_CMDS":
-					// get commands
-					List<TbCmd> lstCmds = this.tbCmdService.listBySvrCode(svrCode);
-					MonJsonNode cmds = new MonJsonNode(MonJsonNode.getJson(lstCmds));
-					// set resNode
-					resNode.put("resResult", cmds);
-					log.info("KANG-20210405 >>>>> {} resNode: {} ", CurrentInfo.get(), resNode.toPrettyString());
-					// send message
-					this.webSocketController.sendMessage(session, resNode.toString());
-					break;
-				case "CMD_RET":
-					// send result to load
-					this.recvResultTask.setQueueLoadResult(reqMessage);
+					// transfer to SplitCommandsTask
+					this.splitCommandsTask.setQueue(reqNode);
 					break;
 				default:
 					throw new Exception("ERROR: couldn't parse the msgCode [" + msgCode + "]");

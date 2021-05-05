@@ -1,4 +1,4 @@
-package org.tain.tasks.loadtables;
+package org.tain.tasks.loadTables;
 
 import java.io.File;
 import java.util.List;

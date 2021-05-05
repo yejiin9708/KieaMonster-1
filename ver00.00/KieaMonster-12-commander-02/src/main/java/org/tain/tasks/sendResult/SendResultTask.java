@@ -1,4 +1,4 @@
-package org.tain.tasks.sendresult;
+package org.tain.tasks.sendResult;
 
 import java.net.URI;
 
