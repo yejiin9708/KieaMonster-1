@@ -10,7 +10,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
-public class MonJsonNode {
+public class MonJsonNode implements Cloneable {
 
 	private JsonNode jsonNode;
 	private MonNodeType monNodeType;
@@ -353,4 +353,9 @@ public class MonJsonNode {
 	///////////////////////////////////////////////////////////////////////////
 	///////////////////////////////////////////////////////////////////////////
 	///////////////////////////////////////////////////////////////////////////
+	
+	@Override
+	public MonJsonNode clone() throws CloneNotSupportedException {
+		return (MonJsonNode) super.clone();
+	}
 }

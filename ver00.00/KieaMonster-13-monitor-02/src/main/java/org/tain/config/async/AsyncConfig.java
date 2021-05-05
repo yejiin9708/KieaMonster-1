@@ -22,7 +22,7 @@ import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 @EnableAsync
 public class AsyncConfig extends AsyncConfigurerSupport {
 
-	// recvResult
+	// CurrentTask
 	@Bean(name = "async_0101")
 	public Executor _async0101() {
 		ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
@@ -34,7 +34,7 @@ public class AsyncConfig extends AsyncConfigurerSupport {
 		return executor;
 	}
 	
-	// sendToMonitor
+	// HistoryTask
 	@Bean(name = "async_0102")
 	public Executor _async0102() {
 		ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
@@ -46,7 +46,7 @@ public class AsyncConfig extends AsyncConfigurerSupport {
 		return executor;
 	}
 	
-	// loadTablesTask
+	// DemoTask
 	@Bean(name = "async_0103")
 	public Executor _async0103() {
 		ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();

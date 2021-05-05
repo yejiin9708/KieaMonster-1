@@ -1,4 +1,4 @@
-package org.tain.tasks.sendresult;
+package org.tain.working.tasks;
 
 import javax.websocket.ClientEndpoint;
 import javax.websocket.OnClose;
@@ -10,16 +10,16 @@ public class WebSocketClient {
 
 	@OnMessage
 	public void onMessage(String message) {
-		System.out.println("[OnMessage] recv message: " + message);
+		System.out.println(">>>>> [OnMessage] recv message: " + message);
 	}
 	
 	@OnClose
 	public void onClose() {
-		System.out.println("[OnClose] session close");
+		System.out.println(">>>>> [OnClose] session close");
 	}
 	
 	@OnError
 	public void onError(Throwable t) {
-		System.out.println("[OnError] msg: " + t.getMessage());
+		System.out.println(">>>>> [OnError] msg: " + t.getMessage());
 	}
 }
