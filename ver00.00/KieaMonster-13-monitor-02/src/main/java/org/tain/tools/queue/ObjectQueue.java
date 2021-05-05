@@ -2,6 +2,7 @@ package org.tain.tools.queue;
 
 import java.util.LinkedList;
 
+@Deprecated
 public class ObjectQueue {
 
 	private final LinkedList<Object> queue = new LinkedList<>();
