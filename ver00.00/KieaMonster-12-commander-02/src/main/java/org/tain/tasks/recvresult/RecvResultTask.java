@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 import org.tain.domain.TbResult;
 import org.tain.repository.TbResultRepository;
 import org.tain.tasks.sendresult.SendResultTask;
-import org.tain.tools.queue.ObjectQueue;
+import org.tain.tools.queue.MonQueue;
 import org.tain.utils.CurrentInfo;
 import org.tain.utils.Flag;
 
@@ -34,7 +34,7 @@ public class RecvResultTask {
 	///////////////////////////////////////////////////////////////////////////
 	///////////////////////////////////////////////////////////////////////////
 	
-	private ObjectQueue queueLoadResult = new ObjectQueue();
+	private MonQueue<Object> queueLoadResult = new MonQueue<>();
 	
 	public void setQueueLoadResult(Object object) {
 		this.queueLoadResult.set(object);
