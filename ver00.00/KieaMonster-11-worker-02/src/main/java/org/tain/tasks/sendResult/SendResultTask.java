@@ -14,6 +14,7 @@ import org.springframework.stereotype.Component;
 import org.tain.tasks.parse.ParseTask;
 import org.tain.tasks.parse.WebSocketClient;
 import org.tain.tools.node.MonJsonNode;
+import org.tain.tools.properties.ProjEnvUrlProperties;
 import org.tain.tools.queue.MonQueueBox;
 import org.tain.utils.CurrentInfo;
 import org.tain.utils.Flag;
@@ -39,6 +40,9 @@ public class SendResultTask {
 	///////////////////////////////////////////////////////////////////////////
 	
 	@Autowired
+	private ProjEnvUrlProperties projEnvUrlProperties;
+	
+	@Autowired
 	private MonQueueBox monQueueBox;
 	
 	@Autowired
@@ -55,8 +59,10 @@ public class SendResultTask {
 			try {
 				WebSocketClient webSocketClient = new WebSocketClient(this.parseTask);
 				WebSocketContainer container = ContainerProvider.getWebSocketContainer();
-				session = container.connectToServer(webSocketClient, URI.create("ws://localhost:8092/v0.1/websocket"));
+				String wsUri = this.projEnvUrlProperties.getWsUri();
+				session = container.connectToServer(webSocketClient, URI.create(wsUri));
 			} catch (Exception e) {
+				System.exit(0);
 				throw e;
 			}
 			System.out.println(">>>>> Start WebSocketClient.....");

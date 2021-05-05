@@ -4,9 +4,9 @@
 		"cmdCode": "uname",
 		"cmdName": "uname all",
 		"cmdDesc": "svr desc",
-		"cmdPeriod": 10,
+		"cmdPeriod": 1,
 		"cmdType": "CMD_NORMAL",
-		"cmdArr": "uname -a "
+		"cmdArr": " df -h  "
 	}
 ]
 

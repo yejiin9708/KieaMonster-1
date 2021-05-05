@@ -126,7 +126,7 @@ proj-env:
     version: ver 1.1_2021.04.01
     comment: This is Monster API project.
     char-set: utf-8
-    test-flag: true
+    # test-flag: true
     # svr-code: TEST01
   param:
     name: PARAM (default)
@@ -161,6 +161,7 @@ proj-env:
     cmd-info-file: cmd-*.json
   url:
     name: URL (air)
+    ws-uri: ws://localhost:8093/v0.1/websocket
 
 ---
 # --------------------------------------------------------

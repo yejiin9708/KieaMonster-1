@@ -6,10 +6,12 @@ import javax.websocket.ContainerProvider;
 import javax.websocket.Session;
 import javax.websocket.WebSocketContainer;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 import org.tain.tools.node.MonJsonNode;
+import org.tain.tools.properties.ProjEnvUrlProperties;
 import org.tain.utils.CurrentInfo;
 import org.tain.utils.Flag;
 import org.tain.utils.Sleep;
@@ -51,6 +53,9 @@ public class DemoTask {
 	///////////////////////////////////////////////////////////////////////////
 	///////////////////////////////////////////////////////////////////////////
 	
+	@Autowired
+	private ProjEnvUrlProperties projEnvUrlProperties;
+	
 	// DemoTask
 	@Async(value = "async_0103")
 	public void async0103(String param) throws Exception {
@@ -61,7 +66,8 @@ public class DemoTask {
 			try {
 				WebSocketClient webSocketClient = new WebSocketClient();
 				WebSocketContainer container = ContainerProvider.getWebSocketContainer();
-				this.session = container.connectToServer(webSocketClient, URI.create("ws://localhost:8093/v0.1/websocket"));
+				String wsUri = this.projEnvUrlProperties.getWsUri();
+				this.session = container.connectToServer(webSocketClient, URI.create(wsUri));
 			} catch (Exception e) {
 				throw e;
 			}

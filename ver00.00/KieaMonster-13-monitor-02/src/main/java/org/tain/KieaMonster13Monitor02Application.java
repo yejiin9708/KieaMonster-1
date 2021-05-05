@@ -44,8 +44,8 @@ public class KieaMonster13Monitor02Application implements CommandLineRunner {
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
-			if (!Boolean.TRUE && this.projEnvBaseProperties.isTestFlag()) {
-				Sleep.run(10 * 1000);
+			if (Boolean.TRUE && this.projEnvBaseProperties.isTestFlag()) {
+				Sleep.run(5 * 1000);
 				System.out.println("\n==========================  SYSTEM EXIT by TestFlag  ===========================\n");
 				System.exit(0);
 			}

@@ -2,6 +2,7 @@ package org.tain.tasks.asyncCommand;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.DependsOn;
@@ -44,8 +45,8 @@ public class AsyncCommandTask {
 	
 		if (Flag.flag) {
 			// spring async kill thread
-			for (int i=0; ; i++) {
-				log.info(">>>>> cmd: {} {}", cmd, i);
+			for (int idx=0; ; idx++) {
+				log.info(">>>>> cmd: {} {}", cmd, idx);
 				MonJsonNode nodeResult = new MonJsonNode("{}");
 				if (Flag.flag) {
 					nodeResult.put("svrCode", cmd.getSvrCode());
@@ -77,7 +78,10 @@ public class AsyncCommandTask {
 					
 					int exitVal = process.waitFor();
 					//System.out.println("Process exitVal = " + exitVal);
-					sb.append(String.format("(%d) Process exitValue = %d", i, exitVal)).append("\n\n");
+					int len = sb.length();
+					sb.insert(0, "----------------------------------------------------\n");
+					sb.insert(0, String.format("DATE: %s\n", new Date()));
+					sb.insert(0, String.format("[idx:%d,len:%d] Process exitValue = %d\n", idx, len, exitVal));
 					process.destroy();
 					
 					//System.out.println(sb.toString());
