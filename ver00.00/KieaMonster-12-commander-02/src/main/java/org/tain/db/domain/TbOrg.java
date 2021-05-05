@@ -1,4 +1,4 @@
-package org.tain.domain;
+package org.tain.db.domain;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -16,55 +16,52 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "tb_grp"
+@Table(name = "tb_org"
 	, indexes = {
-			@Index(name = "grp_idx0", unique = false, columnList = "grp_code"),
+			@Index(name = "org_idx0", unique = false, columnList = "org_code"),
 	}
 )
-@SequenceGenerator(name = "grp_seq"
-	, sequenceName = "grp_seq"
+@SequenceGenerator(name = "org_seq"
+	, sequenceName = "org_seq"
 	, initialValue = 1
 	, allocationSize = 1
 )
 @Data
 @NoArgsConstructor
 @JsonIgnoreProperties(value = {})
-public class TbGrp {
+public class TbOrg {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "grp_seq")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "org_seq")
 	@Column(name = "id")
 	private Long id;
 	
 	@Column(name = "org_code", length = 16)
 	private String orgCode;
 	
-	@Column(name = "grp_code", length = 16)
-	private String grpCode;
+	@Column(name = "org_name", length = 64)
+	private String orgName;
 	
-	@Column(name = "grp_name", length = 64)
-	private String grpName;
+	@Column(name = "org_desc", length = 1024)
+	private String orgDesc;
 	
-	@Column(name = "grp_desc", length = 1024)
-	private String grpDesc;
-	
-	@Column(name = "grp_comment", length = 1024)
-	private String grpComment;
+	@Column(name = "org_comment", length = 1024)
+	private String orgComment;
 	
 	//@Column(name = "create_date")
 	//@CreationTimestamp
 	//private LocalDateTime createdDate;
 	
 	@Builder
-	public TbGrp(
-			String grpCode,
-			String grpName,
-			String grpDesc,
-			String grpComment
+	public TbOrg(
+			String orgCode,
+			String orgName,
+			String orgDesc,
+			String orgComment
 			) {
-		this.grpCode = grpCode;
-		this.grpName = grpName;
-		this.grpDesc = grpDesc;
-		this.grpComment = grpComment;
+		this.orgCode = orgCode;
+		this.orgName = orgName;
+		this.orgDesc = orgDesc;
+		this.orgComment = orgComment;
 	}
 }

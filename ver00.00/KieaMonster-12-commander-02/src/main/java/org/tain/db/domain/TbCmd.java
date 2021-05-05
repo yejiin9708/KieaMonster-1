@@ -1,4 +1,4 @@
-package org.tain.domain;
+package org.tain.db.domain;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -16,69 +16,70 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "tb_result"
+@Table(name = "tb_cmd"
 	, indexes = {
-			@Index(name = "result_idx0", unique = false, columnList = "svr_code"),
-			@Index(name = "result_idx1", unique = false, columnList = "cmd_code"),
+			@Index(name = "cmd_idx0", unique = false, columnList = "cmd_code"),
 	}
 )
-@SequenceGenerator(name = "result_seq"
-	, sequenceName = "result_seq"
+@SequenceGenerator(name = "cmd_seq"
+	, sequenceName = "cmd_seq"
 	, initialValue = 1
 	, allocationSize = 1
 )
 @Data
 @NoArgsConstructor
 @JsonIgnoreProperties(value = {})
-public class TbResult {
+public class TbCmd {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "result_seq")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "cmd_seq")
 	@Column(name = "id")
 	private Long id;
 	
 	@Column(name = "svr_code", length = 16)
 	private String svrCode;
 	
-	@Column(name = "msg_code", length = 16)
-	private String msgCode;
-	
 	@Column(name = "cmd_code", length = 16)
 	private String cmdCode;
 	
-	@Column(name = "cmd_name", length = 32)
+	@Column(name = "cmd_name", length = 64)
 	private String cmdName;
 	
-	@Column(name = "cmd_desc", length = 128)
+	@Column(name = "cmd_desc", length = 1024)
 	private String cmdDesc;
 	
-	@Column(name = "cmd_arr", length = 128)
-	private String cmdArr;
-	
-	@Column(name = "cmd_period", length = 8)
+	@Column(name = "cmd_period", length = 5)
 	private String cmdPeriod;
 	
-	@Column(name = "cmd_result", length = 10240000)  // 10 MB
-	private String cmdResult;
+	@Column(name = "cmd_type", length = 32)
+	private String cmdType;
+	
+	//@JsonIgnore
+	//@Column(name = "cmd_arr")
+	//private String[] cmdArr;
+	
+	//@JsonIgnore
+	@Column(name = "cmd_arr")
+	private String cmdArr;
+	
+	//@Column(name = "create_date")
+	//@CreationTimestamp
+	//private LocalDateTime createdDate;
 	
 	@Builder
-	public TbResult(
-			String svrCode,
-			String msgCode,
+	public TbCmd(
 			String cmdCode,
 			String cmdName,
 			String cmdDesc,
-			String cmdArr,
 			String cmdPeriod,
-			String cmdResult
+			String cmdType,
+			String cmdArr
 			) {
-		this.svrCode = svrCode;
-		this.msgCode = msgCode;
 		this.cmdCode = cmdCode;
 		this.cmdName = cmdName;
 		this.cmdDesc = cmdDesc;
-		this.cmdArr = cmdArr;
 		this.cmdPeriod = cmdPeriod;
-		this.cmdResult = cmdResult;
+		this.cmdType = cmdType;
+		this.cmdArr = cmdArr;
 	}
 }

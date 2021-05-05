@@ -5,8 +5,8 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.tain.domain.TbOrg;
-import org.tain.repository.TbOrgRepository;
+import org.tain.db.domain.TbOrg;
+import org.tain.db.repository.TbOrgRepository;
 import org.tain.tools.properties.ProjEnvJsonProperties;
 import org.tain.tools.properties.ProjEnvParamProperties;
 import org.tain.utils.CurrentInfo;

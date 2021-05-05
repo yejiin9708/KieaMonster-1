@@ -2,7 +2,7 @@ package org.tain.tasks.loadTables;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.tain.repository.TbResultRepository;
+import org.tain.db.repository.TbResultRepository;
 import org.tain.utils.CurrentInfo;
 import org.tain.utils.Flag;
 

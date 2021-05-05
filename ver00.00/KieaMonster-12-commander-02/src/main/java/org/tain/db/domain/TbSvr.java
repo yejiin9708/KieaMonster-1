@@ -1,4 +1,4 @@
-package org.tain.domain;
+package org.tain.db.domain;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

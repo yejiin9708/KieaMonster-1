@@ -1,11 +1,11 @@
-package org.tain.service;
+package org.tain.db.service;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.tain.domain.TbResult;
-import org.tain.repository.TbResultRepository;
+import org.tain.db.domain.TbResult;
+import org.tain.db.repository.TbResultRepository;
 import org.tain.utils.CurrentInfo;
 
 import lombok.extern.slf4j.Slf4j;
