@@ -1,0 +1,30 @@
+[
+	{
+		"svrCode": "TEST01",
+		"cmdCode": "uname",
+		"cmdName": "uname all",
+		"cmdDesc": "svr desc",
+		"cmdPeriod": 5,
+		"cmdType": "CMD_NORMAL",
+		"cmdArr": "uname -a "
+	},{
+		"svrCode": "TEST01",
+		"cmdCode": "disk",
+		"cmdName": "disk space",
+		"cmdDesc": "disk space",
+		"cmdPeriod": 10,
+		"cmdType": "CMD_NORMAL",
+		"cmdArr": " df -h "
+	},{
+		"svrCode": "TEST01",
+		"cmdCode": "memory",
+		"cmdName": "memory space",
+		"cmdDesc": "memory space",
+		"cmdPeriod": 60,
+		"cmdType": "CMD_NORMAL",
+		"cmdArr": " ps -ef "
+	}
+]
+
+
+
