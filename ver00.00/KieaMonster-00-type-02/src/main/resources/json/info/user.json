@@ -2,12 +2,12 @@
 	{
 		"userId": "admin",
 		"passWd": "admin",
-		"group": "ADMIN",
-		"roll": "ADMIN"
+		"groupCd": "ADMIN",
+		"rollCd": "ADMIN"
 	},{
 		"userId": "guest",
 		"passWd": "guest",
-		"group": "GUEST",
-		"roll": "GUEST"
+		"groupCd": "GUEST",
+		"rollCd": "GUEST"
 	}
 ]

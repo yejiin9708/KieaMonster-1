@@ -42,11 +42,11 @@ public class TbUser {
 	@Column(name = "pass_wd", length = 20)
 	private String passWd;
 	
-	@Column(name = "group", length = 20)
-	private String group;
+	@Column(name = "group_cd", length = 20)
+	private String groupCd;
 	
-	@Column(name = "roll", length = 50)
-	private String roll;
+	@Column(name = "roll_cd", length = 50)
+	private String rollCd;
 	
 
 	//@Column(name = "create_date")
@@ -57,12 +57,12 @@ public class TbUser {
 	public TbUser(
 			String userId,
 			String passWd,
-			String group,
-			String roll
+			String groupCd,
+			String rollCd
 			) {
 		this.userId = userId;
 		this.passWd = passWd;
-		this.group = group;
-		this.roll = roll;
+		this.groupCd = groupCd;
+		this.rollCd = rollCd;
 	}
 }
