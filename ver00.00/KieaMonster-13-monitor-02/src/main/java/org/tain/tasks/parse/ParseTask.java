@@ -5,6 +5,7 @@ import javax.websocket.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
+import org.tain.tasks.authenticate.AuthenticateTask;
 import org.tain.tasks.current.CurrentTask;
 import org.tain.tasks.history.HistoryTask;
 import org.tain.tools.node.MonJsonNode;
@@ -17,6 +18,9 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class ParseTask {
 
+	@Autowired
+	private AuthenticateTask authenticateTask;
+	
 	@Autowired
 	private CurrentTask currentTask;
 	
@@ -47,6 +51,10 @@ public class ParseTask {
 				
 				String msgCode = reqNode.getText("msgCode");
 				switch (msgCode) {
+				case "CMD_AUTH":
+					// transfer to AuthenticateTask
+					this.authenticateTask.setQueue(reqNode);
+					break;
 				case "CMD_RET":
 					// transfer to CurrentTask
 					this.currentTask.setQueueCurrent(reqNode);
