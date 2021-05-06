@@ -36,6 +36,7 @@ public class LoadTablesTask {
 			if (Flag.flag) jobForTbSvrLoad();
 			if (Flag.flag) jobForTbCmdLoad();
 			if (Flag.flag) jobForTbResultLoad();
+			if (Flag.flag) jobForTbUserLoad();
 		}
 		
 		log.info("KANG-20200721 >>>>> async_0101 END   {} {}", param, CurrentInfo.get());
@@ -96,5 +97,16 @@ public class LoadTablesTask {
 		log.info("KANG-20210405 >>>>> {} {}", CurrentInfo.get());
 		
 		if (Flag.flag) this.tbResultWorking.load();
+	}
+	
+	///////////////////////////////////////////////////////////////////////////
+	
+	@Autowired
+	private TbUserWorking tbUserWorking;
+	
+	private void jobForTbUserLoad() throws Exception {
+		log.info("KANG-20210405 >>>>> {} {}", CurrentInfo.get());
+		
+		if (Flag.flag) this.tbUserWorking.load();
 	}
 }

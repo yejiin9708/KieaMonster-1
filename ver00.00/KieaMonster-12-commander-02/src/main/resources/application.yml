@@ -159,6 +159,7 @@ proj-env:
     grp-info-file: grp.json
     svr-info-file: svr.json
     cmd-info-file: cmd-*.json
+    user-info-file: user.json
   url:
     name: URL (air)
     ws-uri: ws://localhost:8093/v0.1/websocket
