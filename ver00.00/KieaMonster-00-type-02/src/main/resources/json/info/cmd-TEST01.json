@@ -1,12 +1,12 @@
 [
 	{
 		"svrCode": "TEST01",
-		"cmdCode": "uname",
-		"cmdName": "uname all",
-		"cmdDesc": "svr desc",
-		"cmdPeriod": 1,
+		"cmdCode": "ping",
+		"cmdName": "ping-01",
+		"cmdDesc": "ping google.com",
+		"cmdPeriod": 0,
 		"cmdType": "CMD_NORMAL",
-		"cmdArr": " df -h  "
+		"cmdArr": "   ping     google.com  "
 	}
 ]
 

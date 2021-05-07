@@ -24,7 +24,6 @@ import lombok.extern.slf4j.Slf4j;
 @Component("SendResultTask")
 @Slf4j
 @DependsOn({"MonQueueBox"})
-//@Lazy
 public class SendResultTask {
 
 	@Bean

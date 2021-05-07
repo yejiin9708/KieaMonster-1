@@ -23,6 +23,14 @@
 		"cmdPeriod": 60,
 		"cmdType": "CMD_NORMAL",
 		"cmdArr": " ps -ef "
+	},{
+		"svrCode": "TEST01",
+		"cmdCode": "ping",
+		"cmdName": "ping",
+		"cmdDesc": "ping google.com",
+		"cmdPeriod": 0,
+		"cmdType": "CMD_NORMAL",
+		"cmdArr": " ping google.com "
 	}
 ]
 
