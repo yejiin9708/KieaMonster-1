@@ -22,21 +22,21 @@ public class Test01Working {
 	 * ------------------------------------------------------------------------
 	 * - public static Runtime getRuntime(): 현재 실행되고 있는 자바 애플리케이션과 관련된 런타임 객체를 리턴해 줍니다.
 	 * - public void exit(int status): 현재 자바 가상머신을 종료합니다. status 매개변수는 종료시의 상태값을 나타내며,
-	 * 일반적으로 0 이외의 값은 비정상적으로 종료되었음을 의미합니다.
+	 *     일반적으로 0 이외의 값은 비정상적으로 종료되었음을 의미합니다.
 	 * - public Process exec(String command) throws IOException: 주어진 명령어를 독립된 프로세스로 실행시켜 줍니다.
-	 * exec(command, null)와 같이 실행시킨 것과 같습니다.
+	 *     exec(command, null)와 같이 실행시킨 것과 같습니다.
 	 * - public Process exec(String command, String envp[]) throws IOException:
-	 * 주어진 명령어를 주어진 환경을 갖는 독립된 프로세스로 실행시켜 줍니다.
-	 * 이 메소드는 명령어 문자열을 토큰으로 나누어 이 토큰들을 포함하고 있는 cmdarray라는 새로운 배열을 생성합니다.
-	 * 그리고 나서 exec(cmdarray, envp)을 호출합니다.
+	 *     주어진 명령어를 주어진 환경을 갖는 독립된 프로세스로 실행시켜 줍니다.
+	 *     이 메소드는 명령어 문자열을 토큰으로 나누어 이 토큰들을 포함하고 있는 cmdarray라는 새로운 배열을 생성합니다.
+	 *     그리고 나서 exec(cmdarray, envp)을 호출합니다.
 	 * - public Process exec(String cmdarray[]) throws IOException:
-	 * 주어진 문자열 배열에 있는 명령어와 매개변수를 이용하여 독립된 프로세스로 실행시켜 줍니다.
-	 * exec(cmdarray, null)을 호출합니다.
+	 *     주어진 문자열 배열에 있는 명령어와 매개변수를 이용하여 독립된 프로세스로 실행시켜 줍니다.
+	 *     exec(cmdarray, null)을 호출합니다.
 	 * - public Process exec(String cmdarray[], String envp[]) throws IOException:
-	 * 주어진 문자열 배열에 있는 명령어와 매개변수를 이용하여 주어진 환경을 갖는 독립된 프로세스로 실행시켜 줍니다.
-	 * 문자열 배열 cmdarray에는 명령어와 명령행 인자들을 나타내고 있습니다.
+	 *     주어진 문자열 배열에 있는 명령어와 매개변수를 이용하여 주어진 환경을 갖는 독립된 프로세스로 실행시켜 줍니다.
+	 *     문자열 배열 cmdarray에는 명령어와 명령행 인자들을 나타내고 있습니다.
 	 * - public native long freeMemory(): 시스템에 남아있는 메모리의 양을 얻습니다.
-	 * 이 값은 항상 totalMemory() 메소드에 의해 얻어지는 값보다 작습니다.
+	 *     이 값은 항상 totalMemory() 메소드에 의해 얻어지는 값보다 작습니다.
 	 * - public native long totalMemory(): 자바 가상머신의 최대 메모리 크기를 얻습니다.
 	 */
 	/*
@@ -107,19 +107,16 @@ public class Test01Working {
 	 * "java.class.version", // 자바 클래스 화일 포맷 버전
 	 * "java.vendor", // 자바 가상 머쉰 판매 회사
 	 * "java.vendor.url", // 자바 가상 머쉰 판매 회사의 URL
-	 * "os.name", // 운영체제 이름 ( "Windows 95", "Windows NT", "MacOS",
-	 * // "Linux", "Solaris", "OS/2", "OSF1", ... )
+	 * "os.name", // 운영체제 이름 ( "Windows 95", "Windows NT", "MacOS", "Linux", "Solaris", "OS/2", "OSF1", ... )
 	 * "os.version", // 운영체제 버전
 	 * "os.arch", // 컴퓨터 기종 ( "x86", "sparc", ... )
-	 * "line.separator", // 시스템에서의 행 분리 문자열 ( "
-	 * ", " ", " " )
+	 * "line.separator", // 시스템에서의 행 분리 문자열 ( " ", " ", " " )
 	 * "file.separator", // 화일 경로 이름내의 디렉토리 구분 문자 ("", "/")
 	 * "path.separator", // 화일 경로 이름 리스트의 구분 문자 (";", ":")
 	 * 
 	 * // 일반적으로, 보안에 의한 접근 제한을 받는 표준 시스템 프로퍼티 (애플릿의 경우)
 	 * "java.home", // JDK 설치 디렉토리
-	 * "java.class.path", // 패키지가 있는 디렉토리 리스트
-	 * // (일반적으로, CLASSPATH 환경변수값에 의해 영향 받음)
+	 * "java.class.path", // 패키지가 있는 디렉토리 리스트 (일반적으로, CLASSPATH 환경변수값에 의해 영향 받음)
 	 * "user.name", // 사용자의 등록 이름
 	 * "user.home", // 사용자의 홈 디렉토리
 	 * "user.dir", // 사용자의 현재 작업 디렉토리(파일을 뺀 전체 경로)
