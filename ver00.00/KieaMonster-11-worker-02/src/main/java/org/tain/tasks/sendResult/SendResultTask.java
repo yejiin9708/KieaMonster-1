@@ -12,11 +12,11 @@ import org.springframework.context.annotation.DependsOn;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 import org.tain.tasks.parse.ParseTask;
-import org.tain.tasks.parse.WebSocketClient;
 import org.tain.tools.node.MonJsonNode;
 import org.tain.tools.properties.ProjEnvUrlProperties;
 import org.tain.tools.queue.MonQueueBox;
 import org.tain.utils.CurrentInfo;
+import org.tain.utils.Sleep;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -51,19 +51,8 @@ public class SendResultTask {
 	public void async0102(String param) throws Exception {
 		log.info("KANG-20200721 >>>>> async_0102 START {} {}", param, CurrentInfo.get());
 		
-		Session session = null;
 		if (Boolean.TRUE) {
-			// create a connection with websocket
-			try {
-				WebSocketClient webSocketClient = new WebSocketClient(this.parseTask);
-				WebSocketContainer container = ContainerProvider.getWebSocketContainer();
-				String wsUri = this.projEnvUrlProperties.getWsUri();
-				session = container.connectToServer(webSocketClient, URI.create(wsUri));
-			} catch (Exception e) {
-				System.exit(0);
-				throw e;
-			}
-			System.out.println(">>>>> Start WebSocketClient.....");
+			this.connect();
 		}
 		
 		if (Boolean.TRUE) {
@@ -75,14 +64,56 @@ public class SendResultTask {
 					System.out.println(">>>>> 2. async " + param + ": " + resultNode.toPrettyString());
 					
 					// send result
-					session.getAsyncRemote().sendText(resultNode.toString());
+					this.sendMessage(resultNode.toString());
 				}
 			} catch (Exception e) {
 				e.printStackTrace();
 			} finally {
-				session.close();
+				this.session.close();
 			}
 		}
 		// retry to connect
+	}
+	///////////////////////////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////////////////////////
+	
+	private Session session;
+	
+	public void recvMessage(String message) throws Exception {
+		System.out.println("[recvMessage] message: " + message);
+	}
+	
+	public void sendMessage(String message) throws Exception {
+		System.out.println("[sendMessage] message: " + message);
+		this.session.getAsyncRemote().sendText(message);
+	}
+	
+	public void close() throws Exception {
+		this.session.close();
+	}
+	
+	private void connect() throws Exception {
+		log.info("KANG-20200721 >>>>> {} {}", CurrentInfo.get());
+		
+		if (Boolean.TRUE) {
+			Sleep.run(2 * 1000);
+			for (int i=0; ; i++) {
+				try {
+					WebSocketClient webSocketClient = new WebSocketClient(this.parseTask);
+					WebSocketContainer container = ContainerProvider.getWebSocketContainer();
+					String wsUri = this.projEnvUrlProperties.getWsUri();
+					this.session = container.connectToServer(webSocketClient, URI.create(wsUri));
+					break;
+				} catch (Exception e) {
+					//e.printStackTrace();
+					System.out.println(">>>>> connection failed. -> " + e.getMessage());
+				}
+				System.out.println(">>>>> try to connect again....." + i);
+				Sleep.run(10 * 1000);
+			}
+			
+			System.out.println(">>>>> Start MonWebSocketClient.....sessionId: " + this.session.getId());
+		}
 	}
 }

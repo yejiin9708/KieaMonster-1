@@ -60,13 +60,19 @@ public class SendResultTask {
 		}
 		
 		if (Boolean.TRUE) {
-			while (true) {
-				// get result from the queueSendResult
-				String msg = this.getQueue();
-				System.out.println(">>>>> 2. async " + param + ": " + msg);
-				
-				// send result to the monitor
-				this.sendMessage(msg);
+			try {
+				while (true) {
+					// get result from the queueSendResult
+					String msg = this.getQueue();
+					System.out.println(">>>>> 2. async " + param + ": " + msg);
+					
+					// send result to the monitor
+					this.sendMessage(msg);
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				this.session.close();
 			}
 		}
 	}

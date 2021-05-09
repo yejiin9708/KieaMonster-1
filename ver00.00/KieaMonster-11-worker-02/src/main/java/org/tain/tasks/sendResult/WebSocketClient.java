@@ -1,14 +1,16 @@
-package org.tain.tasks.parse;
+package org.tain.tasks.sendResult;
 
 import javax.websocket.ClientEndpoint;
 import javax.websocket.OnClose;
 import javax.websocket.OnError;
 import javax.websocket.OnMessage;
 
+import org.tain.tasks.parse.ParseTask;
+
 @ClientEndpoint
 public class WebSocketClient {
 
-	private ParseTask parseTask;
+	private ParseTask parseTask = null;
 	
 	public WebSocketClient(ParseTask parseTask) {
 		System.out.println("KANG-20210405 >>>>> Hello, Starting of WebSocketClient.");
@@ -24,10 +26,11 @@ public class WebSocketClient {
 		System.out.println(">>>>> [OnMessage] recv message: " + message);
 		
 		if (Boolean.TRUE) {
-			if (this.parseTask == null) {
+			if (this.parseTask != null) {
+				this.parseTask.parsing(message);
+			} else {
 				System.out.println("##### WebSocketClient.parseTask is null");
 			}
-			this.parseTask.parsing(message);
 		}
 	}
 	
