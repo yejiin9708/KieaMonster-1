@@ -6,6 +6,20 @@
 		"cmdPeriod": 0,
 		"cmdType": "CMD_SEQUENCE",
 		"cmdArr": "   ping     google.com  -i 5  "
+	},{
+		"cmdCode": "disk",
+		"cmdName": "disk space",
+		"cmdDesc": "disk space",
+		"cmdPeriod": 30,
+		"cmdType": "CMD_NORMAL",
+		"cmdArr": " df -h "
+	},{
+		"cmdCode": "date",
+		"cmdName": "date current",
+		"cmdDesc": "date current",
+		"cmdPeriod": 10,
+		"cmdType": "CMD_SEQUENCE",
+		"cmdArr": " date "
 	}
 ]
 

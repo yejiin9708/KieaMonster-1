@@ -128,4 +128,37 @@
 
 
 
+<!-- page5 -->
+<th:block th:fragment="page5">
+	<!-- page4 -->
+	<nav aria-label="Page navigation" style="text-align:center;">
+		<ul class="pagination" th:with="startNumber=${T(Math).floor(cmdList.number/10)}*10+1, endNumber=(${cmdList.totalPages} > ${startNumber}+9) ? ${startNumber}+9 : ${cmdList.totalPages}">
+			<li><a aria-label="Previous" th:href="@{/cmd/list(page=1)}">&laquo;</a></li>
+			<li th:style="${cmdList.first} ? 'display:none'">
+				<a th:href="@{/cmd/list(page=${cmdList.number})}">&lsaquo;</a>
+			</li>
+
+			<li th:each="page :${#numbers.sequence(startNumber, endNumber)}" th:class="(${page} == ${cmdList.number}+1) ? 'active'">
+				<a th:href="@{/cmd/list(page=${page})}" th:text="${page}"><span class="sr-only"></span></a>
+			</li>
+
+			<li th:style="${cmdList.last} ? 'display:none'">
+				<a th:href="@{/cmd/list(page=${cmdList.number}+2)}">&rsaquo;</a>
+			</li>
+			<li><a aria-label="Next" th:href="@{/cmd/list(page=${cmdList.totalPages})}">&raquo;</a></li>
+		</ul>
+	</nav>
+	<div style="text-align:center;">
+		(<!-- th:block th:text="${cmdList.content}"/ --> <th:block th:text="${cmdList.totalElements}"/> : <th:block th:text="${cmdList.numberOfElements}"/> : <th:block th:text="${cmdList.number}+1"/> / <th:block th:text="${cmdList.totalPages}"/>)
+	</div>
+	<!-- /page5 -->
+</th:block>
+<!-- /page5 -->
+
+
+
+
+
+
+
 </html>

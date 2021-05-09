@@ -26,7 +26,7 @@
 		"cmdDesc": "ping google.com",
 		"cmdPeriod": 0,
 		"cmdType": "CMD_NORMAL",
-		"cmdArr": " ping google.com "
+		"cmdArr": " ping google.com -i 3 "
 	}
 ]
 

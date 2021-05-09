@@ -45,7 +45,7 @@ public class ParseTask {
 			try {
 				reqNode = new MonJsonNode(reqMessage);
 				reqNode.put("sessionId", sessionInfo.getSession().getId());
-				log.info("KANG-20210405 >>>>> {} reqNode = {}", CurrentInfo.get(), reqNode.toPrettyString());
+				//log.info("KANG-20210405 >>>>> {} reqNode = {}", CurrentInfo.get(), reqNode.toPrettyString());
 				
 				String msgCode = reqNode.getText("msgCode");
 				switch (msgCode) {

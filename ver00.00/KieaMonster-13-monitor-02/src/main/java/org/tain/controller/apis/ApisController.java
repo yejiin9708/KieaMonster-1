@@ -1,30 +1,55 @@
 package org.tain.controller.apis;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.tain.db.domain.TbCmd;
+import org.tain.db.service.TbCmdService;
+import org.tain.utils.CurrentInfo;
+
+import lombok.extern.slf4j.Slf4j;
 
 @Controller
-@RequestMapping(value = {"/apis"})
-//@Slf4j
+@RequestMapping(value = {"/cmd"})
+@Slf4j
 public class ApisController {
 
-	/*
-	@Autowired
-	private ProjEnvUrlProperties projEnvUrlProperties;
+	//@Autowired
+	//private ProjEnvUrlProperties projEnvUrlProperties;
 	
 	@Autowired
-	private ApisService apisService;
+	private TbCmdService tbCmdService;
 	
 	@RequestMapping(value = {"/list"}, method = {RequestMethod.GET, RequestMethod.POST})
 	public String list(Pageable pageable, Model model) {
 		log.info("KANG-20200730 >>>>> {} {}", CurrentInfo.get());
-		model.addAttribute("apisList", this.apisService.findApisList(pageable));
-		model.addAttribute("urlOnline", this.projEnvUrlProperties.getOnline());
-		model.addAttribute("urlMapper", this.projEnvUrlProperties.getMapper());
-		model.addAttribute("urlSbs01", this.projEnvUrlProperties.getLns01());
-		return "web/apis/list";
+		Page<TbCmd> pageTbCmd = this.tbCmdService.listAll(pageable);
+		log.info("KANG-20200730 >>>>> pageTbCmd: {}", pageTbCmd);
+		model.addAttribute("cmdList", pageTbCmd);
+		//model.addAttribute("urlOnline", this.projEnvUrlProperties.getOnline());
+		//model.addAttribute("urlMapper", this.projEnvUrlProperties.getMapper());
+		//model.addAttribute("urlSbs01", this.projEnvUrlProperties.getLns01());
+		return "web/cmd/list";
 	}
 	
+	@RequestMapping(value = {"/form"}, method = {RequestMethod.GET, RequestMethod.POST})
+	public String form(@RequestParam(value = "id", defaultValue = "0") Long id, Model model) {
+		log.info("KANG-20200730 >>>>> {} {}", CurrentInfo.get());
+		TbCmd tbCmd = this.tbCmdService.getOne(id);
+		log.info("KANG-20200730 >>>>> tbCmd: {}", tbCmd);
+		model.addAttribute("cmd", tbCmd);
+		//model.addAttribute("urlOnline", this.projEnvUrlProperties.getOnline());
+		//model.addAttribute("urlMapper", this.projEnvUrlProperties.getMapper());
+		//model.addAttribute("urlLns01", this.projEnvUrlProperties.getLns01());
+		return "web/cmd/form";
+	}
+	
+	/*
 	@RequestMapping(value = {""}, method = {RequestMethod.GET, RequestMethod.POST})
 	public String form(@RequestParam(value = "id", defaultValue = "0") Long id, Model model) {
 		log.info("KANG-20200730 >>>>> {} {}", CurrentInfo.get());

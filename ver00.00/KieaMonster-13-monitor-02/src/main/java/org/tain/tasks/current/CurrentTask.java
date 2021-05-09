@@ -65,10 +65,10 @@ public class CurrentTask {
 				
 				// send resNode to the client
 				//WebSocketServerController.broadCast(resNode.toString());
-				
+				String code = reqNode.getText("svrCode") + "-" + reqNode.getText("cmdCode");
 				for (Map.Entry<String, SessionInfo> entry : WebSocketServerController.peers.entrySet()) {
-					String userId = entry.getValue().getUserId();
-					if (userId != null && !"".equals(userId)) {
+					String sections = entry.getValue().getSections();
+					if (sections != null && code.equals(sections)) {
 						WebSocketServerController.sendMessage(entry.getValue().getSession(), resNode.toString());
 					}
 				}

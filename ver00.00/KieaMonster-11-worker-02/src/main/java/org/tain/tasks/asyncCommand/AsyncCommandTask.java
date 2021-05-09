@@ -41,20 +41,32 @@ public class AsyncCommandTask {
 	@Async(value = "async_0101")
 	public void async0103(Cmd cmd) throws Exception {
 		log.info("KANG-20200721 >>>>> async_0101 START cmd:{} {}", cmd, CurrentInfo.get());
-	
-		switch (cmd.getCmdType().toUpperCase()) {
-		case "CMD_NORMAL":
-			cmdNormal(cmd);
-			break;
-		case "CMD_SEQUENCE":
-			cmdSequence(cmd);
-			break;
-		default:
-			throw new Exception("KANG ERROR: wrong cmd type [" + cmd.getCmdType() + "]");
+		
+		if (!Boolean.TRUE) {
+			/*
+			switch (cmd.getCmdType().toUpperCase()) {
+			case "CMD_NORMAL":
+				cmdAgainSingle(cmd);
+				break;
+			case "CMD_SEQUENCE":
+				cmdKeepSingle(cmd);
+				break;
+			default:
+				throw new Exception("KANG ERROR: wrong cmd type [" + cmd.getCmdType() + "]");
+			}
+			*/
+		}
+		
+		if (Boolean.TRUE) {
+			if (Integer.parseInt(cmd.getCmdPeriod()) == 0) {
+				cmdKeepSingle(cmd);
+			} else {
+				cmdAgainSingle(cmd);
+			}
 		}
 	}
 	
-	private void cmdNormal(Cmd cmd) throws Exception {
+	private void cmdAgainSingle(Cmd cmd) throws Exception {
 		log.info("KANG-20200721 >>>>> {} {}", CurrentInfo.get());
 		
 		if (Boolean.TRUE) {
@@ -113,7 +125,7 @@ public class AsyncCommandTask {
 		}
 	}
 	
-	private void cmdSequence(Cmd cmd) throws Exception {
+	private void cmdKeepSingle(Cmd cmd) throws Exception {
 		log.info("KANG-20200721 >>>>> {} {}", CurrentInfo.get());
 		
 		if (Boolean.TRUE) {

@@ -7,6 +7,7 @@ import org.tain.controller.WebSocketServerController;
 import org.tain.tools.node.MonJsonNode;
 import org.tain.tools.queue.MonQueue;
 import org.tain.utils.CurrentInfo;
+import org.tain.vo.SessionInfo;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -63,6 +64,17 @@ public class AuthenticateTask {
 				
 				// send resNode to the client
 				String sessionId = resNode.getText("sessionId");
+				SessionInfo sessionInfo = WebSocketServerController.findSessionById(sessionId);
+				sessionInfo.setUserId  (reqNode.getText("userId"));
+				sessionInfo.setGroupCd (reqNode.getText("groupCd"));
+				sessionInfo.setRollCd  (reqNode.getText("rollCd"));
+				sessionInfo.setSections(reqNode.getText("sections"));
+				System.out.println(">>>>> 5-1. AuthenticateTask sessionInfo: " + sessionInfo);
+				
+				// the same of the above
+				//sessionInfo = WebSocketServerController.findSessionById(sessionId);
+				//System.out.println(">>>>> 5-2. AuthenticateTask sessionInfo: " + sessionInfo);
+				
 				WebSocketServerController.sendMessage(sessionId, resNode.toString());
 			}
 		}
