@@ -7,7 +7,6 @@ import org.tain.controller.WebSocketServerController;
 import org.tain.tools.node.MonJsonNode;
 import org.tain.tools.queue.MonQueue;
 import org.tain.utils.CurrentInfo;
-import org.tain.utils.Flag;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -19,7 +18,7 @@ public class HistoryTask {
 	public void startHistoryTask() throws Exception {
 		System.out.println("KANG-20210405 >>>>> Hello, Starting of HistoryTask.");
 		
-		if (Flag.flag) {
+		if (Boolean.TRUE) {
 		}
 	}
 	
@@ -49,7 +48,7 @@ public class HistoryTask {
 	public void async0102(String param) throws Exception {
 		log.info("KANG-20200721 >>>>> async_0102 START {} {}", param, CurrentInfo.get());
 	
-		if (Flag.flag) {
+		if (Boolean.TRUE) {
 			while (true) {
 				// get result from the queueLoadResult
 				MonJsonNode reqNode = this.getQueueHistory();

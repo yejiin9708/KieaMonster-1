@@ -10,7 +10,6 @@ import org.tain.tasks.current.CurrentTask;
 import org.tain.tasks.history.HistoryTask;
 import org.tain.tools.node.MonJsonNode;
 import org.tain.utils.CurrentInfo;
-import org.tain.utils.Flag;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -31,7 +30,7 @@ public class ParseTask {
 	public void startParseTask() throws Exception {
 		System.out.println("KANG-20210405 >>>>> Hello, Starting of ParseTask.");
 		
-		if (Flag.flag) {
+		if (Boolean.TRUE) {
 		}
 	}
 	
@@ -42,7 +41,7 @@ public class ParseTask {
 	public void parsing(Session session, String reqMessage) {
 		log.info("KANG-20210405 >>>>> {} {}", CurrentInfo.get());
 		
-		if (Flag.flag) {
+		if (Boolean.TRUE) {
 			MonJsonNode reqNode = null;
 			try {
 				reqNode = new MonJsonNode(reqMessage);

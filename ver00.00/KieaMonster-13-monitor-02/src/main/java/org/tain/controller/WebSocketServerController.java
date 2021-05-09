@@ -16,8 +16,10 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Controller;
 import org.tain.config.ws.CustomSpringConfigurator;
 import org.tain.tasks.parse.ParseTask;
-import org.tain.utils.Flag;
 
+/*
+ * uri: ws://localhost:8080/v0.1/websocket
+ */
 @Controller
 @ServerEndpoint(value = "/websocket", configurator = CustomSpringConfigurator.class)
 public class WebSocketServerController {
@@ -35,7 +37,7 @@ public class WebSocketServerController {
 	public void startWebSocketController() throws Exception {
 		System.out.println("KANG-20210405 >>>>> Hello, Starting of WebSocketServerController.");
 		
-		if (Flag.flag) {
+		if (Boolean.TRUE) {
 		}
 	}
 	
@@ -96,7 +98,7 @@ public class WebSocketServerController {
 	
 	@Deprecated
 	public void _sendMessage(Session session, String message) {
-		if (Flag.flag) System.out.printf(">>>>> [sendMessage-%s] %s\n", session.getId(), message);
+		if (Boolean.TRUE) System.out.printf(">>>>> [sendMessage-%s] %s\n", session.getId(), message);
 		try {
 			session.getBasicRemote().sendText(message);
 		} catch (Exception e) {
@@ -134,7 +136,7 @@ public class WebSocketServerController {
 	}
 	
 	public static void sendMessage(Session session, String message) {
-		if (Flag.flag) System.out.printf(">>>>> [sendMessage-%s] %s\n", session.getId(), message);
+		if (Boolean.TRUE) System.out.printf(">>>>> [sendMessage-%s] %s\n", session.getId(), message);
 		try {
 			session.getBasicRemote().sendText(message);
 		} catch (Exception e) {

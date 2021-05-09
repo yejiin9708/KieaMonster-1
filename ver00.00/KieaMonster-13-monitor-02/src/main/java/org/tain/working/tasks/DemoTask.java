@@ -13,7 +13,6 @@ import org.springframework.stereotype.Component;
 import org.tain.tools.node.MonJsonNode;
 import org.tain.tools.properties.ProjEnvUrlProperties;
 import org.tain.utils.CurrentInfo;
-import org.tain.utils.Flag;
 import org.tain.utils.Sleep;
 
 import lombok.extern.slf4j.Slf4j;
@@ -26,7 +25,7 @@ public class DemoTask {
 	public void startDemoTask() throws Exception {
 		System.out.println("KANG-20210405 >>>>> Hello, Starting of DemoTask.");
 		
-		if (Flag.flag) {
+		if (Boolean.TRUE) {
 		}
 	}
 	
@@ -61,7 +60,7 @@ public class DemoTask {
 	public void async0103(String param) throws Exception {
 		log.info("KANG-20200721 >>>>> async_0103 START {} {}", param, CurrentInfo.get());
 		
-		if (Flag.flag) {
+		if (Boolean.TRUE) {
 			// create a connection with websocket
 			try {
 				WebSocketClient webSocketClient = new WebSocketClient();
@@ -74,7 +73,7 @@ public class DemoTask {
 			System.out.println(">>>>> Start WebSocketClient.....");
 		}
 		
-		if (Flag.flag) {
+		if (Boolean.TRUE) {
 			for (int i=0; i < 10000; i++) {
 				Sleep.run(5 * 1000);
 				MonJsonNode reqNode = new MonJsonNode("{}");
@@ -90,6 +89,6 @@ public class DemoTask {
 			}
 		}
 		
-		if (Flag.flag) this.close();
+		if (Boolean.TRUE) this.close();
 	}
 }

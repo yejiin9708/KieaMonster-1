@@ -19,11 +19,13 @@ public class FirstController {
 	@RequestMapping("/")
 	public String index() {
 		log.info("KANG-20210405 >>>>> {} {}", CurrentInfo.get());
-		HttpServletRequest request = ((ServletRequestAttributes)RequestContextHolder.currentRequestAttributes()).getRequest();
-		String ip = request.getHeader("X-FORWARDED-FOR");
-		if (ip == null)
-			ip = request.getRemoteAddr();
-		System.out.println(">>>>> Client IP: " + ip);
+		if (Boolean.TRUE) {
+			HttpServletRequest request = ((ServletRequestAttributes)RequestContextHolder.currentRequestAttributes()).getRequest();
+			String ip = request.getHeader("X-FORWARDED-FOR");
+			if (ip == null)
+				ip = request.getRemoteAddr();
+			System.out.println(">>>>> Client IP: " + ip);
+		}
 		return "index";
 	}
 	
@@ -35,8 +37,17 @@ public class FirstController {
 	@RequestMapping("/ws")
 	public String ws() {
 		log.info("KANG-20210405 >>>>> {} {}", CurrentInfo.get());
-		String wsUri = this.projEnvUrlProperties.getWsUri();
-		log.info("KANG-20210405 >>>>> wsUrl: {}", wsUri);
+		if (Boolean.TRUE) {
+			HttpServletRequest request = ((ServletRequestAttributes)RequestContextHolder.currentRequestAttributes()).getRequest();
+			String ip = request.getHeader("X-FORWARDED-FOR");
+			if (ip == null)
+				ip = request.getRemoteAddr();
+			System.out.println(">>>>> Client IP: " + ip);
+		}
+		if (Boolean.TRUE) {
+			String wsUri = this.projEnvUrlProperties.getWsUri();
+			log.info("KANG-20210405 >>>>> wsUrl: {}", wsUri);
+		}
 		return "ws/ws";
 	}
 }
