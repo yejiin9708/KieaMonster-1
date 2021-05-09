@@ -1,4 +1,4 @@
-package org.tain.data;
+package org.tain.vo;
 
 import lombok.Data;
 

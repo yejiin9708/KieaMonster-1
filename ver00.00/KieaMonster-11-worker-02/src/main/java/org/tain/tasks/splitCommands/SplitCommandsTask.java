@@ -9,12 +9,11 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.DependsOn;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
-import org.tain.data.Cmd;
 import org.tain.tasks.asyncCommand.AsyncCommandTask;
 import org.tain.tools.node.MonJsonNode;
 import org.tain.tools.queue.MonQueueBox;
 import org.tain.utils.CurrentInfo;
-import org.tain.utils.Flag;
+import org.tain.vo.Cmd;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -31,7 +30,7 @@ public class SplitCommandsTask {
 	public void startSplitCommandsTask() throws Exception {
 		System.out.println("KANG-20210405 >>>>> Hello, Starting of SplitCommandsTask.");
 		
-		if (Flag.flag) {
+		if (Boolean.TRUE) {
 		}
 	}
 	
@@ -50,7 +49,7 @@ public class SplitCommandsTask {
 	public void async0103(String param) throws Exception {
 		log.info("KANG-20200721 >>>>> async_0103 START {} {}", param, CurrentInfo.get());
 	
-		if (Flag.flag) {
+		if (Boolean.TRUE) {
 			Map<String, Cmd> mapCmds = new HashMap<>();
 			while (true) {
 				// get resNode
@@ -58,7 +57,7 @@ public class SplitCommandsTask {
 				MonJsonNode node = this.monQueueBox.getQueueSplitCommands();
 				System.out.println(">>>>> 3. async " + param + " resNode: " + node.toPrettyString());
 				
-				if (Flag.flag) {
+				if (Boolean.TRUE) {
 					// load to mapCmds
 					try {
 						List<Cmd> lstCmds = new ObjectMapper().readValue(node.getArrayNode("resResult").toString(), new TypeReference<List<Cmd>>(){});
@@ -72,7 +71,7 @@ public class SplitCommandsTask {
 					}
 				}
 				
-				if (Flag.flag) {
+				if (Boolean.TRUE) {
 					// create async cmds
 					try {
 						for (Map.Entry<String, Cmd> entry : mapCmds.entrySet()) {

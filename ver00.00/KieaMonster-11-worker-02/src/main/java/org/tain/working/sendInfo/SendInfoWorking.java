@@ -7,7 +7,6 @@ import org.tain.tools.node.MonJsonNode;
 import org.tain.tools.properties.ProjEnvParamProperties;
 import org.tain.tools.queue.MonQueueBox;
 import org.tain.utils.CurrentInfo;
-import org.tain.utils.Flag;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -26,11 +25,11 @@ public class SendInfoWorking {
 		log.info("KANG-20210405 >>>>> {} {}", CurrentInfo.get());
 		
 		String svrCode = null;
-		if (Flag.flag) {
+		if (Boolean.TRUE) {
 			svrCode = this.projEnvParamProperties.getSvrCode();
 		}
 		
-		if (Flag.flag) {
+		if (Boolean.TRUE) {
 			// send info to the commander
 			MonJsonNode infoNode = new MonJsonNode("{}");
 			infoNode.put("svrCode", svrCode);

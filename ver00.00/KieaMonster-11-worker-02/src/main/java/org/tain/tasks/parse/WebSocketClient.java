@@ -5,8 +5,6 @@ import javax.websocket.OnClose;
 import javax.websocket.OnError;
 import javax.websocket.OnMessage;
 
-import org.tain.utils.Flag;
-
 @ClientEndpoint
 public class WebSocketClient {
 
@@ -25,7 +23,7 @@ public class WebSocketClient {
 	public void onMessage(String message) {
 		System.out.println(">>>>> [OnMessage] recv message: " + message);
 		
-		if (Flag.flag) {
+		if (Boolean.TRUE) {
 			if (this.parseTask == null) {
 				System.out.println("##### WebSocketClient.parseTask is null");
 			}

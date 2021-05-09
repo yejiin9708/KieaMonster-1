@@ -8,12 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.DependsOn;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
-import org.tain.data.Cmd;
 import org.tain.tools.node.MonJsonNode;
 import org.tain.tools.queue.MonQueueBox;
 import org.tain.utils.CurrentInfo;
-import org.tain.utils.Flag;
 import org.tain.utils.Sleep;
+import org.tain.vo.Cmd;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -27,7 +26,7 @@ public class AsyncCommandTask {
 	public void startAsyncCommandTask() throws Exception {
 		System.out.println("KANG-20210405 >>>>> Hello, Starting of AsyncCommandTask.");
 		
-		if (Flag.flag) {
+		if (Boolean.TRUE) {
 		}
 	}
 	
@@ -43,12 +42,12 @@ public class AsyncCommandTask {
 	public void async0103(Cmd cmd) throws Exception {
 		log.info("KANG-20200721 >>>>> async_0101 START cmd:{} {}", cmd, CurrentInfo.get());
 	
-		if (Flag.flag) {
+		if (Boolean.TRUE) {
 			// spring async kill thread
 			for (int idx=0; ; idx++) {
 				log.info(">>>>> cmd: {} {}", cmd, idx);
 				MonJsonNode nodeResult = new MonJsonNode("{}");
-				if (Flag.flag) {
+				if (Boolean.TRUE) {
 					nodeResult.put("svrCode", cmd.getSvrCode());
 					nodeResult.put("msgCode", "CMD_RET");
 					nodeResult.put("cmdCode", cmd.getCmdCode());
@@ -59,7 +58,7 @@ public class AsyncCommandTask {
 					//nodeResult.put("cmdDttm", LocalDateTime.now());
 				}
 				
-				if (Flag.flag) {
+				if (Boolean.TRUE) {
 					// run process and get the result
 					Process process = Runtime.getRuntime().exec(cmd.getCmdArr());
 					
@@ -88,7 +87,7 @@ public class AsyncCommandTask {
 					nodeResult.put("cmdResult", sb.toString());
 				}
 				
-				if (Flag.flag) {
+				if (Boolean.TRUE) {
 					this.monQueueBox.setQueueSendResult(nodeResult);
 				}
 				

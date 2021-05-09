@@ -7,7 +7,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.tain.tools.properties.ProjEnvBaseProperties;
 import org.tain.utils.CurrentInfo;
-import org.tain.utils.Flag;
 import org.tain.utils.Sleep;
 import org.tain.working.Working;
 
@@ -37,7 +36,7 @@ public class KieaMonster11Worker02Application implements CommandLineRunner {
 		log.info("KANG-20210405 >>>>> {} {}", CurrentInfo.get());
 		
 		try {
-			if (Flag.flag) this.working.work();
+			if (Boolean.TRUE) this.working.work();
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {

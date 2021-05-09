@@ -17,7 +17,6 @@ import org.tain.tools.node.MonJsonNode;
 import org.tain.tools.properties.ProjEnvUrlProperties;
 import org.tain.tools.queue.MonQueueBox;
 import org.tain.utils.CurrentInfo;
-import org.tain.utils.Flag;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -30,7 +29,7 @@ public class SendResultTask {
 	public void startSendResultTask() throws Exception {
 		System.out.println("KANG-20210405 >>>>> Hello, Starting of SendResultTask.");
 		
-		if (Flag.flag) {
+		if (Boolean.TRUE) {
 		}
 	}
 	
@@ -53,7 +52,7 @@ public class SendResultTask {
 		log.info("KANG-20200721 >>>>> async_0102 START {} {}", param, CurrentInfo.get());
 		
 		Session session = null;
-		if (Flag.flag) {
+		if (Boolean.TRUE) {
 			// create a connection with websocket
 			try {
 				WebSocketClient webSocketClient = new WebSocketClient(this.parseTask);
@@ -67,7 +66,7 @@ public class SendResultTask {
 			System.out.println(">>>>> Start WebSocketClient.....");
 		}
 		
-		if (Flag.flag) {
+		if (Boolean.TRUE) {
 			// send results to the commander
 			try {
 				while (true) {
