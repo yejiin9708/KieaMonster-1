@@ -42,6 +42,21 @@ public class AsyncCommandTask {
 	public void async0103(Cmd cmd) throws Exception {
 		log.info("KANG-20200721 >>>>> async_0101 START cmd:{} {}", cmd, CurrentInfo.get());
 	
+		switch (cmd.getCmdType().toUpperCase()) {
+		case "CMD_NORMAL":
+			cmdNormal(cmd);
+			break;
+		case "CMD_SEQUENCE":
+			cmdSequence(cmd);
+			break;
+		default:
+			throw new Exception("KANG ERROR: wrong cmd type [" + cmd.getCmdType() + "]");
+		}
+	}
+	
+	private void cmdNormal(Cmd cmd) throws Exception {
+		log.info("KANG-20200721 >>>>> {} {}", CurrentInfo.get());
+		
 		if (Boolean.TRUE) {
 			// spring async kill thread
 			for (int idx=0; ; idx++) {
@@ -53,8 +68,9 @@ public class AsyncCommandTask {
 					nodeResult.put("cmdCode", cmd.getCmdCode());
 					nodeResult.put("cmdName", cmd.getCmdName());
 					nodeResult.put("cmdDesc", cmd.getCmdDesc());
-					nodeResult.put("cmdArr", cmd.getCmdArr());
 					nodeResult.put("cmdPeriod", cmd.getCmdPeriod());
+					nodeResult.put("cmdType", cmd.getCmdType());
+					nodeResult.put("cmdArr", cmd.getCmdArr());
 					//nodeResult.put("cmdDttm", LocalDateTime.now());
 				}
 				
@@ -93,6 +109,44 @@ public class AsyncCommandTask {
 				
 				// wait for period
 				Sleep.run(Integer.parseInt(cmd.getCmdPeriod()) * 1000);
+			}
+		}
+	}
+	
+	private void cmdSequence(Cmd cmd) throws Exception {
+		log.info("KANG-20200721 >>>>> {} {}", CurrentInfo.get());
+		
+		if (Boolean.TRUE) {
+			// spring async kill thread
+			log.info(">>>>> cmd: {} {}", cmd);
+			MonJsonNode nodeResult = new MonJsonNode("{}");
+			if (Boolean.TRUE) {
+				nodeResult.put("svrCode", cmd.getSvrCode());
+				nodeResult.put("msgCode", "CMD_RET");
+				nodeResult.put("cmdCode", cmd.getCmdCode());
+				nodeResult.put("cmdName", cmd.getCmdName());
+				nodeResult.put("cmdDesc", cmd.getCmdDesc());
+				nodeResult.put("cmdPeriod", cmd.getCmdPeriod());
+				nodeResult.put("cmdType", cmd.getCmdType());
+				nodeResult.put("cmdArr", cmd.getCmdArr());
+				//nodeResult.put("cmdDttm", LocalDateTime.now());
+			}
+			
+			if (Boolean.TRUE) {
+				// run process and get the result
+				Process process = Runtime.getRuntime().exec(cmd.getCmdArr());
+				
+				BufferedReader br = new BufferedReader(new InputStreamReader(process.getInputStream(), "UTF-8"));
+				String line = null;
+				while ((line = br.readLine()) != null) {
+					nodeResult.put("cmdResult", line + "\n");
+					if (Boolean.TRUE) {
+						this.monQueueBox.setQueueSendResult(nodeResult);
+					}
+				}
+				
+				process.waitFor();
+				process.destroy();
 			}
 		}
 	}

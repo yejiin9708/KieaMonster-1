@@ -1,6 +1,5 @@
 [
 	{
-		"svrCode": "TEST01",
 		"cmdCode": "uname",
 		"cmdName": "uname all",
 		"cmdDesc": "svr desc",
@@ -8,7 +7,6 @@
 		"cmdType": "CMD_NORMAL",
 		"cmdArr": "uname -a "
 	},{
-		"svrCode": "TEST01",
 		"cmdCode": "disk",
 		"cmdName": "disk space",
 		"cmdDesc": "disk space",
@@ -16,7 +14,6 @@
 		"cmdType": "CMD_NORMAL",
 		"cmdArr": " df -h "
 	},{
-		"svrCode": "TEST01",
 		"cmdCode": "memory",
 		"cmdName": "memory space",
 		"cmdDesc": "memory space",
@@ -24,7 +21,6 @@
 		"cmdType": "CMD_NORMAL",
 		"cmdArr": " ps -ef "
 	},{
-		"svrCode": "TEST01",
 		"cmdCode": "ping",
 		"cmdName": "ping",
 		"cmdDesc": "ping google.com",

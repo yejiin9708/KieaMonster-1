@@ -49,17 +49,34 @@ public class TbCmdWorking {
 			
 			File[] files = new File(pathName).listFiles((FileFilter) new WildcardFileFilter(fileName));
 			for (File file : files) {
-				if (Boolean.TRUE) log.info("KANG-20210406 >>>>> {} {}", CurrentInfo.get(), file.getAbsolutePath());
+				if (Boolean.TRUE) log.info("KANG-20210406 >>>>> {} {} {}", CurrentInfo.get(), file.getAbsolutePath(), file.getName());
 				
+				String svrCode = getSvrCode(file.getName());
 				String strJson = StringTools.stringFromFile(file.getAbsolutePath());
 				if (Boolean.TRUE) log.info("KANG-20210406 >>>>> {} {}", CurrentInfo.get(), strJson);
 				
 				List<TbCmd> lstTbCmd = new ObjectMapper().readValue(strJson, new TypeReference<List<TbCmd>>() {});
 				lstTbCmd.forEach(entry -> {
+					entry.setSvrCode  (svrCode);
+					entry.setCmdCode  (entry.getCmdCode  ().trim());
+					entry.setCmdName  (entry.getCmdName  ().trim());
+					entry.setCmdDesc  (entry.getCmdDesc  ().trim());
+					entry.setCmdPeriod(entry.getCmdPeriod().trim());
+					entry.setCmdType  (entry.getCmdType  ().trim());
+					entry.setCmdArr   (entry.getCmdArr   ().trim());
 					if (Boolean.TRUE) log.info("KANG-20210406 >>>>> {} {}", CurrentInfo.get(), entry);
 					this.tbCmdRepository.save(entry);
 				});
 			}
 		}
+	}
+	
+	private String getSvrCode(String fileName) throws Exception {
+		int endPos = fileName.lastIndexOf('.');
+		if (endPos < 5) {
+			throw new Exception("KANG ERROR: parsing error [" + fileName + "]");
+		}
+		String svrCode = fileName.substring(4, endPos);
+		return svrCode;
 	}
 }

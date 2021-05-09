@@ -1,14 +1,11 @@
 [
 	{
-		"svrCode": "TEST01",
 		"cmdCode": "ping",
 		"cmdName": "ping-01",
 		"cmdDesc": "ping google.com",
 		"cmdPeriod": 0,
-		"cmdType": "CMD_NORMAL",
+		"cmdType": "CMD_SEQUENCE",
 		"cmdArr": "   ping     google.com  "
 	}
 ]
-
-
 

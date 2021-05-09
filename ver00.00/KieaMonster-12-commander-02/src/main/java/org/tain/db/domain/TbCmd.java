@@ -48,7 +48,7 @@ public class TbCmd {
 	@Column(name = "cmd_desc", length = 1024)
 	private String cmdDesc;
 	
-	@Column(name = "cmd_period", length = 5)
+	@Column(name = "cmd_period", length = 8)
 	private String cmdPeriod;
 	
 	@Column(name = "cmd_type", length = 32)
@@ -59,7 +59,7 @@ public class TbCmd {
 	//private String[] cmdArr;
 	
 	//@JsonIgnore
-	@Column(name = "cmd_arr")
+	@Column(name = "cmd_arr", length = 128)
 	private String cmdArr;
 	
 	//@Column(name = "create_date")

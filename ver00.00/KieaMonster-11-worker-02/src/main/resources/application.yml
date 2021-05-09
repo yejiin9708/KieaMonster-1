@@ -124,7 +124,7 @@ proj-env:
     comment: This is Monster API project.
     char-set: utf-8
     #test-flag: true
-    svr-code: TEST03
+    #svr-code: TEST03
     async-size: 20
     
   param:

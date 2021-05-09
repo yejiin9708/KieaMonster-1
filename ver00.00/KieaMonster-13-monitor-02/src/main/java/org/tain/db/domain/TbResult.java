@@ -46,17 +46,20 @@ public class TbResult {
 	@Column(name = "cmd_code", length = 16)
 	private String cmdCode;
 	
-	@Column(name = "cmd_name", length = 32)
+	@Column(name = "cmd_name", length = 64)
 	private String cmdName;
 	
-	@Column(name = "cmd_desc", length = 128)
+	@Column(name = "cmd_desc", length = 1024)
 	private String cmdDesc;
-	
-	@Column(name = "cmd_arr", length = 128)
-	private String cmdArr;
 	
 	@Column(name = "cmd_period", length = 8)
 	private String cmdPeriod;
+	
+	@Column(name = "cmd_type", length = 32)
+	private String cmdType;
+	
+	@Column(name = "cmd_arr", length = 128)
+	private String cmdArr;
 	
 	@Column(name = "cmd_result", length = 10240000)  // 10 MB
 	private String cmdResult;
@@ -68,8 +71,9 @@ public class TbResult {
 			String cmdCode,
 			String cmdName,
 			String cmdDesc,
-			String cmdArr,
 			String cmdPeriod,
+			String cmdType,
+			String cmdArr,
 			String cmdResult
 			) {
 		this.svrCode = svrCode;
@@ -77,8 +81,9 @@ public class TbResult {
 		this.cmdCode = cmdCode;
 		this.cmdName = cmdName;
 		this.cmdDesc = cmdDesc;
-		this.cmdArr = cmdArr;
 		this.cmdPeriod = cmdPeriod;
+		this.cmdType = cmdType;
+		this.cmdArr = cmdArr;
 		this.cmdResult = cmdResult;
 	}
 }
