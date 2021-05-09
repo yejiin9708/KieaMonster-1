@@ -5,6 +5,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 import org.tain.tools.properties.ProjEnvUrlProperties;
@@ -13,10 +14,11 @@ import org.tain.utils.CurrentInfo;
 import lombok.extern.slf4j.Slf4j;
 
 @Controller
+@RequestMapping(value = {"/"})
 @Slf4j
-public class FirstController {
+public class HomeController {
 
-	@RequestMapping("/")
+	@RequestMapping(value={"", "home"}, method = {RequestMethod.GET, RequestMethod.POST})
 	public String index() {
 		log.info("KANG-20210405 >>>>> {} {}", CurrentInfo.get());
 		if (Boolean.TRUE) {
@@ -26,7 +28,7 @@ public class FirstController {
 				ip = request.getRemoteAddr();
 			System.out.println(">>>>> Client IP: " + ip);
 		}
-		return "index";
+		return "home";
 	}
 	
 	///////////////////////////////////////////////////////////////////////////
