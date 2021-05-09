@@ -1,5 +1,7 @@
 package org.tain.tasks.current;
 
+import java.util.Map;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
@@ -7,6 +9,7 @@ import org.tain.controller.WebSocketServerController;
 import org.tain.tools.node.MonJsonNode;
 import org.tain.tools.queue.MonQueue;
 import org.tain.utils.CurrentInfo;
+import org.tain.vo.SessionInfo;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -26,14 +29,14 @@ public class CurrentTask {
 	///////////////////////////////////////////////////////////////////////////
 	///////////////////////////////////////////////////////////////////////////
 	
-	private MonQueue<MonJsonNode> queueCurrent = new MonQueue<>();
+	private MonQueue<MonJsonNode> queue = new MonQueue<>();
 	
-	public void setQueueCurrent(MonJsonNode object) {
-		this.queueCurrent.set(object);
+	public void setQueue(MonJsonNode object) {
+		this.queue.set(object);
 	}
 	
-	public MonJsonNode getQueueCurrent() {
-		return this.queueCurrent.get();
+	public MonJsonNode getQueue() {
+		return this.queue.get();
 	}
 	
 	///////////////////////////////////////////////////////////////////////////
@@ -48,7 +51,7 @@ public class CurrentTask {
 		if (Boolean.TRUE) {
 			while (true) {
 				// get reqNode
-				MonJsonNode reqNode = this.getQueueCurrent();
+				MonJsonNode reqNode = this.getQueue();
 				
 				// clone copy reqNode to resNode
 				MonJsonNode resNode = null;
@@ -61,7 +64,14 @@ public class CurrentTask {
 				System.out.println(">>>>> 1. async " + param + " resNode: " + resNode.toPrettyString());
 				
 				// send resNode to the client
-				WebSocketServerController.broadCast(resNode.toString());
+				//WebSocketServerController.broadCast(resNode.toString());
+				
+				for (Map.Entry<String, SessionInfo> entry : WebSocketServerController.peers.entrySet()) {
+					String userId = entry.getValue().getUserId();
+					if (userId != null && !"".equals(userId)) {
+						WebSocketServerController.sendMessage(entry.getValue().getSession(), resNode.toString());
+					}
+				}
 			}
 		}
 	}

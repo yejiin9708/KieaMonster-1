@@ -26,14 +26,14 @@ public class HistoryTask {
 	///////////////////////////////////////////////////////////////////////////
 	///////////////////////////////////////////////////////////////////////////
 	
-	private MonQueue<MonJsonNode> queueHistory = new MonQueue<>();
+	private MonQueue<MonJsonNode> queue = new MonQueue<>();
 	
-	public void setQueueHistory(MonJsonNode object) {
-		this.queueHistory.set(object);
+	public void setQueue(MonJsonNode object) {
+		this.queue.set(object);
 	}
 	
-	public MonJsonNode getQueueHistory() {
-		return this.queueHistory.get();
+	public MonJsonNode getQueue() {
+		return this.queue.get();
 	}
 	
 	///////////////////////////////////////////////////////////////////////////
@@ -51,7 +51,7 @@ public class HistoryTask {
 		if (Boolean.TRUE) {
 			while (true) {
 				// get result from the queueLoadResult
-				MonJsonNode reqNode = this.getQueueHistory();
+				MonJsonNode reqNode = this.getQueue();
 				
 				// clone copy reqNode to resNode
 				MonJsonNode resNode = null;

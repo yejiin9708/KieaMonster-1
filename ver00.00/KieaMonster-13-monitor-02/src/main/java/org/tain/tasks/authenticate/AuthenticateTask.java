@@ -40,10 +40,10 @@ public class AuthenticateTask {
 	///////////////////////////////////////////////////////////////////////////
 	///////////////////////////////////////////////////////////////////////////
 	
-	// CurrentTask
-	@Async(value = "async_0101")
-	public void async0101(String param) throws Exception {
-		log.info("KANG-20200721 >>>>> async_0101 START {} {}", param, CurrentInfo.get());
+	// AuthenticateTask
+	@Async(value = "async_0104")
+	public void async0104(String param) throws Exception {
+		log.info("KANG-20200721 >>>>> async_0104 START {} {}", param, CurrentInfo.get());
 	
 		if (Boolean.TRUE) {
 			// 인증이 되지 않은 세션은 종료(close) 한다.
@@ -59,7 +59,7 @@ public class AuthenticateTask {
 					throw e;
 				}
 				resNode.put("status", "SUCCESS");
-				System.out.println(">>>>> 4. async " + param + " resNode: " + resNode.toPrettyString());
+				System.out.println(">>>>> 5. AuthenticateTask " + param + " resNode: " + resNode.toPrettyString());
 				
 				// send resNode to the client
 				String sessionId = resNode.getText("sessionId");
