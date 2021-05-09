@@ -109,7 +109,7 @@ public class SendResultTask {
 					this.session = container.connectToServer(webSocketClient, URI.create(wsUri));
 					
 					// clear queue
-					this.queue.clear();
+					//this.queue.clear();
 					break;
 				} catch (Exception e) {
 					//e.printStackTrace();

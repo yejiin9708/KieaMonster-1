@@ -10,14 +10,40 @@ public class MonQueueBox {
 	///////////////////////////////////////////////////////////////////////////
 	///////////////////////////////////////////////////////////////////////////
 	
-	// queue for
-	private MonQueue<MonJsonNode> queue = new MonQueue<>();
+	// queue for sending message
+	private MonQueue<MonJsonNode> queueSendResult = new MonQueue<>();
 	
-	public void setQueue(MonJsonNode object) {
-		this.queue.set(object);
+	public void setQueueSendResult(MonJsonNode object) {
+		this.queueSendResult.set(object);
 	}
 	
-	public MonJsonNode getQueue() {
-		return this.queue.get();
+	public MonJsonNode getQueueSendResult() {
+		return this.queueSendResult.get();
 	}
+	
+	public void clearQueueSendResult() {
+		this.queueSendResult.clear();
+	}
+	
+	///////////////////////////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////////////////////////
+	
+	private MonQueue<MonJsonNode> queueSplitCommands = new MonQueue<>();
+	
+	public void setQueueSplitCommands(MonJsonNode object) {
+		this.queueSplitCommands.set(object);
+	}
+	
+	public MonJsonNode getQueueSplitCommands() {
+		return this.queueSplitCommands.get();
+	}
+	
+	public void clearQueueSplitCommands() {
+		this.queueSplitCommands.clear();
+	}
+	
+	///////////////////////////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////////////////////////
 }
