@@ -7,6 +7,21 @@
 	<th:block th:replace="layout/css::css1"></th:block>
 	<th:block th:replace="layout/script::script1"></th:block>
 	<!-- /css and script -->
+	<!--
+		font-family:Verdana, Arial, Helvetica, sans-serif;
+		font-family: inherit;
+		font-size: inherit;
+	-->
+	<style>
+	#result {
+		resize: vertical;
+	}
+	textarea {
+		font-family: monospace, "맑은 고딕", serif;
+		font-size: 11px;
+		color: #999999;
+	}
+	</style>
 </head>
 <body>
 <!-- header -->
@@ -27,7 +42,7 @@
 		</tr>
 		<tr>
 			<th style="padding:13px 0 0 15px;">result</th>
-			<td><textarea id="result" class="col-md-1 form-control input-sm" rows="15" style="resize:vertical;"></textarea></td>
+			<td><textarea id="result" class="col-md-1 form-control input-sm" rows="15"></textarea></td>
 		</tr>
 		<tr>
 			<td></td>

@@ -100,6 +100,7 @@ public class AsyncCommandTask {
 						//sb.append("> ");
 						sb.append(line).append("\n");
 					}
+					sb.append("====================================================\n");
 					//System.out.println("</OUTPUT>");
 					//sb.append("</OUTPUT>").append("\n");
 					

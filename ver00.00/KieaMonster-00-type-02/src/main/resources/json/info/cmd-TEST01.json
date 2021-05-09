@@ -12,7 +12,7 @@
 		"cmdDesc": "disk space",
 		"cmdPeriod": 30,
 		"cmdType": "CMD_NORMAL",
-		"cmdArr": " df -h "
+		"cmdArr": " df -m "
 	},{
 		"cmdCode": "date",
 		"cmdName": "date current",
