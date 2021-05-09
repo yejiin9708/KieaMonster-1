@@ -104,6 +104,9 @@ public class SendResultTask {
 					WebSocketContainer container = ContainerProvider.getWebSocketContainer();
 					String wsUri = this.projEnvUrlProperties.getWsUri();
 					this.session = container.connectToServer(webSocketClient, URI.create(wsUri));
+					
+					// clear queue
+					this.monQueueBox.clearQueueSendResult();
 					break;
 				} catch (Exception e) {
 					//e.printStackTrace();

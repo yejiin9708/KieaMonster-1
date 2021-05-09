@@ -5,7 +5,7 @@
 		"cmdDesc": "ping google.com",
 		"cmdPeriod": 0,
 		"cmdType": "CMD_SEQUENCE",
-		"cmdArr": "   ping     google.com  "
+		"cmdArr": "   ping     google.com  -i 5  "
 	}
 ]
 
