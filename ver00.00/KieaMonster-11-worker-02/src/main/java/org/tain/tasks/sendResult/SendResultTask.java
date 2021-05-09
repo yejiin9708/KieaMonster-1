@@ -105,8 +105,8 @@ public class SendResultTask {
 					String wsUri = this.projEnvUrlProperties.getWsUri();
 					this.session = container.connectToServer(webSocketClient, URI.create(wsUri));
 					
-					// clear queue
-					this.monQueueBox.clearQueueSendResult();
+					// couldn't clear queue, because of sendInfoMessage
+					//this.monQueueBox.clearQueueSendResult();
 					break;
 				} catch (Exception e) {
 					//e.printStackTrace();
