@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 public class Runtime01Working {
 
 	public void test01() throws Exception {
-		{
+		if (!Boolean.TRUE){
 			String[] cmd = new String[] { "ping", "google.com" };
 			Process process = new ProcessBuilder(cmd).start();
 			
@@ -30,7 +30,7 @@ public class Runtime01Working {
 	}
 	
 	public void test02() throws Exception {
-		{
+		if (Boolean.TRUE){
 			
 		}
 	}
