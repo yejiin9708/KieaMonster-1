@@ -1,0 +1,12 @@
+[
+	{
+		"svrCode": "TEST03",
+		"cmdCode": "disk",
+		"cmdName": "disk space",
+		"cmdDesc": "disk space (연습:utf-8)",
+		"cmdPeriod": 10,
+		"cmdType": "CMD_NORMAL",
+		"cmdArr": " df -h "
+	}
+]
+
