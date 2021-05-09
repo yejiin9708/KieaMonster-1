@@ -15,7 +15,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Controller;
 import org.tain.config.ws.CustomSpringConfigurator;
 import org.tain.tasks.parse.ParseTask;
-import org.tain.utils.Flag;
 
 @Controller
 @ServerEndpoint(value = "/websocket", configurator = CustomSpringConfigurator.class)
@@ -31,7 +30,7 @@ public class WebSocketServerController {
 	public void startWebSocketController() throws Exception {
 		System.out.println("KANG-20210405 >>>>> Hello, Starting of WebSocketController.");
 		
-		if (Flag.flag) {
+		if (Boolean.TRUE) {
 		}
 	}
 	

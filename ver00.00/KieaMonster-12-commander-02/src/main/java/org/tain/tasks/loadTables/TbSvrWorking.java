@@ -10,7 +10,6 @@ import org.tain.db.repository.TbSvrRepository;
 import org.tain.tools.properties.ProjEnvJsonProperties;
 import org.tain.tools.properties.ProjEnvParamProperties;
 import org.tain.utils.CurrentInfo;
-import org.tain.utils.Flag;
 import org.tain.utils.StringTools;
 
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -34,25 +33,25 @@ public class TbSvrWorking {
 	public void load() throws Exception {
 		log.info("KANG-20210405 >>>>> {} {}", CurrentInfo.get());
 		
-		if (Flag.flag) {
+		if (Boolean.TRUE) {
 			// delete all
 			this.tbSvrRepository.deleteAll();
 		}
 		
-		if (Flag.flag) {
+		if (Boolean.TRUE) {
 			String filePath = this.projEnvParamProperties.getHome()
 					+ this.projEnvParamProperties.getBase()
 					+ this.projEnvParamProperties.getInfoPath()
 					+ File.separator
 					+ this.projEnvJsonProperties.getSvrInfoFile();
-			if (Flag.flag) log.info("KANG-20210406 >>>>> {} {}", CurrentInfo.get(), filePath);
+			if (Boolean.TRUE) log.info("KANG-20210406 >>>>> {} {}", CurrentInfo.get(), filePath);
 
 			String strJson = StringTools.stringFromFile(filePath);
-			if (Flag.flag) log.info("KANG-20210406 >>>>> {} {}", CurrentInfo.get(), strJson);
+			if (Boolean.TRUE) log.info("KANG-20210406 >>>>> {} {}", CurrentInfo.get(), strJson);
 			
 			List<TbSvr> lstTbSvr = new ObjectMapper().readValue(strJson, new TypeReference<List<TbSvr>>() {});
 			lstTbSvr.forEach(entry -> {
-				if (Flag.flag) log.info("KANG-20210406 >>>>> {} {}", CurrentInfo.get(), entry);
+				if (Boolean.TRUE) log.info("KANG-20210406 >>>>> {} {}", CurrentInfo.get(), entry);
 				this.tbSvrRepository.save(entry);
 			});
 		}

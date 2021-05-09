@@ -3,7 +3,6 @@ package org.tain.working;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.tain.utils.CurrentInfo;
-import org.tain.utils.Flag;
 import org.tain.working.properties.PropertiesWorking;
 import org.tain.working.test.TestWorking;
 
@@ -17,10 +16,10 @@ public class Working {
 		log.info("KANG-20210405 >>>>> {} {}", CurrentInfo.get());
 		
 		// properties
-		if (Flag.flag) jobForProperties();
+		if (Boolean.TRUE) jobForProperties();
 		
-		// async queue test
-		if (!Flag.flag) jobForTestAsyncQueue();
+		// test
+		if (!Boolean.TRUE) jobForTest();
 	}
 	
 	///////////////////////////////////////////////////////////////////////////
@@ -33,7 +32,7 @@ public class Working {
 	private void jobForProperties() throws Exception {
 		log.info("KANG-20210405 >>>>> {} {}", CurrentInfo.get());
 		
-		if (Flag.flag) this.propertiesWorking.print();
+		if (Boolean.TRUE) this.propertiesWorking.print();
 	}
 	
 	///////////////////////////////////////////////////////////////////////////
@@ -43,9 +42,9 @@ public class Working {
 	@Autowired
 	private TestWorking testWorking;
 	
-	private void jobForTestAsyncQueue() throws Exception {
+	private void jobForTest() throws Exception {
 		log.info("KANG-20210405 >>>>> {} {}", CurrentInfo.get());
 		
-		if (Flag.flag) this.testWorking.test00();
+		if (Boolean.TRUE) this.testWorking.test00();
 	}
 }

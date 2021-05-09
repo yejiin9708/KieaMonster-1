@@ -88,7 +88,7 @@ public class StringTools {
 	// KANG-20200918
 	public static String stringFromFile(String filePath) {
 		StringBuffer sb = new StringBuffer();
-		if (Flag.flag) {
+		if (Boolean.TRUE) {
 			BufferedReader br = null;
 			
 			try {
@@ -110,7 +110,7 @@ public class StringTools {
 	
 	// KANG-20200918
 	public static void stringToFile(String strSource, String filePath) {
-		if (Flag.flag) {
+		if (Boolean.TRUE) {
 			PrintWriter pw = null;
 			
 			try {

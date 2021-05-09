@@ -9,7 +9,6 @@ import org.tain.tools.properties.ProjEnvJsonProperties;
 import org.tain.tools.properties.ProjEnvParamProperties;
 import org.tain.tools.properties.ProjEnvUrlProperties;
 import org.tain.utils.CurrentInfo;
-import org.tain.utils.Flag;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -35,7 +34,7 @@ public class PropertiesWorking {
 	public void print() {
 		log.info("KANG-20210405 >>>>> {} {}", CurrentInfo.get());
 		
-		if (Flag.flag) {
+		if (Boolean.TRUE) {
 			log.info("KANG-20210405 >>>>> {} {}", "- BASE --", MonJsonNode.getPrettyJson(this.projEnvBaseProperties));
 			log.info("KANG-20210405 >>>>> {} {}", "- PARAM -", MonJsonNode.getPrettyJson(this.projEnvParamProperties));
 			log.info("KANG-20210405 >>>>> {} {}", "- JOB  --", MonJsonNode.getPrettyJson(this.projEnvJobProperties));

@@ -12,7 +12,6 @@ import org.tain.db.repository.TbCmdRepository;
 import org.tain.tools.properties.ProjEnvJsonProperties;
 import org.tain.tools.properties.ProjEnvParamProperties;
 import org.tain.utils.CurrentInfo;
-import org.tain.utils.Flag;
 import org.tain.utils.StringTools;
 
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -36,28 +35,28 @@ public class TbCmdWorking {
 	public void load() throws Exception {
 		log.info("KANG-20210405 >>>>> {} {}", CurrentInfo.get());
 		
-		if (Flag.flag) {
+		if (Boolean.TRUE) {
 			// delete all
 			this.tbCmdRepository.deleteAll();
 		}
 		
-		if (Flag.flag) {
+		if (Boolean.TRUE) {
 			String pathName = this.projEnvParamProperties.getHome()
 					+ this.projEnvParamProperties.getBase()
 					+ this.projEnvParamProperties.getInfoPath();
 			String fileName = this.projEnvJsonProperties.getCmdInfoFile();
-			if (Flag.flag) log.info("KANG-20210406 >>>>> {} {}", fileName, pathName);
+			if (Boolean.TRUE) log.info("KANG-20210406 >>>>> {} {}", fileName, pathName);
 			
 			File[] files = new File(pathName).listFiles((FileFilter) new WildcardFileFilter(fileName));
 			for (File file : files) {
-				if (Flag.flag) log.info("KANG-20210406 >>>>> {} {}", CurrentInfo.get(), file.getAbsolutePath());
+				if (Boolean.TRUE) log.info("KANG-20210406 >>>>> {} {}", CurrentInfo.get(), file.getAbsolutePath());
 				
 				String strJson = StringTools.stringFromFile(file.getAbsolutePath());
-				if (Flag.flag) log.info("KANG-20210406 >>>>> {} {}", CurrentInfo.get(), strJson);
+				if (Boolean.TRUE) log.info("KANG-20210406 >>>>> {} {}", CurrentInfo.get(), strJson);
 				
 				List<TbCmd> lstTbCmd = new ObjectMapper().readValue(strJson, new TypeReference<List<TbCmd>>() {});
 				lstTbCmd.forEach(entry -> {
-					if (Flag.flag) log.info("KANG-20210406 >>>>> {} {}", CurrentInfo.get(), entry);
+					if (Boolean.TRUE) log.info("KANG-20210406 >>>>> {} {}", CurrentInfo.get(), entry);
 					this.tbCmdRepository.save(entry);
 				});
 			}

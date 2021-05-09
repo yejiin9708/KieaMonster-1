@@ -5,7 +5,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 import org.tain.utils.CurrentInfo;
-import org.tain.utils.Flag;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -17,7 +16,7 @@ public class LoadTablesTask {
 	public void startLoaderTask() throws Exception {
 		System.out.println("KANG-20210405 >>>>> Hello, Starting of LoadTablesTask.");
 		
-		if (Flag.flag) {
+		if (Boolean.TRUE) {
 		}
 	}
 	
@@ -28,18 +27,18 @@ public class LoadTablesTask {
 	// loaderTask
 	@Async(value = "async_0103")
 	public void async0103(String param) throws Exception {
-		log.info("KANG-20200721 >>>>> async_0101 START {} {}", param, CurrentInfo.get());
+		log.info("KANG-20200721 >>>>> async_0103 START {} {}", param, CurrentInfo.get());
 	
-		if (Flag.flag) {
-			if (Flag.flag) jobForTbOrgLoad();
-			if (Flag.flag) jobForTbGrpLoad();
-			if (Flag.flag) jobForTbSvrLoad();
-			if (Flag.flag) jobForTbCmdLoad();
-			if (Flag.flag) jobForTbResultLoad();
-			if (Flag.flag) jobForTbUserLoad();
+		if (Boolean.TRUE) {
+			if (Boolean.TRUE) jobForTbOrgLoad();
+			if (Boolean.TRUE) jobForTbGrpLoad();
+			if (Boolean.TRUE) jobForTbSvrLoad();
+			if (Boolean.TRUE) jobForTbCmdLoad();
+			if (Boolean.TRUE) jobForTbResultLoad();
+			if (Boolean.TRUE) jobForTbUserLoad();
 		}
 		
-		log.info("KANG-20200721 >>>>> async_0101 END   {} {}", param, CurrentInfo.get());
+		log.info("KANG-20200721 >>>>> async_0103 END   {} {}", param, CurrentInfo.get());
 	}
 	
 	///////////////////////////////////////////////////////////////////////////
@@ -52,7 +51,7 @@ public class LoadTablesTask {
 	private void jobForTbOrgLoad() throws Exception {
 		log.info("KANG-20210405 >>>>> {} {}", CurrentInfo.get());
 		
-		if (Flag.flag) this.tbOrgWorking.load();
+		if (Boolean.TRUE) this.tbOrgWorking.load();
 	}
 	
 	///////////////////////////////////////////////////////////////////////////
@@ -63,7 +62,7 @@ public class LoadTablesTask {
 	private void jobForTbGrpLoad() throws Exception {
 		log.info("KANG-20210405 >>>>> {} {}", CurrentInfo.get());
 		
-		if (Flag.flag) this.tbGrpWorking.load();
+		if (Boolean.TRUE) this.tbGrpWorking.load();
 	}
 	
 	///////////////////////////////////////////////////////////////////////////
@@ -74,7 +73,7 @@ public class LoadTablesTask {
 	private void jobForTbSvrLoad() throws Exception {
 		log.info("KANG-20210405 >>>>> {} {}", CurrentInfo.get());
 		
-		if (Flag.flag) this.tbSvrWorking.load();
+		if (Boolean.TRUE) this.tbSvrWorking.load();
 	}
 	
 	///////////////////////////////////////////////////////////////////////////
@@ -85,7 +84,7 @@ public class LoadTablesTask {
 	private void jobForTbCmdLoad() throws Exception {
 		log.info("KANG-20210405 >>>>> {} {}", CurrentInfo.get());
 		
-		if (Flag.flag) this.tbCmdWorking.load();
+		if (Boolean.TRUE) this.tbCmdWorking.load();
 	}
 	
 	///////////////////////////////////////////////////////////////////////////
@@ -96,7 +95,7 @@ public class LoadTablesTask {
 	private void jobForTbResultLoad() throws Exception {
 		log.info("KANG-20210405 >>>>> {} {}", CurrentInfo.get());
 		
-		if (Flag.flag) this.tbResultWorking.load();
+		if (Boolean.TRUE) this.tbResultWorking.load();
 	}
 	
 	///////////////////////////////////////////////////////////////////////////
@@ -107,6 +106,6 @@ public class LoadTablesTask {
 	private void jobForTbUserLoad() throws Exception {
 		log.info("KANG-20210405 >>>>> {} {}", CurrentInfo.get());
 		
-		if (Flag.flag) this.tbUserWorking.load();
+		if (Boolean.TRUE) this.tbUserWorking.load();
 	}
 }

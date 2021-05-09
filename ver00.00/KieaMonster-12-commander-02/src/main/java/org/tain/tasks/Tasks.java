@@ -7,7 +7,6 @@ import org.tain.tasks.loadTables.LoadTablesTask;
 import org.tain.tasks.recvResult.RecvResultTask;
 import org.tain.tasks.sendResult.SendResultTask;
 import org.tain.utils.CurrentInfo;
-import org.tain.utils.Flag;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -30,11 +29,11 @@ public class Tasks {
 	public void startTask() throws Exception {
 		log.info("KANG-20210405 >>>>> START {} {}", CurrentInfo.get());
 		
-		if (Flag.flag) this.loadTablesTask.async0103("TASK-0103");
+		if (Boolean.TRUE) this.loadTablesTask.async0103("TASK-0103");
 		
-		if (Flag.flag) this.sendResultTask.async0102("TASK-0102");
+		if (Boolean.TRUE) this.sendResultTask.async0102("TASK-0102");
 		
-		if (Flag.flag) this.recvResultTask.async0101("TASK-0101");
+		if (Boolean.TRUE) this.recvResultTask.async0101("TASK-0101");
 		
 		log.info("KANG-20210405 >>>>> END   {} {}", CurrentInfo.get());
 	}

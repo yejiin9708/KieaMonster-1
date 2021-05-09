@@ -9,7 +9,6 @@ import org.tain.db.repository.TbResultRepository;
 import org.tain.tasks.sendResult.SendResultTask;
 import org.tain.tools.queue.MonQueue;
 import org.tain.utils.CurrentInfo;
-import org.tain.utils.Flag;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -23,7 +22,7 @@ public class RecvResultTask {
 	public void startRecvResultTask() throws Exception {
 		System.out.println("KANG-20210405 >>>>> Hello, Starting of RecvResultTask.");
 		
-		if (Flag.flag) {
+		if (Boolean.TRUE) {
 		}
 	}
 	
@@ -56,14 +55,14 @@ public class RecvResultTask {
 	public void async0101(String param) throws Exception {
 		log.info("KANG-20200721 >>>>> async_0101 START {} {}", param, CurrentInfo.get());
 	
-		if (Flag.flag) {
+		if (Boolean.TRUE) {
 			while (true) {
 				// get result from the queueLoadResult
 				String msg = (String) this.getQueue();
 				System.out.println(">>>>> 1. async " + param + ": " + msg);
 				
 				//////////////////////////////////////////////
-				if (Flag.flag) {
+				if (Boolean.TRUE) {
 					// load result to tbResult
 					// table insert
 					TbResult result = new ObjectMapper().readValue(msg, TbResult.class);
