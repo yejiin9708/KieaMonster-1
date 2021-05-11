@@ -91,10 +91,12 @@
 	var code = svrCode + "-" + cmdCode;
 	console.log(">>>>> code = " + code);
 	
+	var wsUri = /*[[${wsUri}]]*/ 'wsUri';
+	console.log(">>>>> wsUri = " + wsUri);
 	//var wsUri = document.getElementById("textWsUri").value;
 	//var result = document.getElementById("result");
 	
-	var ws = new WebSocket("ws://localhost:8093/v0.1/websocket");
+	var ws = new WebSocket(wsUri);
 	ws.onopen = function(event) {
 		console.log("* Server connect...");
 		var jsonData = JSON.stringify({

@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.tain.db.domain.TbCmd;
 import org.tain.db.service.TbCmdService;
+import org.tain.tools.properties.ProjEnvUrlProperties;
 import org.tain.utils.CurrentInfo;
 
 import lombok.extern.slf4j.Slf4j;
@@ -19,8 +20,8 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class ApisController {
 
-	//@Autowired
-	//private ProjEnvUrlProperties projEnvUrlProperties;
+	@Autowired
+	private ProjEnvUrlProperties projEnvUrlProperties;
 	
 	@Autowired
 	private TbCmdService tbCmdService;
@@ -43,6 +44,7 @@ public class ApisController {
 		TbCmd tbCmd = this.tbCmdService.getOne(id);
 		log.info("KANG-20200730 >>>>> tbCmd: {}", tbCmd);
 		model.addAttribute("cmd", tbCmd);
+		model.addAttribute("wsUri", this.projEnvUrlProperties.getWsUri());
 		//model.addAttribute("urlOnline", this.projEnvUrlProperties.getOnline());
 		//model.addAttribute("urlMapper", this.projEnvUrlProperties.getMapper());
 		//model.addAttribute("urlLns01", this.projEnvUrlProperties.getLns01());

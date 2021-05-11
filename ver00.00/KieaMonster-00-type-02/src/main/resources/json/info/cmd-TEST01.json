@@ -5,7 +5,7 @@
 		"cmdDesc": "ping google.com",
 		"cmdPeriod": 0,
 		"cmdType": "CMD_SEQUENCE",
-		"cmdArr": "   ping     google.com  -i 5  "
+		"cmdArr": "   ping     google.com  -i 3  "
 	},{
 		"cmdCode": "disk",
 		"cmdName": "disk space",

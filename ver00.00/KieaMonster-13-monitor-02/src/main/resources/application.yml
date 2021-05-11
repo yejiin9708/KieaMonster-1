@@ -93,7 +93,7 @@ spring:
 # 
 logging:
   file:
-    path: logs/commander/
+    path: logs/monitor/
     max-size: 10MB
     max-history: 30         # delete after a month
   pattern:
