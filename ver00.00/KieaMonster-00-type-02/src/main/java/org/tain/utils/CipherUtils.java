@@ -19,7 +19,7 @@ import javax.crypto.Cipher;
 import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
 
-public class CypherUtils {
+public class CipherUtils {
 
 	/*
 	 * 1024비트 RSA 키쌍을 생성합니다.
