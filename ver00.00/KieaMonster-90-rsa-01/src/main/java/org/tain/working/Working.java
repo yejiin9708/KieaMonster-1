@@ -3,7 +3,7 @@ package org.tain.working;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.tain.utils.CurrentInfo;
-import org.tain.working.rsatest.RsaTestWorking;
+import org.tain.working.rsatest.RSATestWorking;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -16,7 +16,7 @@ public class Working {
 	///////////////////////////////////////////////////////////////////////////
 	
 	@Autowired
-	private RsaTestWorking rsaTestWorking;
+	private RSATestWorking rsaTestWorking;
 	
 	public void work() throws Exception {
 		log.info("KANG-20210510 >>>>> {} {}", CurrentInfo.get());

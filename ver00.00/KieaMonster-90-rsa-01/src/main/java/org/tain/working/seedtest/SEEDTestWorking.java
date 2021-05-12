@@ -7,7 +7,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Component
 @Slf4j
-public class SeedTestWorking {
+public class SEEDTestWorking {
 
 	public void test00() throws Exception {
 		log.info("KANG-20210510 >>>>> {} {}", CurrentInfo.get());

@@ -22,7 +22,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Component
 @Slf4j
-public class RsaTestWorking {
+public class RSATestWorking {
 
 	/*
 	 *  [ test00 ]
