@@ -7,7 +7,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Base64;
 
-public class Base64Working {
+public class Base64Main {
 
 	// 직인 파일
 	private final static String SEND_STAMP_IMG_NAME = "stamp.jpg";
@@ -21,16 +21,18 @@ public class Base64Working {
 	 * @throws Exception
 	 */
 	public static void main(String[] args) throws Exception {
-		Base64Working sample = new Base64Working();
-		sample.start();
+		Base64Main sample = new Base64Main();
+		if (!Boolean.TRUE) sample.start1();
+		if (Boolean.TRUE) sample.start2();
 	}
 
+	///////////////////////////////////////////////////////////////////////////
 	/**
 	 * 샘플
 	 * @version 2016. 4. 20.
 	 * @throws Exception
 	 */
-	public void start() throws Exception {
+	public void start1() throws Exception {
 		System.out.println("[금융거래정보 직인정보 송수신 예제 START]");
 
 		// 직인 이미지 파일 읽음
@@ -112,4 +114,65 @@ public class Base64Working {
 
 		return result;
 	}
+	
+	///////////////////////////////////////////////////////////////////////////
+	//
+	@SuppressWarnings("unused")
+	public void start2() throws Exception {
+		System.out.println("[간단 예제 START]");
+
+		// Data-0
+		byte[] pbData0 = {(byte)0x08, (byte)0x09, (byte)0x0A, (byte)0x0B, (byte)0x0C, (byte)0x0D, (byte)0x0E, (byte)0x0F,
+						(byte)0x08, (byte)0x09, (byte)0x0A, (byte)0x0B, (byte)0x0C, (byte)0x0D, (byte)0x0E, (byte)0x0F,
+						(byte)0x08, (byte)0x09, (byte)0x0A, (byte)0x0B, (byte)0x0C, (byte)0x0D, (byte)0x0E, (byte)0x0F,
+						(byte)0x00, (byte)0x00, (byte)0x00, (byte)0x00, (byte)0x00, (byte)0x00, (byte)0x00, (byte)0x00};
+
+		// Data-1
+		byte[] pbData1 = {(byte)0x00, (byte)0x01};
+
+		// Data-2
+		byte[] pbData2 = {(byte)0xD7, (byte)0x6D, (byte)0x0D, (byte)0x18, (byte)0x32, (byte)0x7E, (byte)0xC5, (byte)0x62,
+						(byte)0xB1, (byte)0x5E, (byte)0x6B, (byte)0xC3, (byte)0x65, (byte)0xAC, (byte)0x0C, (byte)0x0F};
+
+		// Data-3
+		byte[] pbData3 = {(byte)0x00, (byte)0x01, (byte)0x02, (byte)0x03, (byte)0x04, (byte)0x05, (byte)0x06, (byte)0x07,
+						(byte)0x08, (byte)0x09, (byte)0x0A, (byte)0x0B, (byte)0x0C, (byte)0x0D, (byte)0x0E, (byte)0x0F,
+						(byte)0x00, (byte)0x01};
+
+		// Data-4
+		byte[] pbData4 = {(byte)0x00, (byte)0x01, (byte)0x02, (byte)0x03, (byte)0x04, (byte)0x05, (byte)0x06, (byte)0x07,
+						(byte)0x08, (byte)0x09, (byte)0x0A, (byte)0x0B, (byte)0x0C, (byte)0x0D, (byte)0x0E, (byte)0x0F};
+		
+		// 직인 이미지 파일 읽음
+		byte[] sendImg = pbData0;
+
+		// BASE64 인코딩
+		//byte[] b64SendImg = Base64.encodeBase64(sendImg);
+		byte[] b64SendImg = Base64.getEncoder().encode(sendImg);
+
+		if (Boolean.TRUE) {
+			System.out.println("송신 직인 이미지 size[" + sendImg.length + "] b64 size[" + b64SendImg.length + "]");
+			//System.out.println("[직인]");
+			//System.out.println(new String(sendImg) + "\n");
+			System.out.println("[직인(BASE64)]");
+			System.out.println(new String(b64SendImg) + "\n");
+		}
+
+		// 파일 수신
+		byte[] b64RecvImg = b64SendImg;
+
+		// BASE64 디코딩
+		byte[] recvImg = Base64.getDecoder().decode(b64RecvImg);
+
+		if (Boolean.TRUE) {
+			System.out.println("수신 직인 이미지 size[" + recvImg.length + "] b64 size[" + b64RecvImg.length + "]");
+			System.out.println("[직인(BASE64)]");
+			System.out.println(new String(b64RecvImg) + "\n");
+			//System.out.println("[직인]");
+			//System.out.println(new String(recvImg) + "\n");
+		}
+
+		System.out.println("[간단 예제 END]");
+	}
+
 }

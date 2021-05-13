@@ -31,7 +31,7 @@ import javax.crypto.NoSuchPaddingException;
  * @author 금융결제원 IT개발부 강성주(sonaki@kftc.or.kr)
  * @version 2016. 4. 28.
  */
-public class IFSEEDSample
+public class IFSEEDSampleMain
 {
 	private final static int PUB_KEY_SIZE = 2048;						// 공개키 알고리즘 키크기
 	private final static String PUB_ALGORITHM = "RSA";			// 공개키암호화 알고리즘 지정
@@ -64,7 +64,7 @@ public class IFSEEDSample
 	public static void main(String[] args)
 			throws Exception
 	{
-		IFSEEDSample sample = new IFSEEDSample();
+		IFSEEDSampleMain sample = new IFSEEDSampleMain();
 		sample.start();
 	}
 

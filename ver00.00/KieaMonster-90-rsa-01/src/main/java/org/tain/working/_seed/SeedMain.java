@@ -1,6 +1,6 @@
 package org.tain.working._seed;
 
-public class SeedWorking {
+public class SeedMain {
 
 	// DEFAULT : JAVA = BIG_ENDIAN
 	private static int ENDIAN = Common.BIG_ENDIAN;
@@ -891,11 +891,11 @@ public class SeedWorking {
 		System.out.print("[ Test SEED reference code CBC]\n");
 		System.out.print("\n");
 		
-		// OTK
+		// OTK: 사용자가 지정하는 입력키(16bytes), 암호화 대칭키
 		byte pbUserKey[]  = {(byte)0x88, (byte)0xE3, (byte)0x4F, (byte)0x8F, (byte)0x08, (byte)0x17, (byte)0x79, (byte)0xF1,
 							(byte)0xE9, (byte)0xF3, (byte)0x94, (byte)0x37, (byte)0x0A, (byte)0xD4, (byte)0x05, (byte)0x89};
 
-		// Data
+		// Data: 실제 암복호화 하는데 사용하는 문자열.
 		byte pbData[]	 = {(byte)0x08, (byte)0x09, (byte)0x0A, (byte)0x0B, (byte)0x0C, (byte)0x0D, (byte)0x0E, (byte)0x0F,
 							(byte)0x08, (byte)0x09, (byte)0x0A, (byte)0x0B, (byte)0x0C, (byte)0x0D, (byte)0x0E, (byte)0x0F,
 							(byte)0x08, (byte)0x09, (byte)0x0A, (byte)0x0B, (byte)0x0C, (byte)0x0D, (byte)0x0E, (byte)0x0F,
@@ -915,6 +915,7 @@ public class SeedWorking {
 		byte pbData3[]	 = {(byte)0x00, (byte)0x01, (byte)0x02, (byte)0x03, (byte)0x04, (byte)0x05, (byte)0x06, (byte)0x07,
 							(byte)0x08, (byte)0x09, (byte)0x0A, (byte)0x0B, (byte)0x0C, (byte)0x0D, (byte)0x0E, (byte)0x0F, (byte)0x00, (byte)0x01};
 
+		// 사용자가 지정하는 초기화 벡터(16bytes). CBC 대칭키.
 		byte bszIV[] = {(byte)0x026, (byte)0x08d, (byte)0x066, (byte)0x0a7, (byte)0x035, (byte)0x0a8, (byte)0x01a, (byte)0x081,
 						(byte)0x06f, (byte)0x0ba, (byte)0x0d9, (byte)0x0fa, (byte)0x036, (byte)0x016, (byte)0x025, (byte)0x001 };
 
