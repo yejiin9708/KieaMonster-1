@@ -22,7 +22,7 @@ import javax.crypto.NoSuchPaddingException;
 public class CipherUtils {
 
 	//private static int keySize = 1024;
-	private static int keySize = 2048;
+	private static int RSABIT_SIZE = 2048;
 	
 	/*
 	 * 1024비트 RSA 키쌍을 생성합니다.
@@ -31,7 +31,7 @@ public class CipherUtils {
 		SecureRandom secureRandom = new SecureRandom();
 		KeyPairGenerator gen;
 		gen = KeyPairGenerator.getInstance("RSA");
-		gen.initialize(keySize, secureRandom);
+		gen.initialize(RSABIT_SIZE, secureRandom);
 		KeyPair keyPair = gen.generateKeyPair();
 		return keyPair;
 	}
