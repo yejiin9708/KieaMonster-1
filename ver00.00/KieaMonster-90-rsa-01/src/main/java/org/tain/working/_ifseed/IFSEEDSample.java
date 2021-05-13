@@ -1,4 +1,4 @@
-package org.tain.working.ifseed;
+package org.tain.working._ifseed;
 
 import java.io.DataInputStream;
 import java.io.File;

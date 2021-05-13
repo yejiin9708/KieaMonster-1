@@ -1,4 +1,4 @@
-package org.tain.working.ifseed;
+package org.tain.working._ifseed;
 
 /**
  * @file KISA_SEED_CBC.java

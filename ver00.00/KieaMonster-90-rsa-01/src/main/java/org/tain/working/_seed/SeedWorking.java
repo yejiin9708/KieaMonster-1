@@ -1,4 +1,4 @@
-package org.tain.working.seed;
+package org.tain.working._seed;
 
 public class SeedWorking {
 
@@ -887,6 +887,10 @@ public class SeedWorking {
 	///////////////////////////////////////////////////////////////////////////
 	
 	public static void main(String[] args) {
+		System.out.print("\n");
+		System.out.print("[ Test SEED reference code CBC]\n");
+		System.out.print("\n");
+		
 		// OTK
 		byte pbUserKey[]  = {(byte)0x88, (byte)0xE3, (byte)0x4F, (byte)0x8F, (byte)0x08, (byte)0x17, (byte)0x79, (byte)0xF1,
 							(byte)0xE9, (byte)0xF3, (byte)0x94, (byte)0x37, (byte)0x0A, (byte)0xD4, (byte)0x05, (byte)0x89};
@@ -917,43 +921,52 @@ public class SeedWorking {
 		int PLAINTEXT_LENGTH = 14;
 		int CIPHERTEXT_LENGTH = 16;
 
-		System.out.print("\n");
-		System.out.print("[ Test SEED reference code CBC]"+"\n");
-		System.out.print("\n\n");
-
 		System.out.print("[ Test Encrypt mode : 방법 1 ]"+"\n");
-		System.out.print("Key(OTK)\t\t\t: ");
-		for (int i=0; i < 16; i++)
-			System.out.print(Integer.toHexString(0xff&pbUserKey[i]) + " ");
-		System.out.print("\n");
 		
-		System.out.print("Plaintext\t\t\t: ");
-		for (int i=0; i < PLAINTEXT_LENGTH; i++)
-			System.out.print(Integer.toHexString(0xff&pbData[i]) + " ");
-		System.out.print("\n");
-		System.out.println("pbData size:" + pbData.length);
+		if (Boolean.TRUE) {
+			System.out.print("Key(OTK)\t\t\t: ");
+			for (int i=0; i < 16; i++)
+				System.out.print(Integer.toHexString(0xff & pbUserKey[i]) + " ");
+			System.out.print("\n");
+		}
+		
+		if (Boolean.TRUE) {
+			System.out.print("Plaintext\t\t\t: ");
+			for (int i=0; i < PLAINTEXT_LENGTH; i++)
+				System.out.print(Integer.toHexString(0xff & pbData[i]) + " ");
+			System.out.print("\n");
+			System.out.println("pbData size:" + pbData.length);
+		}
 
-		String strPbData = new String(pbData);
-		System.out.println("strPbData:" + strPbData + " size:" + strPbData.length());
+		if (Boolean.TRUE) {
+			String strPbData = new String(pbData);
+			System.out.println("strPbData:" + strPbData + " size:" + strPbData.length());
+		}
 
 		byte[] defaultCipherText = SEED_CBC_Encrypt(pbUserKey, bszIV, pbData, 0, 32);
 		System.out.println("defaultCipherText size:" + defaultCipherText.length);
 		byte[] PPPPP = SEED_CBC_Decrypt(pbUserKey, bszIV, defaultCipherText, 0, CIPHERTEXT_LENGTH);
 
-		System.out.print("\nIV\t\t\t\t: ");
-		for (int i=0; i < 16; i++)
-			System.out.print(Integer.toHexString(0xff&bszIV[i]) + " ");
-		System.out.print("\n");
+		if (Boolean.TRUE) {
+			System.out.print("\nIV\t\t\t\t: ");
+			for (int i=0; i < 16; i++)
+				System.out.print(Integer.toHexString(0xff & bszIV[i]) + " ");
+			System.out.print("\n");
+		}
 
-		System.out.print("Ciphertext(SEED_CBC_Encrypt)\t: ");
-		for (int i=0; i < CIPHERTEXT_LENGTH; i++)
-			System.out.print(Integer.toHexString(0xff&defaultCipherText[i])+" ");
-		System.out.print("\n");
+		if (Boolean.TRUE) {
+			System.out.print("Ciphertext(SEED_CBC_Encrypt)\t: ");
+			for (int i=0; i < CIPHERTEXT_LENGTH; i++)
+				System.out.print(Integer.toHexString(0xff & defaultCipherText[i]) + " ");
+			System.out.print("\n");
+		}
 
-		System.out.print("Plaintext(SEED_CBC_Decrypt)\t: ");
-		for (int i=0; i < PLAINTEXT_LENGTH; i++)
-			System.out.print(Integer.toHexString(0xff&PPPPP[i]) + " ");
-		System.out.print("\n\n");
+		if (Boolean.TRUE) {
+			System.out.print("Plaintext(SEED_CBC_Decrypt)\t: ");
+			for (int i=0; i < PLAINTEXT_LENGTH; i++)
+				System.out.print(Integer.toHexString(0xff & PPPPP[i]) + " ");
+			System.out.print("\n\n");
+		}
 
 		byte[] Cipher1 = SEED_CBC_Encrypt(pbUserKey, bszIV, pbData1,0, 2);
 		byte[] Plain1 = SEED_CBC_Decrypt(pbUserKey, bszIV, Cipher1, 0, 16);
@@ -970,20 +983,20 @@ public class SeedWorking {
 
 		System.out.print("Plaintext(SEED_CBC_Decrypt1)\t: ");
 		for (int i=0; i < 2; i++)
-			System.out.print(Integer.toHexString(0xff&Plain1[i]) + " ");
+			System.out.print(Integer.toHexString(0xff & Plain1[i]) + " ");
 		System.out.print("\n\n");
 
-		byte[] Cipher2 = SEED_CBC_Encrypt(pbUserKey, bszIV, pbData2,0, 16);
-		byte[] Plain2 = SEED_CBC_Decrypt(pbUserKey, bszIV, Cipher2, 0, 32);
+		byte[] Cipher2 = SEED_CBC_Encrypt(pbUserKey, bszIV, pbData2, 0, 16);
+		byte[] Plain2  = SEED_CBC_Decrypt(pbUserKey, bszIV, Cipher2, 0, 32);
 
 		System.out.print("IV\t\t\t\t: ");
 		for (int i=0; i < 16; i++)
-			System.out.print(Integer.toHexString(0xff&bszIV[i]) + " ");
+			System.out.print(Integer.toHexString(0xff & bszIV[i]) + " ");
 		System.out.print("\n\n");
 
 		System.out.print("Ciphertext(SEED_CBC_Encrypt)\t: ");
 		for (int i=0; i < 32; i++)
-			System.out.print(Integer.toHexString(0xff&Cipher2[i]) + " ");
+			System.out.print(Integer.toHexString(0xff & Cipher2[i]) + " ");
 		System.out.print("\n");
 
 		System.out.print("Plaintext(SEED_CBC_Decrypt)\t: ");
