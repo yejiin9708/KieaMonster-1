@@ -21,15 +21,17 @@ import javax.crypto.NoSuchPaddingException;
 
 public class CipherUtils {
 
+	//private static int keySize = 1024;
+	private static int keySize = 2048;
+	
 	/*
 	 * 1024비트 RSA 키쌍을 생성합니다.
 	 */
-	public static KeyPair getRSAKeyPair() throws NoSuchAlgorithmException {
+	public static KeyPair generateRSAKeyPair() throws NoSuchAlgorithmException {
 		SecureRandom secureRandom = new SecureRandom();
 		KeyPairGenerator gen;
 		gen = KeyPairGenerator.getInstance("RSA");
-		// RSA-1024
-		gen.initialize(1024, secureRandom);
+		gen.initialize(keySize, secureRandom);
 		KeyPair keyPair = gen.generateKeyPair();
 		return keyPair;
 	}
