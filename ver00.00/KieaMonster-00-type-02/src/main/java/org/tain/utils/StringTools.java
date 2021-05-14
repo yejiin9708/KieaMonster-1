@@ -1,11 +1,14 @@
 package org.tain.utils;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -124,6 +127,16 @@ public class StringTools {
 				if (pw != null) try { pw.close(); } catch (Exception e) {}
 			}
 		}
+	}
+	
+	// KANG-20210515
+	public static byte[] bytesFromFile(String filePath) throws Exception {
+		return Files.readAllBytes(new File(filePath).toPath());
+	}
+	
+	// KANG-20210515
+	public static void bytesToFile(byte[] bData, String filePath) throws Exception {
+		Files.write(Paths.get(filePath), bData);
 	}
 	
 	///////////////////////////////////////////////////////////////////////////
