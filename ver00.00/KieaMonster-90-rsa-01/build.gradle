@@ -19,6 +19,8 @@ repositories {
 }
 
 dependencies {
+	implementation 'commons-codec:commons-codec:1.15'
+	
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
 	

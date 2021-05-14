@@ -7,6 +7,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Base64;
 
+import org.tain.utils.StringTools;
+
 public class Base64Main {
 
 	// 직인 파일
@@ -126,25 +128,30 @@ public class Base64Main {
 						(byte)0x08, (byte)0x09, (byte)0x0A, (byte)0x0B, (byte)0x0C, (byte)0x0D, (byte)0x0E, (byte)0x0F,
 						(byte)0x08, (byte)0x09, (byte)0x0A, (byte)0x0B, (byte)0x0C, (byte)0x0D, (byte)0x0E, (byte)0x0F,
 						(byte)0x00, (byte)0x00, (byte)0x00, (byte)0x00, (byte)0x00, (byte)0x00, (byte)0x00, (byte)0x00};
-
+		if (Boolean.TRUE) StringTools.printHex(pbData0);
+		
 		// Data-1
 		byte[] pbData1 = {(byte)0x00, (byte)0x01};
+		if (Boolean.TRUE) StringTools.printHex(pbData1);
 
 		// Data-2
 		byte[] pbData2 = {(byte)0xD7, (byte)0x6D, (byte)0x0D, (byte)0x18, (byte)0x32, (byte)0x7E, (byte)0xC5, (byte)0x62,
 						(byte)0xB1, (byte)0x5E, (byte)0x6B, (byte)0xC3, (byte)0x65, (byte)0xAC, (byte)0x0C, (byte)0x0F};
+		if (Boolean.TRUE) StringTools.printHex(pbData2);
 
 		// Data-3
 		byte[] pbData3 = {(byte)0x00, (byte)0x01, (byte)0x02, (byte)0x03, (byte)0x04, (byte)0x05, (byte)0x06, (byte)0x07,
 						(byte)0x08, (byte)0x09, (byte)0x0A, (byte)0x0B, (byte)0x0C, (byte)0x0D, (byte)0x0E, (byte)0x0F,
 						(byte)0x00, (byte)0x01};
+		if (Boolean.TRUE) StringTools.printHex(pbData3);
 
 		// Data-4
 		byte[] pbData4 = {(byte)0x00, (byte)0x01, (byte)0x02, (byte)0x03, (byte)0x04, (byte)0x05, (byte)0x06, (byte)0x07,
 						(byte)0x08, (byte)0x09, (byte)0x0A, (byte)0x0B, (byte)0x0C, (byte)0x0D, (byte)0x0E, (byte)0x0F};
+		if (Boolean.TRUE) StringTools.printHex(pbData4);
 		
 		// 직인 이미지 파일 읽음
-		byte[] sendImg = pbData0;
+		byte[] sendImg = pbData2;
 
 		// BASE64 인코딩
 		//byte[] b64SendImg = Base64.encodeBase64(sendImg);
@@ -154,8 +161,9 @@ public class Base64Main {
 			System.out.println("송신 직인 이미지 size[" + sendImg.length + "] b64 size[" + b64SendImg.length + "]");
 			//System.out.println("[직인]");
 			//System.out.println(new String(sendImg) + "\n");
-			System.out.println("[직인(BASE64)]");
-			System.out.println(new String(b64SendImg) + "\n");
+			StringTools.printHex(sendImg);
+			System.out.println("[직인(BASE64)]: " + new String(b64SendImg));
+			StringTools.printHex(b64SendImg);
 		}
 
 		// 파일 수신
@@ -166,13 +174,12 @@ public class Base64Main {
 
 		if (Boolean.TRUE) {
 			System.out.println("수신 직인 이미지 size[" + recvImg.length + "] b64 size[" + b64RecvImg.length + "]");
-			System.out.println("[직인(BASE64)]");
-			System.out.println(new String(b64RecvImg) + "\n");
+			System.out.println("[직인(BASE64)]: " + new String(b64RecvImg));
+			StringTools.printHex(recvImg);
 			//System.out.println("[직인]");
 			//System.out.println(new String(recvImg) + "\n");
 		}
 
 		System.out.println("[간단 예제 END]");
 	}
-
 }
