@@ -116,7 +116,7 @@
 					<li class="dropdown">
 						<a class="dropdown-toggle" data-toggle="dropdown" href="#">SERVER<span class="caret"></span></a>
 						<ul class="dropdown-menu" th:each="svr : ${lstSvr}">
-							<li><a th:href="@{/cmd/testCmdForm}"><span class="glyphicon glyphicon-list-all"></span>&nbsp;<div th:text="${svr.svrCode}"/></a></li>
+							<li><a th:href="@{/cmd/testCmdForm}"><span class="glyphicon glyphicon-list-all"></span>&nbsp;<span th:text="${svr.svrCode}"></span>></a></li>
 						</ul>
 					</li>
 					<li class="dropdown">
