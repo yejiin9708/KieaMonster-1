@@ -31,14 +31,59 @@
 <!-- main -->
 <div class="container">
 	<div class="page-header">
-		<h2>Detail</h2>
+		<h2>testCmdForm: Test Command</h2>
 	</div>
 	<br/>
-	<!-- input id="cmd_id" type="hidden" class="hide" th:value="${cmd.id}"/ -->
 	<table class="table">
 		<tr>
-			<th style="padding:13px 0 0 15px;">id</th>
-			<td><input type="text" class="col-md-1 form-control input-sm" readonly="readonly" th:value="${cmd.id}"/></td>
+			<th style="padding:13px 0 0 15px;">svrCode</th>
+			<td><input type="text" class="col-md-1 form-control input-sm" readonly="readonly"/></td>
+		</tr>
+		<tr>
+			<th style="padding:13px 0 0 15px;">cmd</th>
+			<td><input type="text" class="col-md-1 form-control input-sm" readonly="readonly"/></td>
+		</tr>
+		<tr>
+			<th style="padding:13px 0 0 15px;">cmdLoop</th>
+			<td><input type="text" class="col-md-1 form-control input-sm" readonly="readonly"/></td>
+		</tr>
+		<tr>
+			<th style="padding:13px 0 0 15px;">Print Direction</th>
+			<td><input type="text" class="col-md-1 form-control input-sm" readonly="readonly"/></td>
+		</tr>
+		<tr>
+			<th class="col-sm-2">Command</th>
+			<td class="col-sm-10">
+				<div class="form-group">
+					<label for="svrCode">svrCode: </label>
+					<select id="svrCode" name="svrCode">
+						<option th:each="svrCode : ${lstSvrCode}" th:value="${svrCode}" th:text="${svrCode}" th:selected="${svrCode=='TEST01'}"></option>
+					</select>
+					&nbsp;&nbsp;&nbsp;&nbsp;
+					<label for="cmd">cmd: </label>
+					<input id="cmd" type="text" size="70"/>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<th style="padding:13px 0 0 15px;">Options</th>
+			<td>
+				<div class="form-group">
+					<label for="cmdLoop">cmdLoop: </label>
+					<select id="cmdLoop" name="cmdLoop">
+						<option th:each="cmdLoop : ${lstCmdLoop}" th:value="${cmdLoop}" th:text="${cmdLoop}"></option>
+					</select>
+					&nbsp;&nbsp;&nbsp;&nbsp;
+					<label for="prtDir">Print Direction: </label>
+					<select id="prtDir" name="lstPrtDir">
+						<option th:each="prtDir : ${lstPrtDir}" th:value="${prtDir}" th:text="${prtDir}"></option>
+					</select>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<th style="padding:13px 0 10px 15px;"><button type="button" class="btn btn-primary" id="send">Send</button></th>
+			<td>&nbsp;</td>
 		</tr>
 		<tr>
 			<th style="padding:13px 0 0 15px;">result</th>
@@ -76,20 +121,22 @@
 	if (true) console.log(">>>>> _contextPath_ = " + _contextPath_);
 	var urlOnline = /*[[${urlOnline}]]*/ 'default';
 	console.log(">>>>> urlOnline = " + urlOnline);
-	
-	var wsUri = /*[[${wsUri}]]*/ 'wsUri';
-	console.log(">>>>> wsUri = " + wsUri);
-	
-	var svrCode = /*[[${cmd.svrCode}]]*/ 'svrCode';
-	var cmdCode = /*[[${cmd.cmdCode}]]*/ 'cmdCode';
-	var code = svrCode + "-" + cmdCode;
-	console.log(">>>>> code = " + code);
 </script>
 <!-- /script: variables -->
 
 
 <!-- script: websocket -->
 <script th:inline="javascript">
+	var svrCode = /*[[${cmd.svrCode}]]*/ 'svrCode';
+	var cmdCode = /*[[${cmd.cmdCode}]]*/ 'cmdCode';
+	var code = svrCode + "-" + cmdCode;
+	console.log(">>>>> code = " + code);
+	
+	var wsUri = /*[[${wsUri}]]*/ 'wsUri';
+	console.log(">>>>> wsUri = " + wsUri);
+	//var wsUri = document.getElementById("textWsUri").value;
+	//var result = document.getElementById("result");
+	
 	var ws = new WebSocket(wsUri);
 	ws.onopen = function(event) {
 		console.log("* Server connect...");

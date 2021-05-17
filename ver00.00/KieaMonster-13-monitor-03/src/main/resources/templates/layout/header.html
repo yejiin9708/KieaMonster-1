@@ -113,20 +113,27 @@
 				<!-- navbar menu -->
 				<ul class="nav navbar-nav navbar-left">
 					<li><a data-target="#modalSelfInfo" data-toggle="modal" href="#" onclick="alert('Hanwha-Monster for monitoring systems...');">MyInfo</a></li>
-					<li class="hide dropdown">
-						<a class="dropdown-toggle" data-toggle="dropdown" href="#">Customer<span class="caret"></span></a>
-						<ul class="dropdown-menu">
-							<li><a href="#"><span class="glyphicon glyphicon-list-all"></span>&nbsp;Info</a></li>
-							<li><a href="#"><span class="glyphicon glyphicon-list-all"></span>&nbsp;Role</a></li>
-							<li class="divider"></li>
-							<li><a href="#"><span class="glyphicon glyphicon-list-all"></span>&nbsp;Order</a></li>
+					<li class="dropdown">
+						<a class="dropdown-toggle" data-toggle="dropdown" href="#">SERVER<span class="caret"></span></a>
+						<ul class="dropdown-menu" th:each="svr : ${lstSvr}">
+							<li><a th:href="@{/cmd/testCmdForm}"><span class="glyphicon glyphicon-list-all"></span>&nbsp;<div th:text="${svr.svrCode}"/></a></li>
 						</ul>
 					</li>
-					<li class="hide dropdown">
-						<a class="dropdown-toggle" data-toggle="dropdown" href="#">Order<span class="caret"></span></a>
+					<li class="dropdown">
+						<a class="dropdown-toggle" data-toggle="dropdown" href="#">FORM<span class="caret"></span></a>
 						<ul class="dropdown-menu">
-							<li><a href="#"><span class="glyphicon glyphicon-list-all"></span>&nbsp;List</a></li>
-							<li><a href="#"><span class="glyphicon glyphicon-list-all"></span>&nbsp;Result</a></li>
+							<li class="_hide"><a th:href="@{/cmd/testCmdForm}"><span class="glyphicon glyphicon-list-all"></span>&nbsp;testCmdForm</a></li>
+							<li class="hide"><a href="#"><span class="glyphicon glyphicon-list-all"></span>&nbsp;_Role</a></li>
+							<li class="hide divider"></li>
+							<li class="hide"><a href="#"><span class="glyphicon glyphicon-list-all"></span>&nbsp;_Order</a></li>
+						</ul>
+					</li>
+					<li class="dropdown">
+						<a class="dropdown-toggle" data-toggle="dropdown" href="#">INTEGRATE<span class="caret"></span></a>
+						<ul class="dropdown-menu">
+							<li class="_hide"><a th:href="@{/cmd/testCmdIntegrate}"><span class="glyphicon glyphicon-list-all"></span>&nbsp;testCmdIntegrate</a></li>
+							<li class="hide"><a href="#"><span class="glyphicon glyphicon-list-all"></span>&nbsp;_List</a></li>
+							<li class="hide"><a href="#"><span class="glyphicon glyphicon-list-all"></span>&nbsp;_Result</a></li>
 						</ul>
 					</li>
 					<li class="hide"><a href="/sample05/">Statistic</a></li>

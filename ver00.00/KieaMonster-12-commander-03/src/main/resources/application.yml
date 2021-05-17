@@ -126,7 +126,7 @@ proj-env:
     version: ver 1.1_2021.04.01
     comment: This is Monster API project.
     char-set: utf-8
-    test-flag: true
+    # test-flag: true
     svr-code: COMMANDER
   param:
     name: PARAM (default)

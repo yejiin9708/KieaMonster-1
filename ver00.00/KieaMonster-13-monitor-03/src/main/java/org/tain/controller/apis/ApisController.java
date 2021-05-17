@@ -1,5 +1,9 @@
 package org.tain.controller.apis;
 
+import java.util.Arrays;
+import java.util.LinkedHashMap;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -44,6 +48,60 @@ public class ApisController {
 		model.addAttribute("cmd", tbCmd);
 		model.addAttribute("wsUri", this.projEnvUrlProperties.getWsUri());
 		return "web/cmd/form";
+	}
+	
+	@RequestMapping(value = {"/testCmdForm"}, method = {RequestMethod.GET, RequestMethod.POST})
+	public String testCmdForm(Model model) {
+		log.info("KANG-20200730 >>>>> {} {}", CurrentInfo.get());
+		
+		String[] lstSvrCode = new String[] { "TEST01", "TEST02", "TEST03", "TEST04", "TEST05", "TEST06", "TEST07" };
+		log.info("KANG-20200730 >>>>> lstSvrCode: {}", Arrays.deepToString(lstSvrCode));
+		
+		//String[] lstCmdLoop = new String[] { "keep(noLoop)", "loopSec(5sec)", "loopSec(10sec)", "loopSec(30sec)", "loopSec(60sec)" };
+		Map<String,String> mapCmdLoop = new LinkedHashMap<>();
+		mapCmdLoop.put("0",  "keep(no Loop)");
+		mapCmdLoop.put("5",  "loopSec(5 sec)");
+		mapCmdLoop.put("10", "loopSec(10 sec)");
+		mapCmdLoop.put("30", "loopSec(30 sec)");
+		mapCmdLoop.put("60", "loopSec(60 sec)");
+		log.info("KANG-20200730 >>>>> mapCmdLoop: {}", mapCmdLoop);
+		
+		String[] lstPrtDir = new String[] { "prepend", "exchange", "append" };
+		log.info("KANG-20200730 >>>>> lstPrtDir: {}", Arrays.deepToString(lstPrtDir));
+		
+		model.addAttribute("lstSvrCode", lstSvrCode);
+		model.addAttribute("mapCmdLoop", mapCmdLoop);
+		model.addAttribute("lstPrtDir", lstPrtDir);
+		model.addAttribute("wsUri", this.projEnvUrlProperties.getWsUri());
+		
+		return "web/cmd/testCmdForm";
+	}
+	
+	@RequestMapping(value = {"/testCmdIntegrate"}, method = {RequestMethod.GET, RequestMethod.POST})
+	public String testCmdIntegrate(Model model) {
+		log.info("KANG-20200730 >>>>> {} {}", CurrentInfo.get());
+		
+		String[] lstSvrCode = new String[] { "TEST01", "TEST02", "TEST03", "TEST04", "TEST05", "TEST06", "TEST07" };
+		log.info("KANG-20200730 >>>>> lstSvrCode: {}", Arrays.deepToString(lstSvrCode));
+		
+		//String[] lstCmdLoop = new String[] { "keep(noLoop)", "loopSec(5sec)", "loopSec(10sec)", "loopSec(30sec)", "loopSec(60sec)" };
+		Map<String,String> mapCmdLoop = new LinkedHashMap<>();
+		mapCmdLoop.put("0",  "keep(no Loop)");
+		mapCmdLoop.put("5",  "loopSec(5 sec)");
+		mapCmdLoop.put("10", "loopSec(10 sec)");
+		mapCmdLoop.put("30", "loopSec(30 sec)");
+		mapCmdLoop.put("60", "loopSec(60 sec)");
+		log.info("KANG-20200730 >>>>> mapCmdLoop: {}", mapCmdLoop);
+		
+		String[] lstPrtDir = new String[] { "prepend", "exchange", "append" };
+		log.info("KANG-20200730 >>>>> lstPrtDir: {}", Arrays.deepToString(lstPrtDir));
+		
+		model.addAttribute("lstSvrCode", lstSvrCode);
+		model.addAttribute("mapCmdLoop", mapCmdLoop);
+		model.addAttribute("lstPrtDir", lstPrtDir);
+		model.addAttribute("wsUri", this.projEnvUrlProperties.getWsUri());
+		
+		return "web/cmd/testCmdIntegrate";
 	}
 	
 	/*
