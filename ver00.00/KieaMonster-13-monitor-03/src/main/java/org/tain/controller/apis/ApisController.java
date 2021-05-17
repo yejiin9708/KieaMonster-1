@@ -40,6 +40,7 @@ public class ApisController {
 		log.info("KANG-20200730 >>>>> {} {}", CurrentInfo.get());
 		TbCmd tbCmd = this.tbCmdService.getOne(id);
 		log.info("KANG-20200730 >>>>> tbCmd: {}", tbCmd);
+		log.info("KANG-20200730 >>>>> wsUri: {}", this.projEnvUrlProperties.getWsUri());
 		model.addAttribute("cmd", tbCmd);
 		model.addAttribute("wsUri", this.projEnvUrlProperties.getWsUri());
 		return "web/cmd/form";
