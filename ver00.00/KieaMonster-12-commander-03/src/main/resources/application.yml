@@ -126,8 +126,8 @@ proj-env:
     version: ver 1.1_2021.04.01
     comment: This is Monster API project.
     char-set: utf-8
-    # test-flag: true
-    # svr-code: TEST01
+    test-flag: true
+    svr-code: COMMANDER
   param:
     name: PARAM (default)
   job:
@@ -174,18 +174,10 @@ spring:
 proj-env:
   param:
     name: PARAM (pro)
-    home: /Users/kangmac
-    base: /KANG/monster/20210320
-    info-path: /json/info
-    data-path: /json/data
   job:
     name: JOB (pro)
   json:
     name: JSON (pro)
-    org-info-file: org.json
-    grp-info-file: grp.json
-    svr-info-file: svr.json
-    cmd-info-file: cmd-*.json
   url:
     name: URL (pro)
 
@@ -216,18 +208,10 @@ spring:
 proj-env:
   param:
     name: PARAM (dfep)
-    home: /hw01/ibridge
-    base: /KANG/monster/20210320
-    info-path: /json/info
-    data-path: /json/data
   job:
     name: JOB (dfep)
   json:
     name: JSON (dfep)
-    org-info-file: org.json
-    grp-info-file: grp.json
-    svr-info-file: svr.json
-    cmd-info-file: cmd-*.json
   url:
     name: URL (dfep)
 
