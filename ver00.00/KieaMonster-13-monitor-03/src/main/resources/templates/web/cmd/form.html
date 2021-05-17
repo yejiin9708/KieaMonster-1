@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="utf-8">
+	<title>form.html</title>
+	<!-- css and script -->
+	<th:block th:replace="layout/css::css1"></th:block>
+	<th:block th:replace="layout/script::script1"></th:block>
+	<!-- /css and script -->
+	<!--
+		font-family:Verdana, Arial, Helvetica, sans-serif;
+		font-family: inherit;
+		font-size: inherit;
+	-->
+	<style>
+	#result {
+		resize: vertical;
+	}
+	textarea {
+		font-family: monospace, "맑은 고딕", serif;
+		font-size: 11px;
+		color: #999999;
+	}
+	</style>
+</head>
+<body>
+<!-- header -->
+<div th:replace="layout/header::header1"></div>
+<!-- /header -->
+
+<!-- main -->
+<div class="container">
+	<div class="page-header">
+		<h2>Detail</h2>
+	</div>
+	<br/>
+	<!-- input id="cmd_id" type="hidden" class="hide" th:value="${cmd.id}"/ -->
+	<table class="table">
+		<tr>
+			<th style="padding:13px 0 0 15px;">id</th>
+			<td><input type="text" class="col-md-1 form-control input-sm" readonly="readonly" th:value="${cmd.id}"/></td>
+		</tr>
+		<tr>
+			<th style="padding:13px 0 0 15px;">result</th>
+			<td><textarea id="result" class="col-md-1 form-control input-sm" rows="15"></textarea></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td></td>
+		</tr>
+	</table>
+	<div class="pull-left">
+		<a th:href="@{/cmd/list}" class="btn btn-primary">list</a>
+		<!-- button id="btnModal" type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">TEST</button -->
+	</div>
+	<!--
+	<div class="pull-right">
+		<button th:if="!${cmd?.id}" type="button" class="btn btn-primary" id="insert1">save1</button>
+		<button th:if="${cmd?.id}" type="button" class="btn btn-primary" id="insert2">save2</button>
+		<button th:if="${cmd?.id}" type="button" class="btn btn-info" id="update">update</button>
+		<button th:if="${cmd?.id}" type="button" class="btn btn-danger" id="delete">delete</button>
+	</div>
+	-->
+</div>
+<!-- /main -->
+<br/><br/><br/>
+
+<!-- footer -->
+<div th:replace="layout/footer::footer1"></div>
+<!-- /footer -->
+
+</body>
+
+<!-- script: variables -->
+<script th:inline="javascript">
+	if (true) console.log(">>>>> _contextPath_ = " + _contextPath_);
+	var urlOnline = /*[[${urlOnline}]]*/ 'default';
+	console.log(">>>>> urlOnline = " + urlOnline);
+	var urlMapper = /*[[${urlMapper}]]*/ 'default';
+	console.log(">>>>> urlMapper = " + urlMapper);
+	var urlSbs01 = /*[[${urlSbs01}]]*/ 'default';
+	console.log(">>>>> urlSbs01 = " + urlSbs01);
+</script>
+<!-- /script: variables -->
+
+
+<!-- script: websocket -->
+<script th:inline="javascript">
+	var svrCode = /*[[${cmd.svrCode}]]*/ 'svrCode';
+	var cmdCode = /*[[${cmd.cmdCode}]]*/ 'cmdCode';
+	var code = svrCode + "-" + cmdCode;
+	console.log(">>>>> code = " + code);
+	
+	var wsUri = /*[[${wsUri}]]*/ 'wsUri';
+	console.log(">>>>> wsUri = " + wsUri);
+	//var wsUri = document.getElementById("textWsUri").value;
+	//var result = document.getElementById("result");
+	
+	var ws = new WebSocket(wsUri);
+	ws.onopen = function(event) {
+		console.log("* Server connect...");
+		var jsonData = JSON.stringify({
+			msgCode: "CMD_AUTH",
+			userId: "KANG",
+			groupCd: "DEV",
+			rollCd: "ADMIN",
+			sections: code
+		});
+		sendMessage(jsonData);
+	};
+	ws.onclose = function(event) {
+		console.log("* Server Disconnect...");
+	};
+	ws.onerror = function(event) {
+		console.log("* error...");
+	};
+	ws.onmessage = function(event) {
+		//console.log("> " + event.data);
+		var json = JSON.parse(event.data);
+		//console.log(json.cmdType + " > " + json.cmdResult);
+		if (json.cmdType == "CMD_NORMAL") {
+			$("#result").val(json.cmdResult);
+		} else if (json.cmdType == "CMD_SEQUENCE"){
+			$("#result").prepend(json.cmdResult);
+		} else {
+			$("#result").append(json.cmdResult);
+		}
+	};
+	function sendMessage(message) {
+		ws.send(message);
+	}
+	function disconnect() {
+		ws.close();
+	}
+</script>
+<!-- script: websocket -->
+
+
+
+<script>
+</script>
+
+
+
+
+
+
+</html>
