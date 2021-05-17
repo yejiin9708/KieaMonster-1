@@ -6,13 +6,12 @@ import org.springframework.stereotype.Component;
 import lombok.Data;
 
 @Component
-@ConfigurationProperties(prefix = "proj-env.url")
+@ConfigurationProperties(prefix = "proj-env.job")
 @Data
-public class ProjEnvUrlProperties {
+public class ProjEnvJobProperties {
 
 	private String name;  // default
 	
-	private String wsUri;
 	
 	private String dummy;  // null
 }

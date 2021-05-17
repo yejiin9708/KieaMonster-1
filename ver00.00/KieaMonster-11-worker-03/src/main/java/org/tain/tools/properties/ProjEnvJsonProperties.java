@@ -6,13 +6,17 @@ import org.springframework.stereotype.Component;
 import lombok.Data;
 
 @Component
-@ConfigurationProperties(prefix = "proj-env.url")
+@ConfigurationProperties(prefix = "proj-env.json")
 @Data
-public class ProjEnvUrlProperties {
+public class ProjEnvJsonProperties {
 
 	private String name;  // default
 	
-	private String wsUri;
+	private String orgInfoFile;
+	private String grpInfoFile;
+	private String svrInfoFile;
+	private String cmdInfoFile;
+	private String userInfoFile;
 	
 	private String dummy;  // null
 }
