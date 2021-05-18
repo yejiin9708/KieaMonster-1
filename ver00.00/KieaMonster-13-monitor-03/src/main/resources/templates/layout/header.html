@@ -112,23 +112,42 @@
 			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 				<!-- navbar menu -->
 				<ul class="nav navbar-nav navbar-left">
-					<li><a data-target="#modalSelfInfo" data-toggle="modal" href="#" onclick="alert('Hanwha-Monster for monitoring systems...');">MyInfo</a></li>
+					<li><a data-target="#modalSelfInfo" data-toggle="modal" href="#" onclick="alert('Hanwha-Monster (Version 1.0 2021.05.15) for monitoring systems... ');">MyInfo</a></li>
+					<!-- dropdown of menu 'GROUP' -->
 					<li class="dropdown">
-						<a class="dropdown-toggle" data-toggle="dropdown" href="#">SERVER<span class="caret"></span></a>
-						<ul class="dropdown-menu" th:each="svr : ${lstSvr}">
-							<li><a th:href="@{/cmd/testCmdForm}"><span class="glyphicon glyphicon-list-all"></span>&nbsp;<span th:text="${svr.svrCode}"></span>></a></li>
+						<a class="dropdown-toggle" data-toggle="dropdown" href="#">GROUP<span class="caret"></span></a>
+						<ul class="dropdown-menu">
+							<th:block th:each="grp : ${lstGrp}">
+								<li><a th:href="@{/cmd/list}">
+									<span class="glyphicon glyphicon-list-all"></span>&nbsp;<span th:utext="${grp.grpCode + '(' + grp.grpName + ')'}"></span>
+								</a></li>
+							</th:block>
 						</ul>
 					</li>
+					<!-- dropdown of menu 'SERVER' -->
 					<li class="dropdown">
-						<a class="dropdown-toggle" data-toggle="dropdown" href="#">FORM<span class="caret"></span></a>
+						<a class="dropdown-toggle" data-toggle="dropdown" href="#">SERVER<span class="caret"></span></a>
 						<ul class="dropdown-menu">
-							<li class="_hide"><a th:href="@{/cmd/testCmdForm}"><span class="glyphicon glyphicon-list-all"></span>&nbsp;testCmdForm</a></li>
+							<th:block th:each="svr : ${lstSvr}">
+								<li><a th:href="@{/cmd/list}">
+									<span class="glyphicon glyphicon-list-all"></span>&nbsp;<span th:utext="${svr.grpCode + '-' + svr.svrCode + '(' + svr.svrName + ')'}"></span>
+								</a></li>
+							</th:block>
+						</ul>
+					</li>
+					<!-- dropdown of menu 'CMDS' -->
+					<li class="dropdown">
+						<a class="dropdown-toggle" data-toggle="dropdown" href="#">COMMAND (test)<span class="caret"></span></a>
+						<ul class="dropdown-menu">
+							<li class="_hide"><a th:href="@{/cmd/testCmdForm}"><span class="glyphicon glyphicon-list-all"></span>&nbsp;Test Command</a></li>
+							<li class="_hide"><a th:href="@{/cmd/testCmdIntegrate}"><span class="glyphicon glyphicon-list-all"></span>&nbsp;Test Group Command</a></li>
 							<li class="hide"><a href="#"><span class="glyphicon glyphicon-list-all"></span>&nbsp;_Role</a></li>
 							<li class="hide divider"></li>
 							<li class="hide"><a href="#"><span class="glyphicon glyphicon-list-all"></span>&nbsp;_Order</a></li>
 						</ul>
 					</li>
-					<li class="dropdown">
+					<!-- dropdown of menu 'INTEGRATE' -->
+					<li class="hide dropdown">
 						<a class="dropdown-toggle" data-toggle="dropdown" href="#">INTEGRATE<span class="caret"></span></a>
 						<ul class="dropdown-menu">
 							<li class="_hide"><a th:href="@{/cmd/testCmdIntegrate}"><span class="glyphicon glyphicon-list-all"></span>&nbsp;testCmdIntegrate</a></li>
@@ -141,6 +160,18 @@
 			</div>
 		</div>
 	</nav>
+	
+<!-- ############################################################################ -->
+<!-- script: init variables -->
+<script th:inline="javascript">
+	if (true) console.log(">>>>> _contextPath_ = " + _contextPath_);
+	var lstGrp = /*[[${lstGrp}]]*/ 'default';
+	console.log(">>>>> lstGrp: ", lstGrp);
+	var lstSvr = /*[[${lstSvr}]]*/ 'default';
+	console.log(">>>>> lstSvr: ", lstSvr);
+</script>
+<!-- /script: variables -->
+
 </div>
 <!-- /header4 -->
 

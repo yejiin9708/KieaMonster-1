@@ -33,20 +33,30 @@ public class ApisController {
 	@RequestMapping(value = {"/list"}, method = {RequestMethod.GET, RequestMethod.POST})
 	public String list(Pageable pageable, Model model) {
 		log.info("KANG-20200730 >>>>> {} {}", CurrentInfo.get());
-		Page<TbCmd> pageTbCmd = this.tbCmdService.listAll(pageable);
-		log.info("KANG-20200730 >>>>> pageTbCmd: {}", pageTbCmd);
-		model.addAttribute("cmdList", pageTbCmd);
+		
+		if (Boolean.TRUE) {
+			Page<TbCmd> pageTbCmd = this.tbCmdService.listAll(pageable);
+			log.info("KANG-20200730 >>>>> pageTbCmd: {}", pageTbCmd);
+			model.addAttribute("cmdList", pageTbCmd);
+		}
+		
 		return "web/cmd/list";
 	}
 	
 	@RequestMapping(value = {"/form"}, method = {RequestMethod.GET, RequestMethod.POST})
 	public String form(@RequestParam(value = "id", defaultValue = "0") Long id, Model model) {
 		log.info("KANG-20200730 >>>>> {} {}", CurrentInfo.get());
-		TbCmd tbCmd = this.tbCmdService.getOne(id);
-		log.info("KANG-20200730 >>>>> tbCmd: {}", tbCmd);
-		log.info("KANG-20200730 >>>>> wsUri: {}", this.projEnvUrlProperties.getWsUri());
-		model.addAttribute("cmd", tbCmd);
-		model.addAttribute("wsUri", this.projEnvUrlProperties.getWsUri());
+		
+		if (Boolean.TRUE) {
+			model.addAttribute("wsUri", this.projEnvUrlProperties.getWsUri());
+		}
+		if (Boolean.TRUE) {
+			TbCmd tbCmd = this.tbCmdService.getOne(id);
+			log.info("KANG-20200730 >>>>> tbCmd: {}", tbCmd);
+			log.info("KANG-20200730 >>>>> wsUri: {}", this.projEnvUrlProperties.getWsUri());
+			model.addAttribute("cmd", tbCmd);
+		}
+		
 		return "web/cmd/form";
 	}
 	
@@ -54,25 +64,33 @@ public class ApisController {
 	public String testCmdForm(Model model) {
 		log.info("KANG-20200730 >>>>> {} {}", CurrentInfo.get());
 		
-		String[] lstSvrCode = new String[] { "TEST01", "TEST02", "TEST03", "TEST04", "TEST05", "TEST06", "TEST07" };
-		log.info("KANG-20200730 >>>>> lstSvrCode: {}", Arrays.deepToString(lstSvrCode));
+		if (Boolean.TRUE) {
+			model.addAttribute("wsUri", this.projEnvUrlProperties.getWsUri());
+		}
 		
-		//String[] lstCmdLoop = new String[] { "keep(noLoop)", "loopSec(5sec)", "loopSec(10sec)", "loopSec(30sec)", "loopSec(60sec)" };
-		Map<String,String> mapCmdLoop = new LinkedHashMap<>();
-		mapCmdLoop.put("0",  "keep(no Loop)");
-		mapCmdLoop.put("5",  "loopSec(5 sec)");
-		mapCmdLoop.put("10", "loopSec(10 sec)");
-		mapCmdLoop.put("30", "loopSec(30 sec)");
-		mapCmdLoop.put("60", "loopSec(60 sec)");
-		log.info("KANG-20200730 >>>>> mapCmdLoop: {}", mapCmdLoop);
+		if (Boolean.TRUE) {
+			String[] lstSvrCode = new String[] { "TEST01", "TEST02", "TEST03", "TEST04", "TEST05", "TEST06", "TEST07" };
+			log.info("KANG-20200730 >>>>> lstSvrCode: {}", Arrays.deepToString(lstSvrCode));
+			model.addAttribute("lstSvrCode", lstSvrCode);
+		}
 		
-		String[] lstPrtDir = new String[] { "prepend", "exchange", "append" };
-		log.info("KANG-20200730 >>>>> lstPrtDir: {}", Arrays.deepToString(lstPrtDir));
+		if (Boolean.TRUE) {
+			//String[] lstCmdLoop = new String[] { "keep(noLoop)", "loopSec(5sec)", "loopSec(10sec)", "loopSec(30sec)", "loopSec(60sec)" };
+			Map<String,String> mapCmdLoop = new LinkedHashMap<>();
+			mapCmdLoop.put("0",  "keep(no Loop)");
+			mapCmdLoop.put("5",  "loopSec(5 sec)");
+			mapCmdLoop.put("10", "loopSec(10 sec)");
+			mapCmdLoop.put("30", "loopSec(30 sec)");
+			mapCmdLoop.put("60", "loopSec(60 sec)");
+			log.info("KANG-20200730 >>>>> mapCmdLoop: {}", mapCmdLoop);
+			model.addAttribute("mapCmdLoop", mapCmdLoop);
+		}
 		
-		model.addAttribute("lstSvrCode", lstSvrCode);
-		model.addAttribute("mapCmdLoop", mapCmdLoop);
-		model.addAttribute("lstPrtDir", lstPrtDir);
-		model.addAttribute("wsUri", this.projEnvUrlProperties.getWsUri());
+		if (Boolean.TRUE) {
+			String[] lstPrtDir = new String[] { "prepend", "exchange", "append" };
+			log.info("KANG-20200730 >>>>> lstPrtDir: {}", Arrays.deepToString(lstPrtDir));
+			model.addAttribute("lstPrtDir", lstPrtDir);
+		}
 		
 		return "web/cmd/testCmdForm";
 	}
@@ -81,25 +99,33 @@ public class ApisController {
 	public String testCmdIntegrate(Model model) {
 		log.info("KANG-20200730 >>>>> {} {}", CurrentInfo.get());
 		
-		String[] lstSvrCode = new String[] { "TEST01", "TEST02", "TEST03", "TEST04", "TEST05", "TEST06", "TEST07" };
-		log.info("KANG-20200730 >>>>> lstSvrCode: {}", Arrays.deepToString(lstSvrCode));
+		if (Boolean.TRUE) {
+			model.addAttribute("wsUri", this.projEnvUrlProperties.getWsUri());
+		}
 		
-		//String[] lstCmdLoop = new String[] { "keep(noLoop)", "loopSec(5sec)", "loopSec(10sec)", "loopSec(30sec)", "loopSec(60sec)" };
-		Map<String,String> mapCmdLoop = new LinkedHashMap<>();
-		mapCmdLoop.put("0",  "keep(no Loop)");
-		mapCmdLoop.put("5",  "loopSec(5 sec)");
-		mapCmdLoop.put("10", "loopSec(10 sec)");
-		mapCmdLoop.put("30", "loopSec(30 sec)");
-		mapCmdLoop.put("60", "loopSec(60 sec)");
-		log.info("KANG-20200730 >>>>> mapCmdLoop: {}", mapCmdLoop);
+		if (Boolean.TRUE) {
+			String[] lstSvrCode = new String[] { "TEST01", "TEST02", "TEST03", "TEST04", "TEST05", "TEST06", "TEST07" };
+			log.info("KANG-20200730 >>>>> lstSvrCode: {}", Arrays.deepToString(lstSvrCode));
+			model.addAttribute("lstSvrCode", lstSvrCode);
+		}
 		
-		String[] lstPrtDir = new String[] { "prepend", "exchange", "append" };
-		log.info("KANG-20200730 >>>>> lstPrtDir: {}", Arrays.deepToString(lstPrtDir));
+		if (Boolean.TRUE) {
+			//String[] lstCmdLoop = new String[] { "keep(noLoop)", "loopSec(5sec)", "loopSec(10sec)", "loopSec(30sec)", "loopSec(60sec)" };
+			Map<String,String> mapCmdLoop = new LinkedHashMap<>();
+			mapCmdLoop.put("0",  "keep(no Loop)");
+			mapCmdLoop.put("5",  "loopSec(5 sec)");
+			mapCmdLoop.put("10", "loopSec(10 sec)");
+			mapCmdLoop.put("30", "loopSec(30 sec)");
+			mapCmdLoop.put("60", "loopSec(60 sec)");
+			log.info("KANG-20200730 >>>>> mapCmdLoop: {}", mapCmdLoop);
+			model.addAttribute("mapCmdLoop", mapCmdLoop);
+		}
 		
-		model.addAttribute("lstSvrCode", lstSvrCode);
-		model.addAttribute("mapCmdLoop", mapCmdLoop);
-		model.addAttribute("lstPrtDir", lstPrtDir);
-		model.addAttribute("wsUri", this.projEnvUrlProperties.getWsUri());
+		if (Boolean.TRUE) {
+			String[] lstPrtDir = new String[] { "prepend", "exchange", "append" };
+			log.info("KANG-20200730 >>>>> lstPrtDir: {}", Arrays.deepToString(lstPrtDir));
+			model.addAttribute("lstPrtDir", lstPrtDir);
+		}
 		
 		return "web/cmd/testCmdIntegrate";
 	}

@@ -4,10 +4,27 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping(value = {"/rest/apis"})
+@RequestMapping(value = {"/rest"})
 //@Slf4j
 public class ApisRestController {
 
+	/*
+	@Autowired
+	private QueryRepository queryRepository;
+	
+	@RequestMapping(value = {"/cmds/list"}, method = {RequestMethod.GET, RequestMethod.POST})
+	public ResponseEntity<?> list(HttpEntity<String> httpEntity) throws Exception {
+		log.info("KANG-20200730 >>>>> {} {}", CurrentInfo.get());
+		
+		List<CmdTree> list = this.queryRepository.findAllCmds();
+		
+		MultiValueMap<String,String> headers = new LinkedMultiValueMap<>();
+		headers.add(HttpHeaders.CONTENT_TYPE, "application/json; charset=UTF-8");
+		
+		return new ResponseEntity<>(list, headers, HttpStatus.OK);
+	}
+	*/
+	
 	/*
 	@Autowired
 	private ApisRepository apisRepository;
