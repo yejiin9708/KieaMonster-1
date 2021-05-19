@@ -31,11 +31,11 @@
 					<tr>
 						<th class="col-md-1">id</th>
 						<th class="col-md-3">CODE</th>
-						<th class="col-md-3">Command</th>
+						<th class="col-md-4">Command</th>
 						<!-- th class="col-md-4">Desc</th -->
 						<th class="col-md-1">Period</th>
 						<th class="col-md-1">Status</th>
-						<th class="col-md-3">Button</th>
+						<th class="col-md-2">Button</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -49,9 +49,11 @@
 							[실행중]
 						</td>
 						<td>
-							<button type="button" style="padding: 1px;" class="btn btn-primary btn-sm" id="run">Run</button>
-							<button type="button" style="padding: 1px;" class="btn btn-primary btn-sm" id="kill">Kill</button>
-							<button type="button" style="padding: 1px;" class="btn btn-primary btn-sm" id="info">Info</button>
+							<div class="pull-left">
+								<button type="button" style="padding:2px;" class="btn btn-primary btn-sm" id="run">Run</button>
+								<button type="button" style="padding:2px;" class="btn btn-danger  btn-sm" id="kill">Kill</button>
+								<button type="button" style="padding:2px;" class="btn btn-outline-danger btn-sm" id="info">Info</button>
+							</div>
 						</td>
 						<!-- td><a th:href="@{'/'+${apis.mapping}+'Form'(id=${apis.id})}" th:text="${apis.name}">Name</a></td -->
 					</tr>
