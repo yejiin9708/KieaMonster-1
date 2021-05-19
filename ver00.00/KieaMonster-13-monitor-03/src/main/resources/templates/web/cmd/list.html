@@ -30,10 +30,12 @@
 				<thead>
 					<tr>
 						<th class="col-md-1">id</th>
-						<th class="col-md-2">CODE</th>
-						<th class="col-md-2">Command</th>
-						<th class="col-md-6">Desc</th>
-						<th class="col-md-1">period</th>
+						<th class="col-md-3">CODE</th>
+						<th class="col-md-3">Command</th>
+						<!-- th class="col-md-4">Desc</th -->
+						<th class="col-md-1">Period</th>
+						<th class="col-md-1">Status</th>
+						<th class="col-md-3">Button</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -41,8 +43,16 @@
 						<td th:text="${cmd.id}">#</td>
 						<td><a th:href="@{'/cmd/form'(id=${cmd.id})}" th:text="${cmd.svrCode}+'-'+${cmd.cmdCode}">CODE</a></td>
 						<td th:text="${cmd.cmdArr}">cmdArr</td>
-						<td th:text="${cmd.cmdDesc}">cmdDesc</td>
+						<!-- td th:text="${cmd.cmdDesc}">cmdDesc</td -->
 						<td th:text="${cmd.cmdPeriod}">cmdPeriod</td>
+						<td>
+							[실행중]
+						</td>
+						<td>
+							<button type="button" style="padding: 1px;" class="btn btn-primary btn-sm" id="run">Run</button>
+							<button type="button" style="padding: 1px;" class="btn btn-primary btn-sm" id="kill">Kill</button>
+							<button type="button" style="padding: 1px;" class="btn btn-primary btn-sm" id="info">Info</button>
+						</td>
 						<!-- td><a th:href="@{'/'+${apis.mapping}+'Form'(id=${apis.id})}" th:text="${apis.name}">Name</a></td -->
 					</tr>
 				</tbody>

@@ -74,7 +74,7 @@
 			</td>
 		</tr>
 		<tr>
-			<th style="padding:13px 0 10px 15px;"><button type="button" class="btn btn-primary form-control" id="btnSend">Send</button></th>
+			<th style="padding:13px 0 10px 15px;"><button type="button" class="btn btn-primary form-control" id="btnSend">Run</button></th>
 			<td>&nbsp;</td>
 		</tr>
 		<tr>
@@ -82,15 +82,20 @@
 			<td><textarea id="result" class="col-md-1 form-control input-sm" rows="15"></textarea></td>
 		</tr>
 		<tr>
-			<th style="padding:13px 0 10px 15px;"><button type="button" class="btn btn-danger form-control" id="btnSend">Register</button></th>
-			<td>&nbsp;</td>
+			<th style="padding:13px 0 10px 15px;"><button type="button" class="btn btn-danger form-control" id="btnSend">Kill</button></th>
+			<td>
+				<div class="pull-right">
+					<button type="button" class="btn btn-primary" id="register">Register</button>
+					<button type="button" class="btn btn-primary" id="list">List</button>
+				</div>
+			</td>
 		</tr>
 		<tr>
 			<td></td>
 			<td></td>
 		</tr>
 	</table>
-	<div class="pull-left">
+	<div class="hide pull-left">
 		<a th:href="@{/cmd/list}" class="btn btn-primary">list</a>
 		<!-- button id="btnModal" type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">TEST</button -->
 	</div>
