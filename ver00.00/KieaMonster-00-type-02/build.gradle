@@ -43,5 +43,6 @@ dependencies {
 }
 
 test {
+	exclude '**/*'    // gradle build --exclude-task test
 	useJUnitPlatform()
 }
