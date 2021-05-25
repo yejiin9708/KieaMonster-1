@@ -23,12 +23,14 @@ public class MybatisConfig {
 	
 	@Bean
 	public SqlSessionFactory sqlSessionFactory(DataSource dataSource) throws Exception {
-		final SqlSessionFactoryBean sessionFactory = new SqlSessionFactoryBean();
+		final SqlSessionFactoryBean sqlSessionFactoryBean = new SqlSessionFactoryBean();
 		PathMatchingResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
-		sessionFactory.setDataSource(dataSource);
-		sessionFactory.setMapperLocations(resolver.getResources("classpath:mappers/**/*Mapper.xml"));
-		sessionFactory.setConfigLocation(resolver.getResource("classpath:mappers/mybatis-config.xml"));
-		sessionFactory.getObject().getConfiguration().setMapUnderscoreToCamelCase(true);
-		return sessionFactory.getObject();
+		sqlSessionFactoryBean.setDataSource(dataSource);
+		sqlSessionFactoryBean.setMapperLocations(resolver.getResources("classpath:mappers/**/*Mapper.xml"));
+		sqlSessionFactoryBean.setConfigLocation(resolver.getResource("classpath:mappers/mybatis_config.xml"));
+		sqlSessionFactoryBean.setTypeAliasesPackage("org.tain.models");
+		sqlSessionFactoryBean.getObject().getConfiguration().setMapUnderscoreToCamelCase(true);
+		sqlSessionFactoryBean.getObject().getConfiguration().setCacheEnabled(true);
+		return sqlSessionFactoryBean.getObject();
 	}
 }

@@ -78,7 +78,7 @@ spring:
 
 
 
-mybatis:
+#mybatis:
   # mybatis config
   #config-location: classpath:mappers/mybatis_config.xml
   # mapper-config.xml 위치 지정
@@ -91,7 +91,7 @@ mybatis:
     #default-executor-type: reuse
     #default-statement-timeout: 3000
   # package alias
-  type-aliases-package: org.tain.models
+  #type-aliases-package: org.tain.models
 # mapper log level
 logging.level.org.tain.mappers: TRACE
 

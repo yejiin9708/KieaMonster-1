@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.tain.mappers.UserMapper">
+
+	<!-- select: selectAllUsers -->
+	<select id="selectAllUsers" resultType="User">
+	<![CDATA[
+		select
+			id
+			, group_cd
+			, user_id
+			, pass_wd
+			, roll_cd
+		from
+			tb_user
+	]]>
+	<if test='id != null and id != ""'>
+	<![CDATA[
+		where 1=1
+			and id = #{id}
+	]]>
+	</if>
+	</select>
+	
+	<!--  -->
+</mapper>
