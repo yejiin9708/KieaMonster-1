@@ -74,7 +74,7 @@ public class KieaMonster10Mybatis01Application implements CommandLineRunner {
 			System.out.println(">>>>> now2: " + now2);
 		}
 		
-		if (!Boolean.TRUE) {
+		if (Boolean.TRUE) {
 			System.exit(0);
 		}
 	}

@@ -5,7 +5,9 @@
 <mapper namespace="org.tain.mappers.TimeMapper">
 
 	<select id="getTimeXML" resultType="string">
+	<![CDATA[
 		select now() as now2
+	]]>
 	</select>
 	
 </mapper>

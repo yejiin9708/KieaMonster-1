@@ -40,6 +40,11 @@ spring:
     username: sa
     password:
     generate-unique-name: false
+    
+    schema: classpath:sql/schema.sql
+    data: classpath:sql/data.sql
+    separator: ;
+    sql-script-encoding: UTF-8
 #    hikari:
 #      maximum-pool-size: 10
 #      jdbc-url: jdbc:h2:tcp://localhost:9092/lightnetdb;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
@@ -78,11 +83,17 @@ spring:
 
 
 mybatis:
-  #config-location: classpath:mybatis-config.xml
+  # mybatis config
+  #config-location: classpath:mappers/mybatis-config.xml
   # mapper-config.xml 위치 지정
   mapper-locations: classpath:mappers/**/*Mapper.xml
   # model property camel case
-  configuration.map-underscore-to-camel-case: true
+  configuration:
+    map-underscore-to-camel-case: true
+    cache-enabled: true
+    use-generated-keys: true
+    default-executor-type: reuse
+    default-statement-timeout: 3000
   # package alias
   type-aliases-package: org.tain.models
 # mapper log level
