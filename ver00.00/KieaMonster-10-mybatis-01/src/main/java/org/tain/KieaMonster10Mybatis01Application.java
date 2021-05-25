@@ -1,6 +1,9 @@
 package org.tain;
 
+import java.sql.Connection;
 import java.util.List;
+
+import javax.sql.DataSource;
 
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +28,9 @@ public class KieaMonster10Mybatis01Application implements CommandLineRunner {
 	///////////////////////////////////////////////////////////////////////////
 	
 	@Autowired
+	private DataSource dataSource;
+	
+	@Autowired
 	private UserService userService;
 	
 	@Autowired
@@ -32,6 +38,14 @@ public class KieaMonster10Mybatis01Application implements CommandLineRunner {
 	
 	@Override
 	public void run(String... args) throws Exception {
+		if (Boolean.TRUE) {
+			Connection connection = this.dataSource.getConnection();
+			System.out.println(">>>>> driverName: " + connection.getMetaData().getDriverName());
+			System.out.println(">>>>> driverVersion: " + connection.getMetaData().getDriverVersion());
+			System.out.println(">>>>> url: " + connection.getMetaData().getURL());
+			System.out.println(">>>>> userName: " + connection.getMetaData().getUserName());
+		}
+		
 		if (Boolean.TRUE) {
 			List<User> lstUser = this.userService.getAllUsers();
 			System.out.println(">>>>> lstUser: " + lstUser);
@@ -45,6 +59,10 @@ public class KieaMonster10Mybatis01Application implements CommandLineRunner {
 		if (Boolean.TRUE) {
 			String now2 = this.timeService.getNow2();
 			System.out.println(">>>>> now2: " + now2);
+		}
+		
+		if (!Boolean.TRUE) {
+			System.exit(0);
 		}
 	}
 }
