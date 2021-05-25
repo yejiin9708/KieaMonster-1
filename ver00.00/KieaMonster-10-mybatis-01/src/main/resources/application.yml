@@ -39,7 +39,9 @@ spring:
     driverClassName: org.h2.Driver
     username: sa
     password:
+    generate-unique-name: false
 #    hikari:
+#      maximum-pool-size: 10
 #      jdbc-url: jdbc:h2:tcp://localhost:9092/lightnetdb;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
 #      # jdbc-url: jdbc:h2:tcp://localhost:9092/lightnetdb;MODE=Oracle;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
 #      # jdbc-url: jdbc:h2:mem:testdb
@@ -78,7 +80,7 @@ spring:
 mybatis:
   #config-location: classpath:mybatis-config.xml
   # mapper-config.xml 위치 지정
-  mapper-locations: classpath:mappers/**/*.xml
+  mapper-locations: classpath:mappers/**/*Mapper.xml
   # model property camel case
   configuration.map-underscore-to-camel-case: true
   # package alias

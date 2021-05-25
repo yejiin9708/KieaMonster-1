@@ -15,8 +15,12 @@ import org.tain.models.User;
 import org.tain.service.TimeService;
 import org.tain.service.UserService;
 
+// 고정 페키지 하위 폴더의 모든 파일을 매퍼로 한다.
 //@MapperScan("org.tain.mappers")
+
+// @Mapper 가 붙은 클래스를 스캔하여 매퍼 빈으로 등록한다.
 @MapperScan(basePackageClasses = KieaMonster10Mybatis01Application.class)
+
 @SpringBootApplication
 public class KieaMonster10Mybatis01Application implements CommandLineRunner {
 
@@ -44,6 +48,7 @@ public class KieaMonster10Mybatis01Application implements CommandLineRunner {
 	public void run(String... args) throws Exception {
 		if (Boolean.TRUE) {
 			Connection connection = this.dataSource.getConnection();
+			System.out.println(">>>>> dbcp: " + this.dataSource.getClass());
 			System.out.println(">>>>> driverName: " + connection.getMetaData().getDriverName());
 			System.out.println(">>>>> driverVersion: " + connection.getMetaData().getDriverVersion());
 			System.out.println(">>>>> url: " + connection.getMetaData().getURL());

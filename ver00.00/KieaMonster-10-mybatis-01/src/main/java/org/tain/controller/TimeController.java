@@ -1,5 +1,8 @@
 package org.tain.controller;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,6 +15,11 @@ public class TimeController {
 
 	@Autowired
 	private TimeService timeService;
+	
+	@GetMapping("/0")
+	public String now0() {
+		return LocalDateTime.now().format(DateTimeFormatter.ISO_LOCAL_DATE_TIME);
+	}
 	
 	@GetMapping("/1")
 	public String now1() {

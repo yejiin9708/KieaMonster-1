@@ -13,6 +13,10 @@
 			, roll_cd
 		from
 			tb_user
+		<if test='id != null and id != ""'>
+		where 1=1
+			and id = #{id}
+		</if>
 	</select>
 	
 </mapper>
