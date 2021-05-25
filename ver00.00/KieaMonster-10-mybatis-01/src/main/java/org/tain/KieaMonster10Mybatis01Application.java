@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.tain.models.User;
 import org.tain.service.TimeService;
 import org.tain.service.UserService;
@@ -31,6 +32,9 @@ public class KieaMonster10Mybatis01Application implements CommandLineRunner {
 	private DataSource dataSource;
 	
 	@Autowired
+	private JdbcTemplate jdbcTemplate;
+	
+	@Autowired
 	private UserService userService;
 	
 	@Autowired
@@ -44,6 +48,10 @@ public class KieaMonster10Mybatis01Application implements CommandLineRunner {
 			System.out.println(">>>>> driverVersion: " + connection.getMetaData().getDriverVersion());
 			System.out.println(">>>>> url: " + connection.getMetaData().getURL());
 			System.out.println(">>>>> userName: " + connection.getMetaData().getUserName());
+		}
+		
+		if (!Boolean.TRUE) {
+			this.jdbcTemplate.execute("insert into products (prod_name, prod_price) values ('hello', 12340)");
 		}
 		
 		if (Boolean.TRUE) {
