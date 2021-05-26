@@ -24,7 +24,7 @@ public class MybatisConfig {
 		final SqlSessionFactoryBean sqlSessionFactoryBean = new SqlSessionFactoryBean();
 		PathMatchingResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
 		sqlSessionFactoryBean.setDataSource(dataSource);
-		sqlSessionFactoryBean.setConfigLocation(resolver.getResource("classpath:mappers/mybatis_config.xml"));
+		sqlSessionFactoryBean.setConfigLocation(resolver.getResource("classpath:mappers/_mybatis_config.xml"));
 		sqlSessionFactoryBean.setMapperLocations(resolver.getResources("classpath:mappers/**/*Mapper.xml"));
 		sqlSessionFactoryBean.setTypeAliasesPackage("org.tain.models");
 		sqlSessionFactoryBean.getObject().getConfiguration().setMapUnderscoreToCamelCase(true);

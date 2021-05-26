@@ -11,4 +11,6 @@ public interface UserMapper {
 
 	@Transactional
 	List<User> selectAllUsers();
+	
+	List<User> selectAllUsers(Long id);
 }
