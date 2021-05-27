@@ -1,4 +1,4 @@
-package org.tain.config;
+package org.tain.mybatis.config;
 
 import javax.sql.DataSource;
 
