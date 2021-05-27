@@ -14,4 +14,6 @@ public class User {
 	private String groupCd;
 	
 	private String rollCd;
+	
+	private String content;
 }
