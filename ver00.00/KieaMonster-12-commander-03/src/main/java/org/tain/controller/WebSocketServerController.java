@@ -16,6 +16,9 @@ import org.springframework.stereotype.Controller;
 import org.tain.config.ws.CustomSpringConfigurator;
 import org.tain.tasks.parse.ParseTask;
 
+/*
+ * 1. {"svrCode":"TEST01","msgCode":"GET_CMDS"}
+ */
 @Controller
 @ServerEndpoint(value = "/websocket", configurator = CustomSpringConfigurator.class)
 public class WebSocketServerController {

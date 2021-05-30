@@ -10,6 +10,8 @@ import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
 import org.tain.controller.WebSocketServerController;
 import org.tain.db.domain.TbCmd;
+import org.tain.mybatis.mappers.CmdMapper;
+import org.tain.mybatis.models.Cmd;
 import org.tain.tools.node.MonJsonNode;
 import org.tain.tools.queue.MonQueueBox;
 import org.tain.utils.CurrentInfo;
@@ -75,14 +77,18 @@ public class ParseTask {
 	
 	///////////////////////////////////////////////////////////////////////////
 	
+	@Autowired
+	private CmdMapper cmdMapper;
+	
 	private void msg_GET_CMDS(Session session, MonJsonNode node) throws Exception {
 		if (Boolean.TRUE) {
 			MonJsonNode reqNode = node;
 			MonJsonNode resNode = reqNode.clone();
 			
 			String svrCode = reqNode.getText("svrCode");
-			List<TbCmd> lstCmds = null; // this.tbCmdService.listBySvrCode(svrCode);
-			MonJsonNode cmds = new MonJsonNode(MonJsonNode.getJson(lstCmds));
+			//List<Cmd> lstCmd = this.cmdMapper.selectAllCmd();
+			List<Cmd> lstCmd = this.cmdMapper.selectAllCmd(svrCode);
+			MonJsonNode cmds = new MonJsonNode(MonJsonNode.getJson(lstCmd));
 			
 			// set resNode
 			resNode.put("resResult", cmds);

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.tain.mybatis.mappers.CmdMapper">
+
+	<select id="selectAllCmd" resultType="Cmd">
+		select
+			id
+			, mst_type
+			, mst_code
+			, cmd_code
+			, cmd_name
+			, cmd_desc
+			, cmd_period
+			, cmd_type
+			, cmd_arr
+		from
+			tb_cmd
+		where 1=1
+	<if test='mstCode != null and mstCode != ""'>
+			and mst_code = #{mstCode}
+	</if>
+	</select>
+	
+</mapper>

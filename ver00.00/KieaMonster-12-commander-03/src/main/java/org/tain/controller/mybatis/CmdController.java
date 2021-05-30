@@ -17,21 +17,21 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
-import org.tain.mybatis.mappers.UsrMapper;
-import org.tain.mybatis.models.Usr;
+import org.tain.mybatis.mappers.CmdMapper;
+import org.tain.mybatis.models.Cmd;
 
 import lombok.extern.slf4j.Slf4j;
 
 @RestController
-@RequestMapping({"/usr"})
+@RequestMapping({"/cmd"})
 @Slf4j
-public class UserController {
+public class CmdController {
 
 	@Autowired
-	private UsrMapper usrMapper;
+	private CmdMapper cmdMapper;
 	
 	@GetMapping({"/list"})
-	public List<Usr> list() {
+	public List<Cmd> list() {
 		if (Boolean.TRUE) {
 			HttpServletRequest request = ((ServletRequestAttributes)RequestContextHolder.currentRequestAttributes()).getRequest();
 			String ip = request.getHeader("X-FORWARDED-FOR");
@@ -40,11 +40,11 @@ public class UserController {
 			log.info(">>>>> Client IP: " + ip);
 		}
 		
-		return this.usrMapper.selectAllUsr();
+		return this.cmdMapper.selectAllCmd();
 	}
 	
-	@GetMapping({"/list/{id}"})
-	public ResponseEntity<?> listById(@PathVariable("id") Long id, HttpEntity<String> httpEntity) {
+	@GetMapping({"/list/{mstCode}"})
+	public ResponseEntity<?> listById(@PathVariable("mstCode") String mstCode, HttpEntity<String> httpEntity) {
 		if (Boolean.TRUE) {
 			HttpHeaders headers = httpEntity.getHeaders();
 			String body = httpEntity.getBody();
@@ -62,10 +62,10 @@ public class UserController {
 			log.info(">>>>> Client IP: " + ip);
 		}
 		
-		List<Usr> list = null;
+		List<Cmd> list = null;
 		MultiValueMap<String,String> headers = null;
 		if (Boolean.TRUE) {
-			list = this.usrMapper.selectAllUsr(id);
+			list = this.cmdMapper.selectAllCmd(mstCode);
 			
 			headers = new LinkedMultiValueMap<>();
 			headers.add(HttpHeaders.CONTENT_TYPE, "application/json; charset=UTF-8");
