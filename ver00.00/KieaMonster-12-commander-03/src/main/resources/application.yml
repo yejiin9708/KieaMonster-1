@@ -147,7 +147,7 @@ spring:
 proj-env:
   param:
     name: PARAM (air)
-    home: /Users/kangmac
+    home: /Users/kang-air
     base: /KANG/monster/20210320
     info-path: /json/info
     data-path: /json/data
@@ -156,10 +156,16 @@ proj-env:
   json:
     name: JSON (air)
     org-info-file: org.json
+    
     grp-info-file: grp.json
+    grpsvr-info-file: grpsvr.json
     svr-info-file: svr.json
+    
+    role-info-file: role.json
+    roleusr-info-file: roleusr.json
+    usr-info-file: usr.json
+    
     cmd-info-file: cmd-*.json
-    user-info-file: user.json
   url:
     name: URL (air)
     ws-uri: ws://localhost:8093/v0.1/websocket
