@@ -8,11 +8,11 @@ import javax.websocket.OnMessage;
 @ClientEndpoint
 public class WebSocketClient {
 
-	private LinkMonitorTask sendResultTask = null;
+	private LinkMonitorTask linkMonitorTask = null;
 	
 	public WebSocketClient(LinkMonitorTask sendResultTask) {
 		System.out.println("KANG-20210405 >>>>> Hello, Starting of WebSocketClient.");
-		this.sendResultTask = sendResultTask;
+		this.linkMonitorTask = sendResultTask;
 	}
 	
 	///////////////////////////////////////////////////////////////////////////
@@ -24,8 +24,8 @@ public class WebSocketClient {
 		System.out.println("[OnMessage] recv message: " + message);
 		
 		if (Boolean.TRUE) {
-			if (this.sendResultTask != null) {
-				this.sendResultTask.recvMessage(message);
+			if (this.linkMonitorTask != null) {
+				this.linkMonitorTask.recvMessage(message);
 			} else {
 				System.out.println("##### WebSocketClient.parseTask is null");
 			}

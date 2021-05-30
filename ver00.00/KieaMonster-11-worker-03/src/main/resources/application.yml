@@ -152,11 +152,6 @@ proj-env:
     name: JOB (air)
   json:
     name: JSON (air)
-    org-info-file: org.json
-    grp-info-file: grp.json
-    svr-info-file: svr.json
-    cmd-info-file: cmd-*.json
-    user-info-file: user.json
   url:
     name: URL (air)
     ws-uri: ws://localhost:8092/v0.1/websocket

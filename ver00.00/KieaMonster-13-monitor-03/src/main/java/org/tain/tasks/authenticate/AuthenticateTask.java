@@ -1,17 +1,20 @@
 package org.tain.tasks.authenticate;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.DependsOn;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 import org.tain.controller.WebSocketServerController;
 import org.tain.tools.node.MonJsonNode;
-import org.tain.tools.queue.MonQueue;
+import org.tain.tools.queue.MonQueueBox;
 import org.tain.utils.CurrentInfo;
 import org.tain.vo.SessionInfo;
 
 import lombok.extern.slf4j.Slf4j;
 
 @Component("AuthenticateTask")
+@DependsOn({"MonQueueBox"})
 @Slf4j
 public class AuthenticateTask {
 
@@ -27,6 +30,7 @@ public class AuthenticateTask {
 	///////////////////////////////////////////////////////////////////////////
 	///////////////////////////////////////////////////////////////////////////
 	
+	/*
 	private MonQueue<MonJsonNode> queue = new MonQueue<>();
 	
 	public void setQueue(MonJsonNode object) {
@@ -36,10 +40,14 @@ public class AuthenticateTask {
 	public MonJsonNode getQueue() {
 		return this.queue.get();
 	}
+	*/
 	
 	///////////////////////////////////////////////////////////////////////////
 	///////////////////////////////////////////////////////////////////////////
 	///////////////////////////////////////////////////////////////////////////
+	
+	@Autowired
+	private MonQueueBox monQueueBox;
 	
 	// AuthenticateTask
 	@Async(value = "async_0104")
@@ -50,7 +58,7 @@ public class AuthenticateTask {
 			// 인증이 되지 않은 세션은 종료(close) 한다.
 			while (true) {
 				// get reqNode
-				MonJsonNode reqNode = this.getQueue();
+				MonJsonNode reqNode = this.monQueueBox.getQueueAuthenticate();
 				
 				// clone copy reqNode to resNode
 				MonJsonNode resNode = null;

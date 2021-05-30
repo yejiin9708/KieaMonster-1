@@ -1,16 +1,19 @@
 package org.tain.tasks.history;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.DependsOn;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 import org.tain.controller.WebSocketServerController;
 import org.tain.tools.node.MonJsonNode;
-import org.tain.tools.queue.MonQueue;
+import org.tain.tools.queue.MonQueueBox;
 import org.tain.utils.CurrentInfo;
 
 import lombok.extern.slf4j.Slf4j;
 
 @Component("HistoryTask")
+@DependsOn({"MonQueueBox"})
 @Slf4j
 public class HistoryTask {
 
@@ -26,6 +29,7 @@ public class HistoryTask {
 	///////////////////////////////////////////////////////////////////////////
 	///////////////////////////////////////////////////////////////////////////
 	
+	/*
 	private MonQueue<MonJsonNode> queue = new MonQueue<>();
 	
 	public void setQueue(MonJsonNode object) {
@@ -35,10 +39,14 @@ public class HistoryTask {
 	public MonJsonNode getQueue() {
 		return this.queue.get();
 	}
+	*/
 	
 	///////////////////////////////////////////////////////////////////////////
 	///////////////////////////////////////////////////////////////////////////
 	///////////////////////////////////////////////////////////////////////////
+	
+	@Autowired
+	private MonQueueBox monQueueBox;
 	
 	//@Autowired
 	//private WebSocketServerController webSocketController;
@@ -51,7 +59,7 @@ public class HistoryTask {
 		if (Boolean.TRUE) {
 			while (true) {
 				// get result from the queueLoadResult
-				MonJsonNode reqNode = this.getQueue();
+				MonJsonNode reqNode = this.monQueueBox.getQueueAuthenticate();
 				
 				// clone copy reqNode to resNode
 				MonJsonNode resNode = null;

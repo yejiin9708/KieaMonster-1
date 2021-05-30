@@ -12,11 +12,5 @@ public class ProjEnvJsonProperties {
 
 	private String name;  // default
 	
-	private String orgInfoFile;
-	private String grpInfoFile;
-	private String svrInfoFile;
-	private String cmdInfoFile;
-	private String userInfoFile;
-	
 	private String dummy;  // null
 }
