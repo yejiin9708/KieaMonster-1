@@ -9,7 +9,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 import org.tain.controller.WebSocketServerController;
 import org.tain.db.domain.TbCmd;
-import org.tain.db.service.TbCmdService;
 import org.tain.tasks.recvResult.RecvResultTask;
 import org.tain.tools.node.MonJsonNode;
 import org.tain.utils.CurrentInfo;
@@ -35,8 +34,8 @@ public class ParseTask {
 	@Autowired
 	private RecvResultTask recvResultTask;
 	
-	@Autowired
-	private TbCmdService tbCmdService;
+	//@Autowired
+	//private TbCmdService tbCmdService;
 	
 	@Autowired
 	private WebSocketServerController webSocketController;
@@ -52,7 +51,7 @@ public class ParseTask {
 				resNode = reqNode.clone();
 				log.info("KANG-20210405 >>>>> {} reqNode = {}", CurrentInfo.get(), reqNode.toPrettyString());
 				
-				String svrCode = reqNode.getText("svrCode");
+				//String svrCode = reqNode.getText("svrCode");
 				String msgCode = reqNode.getText("msgCode");
 				
 				switch (msgCode) {

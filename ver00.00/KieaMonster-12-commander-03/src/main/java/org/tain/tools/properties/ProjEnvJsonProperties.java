@@ -27,5 +27,7 @@ public class ProjEnvJsonProperties {
 	private String cdMstInfoFile;
 	private String cdItmInfoFile;
 	
+	private String brwInfoFile;
+	
 	private String dummy;  // null
 }

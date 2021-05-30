@@ -31,9 +31,9 @@ public class Tasks {
 		
 		if (Boolean.TRUE) this.loadTablesTask.async0103("TASK-0103");
 		
-		//if (Boolean.TRUE) this.sendResultTask.async0102("TASK-0102");
+		if (Boolean.TRUE) this.sendResultTask.async0102("TASK-0102");
 		
-		//if (Boolean.TRUE) this.recvResultTask.async0101("TASK-0101");
+		if (Boolean.TRUE) this.recvResultTask.async0101("TASK-0101");
 		
 		log.info("KANG-20210405 >>>>> END   {} {}", CurrentInfo.get());
 	}
