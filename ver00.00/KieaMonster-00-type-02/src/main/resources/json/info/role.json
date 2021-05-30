@@ -1,0 +1,9 @@
+[
+	{
+		"roleCd": "ROLE_ADMIN",
+		"desc": "role of admin"
+	},{
+		"roleCd": "ROLE_GUEST",
+		"desc": "role of guest"
+	}
+]

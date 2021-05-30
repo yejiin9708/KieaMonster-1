@@ -1,0 +1,15 @@
+[
+	{
+		"userId": "root",
+		"passWd": "root",
+		"desc": "super user"
+	},{
+		"userId": "admin",
+		"passWd": "admin",
+		"desc": "admin user"
+	},{
+		"userId": "guest",
+		"passWd": "guest",
+		"desc": "normal guest user"
+	}
+]

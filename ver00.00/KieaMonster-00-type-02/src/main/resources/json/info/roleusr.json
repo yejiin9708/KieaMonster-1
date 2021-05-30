@@ -1,0 +1,12 @@
+[
+	{
+		"roleCd": "ROLE_ADMIN",
+		"userId": "root"
+	},{
+		"roleCd": "ROLE_ADMIN",
+		"userId": "admin"
+	},{
+		"roleCd": "ROLE_GUEST",
+		"userId": "guest"
+	}
+]

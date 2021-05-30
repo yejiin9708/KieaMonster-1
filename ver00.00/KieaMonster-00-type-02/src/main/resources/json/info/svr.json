@@ -1,12 +1,10 @@
 [
 	{
-		"grpCode": "MCI",
 		"svrCode": "TEST01",
 		"svrName": "TEST01 server",
 		"svrDesc": "svr desc",
 		"svrComment": "svr comment"
 	},{
-		"grpCode": "MCI",
 		"svrCode": "TEST02",
 		"svrName": "TEST02 server",
 		"svrDesc": "svr desc",
