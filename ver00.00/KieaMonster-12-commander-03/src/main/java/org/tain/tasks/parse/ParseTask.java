@@ -6,16 +6,18 @@ import javax.websocket.Session;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
 import org.tain.controller.WebSocketServerController;
 import org.tain.db.domain.TbCmd;
-import org.tain.tasks.recvResult.RecvResultTask;
 import org.tain.tools.node.MonJsonNode;
+import org.tain.tools.queue.MonQueueBox;
 import org.tain.utils.CurrentInfo;
 
 import lombok.extern.slf4j.Slf4j;
 
 @Component("ParseTask")
+@DependsOn({"MonQueueBox"})
 @Slf4j
 public class ParseTask {
 
@@ -32,43 +34,33 @@ public class ParseTask {
 	///////////////////////////////////////////////////////////////////////////
 	
 	@Autowired
-	private RecvResultTask recvResultTask;
-	
-	//@Autowired
-	//private TbCmdService tbCmdService;
+	private MonQueueBox monQueueBox;
 	
 	@Autowired
 	private WebSocketServerController webSocketController;
 	
-	public void parsing(Session session, String message) {
+	public synchronized void parsing(Session session, String message) {
 		log.info("KANG-20210405 >>>>> {} {}", CurrentInfo.get());
 		
 		if (Boolean.TRUE) {
-			MonJsonNode reqNode = null;
-			MonJsonNode resNode = null;
+			MonJsonNode node = null;
 			try {
-				reqNode = new MonJsonNode(message);
-				resNode = reqNode.clone();
-				log.info("KANG-20210405 >>>>> {} reqNode = {}", CurrentInfo.get(), reqNode.toPrettyString());
+				node = new MonJsonNode(message);
+				log.info("KANG-20210405 >>>>> node {} = {}", CurrentInfo.get(), node.toPrettyString());
 				
-				//String svrCode = reqNode.getText("svrCode");
-				String msgCode = reqNode.getText("msgCode");
-				
+				String msgCode = node.getText("msgCode");
 				switch (msgCode) {
 				case "GET_CMDS":
-					// get commands
-					List<TbCmd> lstCmds = null; // this.tbCmdService.listBySvrCode(svrCode);
-					MonJsonNode cmds = new MonJsonNode(MonJsonNode.getJson(lstCmds));
-					// set resNode
-					resNode.put("resResult", cmds);
-					resNode.put("status", "SUCCESS");
-					log.info("KANG-20210405 >>>>> {} resNode: {} ", CurrentInfo.get(), resNode.toPrettyString());
-					// send message
-					this.webSocketController.sendMessage(session, resNode.toString());
+					// get commands: worker -> commander -> worker
+					msg_GET_CMDS(session, node);
 					break;
 				case "CMD_RET":
-					// send result to load
-					this.recvResultTask.setQueue(message);
+					// send result to load: worker -> commander -> monitor
+					this.monQueueBox.setQueueRecvResult(node);
+					break;
+				case "AUTH_BRW":
+					// auth browser: monitor -> commander -> monitor
+					msg_AUTH_BRW(session, node);
 					break;
 				default:
 					throw new Exception("ERROR: couldn't parse the msgCode [" + msgCode + "]");
@@ -78,6 +70,48 @@ public class ParseTask {
 				//e.printStackTrace();
 				log.error("KANG-20210405 >>>>> error message: {} at {}", e.getMessage(), CurrentInfo.get());
 			}
+		}
+	}
+	
+	///////////////////////////////////////////////////////////////////////////
+	
+	private void msg_GET_CMDS(Session session, MonJsonNode node) throws Exception {
+		if (Boolean.TRUE) {
+			MonJsonNode reqNode = node;
+			MonJsonNode resNode = reqNode.clone();
+			
+			String svrCode = reqNode.getText("svrCode");
+			List<TbCmd> lstCmds = null; // this.tbCmdService.listBySvrCode(svrCode);
+			MonJsonNode cmds = new MonJsonNode(MonJsonNode.getJson(lstCmds));
+			
+			// set resNode
+			resNode.put("resResult", cmds);
+			resNode.put("status", "SUCCESS");
+			log.info("KANG-20210405 >>>>> {} {} resNode: {} ", svrCode, CurrentInfo.get(), resNode.toPrettyString());
+			
+			// send message
+			this.webSocketController.sendMessage(session, resNode.toString());
+		}
+	}
+	
+	///////////////////////////////////////////////////////////////////////////
+	
+	private void msg_AUTH_BRW(Session session, MonJsonNode node) throws Exception {
+		if (Boolean.TRUE) {
+			MonJsonNode reqNode = node;
+			MonJsonNode resNode = reqNode.clone();
+			
+			String svrCode = reqNode.getText("svrCode");
+			List<TbCmd> lstCmds = null; // this.tbCmdService.listBySvrCode(svrCode);
+			MonJsonNode cmds = new MonJsonNode(MonJsonNode.getJson(lstCmds));
+			
+			// set resNode
+			resNode.put("resResult", cmds);
+			resNode.put("status", "SUCCESS");
+			log.info("KANG-20210405 >>>>> {} {} resNode: {} ", svrCode, CurrentInfo.get(), resNode.toPrettyString());
+			
+			// send message
+			this.monQueueBox.setQueueLinkMonitor(resNode);
 		}
 	}
 }

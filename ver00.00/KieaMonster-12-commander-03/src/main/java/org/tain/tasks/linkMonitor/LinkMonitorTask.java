@@ -1,4 +1,4 @@
-package org.tain.tasks.sendResult;
+package org.tain.tasks.linkMonitor;
 
 import java.net.URI;
 
@@ -8,22 +8,26 @@ import javax.websocket.WebSocketContainer;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.DependsOn;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
+import org.tain.tasks.parse.ParseTask;
+import org.tain.tools.node.MonJsonNode;
 import org.tain.tools.properties.ProjEnvUrlProperties;
-import org.tain.tools.queue.MonQueue;
+import org.tain.tools.queue.MonQueueBox;
 import org.tain.utils.CurrentInfo;
 import org.tain.utils.Sleep;
 
 import lombok.extern.slf4j.Slf4j;
 
-@Component("SendResultTask")
+@Component("LinkMonitorTask")
+@DependsOn({"MonQueueBox"})
 @Slf4j
-public class SendResultTask {
+public class LinkMonitorTask {
 
 	@Bean
-	public void startSendResultTask() throws Exception {
-		System.out.println("KANG-20210405 >>>>> Hello, Starting of SendResultTask.");
+	public void startLinkMonitorTask() throws Exception {
+		System.out.println("KANG-20210405 >>>>> Hello, Starting of LinkMonitorTask.");
 		
 		if (!Boolean.TRUE) {
 		}
@@ -33,22 +37,14 @@ public class SendResultTask {
 	///////////////////////////////////////////////////////////////////////////
 	///////////////////////////////////////////////////////////////////////////
 	
-	private MonQueue<String> queue = new MonQueue<>();
-	
-	public void setQueue(String object) {
-		this.queue.set(object);
-	}
-	
-	public String getQueue() {
-		return this.queue.get();
-	}
-	
-	///////////////////////////////////////////////////////////////////////////
-	///////////////////////////////////////////////////////////////////////////
-	///////////////////////////////////////////////////////////////////////////
+	@Autowired
+	private MonQueueBox monQueueBox;
 	
 	@Autowired
 	private ProjEnvUrlProperties projEnvUrlProperties;
+	
+	@Autowired
+	private ParseTask parseTask;
 	
 	// sendToMonster
 	@Async(value = "async_0102")
@@ -63,11 +59,11 @@ public class SendResultTask {
 			try {
 				while (true) {
 					// get result from the queueSendResult
-					String msg = this.getQueue();
-					System.out.println(">>>>> 2. async " + param + ": " + msg);
+					MonJsonNode node = this.monQueueBox.getQueueLinkMonitor();
+					System.out.println(">>>>> 2. async " + param + ": " + node.toPrettyString());
 					
 					// send result to the monitor
-					this.sendMessage(msg);
+					this.sendMessage(node.toString());
 				}
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -83,8 +79,9 @@ public class SendResultTask {
 	
 	private Session session;
 	
-	public void recvMessage(String message) throws Exception {
+	public void recvMessage(String message) {
 		System.out.println("[recvMessage] message: " + message);
+		this.parseTask.parsing(this.session, message);
 	}
 	
 	public void sendMessage(String message) throws Exception {
@@ -96,14 +93,17 @@ public class SendResultTask {
 		this.session.close();
 	}
 	
+	///////////////////////////////////////////////////////////////////////////
+	
 	private void connect() throws Exception {
 		log.info("KANG-20200721 >>>>> {} {}", CurrentInfo.get());
 		
 		if (Boolean.TRUE) {
 			Sleep.run(2 * 1000);
 			for (int i=0; ; i++) {
+				WebSocketClient webSocketClient = null;
 				try {
-					WebSocketClient webSocketClient = new WebSocketClient();
+					webSocketClient = new WebSocketClient(this);
 					WebSocketContainer container = ContainerProvider.getWebSocketContainer();
 					String wsUri = this.projEnvUrlProperties.getWsUri();
 					this.session = container.connectToServer(webSocketClient, URI.create(wsUri));
@@ -114,6 +114,7 @@ public class SendResultTask {
 				} catch (Exception e) {
 					//e.printStackTrace();
 					System.out.println(">>>>> connection failed. -> " + e.getMessage());
+					webSocketClient.onClose();
 				}
 				System.out.println(">>>>> try to connect again....." + i);
 				Sleep.run(10 * 1000);

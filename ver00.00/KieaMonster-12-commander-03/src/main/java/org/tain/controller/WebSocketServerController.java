@@ -53,7 +53,6 @@ public class WebSocketServerController {
 	@OnMessage
 	public void onMessage(Session session, String message) {
 		System.out.println(">>>>> [OnMessage] recv reqMessage: " + message);
-		//this.recvResultTask.setQueueLoadResult(reqMessage);
 		
 		// parsing and processing
 		this.parseTask.parsing(session, message);

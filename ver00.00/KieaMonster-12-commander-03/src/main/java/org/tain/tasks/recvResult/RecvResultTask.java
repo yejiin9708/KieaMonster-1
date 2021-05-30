@@ -2,12 +2,13 @@ package org.tain.tasks.recvResult;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.DependsOn;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 import org.tain.db.domain.TbResult;
 import org.tain.db.repository.TbResultRepository;
-import org.tain.tasks.sendResult.SendResultTask;
-import org.tain.tools.queue.MonQueue;
+import org.tain.tools.node.MonJsonNode;
+import org.tain.tools.queue.MonQueueBox;
 import org.tain.utils.CurrentInfo;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -15,6 +16,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 
 @Component("RecvResultTask")
+@DependsOn({"MonQueueBox"})
 @Slf4j
 public class RecvResultTask {
 
@@ -30,25 +32,11 @@ public class RecvResultTask {
 	///////////////////////////////////////////////////////////////////////////
 	///////////////////////////////////////////////////////////////////////////
 	
-	private MonQueue<String> queue = new MonQueue<>();
-	
-	public void setQueue(String object) {
-		this.queue.set(object);
-	}
-	
-	public String getQueue() {
-		return this.queue.get();
-	}
-	
-	///////////////////////////////////////////////////////////////////////////
-	///////////////////////////////////////////////////////////////////////////
-	///////////////////////////////////////////////////////////////////////////
+	@Autowired
+	private MonQueueBox monQueueBox;
 	
 	@Autowired
 	private TbResultRepository tbResultRepository;
-	
-	@Autowired
-	private SendResultTask sendResultTask;
 	
 	// recvResult
 	@Async(value = "async_0101")
@@ -58,19 +46,22 @@ public class RecvResultTask {
 		if (Boolean.TRUE) {
 			while (true) {
 				// get result from the queueLoadResult
-				String msg = (String) this.getQueue();
-				System.out.println(">>>>> 1. async " + param + ": " + msg);
+				MonJsonNode node = this.monQueueBox.getQueueRecvResult();
+				System.out.println(">>>>> 1. async " + param + ": " + node.toPrettyString());
+				
+				//////////////////////////////////////////////
+				if (Boolean.TRUE) {
+					// set result to the queueSendResult
+					this.monQueueBox.setQueueLinkMonitor(node);
+				}
 				
 				//////////////////////////////////////////////
 				if (Boolean.TRUE) {
 					// load result to tbResult
 					// table insert
-					TbResult result = new ObjectMapper().readValue(msg, TbResult.class);
+					TbResult result = new ObjectMapper().readValue(node.toString(), TbResult.class);
 					this.tbResultRepository.save(result);
 				}
-				
-				// set result to the queueSendResult
-				this.sendResultTask.setQueue(msg);
 			}
 		}
 	}

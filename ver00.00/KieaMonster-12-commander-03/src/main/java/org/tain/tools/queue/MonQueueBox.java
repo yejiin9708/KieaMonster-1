@@ -11,24 +11,44 @@ public class MonQueueBox {
 	///////////////////////////////////////////////////////////////////////////
 	
 	// queue for sending message
-	private MonQueue<MonJsonNode> queueSendResult = new MonQueue<>();
+	private MonQueue<MonJsonNode> queueRecvResult = new MonQueue<>();
 	
-	public void setQueueSendResult(MonJsonNode object) {
-		this.queueSendResult.set(object);
+	public void setQueueRecvResult(MonJsonNode object) {
+		this.queueRecvResult.set(object);
 	}
 	
-	public MonJsonNode getQueueSendResult() {
-		return this.queueSendResult.get();
+	public MonJsonNode getQueueRecvResult() {
+		return this.queueRecvResult.get();
 	}
 	
-	public void clearQueueSendResult() {
-		this.queueSendResult.clear();
+	public void clearQueueRecvResult() {
+		this.queueRecvResult.clear();
 	}
 	
 	///////////////////////////////////////////////////////////////////////////
 	///////////////////////////////////////////////////////////////////////////
 	///////////////////////////////////////////////////////////////////////////
 	
+	// queue for sending message
+	private MonQueue<MonJsonNode> queueLinkMonitor = new MonQueue<>();
+	
+	public void setQueueLinkMonitor(MonJsonNode object) {
+		this.queueLinkMonitor.set(object);
+	}
+	
+	public MonJsonNode getQueueLinkMonitor() {
+		return this.queueLinkMonitor.get();
+	}
+	
+	public void clearQueueLinkMonitor() {
+		this.queueLinkMonitor.clear();
+	}
+	
+	///////////////////////////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////////////////////////
+	
+	/*
 	private MonQueue<MonJsonNode> queueSplitCommands = new MonQueue<>();
 	
 	public void setQueueSplitCommands(MonJsonNode object) {
@@ -42,6 +62,7 @@ public class MonQueueBox {
 	public void clearQueueSplitCommands() {
 		this.queueSplitCommands.clear();
 	}
+	*/
 	
 	///////////////////////////////////////////////////////////////////////////
 	///////////////////////////////////////////////////////////////////////////
