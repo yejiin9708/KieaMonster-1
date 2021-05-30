@@ -9,4 +9,6 @@ import org.tain.mybatis.models.User;
 public interface UserMapper {
 
 	List<User> selectAllUsers();
+	
+	List<User> selectAllUsers(Long id);
 }
