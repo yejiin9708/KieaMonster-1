@@ -58,7 +58,7 @@ public class ParseTask {
 				switch (msgCode) {
 				case "GET_CMDS":
 					// get commands
-					List<TbCmd> lstCmds = this.tbCmdService.listBySvrCode(svrCode);
+					List<TbCmd> lstCmds = null; // this.tbCmdService.listBySvrCode(svrCode);
 					MonJsonNode cmds = new MonJsonNode(MonJsonNode.getJson(lstCmds));
 					// set resNode
 					resNode.put("resResult", cmds);

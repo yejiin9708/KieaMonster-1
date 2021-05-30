@@ -42,7 +42,7 @@ public class KieaMonster12Commander03Application implements CommandLineRunner {
 			e.printStackTrace();
 		} finally {
 			if (Boolean.TRUE && this.projEnvBaseProperties.isTestFlag()) {
-				Sleep.run(5 * 1000);
+				Sleep.run(2 * 1000);
 				System.out.println("\n==========================  SYSTEM EXIT by TestFlag  ===========================\n");
 				System.exit(0);
 			}

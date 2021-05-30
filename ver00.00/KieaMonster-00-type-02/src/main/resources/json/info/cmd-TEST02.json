@@ -1,25 +1,13 @@
 [
 	{
+		"mstType": "CMD_SVR",
+		"mstCode": "TEST02",
 		"cmdCode": "uname",
 		"cmdName": "uname all",
-		"cmdDesc": "svr desc (연습:utf-8)",
+		"cmdDesc": "",
 		"cmdPeriod": 60,
 		"cmdType": "CMD_NORMAL",
 		"cmdArr": " uname -a   "
-	},{
-		"cmdCode": "disk",
-		"cmdName": "disk space",
-		"cmdDesc": "disk space (연습:utf-8)",
-		"cmdPeriod": 60,
-		"cmdType": "CMD_NORMAL",
-		"cmdArr": " df -h "
-	},{
-		"cmdCode": "memory",
-		"cmdName": "memory space",
-		"cmdDesc": "memory space (연습:utf-8)",
-		"cmdPeriod": 60,
-		"cmdType": "CMD_NORMAL",
-		"cmdArr": " ps -ef "
 	}
 ]
 

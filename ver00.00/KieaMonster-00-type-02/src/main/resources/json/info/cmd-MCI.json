@@ -1,8 +1,10 @@
 [
 	{
+		"mstType": "CMD_GRP",
+		"mstCode": "MCI",
 		"cmdCode": "disk",
 		"cmdName": "disk space",
-		"cmdDesc": "disk space (연습:utf-8)",
+		"cmdDesc": "",
 		"cmdPeriod": 10,
 		"cmdType": "CMD_NORMAL",
 		"cmdArr": " df -h "

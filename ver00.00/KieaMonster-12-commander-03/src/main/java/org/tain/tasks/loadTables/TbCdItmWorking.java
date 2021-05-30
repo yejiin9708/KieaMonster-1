@@ -5,8 +5,8 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.tain.db.domain.TbUser;
-import org.tain.db.repository.TbUserRepository;
+import org.tain.db.domain.TbCdItm;
+import org.tain.db.repository.TbCdItmRepository;
 import org.tain.tools.properties.ProjEnvJsonProperties;
 import org.tain.tools.properties.ProjEnvParamProperties;
 import org.tain.utils.CurrentInfo;
@@ -19,7 +19,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Component
 @Slf4j
-public class TbUserWorking {
+public class TbCdItmWorking {
 
 	@Autowired
 	private ProjEnvParamProperties projEnvParamProperties;
@@ -28,14 +28,14 @@ public class TbUserWorking {
 	private ProjEnvJsonProperties projEnvJsonProperties;
 
 	@Autowired
-	private TbUserRepository tbUserRepository;
+	private TbCdItmRepository tbCdItmRepository;
 	
 	public void load() throws Exception {
 		log.info("KANG-20210405 >>>>> {} {}", CurrentInfo.get());
 		
 		if (Boolean.TRUE) {
 			// delete all
-			this.tbUserRepository.deleteAll();
+			this.tbCdItmRepository.deleteAll();
 		}
 		
 		if (Boolean.TRUE) {
@@ -43,16 +43,16 @@ public class TbUserWorking {
 					+ this.projEnvParamProperties.getBase()
 					+ this.projEnvParamProperties.getInfoPath()
 					+ File.separator
-					+ this.projEnvJsonProperties.getUserInfoFile();
+					+ this.projEnvJsonProperties.getCdItmInfoFile();
 			if (Boolean.TRUE) log.info("KANG-20210406 >>>>> {} {}", CurrentInfo.get(), filePath);
 
 			String strJson = StringTools.stringFromFile(filePath);
 			if (Boolean.TRUE) log.info("KANG-20210406 >>>>> {} {}", CurrentInfo.get(), strJson);
 			
-			List<TbUser> lstTbUser = new ObjectMapper().readValue(strJson, new TypeReference<List<TbUser>>() {});
+			List<TbCdItm> lstTbUser = new ObjectMapper().readValue(strJson, new TypeReference<List<TbCdItm>>() {});
 			lstTbUser.forEach(entry -> {
 				if (Boolean.TRUE) log.info("KANG-20210406 >>>>> {} {}", CurrentInfo.get(), entry);
-				this.tbUserRepository.save(entry);
+				this.tbCdItmRepository.save(entry);
 			});
 		}
 	}

@@ -16,52 +16,52 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "tb_svr"
+@Table(name = "tb_cditm"
 	, indexes = {
-			@Index(name = "svr_idx0", unique = false, columnList = "svr_code"),
+			@Index(name = "cditm_idx0", unique = false, columnList = "cd_mst"),
 	}
 )
-@SequenceGenerator(name = "svr_seq"
-	, sequenceName = "svr_seq"
+@SequenceGenerator(name = "cditm_seq"
+	, sequenceName = "cditm_seq"
 	, initialValue = 1
 	, allocationSize = 1
 )
 @Data
 @NoArgsConstructor
 @JsonIgnoreProperties(value = {})
-public class TbSvr {
+public class TbCdItm {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "svr_seq")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "cditm_seq")
 	@Column(name = "id")
 	private Long id;
 	
-	@Column(name = "svr_code", length = 16)
-	private String svrCode;
+	@Column(name = "cd_mst", length = 20)
+	private String cdMst;
 	
-	@Column(name = "svr_name", length = 64)
-	private String svrName;
+	@Column(name = "cd_itm", length = 20)
+	private String cdItm;
 	
-	@Column(name = "svr_desc", length = 1024)
-	private String svrDesc;
+	@Column(name = "cd_val", length = 20)
+	private String cdVal;
 	
-	@Column(name = "svr_comment", length = 1024)
-	private String svrComment;
-	
+	@Column(name = "desc", length = 128)
+	private String desc;
+
 	//@Column(name = "create_date")
 	//@CreationTimestamp
 	//private LocalDateTime createdDate;
 	
 	@Builder
-	public TbSvr(
-			String svrCode,
-			String svrName,
-			String svrDesc,
-			String svrComment
+	public TbCdItm(
+			String cdMst,
+			String cdItm,
+			String cdVal,
+			String desc
 			) {
-		this.svrCode = svrCode;
-		this.svrName = svrName;
-		this.svrDesc = svrDesc;
-		this.svrComment = svrComment;
+		this.cdMst = cdMst;
+		this.cdItm = cdItm;
+		this.cdVal = cdVal;
+		this.desc = desc;
 	}
 }

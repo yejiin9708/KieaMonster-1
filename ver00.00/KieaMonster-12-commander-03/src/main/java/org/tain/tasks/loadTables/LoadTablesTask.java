@@ -31,11 +31,21 @@ public class LoadTablesTask {
 	
 		if (Boolean.TRUE) {
 			if (Boolean.TRUE) jobForTbOrgLoad();
+			
 			if (Boolean.TRUE) jobForTbGrpLoad();
+			if (Boolean.TRUE) jobForTbGrpSvrLoad();
 			if (Boolean.TRUE) jobForTbSvrLoad();
+			
+			if (Boolean.TRUE) jobForTbRoleLoad();
+			if (Boolean.TRUE) jobForTbRoleUsrLoad();
+			if (Boolean.TRUE) jobForTbUsrLoad();
+			
 			if (Boolean.TRUE) jobForTbCmdLoad();
+			
 			if (Boolean.TRUE) jobForTbResultLoad();
-			if (Boolean.TRUE) jobForTbUserLoad();
+			
+			if (Boolean.TRUE) jobForTbCdMstLoad();
+			if (Boolean.TRUE) jobForTbCdItmLoad();
 		}
 		
 		log.info("KANG-20200721 >>>>> async_0103 END   {} {}", param, CurrentInfo.get());
@@ -55,6 +65,8 @@ public class LoadTablesTask {
 	}
 	
 	///////////////////////////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////////////////////////
 	
 	@Autowired
 	private TbGrpWorking tbGrpWorking;
@@ -68,6 +80,17 @@ public class LoadTablesTask {
 	///////////////////////////////////////////////////////////////////////////
 	
 	@Autowired
+	private TbGrpSvrWorking tbGrpSvrWorking;
+	
+	private void jobForTbGrpSvrLoad() throws Exception {
+		log.info("KANG-20210405 >>>>> {} {}", CurrentInfo.get());
+		
+		if (Boolean.TRUE) this.tbGrpSvrWorking.load();
+	}
+	
+	///////////////////////////////////////////////////////////////////////////
+	
+	@Autowired
 	private TbSvrWorking tbSvrWorking;
 	
 	private void jobForTbSvrLoad() throws Exception {
@@ -76,6 +99,43 @@ public class LoadTablesTask {
 		if (Boolean.TRUE) this.tbSvrWorking.load();
 	}
 	
+	///////////////////////////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////////////////////////
+	
+	@Autowired
+	private TbRoleWorking tbRoleWorking;
+	
+	private void jobForTbRoleLoad() throws Exception {
+		log.info("KANG-20210405 >>>>> {} {}", CurrentInfo.get());
+		
+		if (Boolean.TRUE) this.tbRoleWorking.load();
+	}
+	
+	///////////////////////////////////////////////////////////////////////////
+	
+	@Autowired
+	private TbRoleUsrWorking tbRoleUsrWorking;
+	
+	private void jobForTbRoleUsrLoad() throws Exception {
+		log.info("KANG-20210405 >>>>> {} {}", CurrentInfo.get());
+		
+		if (Boolean.TRUE) this.tbRoleUsrWorking.load();
+	}
+	
+	///////////////////////////////////////////////////////////////////////////
+	
+	@Autowired
+	private TbUsrWorking tbUsrWorking;
+	
+	private void jobForTbUsrLoad() throws Exception {
+		log.info("KANG-20210405 >>>>> {} {}", CurrentInfo.get());
+		
+		if (Boolean.TRUE) this.tbUsrWorking.load();
+	}
+	
+	///////////////////////////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////////////////////////
 	///////////////////////////////////////////////////////////////////////////
 	
 	@Autowired
@@ -99,13 +159,27 @@ public class LoadTablesTask {
 	}
 	
 	///////////////////////////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////////////////////////
 	
 	@Autowired
-	private TbUserWorking tbUserWorking;
+	private TbCdMstWorking tbCdMstWorking;
 	
-	private void jobForTbUserLoad() throws Exception {
+	private void jobForTbCdMstLoad() throws Exception {
 		log.info("KANG-20210405 >>>>> {} {}", CurrentInfo.get());
 		
-		if (Boolean.TRUE) this.tbUserWorking.load();
+		if (Boolean.TRUE) this.tbCdMstWorking.load();
 	}
+	
+	///////////////////////////////////////////////////////////////////////////
+	
+	@Autowired
+	private TbCdItmWorking tbCdItmWorking;
+	
+	private void jobForTbCdItmLoad() throws Exception {
+		log.info("KANG-20210405 >>>>> {} {}", CurrentInfo.get());
+		
+		if (Boolean.TRUE) this.tbCdItmWorking.load();
+	}
+	
 }

@@ -16,53 +16,42 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "tb_user"
+@Table(name = "tb_roleusr"
 	, indexes = {
-			@Index(name = "user_idx0", unique = true, columnList = "user_id"),
+			@Index(name = "roleusr_idx0", unique = false, columnList = "role_cd"),
 	}
 )
-@SequenceGenerator(name = "user_seq"
-	, sequenceName = "user_seq"
+@SequenceGenerator(name = "roleusr_seq"
+	, sequenceName = "roleusr_seq"
 	, initialValue = 1
 	, allocationSize = 1
 )
 @Data
 @NoArgsConstructor
 @JsonIgnoreProperties(value = {})
-public class TbUser {
+public class TbRoleUsr {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_seq")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "roleusr_seq")
 	@Column(name = "id")
 	private Long id;
 	
-	@Column(name = "user_Id", length = 20)
+	@Column(name = "role_cd", length = 20)
+	private String roleCd;
+	
+	@Column(name = "user_id", length = 20)
 	private String userId;
 	
-	@Column(name = "pass_wd", length = 20)
-	private String passWd;
-	
-	@Column(name = "group_cd", length = 20)
-	private String groupCd;
-	
-	@Column(name = "roll_cd", length = 50)
-	private String rollCd;
-	
-
 	//@Column(name = "create_date")
 	//@CreationTimestamp
 	//private LocalDateTime createdDate;
 	
 	@Builder
-	public TbUser(
-			String userId,
-			String passWd,
-			String groupCd,
-			String rollCd
+	public TbRoleUsr(
+			String roleCd,
+			String userId
 			) {
+		this.roleCd = roleCd;
 		this.userId = userId;
-		this.passWd = passWd;
-		this.groupCd = groupCd;
-		this.rollCd = rollCd;
 	}
 }

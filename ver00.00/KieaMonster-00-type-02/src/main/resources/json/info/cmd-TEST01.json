@@ -1,28 +1,22 @@
 [
 	{
+		"mstType": "CMD_SVR",
+		"mstCode": "TEST01",
 		"cmdCode": "ping",
 		"cmdName": "ping-01",
-		"cmdDesc": "ping google.com",
-		"cmdClass": "CMD_GRP",
+		"cmdDesc": "",
 		"cmdPeriod": 0,
 		"cmdType": "CMD_SEQUENCE",
 		"cmdArr": "   ping     google.com  -i 5  "
 	},{
+		"mstType": "CMD_SVR",
+		"mstCode": "TEST01",
 		"cmdCode": "disk",
 		"cmdName": "disk space",
-		"cmdDesc": "disk space",
-		"cmdClass": "CMD_GRP",
+		"cmdDesc": "",
 		"cmdPeriod": 60,
 		"cmdType": "CMD_NORMAL",
 		"cmdArr": " df -m "
-	},{
-		"cmdCode": "date",
-		"cmdName": "date current",
-		"cmdDesc": "date current",
-		"cmdClass": "CMD_SVR",
-		"cmdPeriod": 60,
-		"cmdType": "CMD_SEQUENCE",
-		"cmdArr": " date "
 	}
 ]
 

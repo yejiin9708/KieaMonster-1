@@ -51,13 +51,14 @@ public class TbCmdWorking {
 			for (File file : files) {
 				if (Boolean.TRUE) log.info("KANG-20210406 >>>>> {} {} {}", CurrentInfo.get(), file.getAbsolutePath(), file.getName());
 				
-				String svrCode = getSvrCode(file.getName());
+				//String svrCode = getSvrCode(file.getName());
 				String strJson = StringTools.stringFromFile(file.getAbsolutePath());
 				if (Boolean.TRUE) log.info("KANG-20210406 >>>>> {} {}", CurrentInfo.get(), strJson);
 				
 				List<TbCmd> lstTbCmd = new ObjectMapper().readValue(strJson, new TypeReference<List<TbCmd>>() {});
 				lstTbCmd.forEach(entry -> {
-					entry.setSvrCode  (svrCode);
+					entry.setMstType  (entry.getMstType  ().trim());
+					entry.setMstCode  (entry.getMstCode  ().trim());
 					entry.setCmdCode  (entry.getCmdCode  ().trim());
 					entry.setCmdName  (entry.getCmdName  ().trim());
 					entry.setCmdDesc  (entry.getCmdDesc  ().trim());
@@ -71,6 +72,7 @@ public class TbCmdWorking {
 		}
 	}
 	
+	@SuppressWarnings("unused")
 	private String getSvrCode(String fileName) throws Exception {
 		int endPos = fileName.lastIndexOf('.');
 		if (endPos < 5) {

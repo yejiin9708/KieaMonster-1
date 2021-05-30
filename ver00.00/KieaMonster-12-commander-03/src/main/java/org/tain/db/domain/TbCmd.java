@@ -36,8 +36,11 @@ public class TbCmd {
 	@Column(name = "id")
 	private Long id;
 	
-	@Column(name = "svr_code", length = 16)
-	private String svrCode;
+	@Column(name = "mst_type", length = 16)
+	private String mstType;
+	
+	@Column(name = "mst_code", length = 16)
+	private String mstCode;
 	
 	@Column(name = "cmd_code", length = 16)
 	private String cmdCode;
@@ -68,6 +71,8 @@ public class TbCmd {
 	
 	@Builder
 	public TbCmd(
+			String mstType,
+			String mstCode,
 			String cmdCode,
 			String cmdName,
 			String cmdDesc,
@@ -75,6 +80,8 @@ public class TbCmd {
 			String cmdType,
 			String cmdArr
 			) {
+		this.mstType = mstType;
+		this.mstCode = mstCode;
 		this.cmdCode = cmdCode;
 		this.cmdName = cmdName;
 		this.cmdDesc = cmdDesc;
