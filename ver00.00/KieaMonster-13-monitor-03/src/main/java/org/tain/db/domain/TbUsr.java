@@ -16,52 +16,47 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "tb_svr"
+@Table(name = "tb_usr"
 	, indexes = {
-			@Index(name = "svr_idx0", unique = false, columnList = "svr_code"),
+			@Index(name = "usr_idx0", unique = false, columnList = "user_id"),
 	}
 )
-@SequenceGenerator(name = "svr_seq"
-	, sequenceName = "svr_seq"
+@SequenceGenerator(name = "usr_seq"
+	, sequenceName = "usr_seq"
 	, initialValue = 1
 	, allocationSize = 1
 )
 @Data
 @NoArgsConstructor
 @JsonIgnoreProperties(value = {})
-public class TbSvr {
+public class TbUsr {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "svr_seq")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "usr_seq")
 	@Column(name = "id")
 	private Long id;
 	
-	@Column(name = "svr_code", length = 16)
-	private String svrCode;
+	@Column(name = "user_id", length = 20)
+	private String userId;
 	
-	@Column(name = "svr_name", length = 64)
-	private String svrName;
+	@Column(name = "pass_wd", length = 20)
+	private String passWd;
 	
-	@Column(name = "svr_desc", length = 1024)
-	private String svrDesc;
-	
-	@Column(name = "svr_comment", length = 1024)
-	private String svrComment;
-	
+	@Column(name = "desc", length = 128)
+	private String desc;
+
 	//@Column(name = "create_date")
 	//@CreationTimestamp
 	//private LocalDateTime createdDate;
 	
 	@Builder
-	public TbSvr(
-			String svrCode,
-			String svrName,
-			String svrDesc,
-			String svrComment
+	public TbUsr(
+			String userId,
+			String passWd,
+			String desc
 			) {
-		this.svrCode = svrCode;
-		this.svrName = svrName;
-		this.svrDesc = svrDesc;
-		this.svrComment = svrComment;
+		this.userId = userId;
+		this.passWd = passWd;
+		this.desc = desc;
 	}
 }

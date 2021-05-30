@@ -48,7 +48,8 @@ public class WebSocketServerController {
 	
 	@OnOpen
 	public void onOpen(Session session) {
-		System.out.printf(">>>>> [OnOpen-%s] connection\n", session.getId());
+		String ipAddr = (String) session.getUserProperties().get("javax.websocket.endpoint.remoteAddress");
+		System.out.printf(">>>>> [OnOpen-%s] connection from [%s]\n", session.getId(), ipAddr);
 		WebSocketServerController.peers.put(session.getId(), SessionInfo.builder().session(session).build());
 	}
 	

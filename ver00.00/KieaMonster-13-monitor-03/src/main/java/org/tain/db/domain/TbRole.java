@@ -16,52 +16,42 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "tb_svr"
+@Table(name = "tb_role"
 	, indexes = {
-			@Index(name = "svr_idx0", unique = false, columnList = "svr_code"),
+			@Index(name = "role_idx0", unique = false, columnList = "role_cd"),
 	}
 )
-@SequenceGenerator(name = "svr_seq"
-	, sequenceName = "svr_seq"
+@SequenceGenerator(name = "role_seq"
+	, sequenceName = "role_seq"
 	, initialValue = 1
 	, allocationSize = 1
 )
 @Data
 @NoArgsConstructor
 @JsonIgnoreProperties(value = {})
-public class TbSvr {
+public class TbRole {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "svr_seq")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "role_seq")
 	@Column(name = "id")
 	private Long id;
 	
-	@Column(name = "svr_code", length = 16)
-	private String svrCode;
+	@Column(name = "role_cd", length = 20)
+	private String roleCd;
 	
-	@Column(name = "svr_name", length = 64)
-	private String svrName;
-	
-	@Column(name = "svr_desc", length = 1024)
-	private String svrDesc;
-	
-	@Column(name = "svr_comment", length = 1024)
-	private String svrComment;
+	@Column(name = "desc", length = 128)
+	private String desc;
 	
 	//@Column(name = "create_date")
 	//@CreationTimestamp
 	//private LocalDateTime createdDate;
 	
 	@Builder
-	public TbSvr(
-			String svrCode,
-			String svrName,
-			String svrDesc,
-			String svrComment
+	public TbRole(
+			String roleCd,
+			String desc
 			) {
-		this.svrCode = svrCode;
-		this.svrName = svrName;
-		this.svrDesc = svrDesc;
-		this.svrComment = svrComment;
+		this.roleCd = roleCd;
+		this.desc = desc;
 	}
 }

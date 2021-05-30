@@ -43,7 +43,8 @@ public class WebSocketServerController {
 	
 	@OnOpen
 	public void onOpen(Session session) {
-		System.out.println(">>>>> [OnOpen] connection from " + session.getId());
+		String ipAddr = (String) session.getUserProperties().get("javax.websocket.endpoint.remoteAddress");
+		System.out.printf(">>>>> [OnOpen-%s] connection from [%s]\n", session.getId(), ipAddr);
 		WebSocketServerController.sessions.add(session);
 	}
 	
