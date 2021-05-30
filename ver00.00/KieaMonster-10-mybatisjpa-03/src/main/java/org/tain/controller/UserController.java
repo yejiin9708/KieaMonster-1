@@ -25,6 +25,13 @@ public class UserController {
 	
 	@GetMapping(value = {"", "/list1"})
 	public List<User> list1() {
+		if (Boolean.TRUE) {
+			HttpServletRequest request = ((ServletRequestAttributes)RequestContextHolder.currentRequestAttributes()).getRequest();
+			String ip = request.getHeader("X-FORWARDED-FOR");
+			if (ip == null)
+				ip = request.getRemoteAddr();
+			System.out.println(">>>>> Client IP: " + ip);
+		}
 		return this.userMapper.selectAllUsers();
 	}
 	
