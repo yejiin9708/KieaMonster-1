@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
 	<meta charset="utf-8">
-	<title>orgForm.html</title>
+	<title>grpSvrForm.html</title>
 	<!-- css and script -->
 	<th:block th:replace="layout/css::css1"></th:block>
 	<th:block th:replace="layout/script::script1"></th:block>
@@ -27,28 +27,41 @@
 <!-- main -->
 <div class="container">
 	<div class="page-header">
-		<h2>Org Detail</h2>
+		<h2>Grp Svr Detail</h2>
 	</div>
 	<br/>
 	<table class="table">
+		<tr>
+			<th style="padding:13px 0 0 15px;">id</th>
+			<td><input type="text" class="col-md-1 form-control input-sm" th:value="${cmd.id}"/></td>
+		</tr>
 		<tr>
 			<th style="padding:13px 0 0 15px;">org code</th>
 			<td><input type="text" class="col-md-1 form-control input-sm" th:value="${cmd.id}"/></td>
 		</tr>
 		<tr>
-			<th style="padding:13px 0 0 15px;">org name</th>
+			<th style="padding:13px 0 0 15px;">grp code</th>
 			<td><input type="text" class="col-md-1 form-control input-sm" th:value="${cmd.id}"/></td>
 		</tr>
 		<tr>
-			<th style="padding:13px 0 0 15px;">org desc</th>
+			<th style="padding:13px 0 0 15px;">grp name</th>
 			<td><input type="text" class="col-md-1 form-control input-sm" th:value="${cmd.id}"/></td>
 		</tr>
 		<tr>
-			<th style="padding:13px 0 0 15px;">org comment</th>
+			<th style="padding:13px 0 0 15px;">grp desc</th>
 			<td><input type="text" class="col-md-1 form-control input-sm" th:value="${cmd.id}"/></td>
+		</tr>
+		<tr>
+			<th style="padding:13px 0 0 15px;">grp comment</th>
+			<td><textarea id="result" class="col-md-1 form-control input-sm" rows="15" th:value="${cmd.id}"></textarea></td>
 		</tr>
 	</table>
-
+	<div class="pull-right">
+		<a th:href="@{/cmd/save}" class="btn btn-primary">save</a>
+		<a th:href="@{/cmd/change}" class="btn btn-primary">change</a>
+		<a th:href="@{/cmd/del}" class="btn btn-primary">del</a>
+		<a th:href="@{/cmd/cancel}" class="btn btn-primary">cancel</a>
+	</div>
 </div>
 <!-- /main -->
 <br/><br/><br/>

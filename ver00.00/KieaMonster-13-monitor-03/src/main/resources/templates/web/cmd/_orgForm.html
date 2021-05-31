@@ -1,0 +1,250 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="utf-8">
+	<title>form.html</title>
+	<!-- css and script -->
+	<th:block th:replace="layout/css::css1"></th:block>
+	<th:block th:replace="layout/script::script1"></th:block>
+	<!-- /css and script -->
+	<!--
+		font-family:Verdana, Arial, Helvetica, sans-serif;
+		font-family: inherit;
+		font-size: inherit;
+	-->
+	<style>
+	#result {
+		resize: vertical;
+	}
+	textarea {
+		font-family: monospace, "맑은 고딕", serif;
+		font-size: 11px;
+		color: #999999;
+	}
+	</style>
+</head>
+<body>
+<!-- header -->
+<div th:replace="layout/header::header5"></div>
+<!-- /header -->
+
+<!-- main -->
+<div class="container">
+	<div class="page-header">
+		<h2>Organization: Detail Form</h2>
+	</div>
+	<br/>
+	<table class="table table-responsive-sm">
+		<tr>
+			<th style="padding:13px 0 0 15px;" class="col-sm-2">Command</th>
+			<td class="col-sm-10">
+				<input id="cmd" type="text" class="col-md-1 form-control input-sm" placeholder="uname -a"/>
+			</td>
+		</tr>
+		<!--
+		<tr class="hide">
+			<th style="padding:13px 0 0 15px;">Server Code<br>(Multiple)</th>
+			<td>
+				<select id="multiSvrCode" name="multiSvrCode" multiple="multiple" class="form-control">
+					<option th:each="svrCode : ${lstSvrCode}" th:value="${svrCode}" th:text="${svrCode}" th:selected="${svrCode=='TEST01'}"></option>
+				</select>
+			</td>
+		</tr>
+		<tr class="_hide">
+			<th style="padding:13px 0 0 15px;">Server Code</th>
+			<td>
+				<select id="svrCode" name="svrCode" class="form-control">
+					<option th:each="svrCode : ${lstSvrCode}" th:value="${svrCode}" th:text="${svrCode}" th:selected="${svrCode=='TEST03'}"></option>
+				</select>
+			</td>
+		</tr>
+		<tr>
+			<th style="padding:13px 0 0 15px;">Command Loop</th>
+			<td>
+				<select id="cmdLoop" name="cmdLoop" class="form-control">
+					<option th:each="cmdLoop : ${mapCmdLoop}" th:value="${cmdLoop.key}" th:text="${cmdLoop.value}" th:selected="${cmdLoop.key=='60'}"></option>
+				</select>
+			</td>
+		</tr>
+		<tr>
+			<th style="padding:13px 0 0 15px;">Print Direction</th>
+			<td>
+				<select id="prtDir" name="lstPrtDir" class="form-control">
+					<option th:each="prtDir : ${lstPrtDir}" th:value="${prtDir}" th:text="${prtDir}" th:selected="${prtDir=='exchange'}"></option>
+				</select>
+			</td>
+		</tr>
+		-->
+		<tr>
+			<th style="padding:13px 0 10px 15px;"><button type="button" class="btn btn-primary form-control" id="btnSend">Run</button></th>
+			<td>&nbsp;</td>
+		</tr>
+		<tr>
+			<th style="padding:13px 0 0 15px;">result</th>
+			<td><textarea id="result" class="col-md-1 form-control input-sm" rows="15"></textarea></td>
+		</tr>
+		<tr>
+			<th style="padding:13px 0 10px 15px;"><button type="button" class="btn btn-danger form-control" id="btnSend">Kill</button></th>
+			<td>
+				<div class="pull-right">
+					<button type="button" class="btn btn-primary" id="register">Register</button>
+					<button type="button" class="btn btn-primary" id="list">List</button>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td></td>
+		</tr>
+	</table>
+	<div class="hide pull-left">
+		<a th:href="@{/cmd/list}" class="btn btn-primary">list</a>
+		<!-- button id="btnModal" type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">TEST</button -->
+	</div>
+	<!--
+	<div class="pull-right">
+		<button th:if="!${cmd?.id}" type="button" class="btn btn-primary" id="insert1">save1</button>
+		<button th:if="${cmd?.id}" type="button" class="btn btn-primary" id="insert2">save2</button>
+		<button th:if="${cmd?.id}" type="button" class="btn btn-info" id="update">update</button>
+		<button th:if="${cmd?.id}" type="button" class="btn btn-danger" id="delete">delete</button>
+	</div>
+	-->
+</div>
+<!-- /main -->
+<br/><br/><br/>
+
+<!-- footer -->
+<div th:replace="layout/footer::footer1"></div>
+<!-- /footer -->
+
+</body>
+
+<!-- ############################################################################ -->
+<!-- script: init variables -->
+<script th:inline="javascript">
+	if (true) console.log(">>>>> _contextPath_ = " + _contextPath_);
+	
+	var urlOnline = /*[[${urlOnline}]]*/ 'default';
+	console.log(">>>>> urlOnline = " + urlOnline);
+	
+	var lstSvrCode = /*[[${lstSvrCode}]]*/ 'default';
+	console.log(">>>>> lstSvrCode = " + lstSvrCode);
+	
+	var mapCmdLoop = /*[[${mapCmdLoop}]]*/ 'default';
+	console.log(">>>>> mapCmdLoop = ", mapCmdLoop);
+	
+	var lstPrtDir = /*[[${lstPrtDir}]]*/ 'default';
+	console.log(">>>>> lstPrtDir = " + lstPrtDir);
+	
+	var wsUri = /*[[${wsUri}]]*/ 'wsUri';
+	console.log(">>>>> wsUri = " + wsUri);
+</script>
+<!-- /script: variables -->
+
+
+<!-- ############################################################################ -->
+<!-- script: websocket -->
+<script th:inline="javascript">
+	var ws = new WebSocket(wsUri);
+	ws.onopen = function(event) {
+		console.log("* Server connect...");
+		var objAuth = {
+			msgCode: "CMD_AUTH",
+			userId: "KANG",
+			groupCd: "DEV",
+			rollCd: "ADMIN",
+			sections: code
+		};
+		console.log("* auth: " + JSON.stringify(objAuth, null, 2));
+		sendMessage(JSON.stringify(objAuth));
+	};
+	ws.onclose = function(event) {
+		console.log("* Server Disconnect...");
+	};
+	ws.onerror = function(event) {
+		console.log("* error...");
+	};
+	ws.onmessage = function(event) {
+		//console.log("> " + event.data);
+		var objRes = event.data;  // json string
+		var jsonRes = JSON.parse(objRes);
+		if (jsonRes.msgCode == "CMD_AUTH") {
+			console.log(jsonRes.msgCode + " > " + JSON.stringify(jsonRes, null, 2));
+			//$("#result").prepend(JSON.stringify(jsonRes, null, 2));
+			if (jsonRes.cmdType == "CMD_NORMAL") {
+				$("#result").val(JSON.stringify(jsonRes, null, 2));
+			} else if (jsonRes.cmdType == "CMD_SEQUENCE"){
+				$("#result").prepend(JSON.stringify(jsonRes, null, 2));
+			} else {
+				$("#result").append(JSON.stringify(jsonRes, null, 2));
+			}
+		} else {
+			console.log("* " + jsonRes.cmdType + " > " + jsonRes.cmdResult);
+			if (jsonRes.cmdType == "CMD_NORMAL") {
+				$("#result").val(jsonRes.cmdResult);
+			} else if (jsonRes.cmdType == "CMD_SEQUENCE"){
+				$("#result").prepend(jsonRes.cmdResult);
+			} else {
+				$("#result").append(jsonRes.cmdResult);
+			}
+		}
+	};
+	function sendMessage(message) {
+		ws.send(message);
+	}
+	function disconnect() {
+		ws.close();
+	}
+</script>
+<!-- script: websocket -->
+
+
+<!-- ############################################################################ -->
+<!-- script: button of Send -->
+<script>
+	$('#btnSend').click(function() {
+		console.log('Hello btnSend');
+		
+		var multiSvrCode = [];
+		$("#multiSvrCode option:selected").each(function() {
+			console.log(">>>>> multiSvrCode.value = " + $(this).val());
+			console.log(">>>>> multiSvrCode.text = " + $(this).text());
+			multiSvrCode.push($(this).text());
+		});
+		console.log(">>>>> multiSvrCode = " + multiSvrCode);
+		
+		var svrCode = $("#svrCode option:selected").val();
+		console.log(">>>>> svrCode = " + svrCode);
+		
+		var cmdLoop = {
+			value : $("#cmdLoop option:selected").val(),
+			text : $("#cmdLoop option:selected").text()
+		};
+		console.log(">>>>> cmdLoop = " + JSON.stringify(cmdLoop));
+		
+		var prtDir = $("#prtDir option:selected").val();
+		console.log(">>>>> prtDir = " + prtDir);
+		
+		var strCmd = $("#cmd").val();
+		console.log(">>>>> strCmd = " + strCmd);
+		
+		/////////////////////////////////////////////////////////////
+		if (multiSvrCode.length == 0) {
+			$("#multiSvrCode").focus();
+			return false;
+		}
+		if (strCmd == "") {
+			$("#cmd").focus();
+			return false;
+		}
+		
+		return true;
+	});
+</script>
+
+
+
+
+
+
+</html>
