@@ -1,4 +1,4 @@
-package org.tain.vo;
+package org.tain.data;
 
 import javax.websocket.Session;
 

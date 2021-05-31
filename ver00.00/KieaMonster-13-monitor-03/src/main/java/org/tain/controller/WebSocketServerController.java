@@ -15,8 +15,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Controller;
 import org.tain.config.ws.CustomSpringConfigurator;
+import org.tain.data.SessionInfo;
 import org.tain.tasks.parse.ParseTask;
-import org.tain.vo.SessionInfo;
 
 /*
  * uri: ws://localhost:8080/v0.1/websocket
