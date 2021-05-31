@@ -57,9 +57,9 @@ public class RSATestWorking {
 			System.out.println(">>>>> a. publicKey.toString()    : " + publicKey.toString());
 			
 			PrivateKey privateKey = keyPair.getPrivate();
-			System.out.println(">>>>> b. publicKey.getAlgorithm(): " + privateKey.getAlgorithm());
-			System.out.println(">>>>> b. publicKey.getFormat()   : " + privateKey.getFormat());
-			System.out.println(">>>>> b. publicKey.toString()    : " + privateKey.toString());
+			System.out.println(">>>>> b. privateKey.getAlgorithm(): " + privateKey.getAlgorithm());
+			System.out.println(">>>>> b. privateKey.getFormat()   : " + privateKey.getFormat());
+			System.out.println(">>>>> b. privateKey.toString()    : " + privateKey.toString());
 			
 			String plainText = "암호화 할 문자열 입니다.";
 			System.out.println(">>>>> 0. 평 문 plainText: " + plainText);
@@ -74,11 +74,13 @@ public class RSATestWorking {
 			
 			// 공개키를 Base64 인코딩한 문자열을 만듭니다.
 			byte[] bytePublicKey = publicKey.getEncoded();
+			//System.out.println(">>>>> 2. Public  Key: " + new String(bytePublicKey));
 			String base64PublicKey = Base64.getEncoder().encodeToString(bytePublicKey);
 			System.out.println(">>>>> 2. Base64 Public  Key: " + base64PublicKey);
 			
 			// 개인키를 Base64 인코딩한 문자열을 만듭니다.
 			byte[] bytePrivateKey = privateKey.getEncoded();
+			//System.out.println(">>>>> 2. Private Key: " + new String(bytePrivateKey));
 			String base64PrivateKey = Base64.getEncoder().encodeToString(bytePrivateKey);
 			System.out.println(">>>>> 2. Base64 Private Key: " + base64PrivateKey);
 			
