@@ -148,7 +148,7 @@ spring:
 proj-env:
   param:
     name: PARAM (air)
-    home: /Users/kang-air
+    home: /Users/kangmac
     base: /KANG/monster/20210320
     info-path: /json/info
     data-path: /json/data

@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.tain.db.domain.TbCmd;
-import org.tain.db.service.TbCmdService;
 import org.tain.tools.properties.ProjEnvUrlProperties;
 import org.tain.utils.CurrentInfo;
 
@@ -27,15 +26,15 @@ public class ApisController {
 	@Autowired
 	private ProjEnvUrlProperties projEnvUrlProperties;
 	
-	@Autowired
-	private TbCmdService tbCmdService;
+	//@Autowired
+	//private TbCmdService tbCmdService;
 	
 	@RequestMapping(value = {"/list"}, method = {RequestMethod.GET, RequestMethod.POST})
 	public String list(Pageable pageable, Model model) {
 		log.info("KANG-20200730 >>>>> {} {}", CurrentInfo.get());
 		
 		if (Boolean.TRUE) {
-			Page<TbCmd> pageTbCmd = this.tbCmdService.listAll(pageable);
+			Page<TbCmd> pageTbCmd = null; //this.tbCmdService.listAll(pageable);
 			log.info("KANG-20200730 >>>>> pageTbCmd: {}", pageTbCmd);
 			model.addAttribute("cmdList", pageTbCmd);
 		}
@@ -51,7 +50,7 @@ public class ApisController {
 			model.addAttribute("wsUri", this.projEnvUrlProperties.getWsUri());
 		}
 		if (Boolean.TRUE) {
-			TbCmd tbCmd = this.tbCmdService.getOne(id);
+			TbCmd tbCmd = null;  //this.tbCmdService.getOne(id);
 			log.info("KANG-20200730 >>>>> tbCmd: {}", tbCmd);
 			log.info("KANG-20200730 >>>>> wsUri: {}", this.projEnvUrlProperties.getWsUri());
 			model.addAttribute("cmd", tbCmd);
