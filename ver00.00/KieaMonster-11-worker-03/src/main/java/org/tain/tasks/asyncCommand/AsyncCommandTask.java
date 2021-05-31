@@ -8,11 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.DependsOn;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
+import org.tain.data.Cmd;
 import org.tain.tools.node.MonJsonNode;
 import org.tain.tools.queue.MonQueueBox;
 import org.tain.utils.CurrentInfo;
 import org.tain.utils.Sleep;
-import org.tain.vo.Cmd;
 
 import lombok.extern.slf4j.Slf4j;
 

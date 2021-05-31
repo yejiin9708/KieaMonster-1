@@ -9,11 +9,11 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.DependsOn;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
+import org.tain.data.Cmd;
 import org.tain.tasks.asyncCommand.AsyncCommandTask;
 import org.tain.tools.node.MonJsonNode;
 import org.tain.tools.queue.MonQueueBox;
 import org.tain.utils.CurrentInfo;
-import org.tain.vo.Cmd;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
