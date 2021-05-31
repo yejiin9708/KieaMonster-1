@@ -38,6 +38,12 @@ public class HomeController {
 		}
 		
 		if (Boolean.TRUE) {
+			String wsUri = this.projEnvUrlProperties.getWsUri();
+			log.info("KANG-20210405 >>>>> wsUrl: {}", wsUri);
+			model.addAttribute("wsUri", wsUri);
+		}
+		
+		if (Boolean.TRUE) {
 			/*
 			List<TbGrp> lstGrp = this.tbGrpRepository.findAll();
 			model.addAttribute("lstGrp", lstGrp);

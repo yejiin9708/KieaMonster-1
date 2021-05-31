@@ -201,7 +201,7 @@
 					<li><a data-target="#modalSelfInfo" data-toggle="modal" href="#" onclick="alert('Hanwha-Monster (Version 1.0 2021.05.15) for monitoring systems... ');">MyInfo</a></li>
 					
 					<!-- dropdown of menu 'Org' -->
-					<li><a data-target="#modalSelfInfo" data-toggle="modal" href="#">Org</a></li>
+					<li><a th:href="@{/cmd/orgForm}">Organization</a></li>
 					
 					<!-- dropdown of menu 'List' -->
 					<li class="dropdown">
@@ -227,14 +227,10 @@
 		</div>
 	</nav>
 	
-	<!-- ############################################################################ -->
 	<!-- script: init variables -->
 	<script th:inline="javascript">
-		if (true) console.log(">>>>> _contextPath_ = " + _contextPath_);
-		var lstGrp = /*[[${lstGrp}]]*/ 'default';
-		console.log(">>>>> lstGrp: ", lstGrp);
-		var lstSvr = /*[[${lstSvr}]]*/ 'default';
-		console.log(">>>>> lstSvr: ", lstSvr);
+		var wsUri = /*[[${wsUri}]]*/ 'default';
+		if (true) console.log(">>>>> wsUri: ", wsUri);
 	</script>
 	<!-- /script: variables -->
 
