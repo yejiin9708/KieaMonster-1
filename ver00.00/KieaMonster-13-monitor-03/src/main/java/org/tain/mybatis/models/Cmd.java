@@ -22,4 +22,6 @@ public class Cmd {
 	private String cmdType;
 	
 	private String cmdArr;
+	
+	private String content;
 }

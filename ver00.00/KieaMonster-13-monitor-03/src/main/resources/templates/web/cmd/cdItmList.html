@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
 	<meta charset="utf-8">
-	<title>grpList</title>
+	<title>codeItemList.html</title>
 	<!-- css and script -->
 	<th:block th:replace="layout/css::css1"></th:block>
 	<th:block th:replace="layout/script::script1"></th:block>
@@ -16,7 +16,7 @@
 	<!-- main -->
 	<div class="container">
 		<div class="page-header">
-			<h2>Commands List</h2>
+			<h2>Code Item List</h2>
 		</div>
 		<br/>
 		<div>
@@ -24,29 +24,23 @@
 				<thead>
 					<tr>
 						<th class="col-md-1">id</th>
-						<th class="col-md-1">Mst Type</th>
-						<th class="col-md-1">Mst Code</th>
-						<th class="col-md-1">Cmd Code</th>
-						<th class="col-md-1">Cmd Name</th>
-						<th class="col-md-1">Cmd Desc</th>
-						<th class="col-md-1">Cmd Period</th>
-						<th class="col-md-2">Cmd Arr</th>
-						<th class="col-md-2">&nbsp;</th>
+						<th class="col-md-2">code mst</th>
+						<th class="col-md-2">code item</th>
+						<th class="col-md-2">code value</th>
+						<th class="col-md-2">desc</th>
+						<th class="col-md-3">&nbsp;</th>
 					</tr>
 				</thead>
 				<tbody>
 					<tr th:each="itm : ${lst}">
 						<td th:text="${itm.id}">#</td>
-						<td th:text="${itm.mstType}">CODE</td>
-						<td th:text="${itm.mstCode}">cmdArr</td>
-						<td th:text="${itm.cmdCode}">cmdPeriod</td>
-						<td th:text="${itm.cmdName}">cmdPeriod</td>
-						<td th:text="${itm.cmdDesc}">cmdPeriod</td>
-						<td th:text="${itm.cmdPeriod}">cmdPeriod</td>
-						<td th:text="${itm.cmdArr}">cmdPeriod</td>
+						<td th:text="${itm.cdMst}">code mst</td>
+						<td th:text="${itm.cdItm}">code item</td>
+						<td th:text="${itm.cdVal}">code value</td>
+						<td th:text="${itm.desc}">desc</td>
 						<td>
 							<div class="pull-right">
-								<a th:href="@{/cmd/cmdForm(id=${itm.id})}" style="padding:2px;" class="btn btn-primary btn-sm">detail</a>
+								<a th:href="@{/cmd/cdItmForm(id=${itm.id})}" style="padding:2px;" class="btn btn-primary btn-sm">detail</a>
 								<button type="button" style="padding:2px;" class="btn btn-danger btn-sm" id="btnDelete">delete</button>
 							</div>
 						</td>
@@ -55,7 +49,7 @@
 			</table>
 		</div>
 		<div class="pull-right">
-			<a th:href="@{/cmd/cmdForm}" class="btn btn-danger">create</a>
+			<a th:href="@{/cmd/cdItmForm}" class="btn btn-danger">create</a>
 			<a th:href="@{/}" class="btn btn-info">home</a>
 		</div>
 		<br/>

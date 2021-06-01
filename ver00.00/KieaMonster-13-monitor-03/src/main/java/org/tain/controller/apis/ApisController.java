@@ -1,11 +1,5 @@
 package org.tain.controller.apis;
 
-import java.util.Arrays;
-import java.util.LinkedHashMap;
-import java.util.Map;
-
-import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -14,21 +8,33 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.context.request.RequestContextHolder;
-import org.springframework.web.context.request.ServletRequestAttributes;
 import org.tain.db.domain.TbCmd;
 import org.tain.tools.properties.ProjEnvUrlProperties;
 import org.tain.utils.CurrentInfo;
+import org.tain.utils.IpPrint;
 
 import lombok.extern.slf4j.Slf4j;
 
 @Controller
-@RequestMapping(value = {"/cmd"})
+@RequestMapping(value = {"/test"})
 @Slf4j
 public class ApisController {
 
 	@Autowired
 	private ProjEnvUrlProperties projEnvUrlProperties;
+	
+	///////////////////////////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////////////////////////
 	
 	//@Autowired
 	//private TbCmdService tbCmdService;
@@ -51,20 +57,13 @@ public class ApisController {
 		log.info("KANG-20200730 >>>>> {} {}", CurrentInfo.get());
 		
 		if (Boolean.TRUE) {
-			HttpServletRequest request = ((ServletRequestAttributes)RequestContextHolder.currentRequestAttributes()).getRequest();
-			String ip = request.getHeader("X-FORWARDED-FOR");
-			if (ip == null)
-				ip = request.getRemoteAddr();
-			System.out.println(">>>>> Client IP: " + ip);
-		}
-		
-		if (Boolean.TRUE) {
+			IpPrint.print();
 			model.addAttribute("wsUri", this.projEnvUrlProperties.getWsUri());
+			log.info("KANG-20200730 >>>>> wsUri: {}", model.getAttribute("wsUri"));
 		}
 		if (Boolean.TRUE) {
 			TbCmd tbCmd = null;  //this.tbCmdService.getOne(id);
 			log.info("KANG-20200730 >>>>> tbCmd: {}", tbCmd);
-			log.info("KANG-20200730 >>>>> wsUri: {}", this.projEnvUrlProperties.getWsUri());
 			model.addAttribute("cmd", tbCmd);
 		}
 		
@@ -73,27 +72,7 @@ public class ApisController {
 	
 	///////////////////////////////////////////////////////////////////////////
 	
-	@RequestMapping(value = {"/orgForm"}, method = {RequestMethod.GET, RequestMethod.POST})
-	public String orgForm(Model model) {
-		log.info("KANG-20200730 >>>>> {} {}", CurrentInfo.get());
-		
-		if (Boolean.TRUE) {
-			HttpServletRequest request = ((ServletRequestAttributes)RequestContextHolder.currentRequestAttributes()).getRequest();
-			String ip = request.getHeader("X-FORWARDED-FOR");
-			if (ip == null)
-				ip = request.getRemoteAddr();
-			System.out.println(">>>>> Client IP: " + ip);
-		}
-		
-		if (Boolean.TRUE) {
-			model.addAttribute("wsUri", this.projEnvUrlProperties.getWsUri());
-		}
-		
-		return "web/cmd/orgForm";
-	}
-	
-	///////////////////////////////////////////////////////////////////////////
-	
+	/*
 	@RequestMapping(value = {"/testCmdIntegrate"}, method = {RequestMethod.GET, RequestMethod.POST})
 	public String testCmdIntegrate(Model model) {
 		log.info("KANG-20200730 >>>>> {} {}", CurrentInfo.get());
@@ -128,6 +107,7 @@ public class ApisController {
 		
 		return "web/cmd/testCmdIntegrate";
 	}
+	*/
 	
 	/*
 	@RequestMapping(value = {""}, method = {RequestMethod.GET, RequestMethod.POST})

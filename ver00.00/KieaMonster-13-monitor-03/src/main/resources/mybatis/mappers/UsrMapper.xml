@@ -5,7 +5,8 @@
 
 <mapper namespace="org.tain.mybatis.mappers.UsrMapper">
 
-	<select id="selectAllUsr" resultType="Usr">
+	<!-- selectAll -->
+	<select id="selectAll" resultType="Usr">
 		select
 			id
 			, user_id
@@ -17,6 +18,19 @@
 	<if test='id != null and id != ""'>
 			and id = #{id}
 	</if>
+	</select>
+	
+	<!-- selectOne -->
+	<select id="selectOne" resultType="Usr">
+		select
+			id
+			, user_id
+			, '*****' as pass_wd
+			, desc
+		from
+			tb_usr
+		where 1=1
+			and id = #{id}
 	</select>
 	
 </mapper>

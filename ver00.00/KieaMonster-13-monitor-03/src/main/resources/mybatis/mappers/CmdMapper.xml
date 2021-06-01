@@ -5,7 +5,8 @@
 
 <mapper namespace="org.tain.mybatis.mappers.CmdMapper">
 
-	<select id="selectAllCmd" resultType="Cmd">
+	<!-- id: selectAll -->
+	<select id="selectAll" resultType="Cmd">
 		select
 			id
 			, mst_type
@@ -19,9 +20,24 @@
 		from
 			tb_cmd
 		where 1=1
-	<if test='mstCode != null and mstCode != ""'>
-			and mst_code = #{mstCode}
-	</if>
+	</select>
+	
+	<!-- id: selectOne -->
+	<select id="selectOne" resultType="Cmd">
+		select
+			id
+			, mst_type
+			, mst_code
+			, cmd_code
+			, cmd_name
+			, cmd_desc
+			, cmd_period
+			, cmd_type
+			, cmd_arr
+		from
+			tb_cmd
+		where 1=1
+			and id = #{id}
 	</select>
 	
 </mapper>

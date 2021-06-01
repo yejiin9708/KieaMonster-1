@@ -8,7 +8,6 @@ import org.tain.mybatis.models.Usr;
 @Mapper
 public interface UsrMapper {
 
-	List<Usr> selectAllUsr();
-	
-	List<Usr> selectAllUsr(Long id);
+	List<Usr> selectAll();
+	Usr selectOne(Long id);
 }

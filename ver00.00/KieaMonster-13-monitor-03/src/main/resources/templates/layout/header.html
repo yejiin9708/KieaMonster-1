@@ -209,17 +209,17 @@
 						<ul class="dropdown-menu">
 							<li><a href="#"><span class="glyphicon glyphicon-list-all"></span>&nbsp;Group</a></li>
 							<li><a href="#"><span class="glyphicon glyphicon-list-all"></span>&nbsp;Server</a></li>
-							<li><a href="#"><span class="glyphicon glyphicon-list-all"></span>&nbsp;Command</a></li>
+							<li><a th:href="@{/cmd/cmdList}"><span class="glyphicon glyphicon-list-all"></span>&nbsp;Command</a></li>
 							<li class="divider"></li>
-							<li><a href="#"><span class="glyphicon glyphicon-list-all"></span>&nbsp;Code</a></li>
+							<li><a th:href="@{/cmd/cdMstList}"><span class="glyphicon glyphicon-list-all"></span>&nbsp;Code</a></li>
 						</ul>
 					</li>
 					
 					<!-- dropdown of menu 'Org' -->
-					<li><a data-target="#modalSelfInfo" data-toggle="modal" href="#">User</a></li>
+					<li><a th:href="@{/cmd/usrList}">User</a></li>
 					
 					<!-- dropdown of menu 'Org' -->
-					<li><a data-target="#modalSelfInfo" data-toggle="modal" href="#">Browser</a></li>
+					<li><a th:href="@{/cmd/brwList}">Browser</a></li>
 					
 					<li class="hide"><a href="/sample05/">Statistic</a></li>
 				</ul>
@@ -229,8 +229,8 @@
 	
 	<!-- script: init variables -->
 	<script th:inline="javascript">
-		var wsUri = /*[[${wsUri}]]*/ 'default';
-		if (true) console.log(">>>>> wsUri: ", wsUri);
+		//var wsUri = /*[[${wsUri}]]*/ 'default';
+		//if (true) console.log(">>>>> wsUri: ", wsUri);
 	</script>
 	<!-- /script: variables -->
 
