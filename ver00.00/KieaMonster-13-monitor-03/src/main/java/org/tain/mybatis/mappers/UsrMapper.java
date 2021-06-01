@@ -1,13 +1,14 @@
 package org.tain.mybatis.mappers;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
-import org.tain.mybatis.models.Usr;
 
 @Mapper
 public interface UsrMapper {
 
-	List<Usr> selectAll();
-	Usr selectOne(Long id);
+	// usr
+	List<Map<String,Object>> selectAll(Map<String,Object> map);
+	Map<String,Object> selectOne(Map<String,Object> map);
 }

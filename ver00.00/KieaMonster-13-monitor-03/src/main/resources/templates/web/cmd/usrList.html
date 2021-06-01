@@ -31,14 +31,14 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr th:each="usr : ${lst}">
-						<td th:text="${usr.id}">#</td>
-						<td th:text="${usr.userId}">userId</td>
-						<td th:text="${usr.passWd}">passWd</td>
-						<td th:text="${usr.desc}">desc</td>
+					<tr th:each="itm : ${lst}">
+						<td th:text="${itm.id}">#</td>
+						<td th:text="${itm.userId}">userId</td>
+						<td th:text="${itm.passWd}">passWd</td>
+						<td th:text="${itm.desc}">desc</td>
 						<td>
 							<div class="pull-right">
-								<a th:href="@{/cmd/usrForm(id=${usr.id})}" style="padding:2px;" class="btn btn-primary btn-sm">detail</a>
+								<a th:href="@{/cmd/usrForm(id=${itm.id})}" style="padding:2px;" class="btn btn-primary btn-sm">detail</a>
 								<button type="button" style="padding:2px;" class="btn btn-primary btn-sm" id="btnDel">delete</button>
 							</div>
 						</td>

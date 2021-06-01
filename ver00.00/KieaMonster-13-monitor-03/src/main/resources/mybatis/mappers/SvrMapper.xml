@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.tain.mybatis.mappers.SvrMapper">
+
+	<!-- id: selectAll -->
+	<select id="selectAll" parameterType="LowerMap"  resultType="LowerMap">
+		select
+			id
+			, svr_code
+			, svr_name
+			, svr_desc
+			, svr_comment
+		from
+			tb_svr
+		where 1=1
+	</select>
+	
+	<!-- id: selectOne -->
+	<select id="selectOne"  parameterType="LowerMap"  resultType="LowerMap">
+		select
+			id
+			, svr_code
+			, svr_name
+			, svr_desc
+			, svr_comment
+		from
+			tb_svr
+		where 1=1
+			and id = #{id}
+	</select>
+	
+	<!-- ==================================================================== -->
+	<!-- id: selectAllByGrp -->
+	<select id="selectAllByGrp"  parameterType="LowerMap"  resultType="LowerMap">
+		select
+			svr.id
+			, grp.grp_code
+			, svr.svr_code
+			, svr.svr_name
+			, svr.svr_desc
+			, svr.svr_comment
+		from
+			tb_svr as svr
+			, tb_grpsvr as grp
+		where 1=1
+			and grp.grp_code = #{code}
+			and svr.svr_code = grp.svr_code
+	</select>
+	
+	<!-- id: selectOneByGrp -->
+	<select id="selectOneByGrp"  parameterType="LowerMap"  resultType="LowerMap">
+		select
+			svr.id
+			, grp.grp_code
+			, svr.svr_code
+			, svr.svr_name
+			, svr.svr_desc
+			, svr.svr_comment
+		from
+			tb_svr as svr
+			, tb_grpsvr as grp
+		where 1=1
+			and svr.id = #{id}
+			and grp.grp_code = #{code}
+			and svr.svr_code = grp.svr_code
+	</select>
+	
+</mapper>

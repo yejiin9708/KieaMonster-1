@@ -1,12 +1,13 @@
 package org.tain.controller.mon;
 
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.tain.mybatis.mappers.OrgMapper;
-import org.tain.mybatis.models.Org;
 import org.tain.tools.properties.ProjEnvUrlProperties;
 import org.tain.utils.CurrentInfo;
 import org.tain.utils.IpPrint;
@@ -39,10 +40,14 @@ public class OrgController {
 			model.addAttribute("wsUri", wsUri);
 		}
 		
+		Map<String,Object> mapIn = null;
 		if (Boolean.TRUE) {
-			Org org = this.orgMapper.selectOne();
-			log.info("KANG-20200730 >>>>> org: {}", org);
-			model.addAttribute("org", org);
+		}
+		
+		if (Boolean.TRUE) {
+			Map<String,Object> itm = this.orgMapper.selectOne(mapIn);
+			log.info("KANG-20200730 >>>>> itm: {}", itm);
+			model.addAttribute("itm", itm);
 		}
 		
 		return "web/cmd/orgForm";

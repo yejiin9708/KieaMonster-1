@@ -6,9 +6,13 @@ import java.util.Map;
 import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
-public interface CdItmMapper {
+public interface SvrMapper {
 
-	// cdItm
+	// svr
 	List<Map<String,Object>> selectAll(Map<String,Object> map);
 	Map<String,Object> selectOne(Map<String,Object> map);
+	
+	// grp
+	List<Map<String,Object>> selectAllByGrp(Map<String,Object> map);
+	Map<String,Object> selectOneByGrp(Map<String,Object> map);
 }

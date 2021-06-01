@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="utf-8">
+	<title>grpCmdForm.html</title>
+	<!-- css and script -->
+	<th:block th:replace="layout/css::css1"></th:block>
+	<th:block th:replace="layout/script::script1"></th:block>
+	<!-- /css and script -->
+	<style>
+	#result {
+		resize: vertical;
+	}
+	textarea {
+		font-family: monospace, "맑은 고딕", serif;
+		font-size: 11px;
+		color: #999999;
+	}
+	</style>
+
+</head>
+<body>
+<!-- header -->
+<div th:replace="layout/header::header5"></div>
+<!-- /header -->
+
+<!-- main -->
+<div class="container">
+	<div class="page-header">
+		<h2>Grp Cmd Detail</h2>
+	</div>
+	<br/>
+	<table class="table">
+		<tr>
+			<th style="padding:13px 0 0 15px;">id</th>
+			<td><input type="text" class="col-md-1 form-control input-sm" th:value="${cmd.id}"/></td>
+		</tr>
+		<tr>
+			<th style="padding:13px 0 0 15px;">mst type</th>
+			<td><input type="text" class="col-md-1 form-control input-sm" th:value="${cmd.id}"/></td>
+		</tr>
+		<tr>
+			<th style="padding:13px 0 0 15px;">mst code</th>
+			<td><input type="text" class="col-md-1 form-control input-sm" th:value="${cmd.id}"/></td>
+		</tr>
+		<tr>
+			<th style="padding:13px 0 0 15px;">cmd code</th>
+			<td><input type="text" class="col-md-1 form-control input-sm" th:value="${cmd.id}"/></td>
+		</tr>
+		<tr>
+			<th style="padding:13px 0 0 15px;">cmd name</th>
+			<td><input type="text" class="col-md-1 form-control input-sm" th:value="${cmd.id}"/></td>
+		</tr>
+		<tr>
+			<th style="padding:13px 0 0 15px;">cmd desc</th>
+			<td><input type="text" class="col-md-1 form-control input-sm" th:value="${cmd.id}"/></td>
+		</tr>
+		<tr>
+			<th style="padding:13px 0 0 15px;">cmd period</th>
+			<td><input type="text" class="col-md-1 form-control input-sm" th:value="${cmd.id}"/></td>
+		</tr>
+		<tr>
+			<th style="padding:13px 0 0 15px;">cmd type</th>
+			<td><input type="text" class="col-md-1 form-control input-sm" th:value="${cmd.id}"/></td>
+		</tr>
+		<tr>
+			<th style="padding:13px 0 0 15px;">status arr</th>
+			<td><textarea id="result" class="col-md-1 form-control input-sm" rows="15" th:value="${cmd.id}"></textarea></td>
+		</tr>
+	</table>
+	<div class="pull-right">
+		<a th:href="@{/cmd/stop}" class="btn btn-primary">stop</a>
+		<a th:href="@{/cmd/run}" class="btn btn-primary">run</a>
+		<a th:href="@{/cmd/save}" class="btn btn-primary">save</a>
+		<a th:href="@{/cmd/change}" class="btn btn-primary">change</a>
+		<a th:href="@{/cmd/del}" class="btn btn-primary">del</a>
+		<a th:href="@{/cmd/cancel}" class="btn btn-primary">cancel</a>
+	</div>
+	<br/><br/>
+</div>
+<!-- /main -->
+<br/><br/><br/>
+
+<!-- footer -->
+<div th:replace="layout/footer::footer1"></div>
+<!-- /footer -->
+
+</body>
+<!-- script: variables -->
+<script th:inline="javascript">
+	if (true) console.log(">>>>> _contextPath_ = " + _contextPath_);
+	var urlOnline = /*[[${urlOnline}]]*/ 'default';
+	console.log(">>>>> urlOnline = " + urlOnline);
+	
+	var wsUri = /*[[${wsUri}]]*/ 'wsUri';
+	console.log(">>>>> wsUri = " + wsUri);
+	
+	var svrCode = /*[[${cmd.svrCode}]]*/ 'svrCode';
+	var cmdCode = /*[[${cmd.cmdCode}]]*/ 'cmdCode';
+	var code = svrCode + "-" + cmdCode;
+	console.log(">>>>> code = " + code);
+</script>
+<!-- /script: variables -->
+
+
+<!-- script: websocket -->
+<script th:inline="javascript">
+	var ws = new WebSocket(wsUri);
+	ws.onopen = function(event) {
+		console.log("* Server connect...");
+		var objAuth = {
+			msgCode: "CMD_AUTH",
+			userId: "KANG",
+			groupCd: "DEV",
+			rollCd: "ADMIN",
+			sections: code
+		};
+		console.log("* auth: " + JSON.stringify(objAuth, null, 2));
+		sendMessage(JSON.stringify(objAuth));
+	};
+	ws.onclose = function(event) {
+		console.log("* Server Disconnect...");
+	};
+	ws.onerror = function(event) {
+		console.log("* error...");
+	};
+	ws.onmessage = function(event) {
+		//console.log("> " + event.data);
+		var objRes = event.data;  // json string
+		var jsonRes = JSON.parse(objRes);
+		if (jsonRes.msgCode == "CMD_AUTH") {
+			console.log(jsonRes.msgCode + " > " + JSON.stringify(jsonRes, null, 2));
+			//$("#result").prepend(JSON.stringify(jsonRes, null, 2));
+			if (jsonRes.cmdType === "CMD_NORMAL") {
+				$("#result").val(JSON.stringify(jsonRes, null, 2));
+			} else if (jsonRes.cmdType === "CMD_SEQUENCE"){
+				$("#result").prepend(JSON.stringify(jsonRes, null, 2));
+			} else {
+				$("#result").append(JSON.stringify(jsonRes, null, 2));
+			}
+		} else {
+			console.log("* " + jsonRes.cmdType + " > " + jsonRes.cmdResult);
+			if (jsonRes.cmdType === "CMD_NORMAL") {
+				$("#result").val(jsonRes.cmdResult);
+			} else if (jsonRes.cmdType === "CMD_SEQUENCE"){
+				$("#result").prepend(jsonRes.cmdResult);
+			} else {
+				$("#result").append(jsonRes.cmdResult);
+			}
+		}
+	};
+	function sendMessage(message) {
+		ws.send(message);
+	}
+	function disconnect() {
+		ws.close();
+	}
+</script>
+<!-- script: websocket -->
+
+</html>

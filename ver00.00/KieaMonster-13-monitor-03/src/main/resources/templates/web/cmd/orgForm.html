@@ -33,35 +33,39 @@
 	<table class="table">
 		<tr>
 			<th class="col-sm-2" style="padding:13px 0 0 15px;">id</th>
-			<td class="col-sm-10"><input type="text" class="col-md-1 form-control input-sm" th:value="${org.id}" readonly/></td>
+			<td class="col-sm-10"><input type="text" class="col-md-1 form-control input-sm" th:value="${itm.id}" readonly/></td>
 		</tr>
 		<tr>
 			<th style="padding:13px 0 0 15px;">org code</th>
-			<td><input type="text" class="col-md-1 form-control input-sm" th:value="${org.orgCode}" readonly/></td>
+			<td><input type="text" class="col-md-1 form-control input-sm" th:value="${itm.orgCode}" readonly/></td>
 		</tr>
 		<tr>
 			<th style="padding:13px 0 0 15px;">org name</th>
-			<td><input type="text" class="col-md-1 form-control input-sm" th:value="${org.orgName}" readonly/></td>
+			<td><input type="text" class="col-md-1 form-control input-sm" th:value="${itm.orgName}" readonly/></td>
 		</tr>
 		<tr>
 			<th style="padding:13px 0 0 15px;">org desc</th>
-			<td><input type="text" class="col-md-1 form-control input-sm" th:value="${org.orgDesc}" readonly/></td>
+			<td><input type="text" class="col-md-1 form-control input-sm" th:value="${itm.orgDesc}" readonly/></td>
 		</tr>
 		<tr>
 			<th style="padding:13px 0 0 15px;">org comment</th>
-			<td><input type="text" class="col-md-1 form-control input-sm" th:value="${org.orgComment}" readonly/></td>
+			<td><input type="text" class="col-md-1 form-control input-sm" th:value="${itm.orgComment}" readonly/></td>
 		</tr>
 		<tr>
 			<th style="padding:13px 0 0 15px;">content</th>
-			<td><input type="text" class="col-md-1 form-control input-sm" th:value="${org.content}"/></td>
+			<td><input type="text" class="col-md-1 form-control input-sm"/></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td></td>
 		</tr>
 	</table>
 	<div class="pull-right">
-		<button th:if="!${org?.id}" type="button" class="btn btn-primary" id="btnInsert">save</button>
-		<button th:if="!${org?.id}" type="button" class="btn btn-info" id="btnUpdate">update</button>
-		<button th:if="!${org?.id}" type="button" class="btn btn-info" id="btnMain">main</button>
-		<a th:if="!${org?.id}" th:href="@{/}" class="btn btn-info">main</a>
-		<a th:if="${org?.id}" th:href="@{/}" class="btn btn-info">home</a>
+		<button th:if="!${itm?.id}" type="button" class="btn btn-primary" id="btnInsert">save</button>
+		<button th:if="!${itm?.id}" type="button" class="btn btn-info" id="btnUpdate">update</button>
+		<button th:if="!${itm?.id}" type="button" class="btn btn-info" id="btnMain">main</button>
+		<a th:if="!${itm?.id}" th:href="@{/}" class="btn btn-info">main</a>
+		<a th:if="${itm?.id}" th:href="@{/}" class="btn btn-info">home</a>
 	</div>
 
 </div>
@@ -78,8 +82,8 @@
 <script th:inline="javascript">
 	var wsUri = /*[[${wsUri}]]*/ 'wsUri';
 	console.log(">>>>> wsUri = " + wsUri);
-	var org = /*[[${org}]]*/ 'svrCode';
-	console.log(">>>>> org = " + org);
+	var itm = /*[[${itm}]]*/ 'svrCode';
+	console.log(">>>>> itm = " + itm);
 </script>
 <!-- /script: variables -->
 

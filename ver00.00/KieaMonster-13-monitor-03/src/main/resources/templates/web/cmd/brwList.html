@@ -31,14 +31,14 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr th:each="brw : ${lstBrw}">
-						<td th:text="${brw.id}">#</td>
-						<td th:text="${brw.ipAddr}">ipAddr</td>
-						<td th:text="${brw.userId}">userId</td>
-						<td th:text="${brw.createDate}">createDate</td>
+					<tr th:each="itm : ${lst}">
+						<td th:text="${itm.id}">#</td>
+						<td th:text="${itm.ipAddr}">ipAddr</td>
+						<td th:text="${itm.userId}">userId</td>
+						<td th:text="${itm.createDate}">createDate</td>
 						<td>
 							<div class="pull-right">
-								<a th:href="@{/cmd/brwForm(id=${brw.id})}" style="padding:2px;" class="btn btn-primary btn-sm">detail</a>
+								<a th:href="@{/cmd/brwForm(id=${itm.id})}" style="padding:2px;" class="btn btn-primary btn-sm">detail</a>
 							</div>
 						</td>
 					</tr>
@@ -75,8 +75,8 @@
 <script th:inline="javascript">
 	var wsUri = /*[[${wsUri}]]*/ 'wsUri';
 	console.log(">>>>> wsUri = " + wsUri);
-	var org = /*[[${org}]]*/ 'svrCode';
-	console.log(">>>>> org = " + org);
+	var lst = /*[[${lst}]]*/ 'svrCode';
+	console.log(">>>>> lst = " + lst);
 </script>
 <!-- /script: variables -->
 

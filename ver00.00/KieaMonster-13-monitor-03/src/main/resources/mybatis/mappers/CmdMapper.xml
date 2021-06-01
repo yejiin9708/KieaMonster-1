@@ -6,7 +6,7 @@
 <mapper namespace="org.tain.mybatis.mappers.CmdMapper">
 
 	<!-- id: selectAll -->
-	<select id="selectAll" resultType="Cmd">
+	<select id="selectAll" parameterType="LowerMap"  resultType="LowerMap">
 		select
 			id
 			, mst_type
@@ -23,7 +23,7 @@
 	</select>
 	
 	<!-- id: selectOne -->
-	<select id="selectOne" resultType="Cmd">
+	<select id="selectOne" parameterType="LowerMap"  resultType="LowerMap">
 		select
 			id
 			, mst_type
@@ -37,6 +37,86 @@
 		from
 			tb_cmd
 		where 1=1
+			and id = #{id}
+	</select>
+	
+	<!-- ==================================================================== -->
+	<!-- id: selectAllByGrp -->
+	<select id="selectAllByGrp" parameterType="LowerMap"  resultType="LowerMap">
+		select
+			id
+			, mst_type
+			, mst_code
+			, cmd_code
+			, cmd_name
+			, cmd_desc
+			, cmd_period
+			, cmd_type
+			, cmd_arr
+		from
+			tb_cmd
+		where 1=1
+			and mst_type = 'CMD_GRP'
+			and mst_code = #{code}
+	</select>
+	
+	<!-- id: selectOneByGrp -->
+	<select id="selectOneByGrp" parameterType="LowerMap" resultType="LowerMap">
+		select
+			id
+			, mst_type
+			, mst_code
+			, cmd_code
+			, cmd_name
+			, cmd_desc
+			, cmd_period
+			, cmd_type
+			, cmd_arr
+		from
+			tb_cmd
+		where 1=1
+			and mst_type = 'CMD_GRP'
+			and mst_code = #{code}
+			and id = #{id}
+	</select>
+	
+	<!-- ==================================================================== -->
+	<!-- id: selectAllBySvr -->
+	<select id="selectAllBySvr" parameterType="LowerMap"  resultType="LowerMap">
+		select
+			id
+			, mst_type
+			, mst_code
+			, cmd_code
+			, cmd_name
+			, cmd_desc
+			, cmd_period
+			, cmd_type
+			, cmd_arr
+		from
+			tb_cmd
+		where 1=1
+			and mst_type = 'CMD_SVR'
+			and mst_code = #{code}
+	</select>
+	
+	<!-- id: selectOneBySvr -->
+	<select id="selectOneBySvr" parameterType="LowerMap" resultType="LowerMap">
+		select
+			id
+			, mst_type
+			, mst_code
+			, cmd_code
+			, cmd_name
+			, cmd_desc
+			, cmd_period
+			, cmd_type
+			, cmd_arr
+		from
+			tb_cmd
+		where 1=1
+			and mst_type = 'CMD_SVR'
+			and mst_code = #{code}
 			and id = #{id}
 	</select>
 	

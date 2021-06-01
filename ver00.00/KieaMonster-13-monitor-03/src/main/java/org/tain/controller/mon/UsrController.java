@@ -1,6 +1,8 @@
 package org.tain.controller.mon;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -9,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.tain.mybatis.mappers.UsrMapper;
-import org.tain.mybatis.models.Usr;
 import org.tain.tools.properties.ProjEnvUrlProperties;
 import org.tain.utils.CurrentInfo;
 import org.tain.utils.IpPrint;
@@ -42,8 +43,12 @@ public class UsrController {
 			model.addAttribute("wsUri", wsUri);
 		}
 		
+		Map<String,Object> mapIn = null;
 		if (Boolean.TRUE) {
-			List<Usr> lst = this.usrMapper.selectAll();
+		}
+		
+		if (Boolean.TRUE) {
+			List<Map<String,Object>> lst = this.usrMapper.selectAll(mapIn);
 			log.info("KANG-20200730 >>>>> lst: {}", lst);
 			model.addAttribute("lst", lst);
 		}
@@ -68,10 +73,16 @@ public class UsrController {
 			model.addAttribute("wsUri", wsUri);
 		}
 		
+		Map<String,Object> mapIn = null;
 		if (Boolean.TRUE) {
-			Usr usr = this.usrMapper.selectOne(id);
-			log.info("KANG-20200730 >>>>> usr: {}", usr);
-			model.addAttribute("usr", usr);
+			mapIn = new HashMap<>();
+			mapIn.put("id", id);
+		}
+		
+		if (Boolean.TRUE) {
+			Map<String,Object> itm = this.usrMapper.selectOne(mapIn);
+			log.info("KANG-20200730 >>>>> itm: {}", itm);
+			model.addAttribute("itm", itm);
 		}
 		
 		return "web/cmd/usrForm";

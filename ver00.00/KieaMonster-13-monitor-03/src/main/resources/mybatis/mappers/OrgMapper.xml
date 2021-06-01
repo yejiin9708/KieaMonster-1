@@ -6,7 +6,7 @@
 <mapper namespace="org.tain.mybatis.mappers.OrgMapper">
 
 	<!-- id: selectOne -->
-	<select id="selectOne" resultType="Org">
+	<select id="selectOne" parameterType="LowerMap"  resultType="LowerMap">
 		select
 			id
 			, org_code

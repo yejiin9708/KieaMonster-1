@@ -30,14 +30,14 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr th:each="cd : ${lst}">
-						<td th:text="${cd.id}">#</td>
-						<td th:text="${cd.cdMst}">cd mst</td>
-						<td th:text="${cd.desc}">desc</td>
+					<tr th:each="itm : ${lst}">
+						<td th:text="${itm.id}">#</td>
+						<td th:text="${itm.cdMst}">cd mst</td>
+						<td th:text="${itm.desc}">desc</td>
 						<td>
 							<div class="pull-right">
-								<a th:href="@{/cmd/cdMstForm(id=${cd.id})}" style="padding:2px;" class="btn btn-primary btn-sm">detail</a>
-								<a th:href="@{/cmd/cdItmList(cdmst=${cd.cdMst})}" style="padding:2px;" class="btn btn-primary btn-sm">items</a>
+								<a th:href="@{/cmd/cdMstForm(id=${itm.id})}" style="padding:2px;" class="btn btn-primary btn-sm">detail</a>
+								<a th:href="@{/cmd/cdItmList(cdmst=${itm.cdMst})}" style="padding:2px;" class="btn btn-primary btn-sm">items</a>
 								<button type="button" style="padding:2px;" class="btn btn-primary btn-sm" id="btnDelete">delete</button>
 							</div>
 						</td>

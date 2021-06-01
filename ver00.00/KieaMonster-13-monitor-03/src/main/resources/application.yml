@@ -102,6 +102,7 @@ logging:
   level:
     root: info
     org.tain.*: info
+    org.tain.mybatis.mappers: trace
     org.hibernate.SQL: info
     org.hibernate.type: info
     org.hibernate.type.descriptor.sql.BasicBinder: trace

@@ -6,7 +6,7 @@
 <mapper namespace="org.tain.mybatis.mappers.UsrMapper">
 
 	<!-- selectAll -->
-	<select id="selectAll" resultType="Usr">
+	<select id="selectAll" parameterType="LowerMap"  resultType="LowerMap">
 		select
 			id
 			, user_id
@@ -21,7 +21,7 @@
 	</select>
 	
 	<!-- selectOne -->
-	<select id="selectOne" resultType="Usr">
+	<select id="selectOne" parameterType="LowerMap"  resultType="LowerMap">
 		select
 			id
 			, user_id
