@@ -14,5 +14,9 @@ public class ProjEnvUrlProperties {
 	
 	private String wsUri;
 	
+	private String workerUrl;
+	private String commanderUrl;
+	private String monitorUrl;
+	
 	private String dummy;  // null
 }

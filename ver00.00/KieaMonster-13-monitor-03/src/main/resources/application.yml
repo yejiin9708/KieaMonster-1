@@ -159,6 +159,9 @@ proj-env:
   url:
     name: URL (air)
     ws-uri: ws://localhost:8093/v0.1/websocket
+    worker-url:    http://localhost:8091/v0.1
+    commander-url: http://localhost:8092/v0.1
+    monitor-url:   http://localhost:8093/v0.1
 
 ---
 # --------------------------------------------------------

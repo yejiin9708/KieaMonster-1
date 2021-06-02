@@ -1,6 +1,5 @@
 package org.tain.controller;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -19,9 +18,9 @@ import org.tain.utils.IpPrint;
 import lombok.extern.slf4j.Slf4j;
 
 @RestController
-@RequestMapping("/monitor")
+@RequestMapping("/commander")
 @Slf4j
-public class MonitorController {
+public class CommanderController {
 
 	@Autowired
 	private ProjEnvUrlProperties projEnvUrlProperties;
@@ -42,7 +41,7 @@ public class MonitorController {
 			log.info(">>>>> request.body: " + reqData);
 		}
 		
-		String httpUrl = this.projEnvUrlProperties.getCommanderUrl() + "/commander/cmd/start";
+		String httpUrl = this.projEnvUrlProperties.getWorkerUrl() + "/worker/cmd/start";
 		log.info(">>>>> httpUrl: " + httpUrl);
 		String resData = this.monHttpClient.post(httpUrl, reqData);
 		

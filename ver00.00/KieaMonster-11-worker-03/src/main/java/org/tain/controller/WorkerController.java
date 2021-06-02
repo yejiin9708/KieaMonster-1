@@ -1,7 +1,5 @@
 package org.tain.controller;
 
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -11,24 +9,16 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-import org.tain.httpClient.MonHttpClient;
-import org.tain.tools.properties.ProjEnvUrlProperties;
 import org.tain.utils.CurrentInfo;
 import org.tain.utils.IpPrint;
 
 import lombok.extern.slf4j.Slf4j;
 
 @RestController
-@RequestMapping("/monitor")
+@RequestMapping("/worker")
 @Slf4j
-public class MonitorController {
+public class WorkerController {
 
-	@Autowired
-	private ProjEnvUrlProperties projEnvUrlProperties;
-	
-	@Autowired
-	private MonHttpClient monHttpClient;
-	
 	@RequestMapping(value = {"/cmd/start"}, method = {RequestMethod.GET, RequestMethod.POST})
 	public ResponseEntity<?> cmdStart(HttpEntity<String> httpEntity) throws Exception {
 		log.info("KANG-20200730 >>>>> {} {}", CurrentInfo.get());
@@ -42,9 +32,7 @@ public class MonitorController {
 			log.info(">>>>> request.body: " + reqData);
 		}
 		
-		String httpUrl = this.projEnvUrlProperties.getCommanderUrl() + "/commander/cmd/start";
-		log.info(">>>>> httpUrl: " + httpUrl);
-		String resData = this.monHttpClient.post(httpUrl, reqData);
+		String resData = "{\"msgCode\": \"SUCCESS\"}";  //this.monHttpClient.post(httpUrl, reqData);
 		
 		MultiValueMap<String,String> headers = null;
 		if (Boolean.TRUE) {
