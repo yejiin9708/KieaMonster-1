@@ -1,4 +1,4 @@
-package org.tain.controller.apis;
+package org.tain.controller._apis;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;

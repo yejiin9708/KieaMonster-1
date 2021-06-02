@@ -81,7 +81,8 @@
 		<button th:if="${itm?.id}" type="button" class="btn btn-danger" id="btnChange">change</button>
 		<button th:if="${itm?.id}" type="button" class="btn btn-danger" id="btnDelete">delete</button>
 		
-		<a th:if="${itm?.id}" th:href="@{'/cmd/cmdView'(id=${itm?.id})}" class="btn btn-info">view</a>
+		<button th:if="${itm?.mstType.equals('CMD_SVR')}" type="button" class="btn btn-info" data-toggle="modal" data-target="#modalViewSvr" id="btnViewSvr">viewSvr</button>
+		<button th:if="${itm?.mstType.equals('CMD_GRP')}" type="button" class="btn btn-info" data-toggle="modal" data-target="#modalViewGrp" id="btnViewGrp">viewGrp</button>
 		<a th:href="@{/cmd/cmdList}" class="btn btn-info">list</a>
 		<a th:href="@{/}" class="btn btn-info">home</a>
 	</div>
@@ -96,13 +97,12 @@
 
 </body>
 
-<!-- ================================================================================== -->
-<!-- ================================================================================== -->
-<!-- ================================================================================== -->
-<!-- ================================================================================== -->
-<!-- ================================================================================== -->
-<!-- ================================================================================== -->
 
+
+
+<!-- ================================================================================== -->
+<!-- ================================================================================== -->
+<!-- ================================================================================== -->
 <!-- script: variables -->
 <script th:inline="javascript">
 	var wsUri = /*[[${wsUri}]]*/ 'wsUri';
@@ -115,11 +115,197 @@
 
 <!-- script: button -->
 <script>
-	$('#btnDelete').click(function() {
-		console.log('>>>>> btnDelete: onClick');
+	$('#btnViewSvr').click(function() {
+		console.log('>>>>> btnViewSvr: onClick');
+		return true;
+	});
+	$('#btnViewGrp').click(function() {
+		console.log('>>>>> btnViewGrp: onClick');
+		return true;
 	});
 </script>
 <!-- /script: button -->
+
+
+
+<!-- ================================================================================== -->
+<!-- ================================================================================== -->
+<!-- ================================================================================== -->
+<!-- 1. Modal dialog : Server -->
+<div class="modal fase" id="modalViewSvr">
+	<div class="modal-dialog modal-lg modal-dialog-centered">
+		<div class="modal-content">
+		
+			<!-- Modal Header -->
+			<div class="modal-header bg-success">
+				<h4 class="modal-title">Server Command View</h4>
+				<!-- button type="button" class="close" data-dismiss="modal">&times;</button -->
+			</div>
+			
+			<!-- Modal body -->
+			<div class="modal-body">
+				<table class="table">
+					<tr>
+						<td class="col-sm-1"> command </td>
+						<td class="col-sm-11">
+							<input id="cmd" type="text" class="col-md-1 form-control input-sm" placeholder="uname -a"/>
+						</td>
+					</tr>
+					<tr>
+						<td class="col-sm-1"> pattern </td>
+						<td class="col-sm-11">
+							<select id="pattern" name="svrCode" class="form-control">
+								<option value="OVERRIDE">Override</option>
+								<option value="APPEND">Append</option>
+								<option value="PREPEND">Prepend</option>
+							</select>
+						</td>
+					</tr>
+					<tr>
+						<td class="col-sm-1"> period </td>
+						<td class="col-sm-11">
+							<select id="period" name="period" class="form-control">
+								<option value="0">keep(no Loop)</option>
+								<option value="5">  5 sec</option>
+								<option value="10">10 sec</option>
+								<option value="30">30 sec</option>
+								<option value="60"> 1 min</option>
+							</select>
+						</td>
+					</tr>
+					<tr>
+						<td class="col-sm-1">
+							result
+						</td>
+						<td class="col-sm-11">
+							<textarea id="modal3_cstruct" class="col-md-1 form-control input-sm" rows="7" style="height:300px;"></textarea>
+						</td>
+					</tr>
+				</table>
+			</div>
+			
+			<!-- Modal footer -->
+			<div class="modal-footer bg-success">
+				<button id="btnStartSvr" type="button" class="btn btn-primary" data-dismiss="modal">start</button>
+				<button id="btnStopSvr"  type="button" class="btn btn-primary" data-dismiss="modal">stop</button>
+				<button id="btnCloseSvr" type="button" class="btn btn-danger" data-dismiss="modal">close</button>
+			</div>
+		
+		</div>
+	</div>
+</div>
+<!-- /1. Modal dialog :  -->
+
+<!-- 1. script :  -->
+<script th:inline="javascript">
+	$('#btnStartSvr').click(function() {
+		console.log('>>>>> btnStartSvr: onClick');
+		return false;
+	});
+	$('#btnStopSvr').click(function() {
+		console.log('>>>>> btnStopSvr: onClick');
+		return false;
+	});
+	$('#btnCloseSvr').click(function() {
+		console.log('>>>>> btnCloseSvr: onClick');
+		return true;
+	});
+</script>
+<!-- /1. script :  -->
+
+
+
+
+<!-- ================================================================================== -->
+<!-- ================================================================================== -->
+<!-- ================================================================================== -->
+<!-- 2. Modal dialog : Group -->
+<div class="modal fase" id="modalViewGrp">
+	<div class="modal-dialog modal-lg modal-dialog-centered">
+		<div class="modal-content">
+		
+			<!-- Modal Header -->
+			<div class="modal-header bg-success">
+				<h4 class="modal-title">Group Command View</h4>
+				<!-- button type="button" class="close" data-dismiss="modal">&times;</button -->
+			</div>
+			
+			<!-- Modal body -->
+			<div class="modal-body">
+				<table class="table">
+					<tr>
+						<td class="col-sm-1"> command </td>
+						<td class="col-sm-11">
+							<input id="cmd" type="text" class="col-md-1 form-control input-sm" placeholder="uname -a"/>
+						</td>
+					</tr>
+					<tr class="hide">
+						<td class="col-sm-1"> pattern </td>
+						<td class="col-sm-11">
+							<select id="pattern" name="svrCode" class="form-control">
+								<option value="OVERRIDE">Override</option>
+								<option value="APPEND">Append</option>
+								<option value="PREPEND">Prepend</option>
+							</select>
+						</td>
+					</tr>
+					<tr>
+						<td class="col-sm-1"> period </td>
+						<td class="col-sm-11">
+							<select id="period" name="period" class="form-control">
+								<option value="0">keep(no Loop)</option>
+								<option value="5">  5 sec</option>
+								<option value="10">10 sec</option>
+								<option value="30">30 sec</option>
+								<option value="60"> 1 min</option>
+							</select>
+						</td>
+					</tr>
+					<tr>
+						<td class="col-sm-1">
+							result
+						</td>
+						<td class="col-sm-11">
+							<textarea id="modal3_cstruct" class="col-md-1 form-control input-sm" rows="7" style="height:300px;"></textarea>
+						</td>
+					</tr>
+				</table>
+			</div>
+			
+			<!-- Modal footer -->
+			<div class="modal-footer bg-success">
+				<button id="btnStartGrp" type="button" class="btn btn-primary" data-dismiss="modal">start</button>
+				<button id="btnStopGrp"  type="button" class="btn btn-primary" data-dismiss="modal">stop</button>
+				<button id="btnCloseGrp" type="button" class="btn btn-danger" data-dismiss="modal">close</button>
+			</div>
+		
+		</div>
+	</div>
+</div>
+<!-- /1. Modal dialog :  -->
+
+<!-- 1. script :  -->
+<script th:inline="javascript">
+	$('#btnStartGrp').click(function() {
+		console.log('>>>>> btnStartGrp: onClick');
+		return false;
+	});
+	$('#btnStopGrp').click(function() {
+		console.log('>>>>> btnStopGrp: onClick');
+		return false;
+	});
+	$('#btnCloseGrp').click(function() {
+		console.log('>>>>> btnCloseGrp: onClick');
+		return true;
+	});
+</script>
+<!-- /1. script :  -->
+
+
+
+
+
+
 
 
 
