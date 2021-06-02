@@ -2,12 +2,17 @@
 	{
 		"cdMst": "TEST",
 		"cdItm": "T01",
-		"cdVal": "Test-01",
+		"cdVal": "test-01",
 		"desc": "description of T01"
 	},{
 		"cdMst": "TEST",
 		"cdItm": "T02",
-		"cdVal": "Test-02",
+		"cdVal": "test-02",
 		"desc": "description of T02"
+	},{
+		"cdMst": "PERIOD",
+		"cdItm": "T02",
+		"cdVal": "test-02",
+		"desc": ""
 	}
 ]

@@ -1,6 +1,8 @@
 package org.tain.controller.mon;
 
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.tain.mybatis.mappers.CmdMapper;
+import org.tain.mybatis.mappers.SvrMapper;
 import org.tain.tools.properties.ProjEnvUrlProperties;
 import org.tain.utils.CurrentInfo;
 import org.tain.utils.IpPrint;
@@ -59,6 +62,9 @@ public class CmdController {
 	
 	///////////////////////////////////////////////////////////////////////////
 	
+	@Autowired
+	private SvrMapper svrMapper;
+	
 	@RequestMapping(value = {"/cmd/cmdForm"}, method = {RequestMethod.GET, RequestMethod.POST})
 	public String form(@RequestParam(value = "id", defaultValue = "0") Long id, Model model) {
 		log.info("KANG-20200730 >>>>> {} {}", CurrentInfo.get());
@@ -72,6 +78,42 @@ public class CmdController {
 			String wsUri = this.projEnvUrlProperties.getWsUri();
 			log.info("KANG-20200730 >>>>> wsUri: {}", wsUri);
 			model.addAttribute("wsUri", wsUri);
+		}
+		
+		// sample data
+		if (Boolean.TRUE) {
+			if (Boolean.TRUE) {
+				String[] lstSvrCode = new String[] { "TEST01", "TEST02", "TEST03", "TEST04", "TEST05", "TEST06", "TEST07" };
+				log.info("KANG-20200730 >>>>> lstSvrCode: {}", Arrays.deepToString(lstSvrCode));
+				model.addAttribute("lstSvrCode", lstSvrCode);
+			}
+			
+			if (Boolean.TRUE) {
+				//String[] lstCmdLoop = new String[] { "keep(noLoop)", "loopSec(5sec)", "loopSec(10sec)", "loopSec(30sec)", "loopSec(60sec)" };
+				Map<String,String> mapCmdLoop = new LinkedHashMap<>();
+				mapCmdLoop.put("0",  "keep(no Loop)");
+				mapCmdLoop.put("5",  "loopSec(5 sec)");
+				mapCmdLoop.put("10", "loopSec(10 sec)");
+				mapCmdLoop.put("30", "loopSec(30 sec)");
+				mapCmdLoop.put("60", "loopSec(60 sec)");
+				log.info("KANG-20200730 >>>>> mapCmdLoop: {}", mapCmdLoop);
+				model.addAttribute("mapPeriod", mapCmdLoop);
+			}
+			
+			if (Boolean.TRUE) {
+				String[] lstPrtDir = new String[] { "prepend", "override", "append" };
+				log.info("KANG-20200730 >>>>> lstPrtDir: {}", Arrays.deepToString(lstPrtDir));
+				model.addAttribute("lstPattern", lstPrtDir);
+			}
+		}
+		
+		if (Boolean.TRUE) {
+			if (Boolean.TRUE) {
+				List<Map<String,Object>> lstSvr = this.svrMapper.selectAll(null);
+				log.info("KANG-20200730 >>>>> mapSvr: {}", lstSvr);
+				model.addAttribute("lstSvr", lstSvr);
+			}
+			
 		}
 		
 		Map<String,Object> mapIn = null;

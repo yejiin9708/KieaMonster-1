@@ -81,7 +81,9 @@
 		<button th:if="${itm?.id}" type="button" class="btn btn-danger" id="btnChange">change</button>
 		<button th:if="${itm?.id}" type="button" class="btn btn-danger" id="btnDelete">delete</button>
 		
+		<!-- 
 		<a th:if="${itm?.id}" th:href="@{'/cmd/svrCmdView/' + ${code}(id=${itm?.id})}" class="btn btn-info">view</a>
+		 -->
 		<a th:href="@{'/cmd/svrCmdList/' + ${code}}" class="btn btn-info">list</a>
 		<a th:href="@{/}" class="btn btn-info">home</a>
 	</div>

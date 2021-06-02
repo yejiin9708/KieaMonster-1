@@ -152,12 +152,26 @@
 						</td>
 					</tr>
 					<tr>
+						<td class="col-sm-1"> multi-server </td>
+						<td class="col-sm-11">
+							<select id="multiSvr" name="multiSvr" multiple="multiple" class="form-control">
+								<option th:each="itm : ${lstSvrCode}" th:value="${itm}" th:text="${itm}"></option>
+							</select>
+						</td>
+					</tr>
+					<tr>
+						<td class="col-sm-1"> server </td>
+						<td class="col-sm-11">
+							<select id="svrSvr" name="svr" class="form-control">
+								<option th:each="itm : ${lstSvrCode}" th:value="${itm}" th:text="${itm}" th:selected="${itm=='TEST03'}"></option>
+							</select>
+						</td>
+					</tr>
+					<tr>
 						<td class="col-sm-1"> pattern </td>
 						<td class="col-sm-11">
-							<select id="patternSvr" name="svrCode" class="form-control">
-								<option value="OVERRIDE">Override</option>
-								<option value="APPEND">Append</option>
-								<option value="PREPEND">Prepend</option>
+							<select id="patternSvr" name="pattern" class="form-control">
+								<option th:each="itm : ${lstPattern}" th:value="${itm}" th:text="${itm}"></option>
 							</select>
 						</td>
 					</tr>
@@ -165,18 +179,12 @@
 						<td class="col-sm-1"> period </td>
 						<td class="col-sm-11">
 							<select id="periodSvr" name="period" class="form-control">
-								<option value="0">keep(no Loop)</option>
-								<option value="5">  5 sec</option>
-								<option value="10">10 sec</option>
-								<option value="30">30 sec</option>
-								<option value="60"> 1 min</option>
+								<option th:each="ent : ${mapPeriod}" th:value="${ent.key}" th:text="${ent.value}" th:selected="${ent.key=='60'}"></option>
 							</select>
 						</td>
 					</tr>
 					<tr>
-						<td class="col-sm-1">
-							result
-						</td>
+						<td class="col-sm-1"> result </td>
 						<td class="col-sm-11">
 							<textarea id="resultSvr" class="col-md-1 form-control input-sm" rows="7" style="height:300px;"></textarea>
 						</td>

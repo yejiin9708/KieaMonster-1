@@ -1,6 +1,9 @@
 [
 	{
 		"cdMst": "TEST",
-		"desc": "TEST"
+		"desc": "for check test"
+	}, {
+		"cdMst": "PERIOD",
+		"desc": "looping period"
 	}
 ]
