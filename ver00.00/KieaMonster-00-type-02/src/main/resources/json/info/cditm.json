@@ -9,10 +9,47 @@
 		"cdItm": "T02",
 		"cdVal": "test-02",
 		"desc": "description of T02"
+	},
+	{
+		"cdMst": "PERIOD",
+		"cdItm": "0",
+		"cdVal": "keep",
+		"desc": ""
 	},{
 		"cdMst": "PERIOD",
-		"cdItm": "T02",
-		"cdVal": "test-02",
+		"cdItm": "5",
+		"cdVal": "5 sec",
+		"desc": ""
+	},{
+		"cdMst": "PERIOD",
+		"cdItm": "10",
+		"cdVal": "10 sec",
+		"desc": ""
+	},{
+		"cdMst": "PERIOD",
+		"cdItm": "30",
+		"cdVal": "30 sec",
+		"desc": ""
+	},{
+		"cdMst": "PERIOD",
+		"cdItm": "60",
+		"cdVal": "1 min",
+		"desc": ""
+	},
+	{
+		"cdMst": "PRN_PATTERN",
+		"cdItm": "PREPEND",
+		"cdVal": "prepend",
+		"desc": ""
+	},{
+		"cdMst": "PRN_PATTERN",
+		"cdItm": "OVERRIDE",
+		"cdVal": "override",
+		"desc": ""
+	},{
+		"cdMst": "PRN_PATTERN",
+		"cdItm": "APPEND",
+		"cdVal": "append",
 		"desc": ""
 	}
 ]

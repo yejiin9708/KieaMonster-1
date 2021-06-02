@@ -1,9 +1,42 @@
 [
 	{
-		"grpCode": "MCI",
-		"svrCode": "TEST01"
+		"grpCode": "GRP00",
+		"svrCode": "SVR01"
 	},{
-		"grpCode": "MCI",
-		"svrCode": "TEST02"
+		"grpCode": "GRP00",
+		"svrCode": "SVR02"
+	},{
+		"grpCode": "GRP00",
+		"svrCode": "SVR03"
+	},{
+		"grpCode": "GRP00",
+		"svrCode": "SVR04"
+	},{
+		"grpCode": "GRP00",
+		"svrCode": "SVR05"
+	},
+	{
+		"grpCode": "GRP01",
+		"svrCode": "SVR01"
+	},{
+		"grpCode": "GRP01",
+		"svrCode": "SVR02"
+	},
+	{
+		"grpCode": "GRP02",
+		"svrCode": "SVR02"
+	},{
+		"grpCode": "GRP02",
+		"svrCode": "SVR04"
+	},{
+		"grpCode": "GRP02",
+		"svrCode": "SVR05"
+	},
+	{
+		"grpCode": "GRP03",
+		"svrCode": "SVR03"
+	},{
+		"grpCode": "GRP03",
+		"svrCode": "SVR05"
 	}
 ]

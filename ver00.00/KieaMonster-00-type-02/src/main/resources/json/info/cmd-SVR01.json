@@ -1,0 +1,20 @@
+[
+	{
+		"cmdCode": "SVR0100",
+		"cmdName": "java version",
+		"cmdDesc": "java version",
+		"cmdPeriod": 60,
+		"cmdType": "CMD_NORMAL",
+		"cmdArr": "  java -version "
+	},{
+		"cmdCode": "SVR0101",
+		"cmdName": "pwd",
+		"cmdDesc": "pwd",
+		"cmdPeriod": 60,
+		"cmdType": "CMD_NORMAL",
+		"cmdArr": " pwd "
+	}
+]
+
+
+

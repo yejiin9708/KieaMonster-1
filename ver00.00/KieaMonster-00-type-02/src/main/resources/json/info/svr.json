@@ -1,14 +1,29 @@
 [
 	{
-		"svrCode": "TEST01",
-		"svrName": "TEST01 server",
-		"svrDesc": "svr desc",
-		"svrComment": "svr comment"
+		"svrCode": "SVR01",
+		"svrName": "Server01",
+		"svrDesc": "server 01",
+		"svrComment": "comment"
 	},{
-		"svrCode": "TEST02",
-		"svrName": "TEST02 server",
-		"svrDesc": "svr desc",
-		"svrComment": "svr comment"
+		"svrCode": "SVR02",
+		"svrName": "Server02",
+		"svrDesc": "server 02",
+		"svrComment": "comment"
+	},{
+		"svrCode": "SVR03",
+		"svrName": "Server03",
+		"svrDesc": "server 03",
+		"svrComment": "comment"
+	},{
+		"svrCode": "SVR04",
+		"svrName": "Server04",
+		"svrDesc": "server 04",
+		"svrComment": "comment"
+	},{
+		"svrCode": "SVR05",
+		"svrName": "Server05",
+		"svrDesc": "server 05",
+		"svrComment": "comment"
 	}
 ]
 

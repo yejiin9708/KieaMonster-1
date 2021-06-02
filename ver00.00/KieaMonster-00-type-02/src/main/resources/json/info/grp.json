@@ -1,9 +1,27 @@
 [
 	{
 		"orgCode": "HANWHA",
-		"grpCode": "MCI",
-		"grpName": "Hanswha IS MCI",
-		"grpDesc": "grp desc",
-		"grpComment": "grp comment"
+		"grpCode": "GRP00",
+		"grpName": "Group00",
+		"grpDesc": "group 00",
+		"grpComment": "comment"
+	},{
+		"orgCode": "HANWHA",
+		"grpCode": "GRP01",
+		"grpName": "Group01",
+		"grpDesc": "group 01",
+		"grpComment": "comment"
+	},{
+		"orgCode": "HANWHA",
+		"grpCode": "GRP02",
+		"grpName": "Group02",
+		"grpDesc": "group 02",
+		"grpComment": "comment"
+	},{
+		"orgCode": "HANWHA",
+		"grpCode": "GRP03",
+		"grpName": "Group03",
+		"grpDesc": "group 03",
+		"grpComment": "comment"
 	}
 ]

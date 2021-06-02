@@ -5,5 +5,8 @@
 	}, {
 		"cdMst": "PERIOD",
 		"desc": "looping period"
+	}, {
+		"cdMst": "PRN_PATTERN",
+		"desc": "print pattern"
 	}
 ]

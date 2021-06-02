@@ -1,0 +1,20 @@
+[
+	{
+		"cmdCode": "SVR0400",
+		"cmdName": "java version",
+		"cmdDesc": "java version",
+		"cmdPeriod": 60,
+		"cmdType": "CMD_NORMAL",
+		"cmdArr": "  java -version "
+	},{
+		"cmdCode": "SVR0401",
+		"cmdName": "profile",
+		"cmdDesc": "profile",
+		"cmdPeriod": 60,
+		"cmdType": "CMD_NORMAL",
+		"cmdArr": " cat ~/.profile "
+	}
+]
+
+
+

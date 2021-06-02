@@ -1,0 +1,13 @@
+[
+	{
+		"mstType": "CMD_GRP",
+		"mstCode": "GRP03",
+		"cmdCode": "GRP0300",
+		"cmdName": "hostname",
+		"cmdDesc": "",
+		"cmdPeriod": 60,
+		"cmdType": "CMD_NORMAL",
+		"cmdArr": " hostname "
+	}
+]
+

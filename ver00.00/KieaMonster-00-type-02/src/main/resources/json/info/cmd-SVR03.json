@@ -1,0 +1,13 @@
+[
+	{
+		"cmdCode": "SVR0300",
+		"cmdName": "java version",
+		"cmdDesc": "java version",
+		"cmdPeriod": 60,
+		"cmdType": "CMD_NORMAL",
+		"cmdArr": "  java -version "
+	}
+]
+
+
+

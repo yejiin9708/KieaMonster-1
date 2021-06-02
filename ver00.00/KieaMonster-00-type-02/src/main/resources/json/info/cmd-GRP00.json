@@ -1,0 +1,13 @@
+[
+	{
+		"mstType": "CMD_GRP",
+		"mstCode": "GRP00",
+		"cmdCode": "GRP0000",
+		"cmdName": "uname",
+		"cmdDesc": "",
+		"cmdPeriod": 60,
+		"cmdType": "CMD_NORMAL",
+		"cmdArr": " uname -a "
+	}
+]
+

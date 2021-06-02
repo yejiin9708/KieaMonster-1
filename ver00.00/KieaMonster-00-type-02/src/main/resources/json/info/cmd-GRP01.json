@@ -1,0 +1,13 @@
+[
+	{
+		"mstType": "CMD_GRP",
+		"mstCode": "GRP01",
+		"cmdCode": "GRP0100",
+		"cmdName": "df",
+		"cmdDesc": "",
+		"cmdPeriod": 60,
+		"cmdType": "CMD_NORMAL",
+		"cmdArr": " df -h "
+	}
+]
+
