@@ -148,13 +148,13 @@
 					<tr>
 						<td class="col-sm-1"> command </td>
 						<td class="col-sm-11">
-							<input id="cmd" type="text" class="col-md-1 form-control input-sm" placeholder="uname -a"/>
+							<input id="cmdSvr" type="text" class="col-md-1 form-control input-sm" placeholder="uname -a"/>
 						</td>
 					</tr>
 					<tr>
 						<td class="col-sm-1"> pattern </td>
 						<td class="col-sm-11">
-							<select id="pattern" name="svrCode" class="form-control">
+							<select id="patternSvr" name="svrCode" class="form-control">
 								<option value="OVERRIDE">Override</option>
 								<option value="APPEND">Append</option>
 								<option value="PREPEND">Prepend</option>
@@ -164,7 +164,7 @@
 					<tr>
 						<td class="col-sm-1"> period </td>
 						<td class="col-sm-11">
-							<select id="period" name="period" class="form-control">
+							<select id="periodSvr" name="period" class="form-control">
 								<option value="0">keep(no Loop)</option>
 								<option value="5">  5 sec</option>
 								<option value="10">10 sec</option>
@@ -178,7 +178,7 @@
 							result
 						</td>
 						<td class="col-sm-11">
-							<textarea id="modal3_cstruct" class="col-md-1 form-control input-sm" rows="7" style="height:300px;"></textarea>
+							<textarea id="resultSvr" class="col-md-1 form-control input-sm" rows="7" style="height:300px;"></textarea>
 						</td>
 					</tr>
 				</table>
@@ -236,13 +236,13 @@
 					<tr>
 						<td class="col-sm-1"> command </td>
 						<td class="col-sm-11">
-							<input id="cmd" type="text" class="col-md-1 form-control input-sm" placeholder="uname -a"/>
+							<input id="cmdGrp" type="text" class="col-md-1 form-control input-sm" placeholder="uname -a"/>
 						</td>
 					</tr>
 					<tr class="hide">
 						<td class="col-sm-1"> pattern </td>
 						<td class="col-sm-11">
-							<select id="pattern" name="svrCode" class="form-control">
+							<select id="patternGrp" name="svrCode" class="form-control">
 								<option value="OVERRIDE">Override</option>
 								<option value="APPEND">Append</option>
 								<option value="PREPEND">Prepend</option>
@@ -252,7 +252,7 @@
 					<tr>
 						<td class="col-sm-1"> period </td>
 						<td class="col-sm-11">
-							<select id="period" name="period" class="form-control">
+							<select id="periodGrp" name="period" class="form-control">
 								<option value="0">keep(no Loop)</option>
 								<option value="5">  5 sec</option>
 								<option value="10">10 sec</option>
@@ -266,7 +266,7 @@
 							result
 						</td>
 						<td class="col-sm-11">
-							<textarea id="modal3_cstruct" class="col-md-1 form-control input-sm" rows="7" style="height:300px;"></textarea>
+							<textarea id="resultGrp" class="col-md-1 form-control input-sm" rows="7" style="height:300px;"></textarea>
 						</td>
 					</tr>
 				</table>
