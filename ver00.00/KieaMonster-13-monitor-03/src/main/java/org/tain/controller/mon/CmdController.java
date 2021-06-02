@@ -90,6 +90,38 @@ public class CmdController {
 	}
 	
 	///////////////////////////////////////////////////////////////////////////
+	
+	@RequestMapping(value = {"/cmd/cmdView"}, method = {RequestMethod.GET, RequestMethod.POST})
+	public String view(@RequestParam(value = "id", defaultValue = "0") Long id, Model model) {
+		log.info("KANG-20200730 >>>>> {} {}", CurrentInfo.get());
+		
+		if (Boolean.TRUE) {
+			IpPrint.print();
+			log.info("KANG-20200730 >>>>> id: {}",id);
+		}
+		
+		if (Boolean.TRUE) {
+			String wsUri = this.projEnvUrlProperties.getWsUri();
+			log.info("KANG-20200730 >>>>> wsUri: {}", wsUri);
+			model.addAttribute("wsUri", wsUri);
+		}
+		
+		Map<String,Object> mapIn = null;
+		if (Boolean.TRUE) {
+			mapIn = new HashMap<>();
+			mapIn.put("id", id);
+		}
+		
+		if (Boolean.TRUE) {
+			Map<String,Object> itm = this.cmdMapper.selectOne(mapIn);
+			log.info("KANG-20200730 >>>>> itm: {}", itm);
+			model.addAttribute("itm", itm);
+		}
+		
+		return "web/cmd/cmdView";
+	}
+	
+	///////////////////////////////////////////////////////////////////////////
 	///////////////////////////////////////////////////////////////////////////
 	///////////////////////////////////////////////////////////////////////////
 	
@@ -156,6 +188,40 @@ public class CmdController {
 		}
 		
 		return "web/cmd/grpCmdForm";
+	}
+	
+	///////////////////////////////////////////////////////////////////////////
+	
+	@RequestMapping(value = {"/cmd/grpCmdView/{code}"}, method = {RequestMethod.GET, RequestMethod.POST})
+	public String viewByGrp(@PathVariable(value = "code") String code, @RequestParam(value = "id", defaultValue = "0") Long id, Model model) {
+		log.info("KANG-20200730 >>>>> {} {}", CurrentInfo.get());
+		
+		if (Boolean.TRUE) {
+			IpPrint.print();
+			log.info("KANG-20200730 >>>>> code: {}, id: {}", code, id);
+		}
+		
+		if (Boolean.TRUE) {
+			String wsUri = this.projEnvUrlProperties.getWsUri();
+			log.info("KANG-20200730 >>>>> wsUri: {}", wsUri);
+			model.addAttribute("wsUri", wsUri);
+		}
+		
+		Map<String,Object> mapIn = null;
+		if (Boolean.TRUE) {
+			mapIn = new HashMap<>();
+			mapIn.put("id", id);
+			mapIn.put("code", code);
+		}
+		
+		if (Boolean.TRUE) {
+			Map<String,Object> itm = this.cmdMapper.selectOneByGrp(mapIn);
+			log.info("KANG-20200730 >>>>> itm: {}", itm);
+			model.addAttribute("itm", itm);
+			model.addAttribute("code", code);
+		}
+		
+		return "web/cmd/grpCmdView";
 	}
 	
 	///////////////////////////////////////////////////////////////////////////
@@ -226,4 +292,39 @@ public class CmdController {
 		
 		return "web/cmd/svrCmdForm";
 	}
+	
+	///////////////////////////////////////////////////////////////////////////
+	
+	@RequestMapping(value = {"/cmd/svrCmdView/{code}"}, method = {RequestMethod.GET, RequestMethod.POST})
+	public String viewBySvr(@PathVariable(value = "code") String code, @RequestParam(value = "id", defaultValue = "0") Long id, Model model) {
+		log.info("KANG-20200730 >>>>> {} {}", CurrentInfo.get());
+		
+		if (Boolean.TRUE) {
+			IpPrint.print();
+			log.info("KANG-20200730 >>>>> code: {}, id: {}", code, id);
+		}
+		
+		if (Boolean.TRUE) {
+			String wsUri = this.projEnvUrlProperties.getWsUri();
+			log.info("KANG-20200730 >>>>> wsUri: {}", wsUri);
+			model.addAttribute("wsUri", wsUri);
+		}
+		
+		Map<String,Object> mapIn = null;
+		if (Boolean.TRUE) {
+			mapIn = new HashMap<>();
+			mapIn.put("id", id);
+			mapIn.put("code", code);
+		}
+		
+		if (Boolean.TRUE) {
+			Map<String,Object> itm = this.cmdMapper.selectOneBySvr(mapIn);
+			log.info("KANG-20200730 >>>>> itm: {}", itm);
+			model.addAttribute("itm", itm);
+			model.addAttribute("code", code);
+		}
+		
+		return "web/cmd/svrCmdView";
+	}
+	
 }

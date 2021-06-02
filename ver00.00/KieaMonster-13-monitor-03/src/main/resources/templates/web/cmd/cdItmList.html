@@ -40,7 +40,7 @@
 						<td th:text="${itm.desc}">desc</td>
 						<td>
 							<div class="pull-right">
-								<a th:href="@{/cmd/cdItmForm(id=${itm.id})}" style="padding:2px;" class="btn btn-primary btn-sm">detail</a>
+								<a th:href="@{'/cmd/cdItmForm/' + ${code}(id=${itm.id})}" style="padding:2px;" class="btn btn-primary btn-sm">detail</a>
 								<button type="button" style="padding:2px;" class="btn btn-danger btn-sm" id="btnDelete">delete</button>
 							</div>
 						</td>
@@ -49,9 +49,9 @@
 			</table>
 		</div>
 		<div class="pull-right">
-			<a th:href="@{/cmd/cdItmForm}" class="btn btn-danger">create</a>
-			<a th:href="@{/cmd/cdMstList}" class="btn btn-info">cdMsts</a>
-			<a th:href="@{/}" class="btn btn-info">home</a>
+			<a th:href="@{'/cmd/cdItmForm/' + ${code}}" class="btn btn-danger">create</a>
+			<a th:href="@{'/cmd/cdMstList'}" class="btn btn-info">msts</a>
+			<a th:href="@{'/'}" class="btn btn-info">home</a>
 		</div>
 		<br/>
 		<!-- page --
@@ -70,8 +70,7 @@
 </body>
 
 
-	
-</body>
+
 
 <!-- ================================================================================== -->
 <!-- ================================================================================== -->

@@ -2,16 +2,11 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
 	<meta charset="utf-8">
-	<title>codeItemForm.html</title>
+	<title>cmdForm.html</title>
 	<!-- css and script -->
 	<th:block th:replace="layout/css::css1"></th:block>
 	<th:block th:replace="layout/script::script1"></th:block>
 	<!-- /css and script -->
-	<!--
-		font-family:Verdana, Arial, Helvetica, sans-serif;
-		font-family: inherit;
-		font-size: inherit;
-	-->
 	<style>
 	#result {
 		resize: vertical;
@@ -22,6 +17,7 @@
 		color: #999999;
 	}
 	</style>
+
 </head>
 <body>
 <!-- header -->
@@ -31,7 +27,7 @@
 <!-- main -->
 <div class="container">
 	<div class="page-header">
-		<h2>Code Item Detail</h2>
+		<h2>Command View</h2>
 	</div>
 	<br/>
 	<table class="table">
@@ -40,20 +36,36 @@
 			<td class="col-sm-10"><input type="text" class="col-md-1 form-control input-sm" th:value="${itm?.id}" readonly/></td>
 		</tr>
 		<tr>
-			<th style="padding:13px 0 0 15px;">code mst</th>
-			<td><input type="text" class="col-md-1 form-control input-sm" th:value="${itm?.cdMst}"/></td>
+			<th style="padding:13px 0 0 15px;">mst type</th>
+			<td><input type="text" class="col-md-1 form-control input-sm" th:value="${itm?.mstType}"/></td>
 		</tr>
 		<tr>
-			<th style="padding:13px 0 0 15px;">code item</th>
-			<td><input type="text" class="col-md-1 form-control input-sm" th:value="${itm?.cdItm}"/></td>
+			<th style="padding:13px 0 0 15px;">mst code</th>
+			<td><input type="text" class="col-md-1 form-control input-sm" th:value="${itm?.mstCode}"/></td>
 		</tr>
 		<tr>
-			<th style="padding:13px 0 0 15px;">code value</th>
-			<td><input type="text" class="col-md-1 form-control input-sm" th:value="${itm?.cdVal}"/></td>
+			<th style="padding:13px 0 0 15px;">cmd code</th>
+			<td><input type="text" class="col-md-1 form-control input-sm" th:value="${itm?.cmdCode}"/></td>
 		</tr>
 		<tr>
-			<th style="padding:13px 0 0 15px;">desc</th>
-			<td><input type="text" class="col-md-1 form-control input-sm" th:value="${itm?.desc}"/></td>
+			<th style="padding:13px 0 0 15px;">cmd name</th>
+			<td><input type="text" class="col-md-1 form-control input-sm" th:value="${itm?.cmdName}"/></td>
+		</tr>
+		<tr>
+			<th style="padding:13px 0 0 15px;">cmd desc</th>
+			<td><input type="text" class="col-md-1 form-control input-sm" th:value="${itm?.cmdDesc}"/></td>
+		</tr>
+		<tr>
+			<th style="padding:13px 0 0 15px;">cmd period</th>
+			<td><input type="text" class="col-md-1 form-control input-sm" th:value="${itm?.cmdPeriod}"/></td>
+		</tr>
+		<tr>
+			<th style="padding:13px 0 0 15px;">cmd type</th>
+			<td><input type="text" class="col-md-1 form-control input-sm" th:value="${itm?.cmdType}"/></td>
+		</tr>
+		<tr>
+			<th style="padding:13px 0 0 15px;">cmd arr</th>
+			<td><input type="text" class="col-md-1 form-control input-sm" th:value="${itm?.cmdArr}"/></td>
 		</tr>
 		<tr>
 			<th style="padding:13px 0 0 15px;">content</th>
@@ -69,9 +81,10 @@
 		<button th:if="${itm?.id}" type="button" class="btn btn-danger" id="btnChange">change</button>
 		<button th:if="${itm?.id}" type="button" class="btn btn-danger" id="btnDelete">delete</button>
 		
-		<a th:href="@{'/cmd/cdItmList/' + ${code}}" class="btn btn-info">list</a>
-		<a th:href="@{'/'}" class="btn btn-info">home</a>
+		<a th:href="@{/cmd/cmdList}" class="btn btn-info">list</a>
+		<a th:href="@{/}" class="btn btn-info">home</a>
 	</div>
+
 </div>
 <!-- /main -->
 <br/><br/><br/>
@@ -80,9 +93,7 @@
 <div th:replace="layout/footer::footer1"></div>
 <!-- /footer -->
 
-
 </body>
-
 
 <!-- ================================================================================== -->
 <!-- ================================================================================== -->
@@ -108,7 +119,6 @@
 	});
 </script>
 <!-- /script: button -->
-
 
 
 

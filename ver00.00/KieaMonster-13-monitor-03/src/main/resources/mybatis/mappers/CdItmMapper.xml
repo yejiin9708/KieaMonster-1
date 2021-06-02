@@ -32,4 +32,34 @@
 			and id = #{id}
 	</select>
 	
+	<!-- ==================================================================== -->
+	<!-- id: selectAll -->
+	<select id="selectAllByMst" parameterType="LowerMap"  resultType="LowerMap">
+		select
+			id
+			, cd_mst
+			, cd_itm
+			, cd_val
+			, desc
+		from
+			tb_cditm
+		where 1=1
+			and cd_mst = #{code}
+	</select>
+	
+	<!-- id: selectOne -->
+	<select id="selectOneByMst" parameterType="LowerMap"  resultType="LowerMap">
+		select
+			id
+			, cd_mst
+			, cd_itm
+			, cd_val
+			, desc
+		from
+			tb_cditm
+		where 1=1
+			and id = #{id}
+			and cd_mst = #{code}
+	</select>
+	
 </mapper>

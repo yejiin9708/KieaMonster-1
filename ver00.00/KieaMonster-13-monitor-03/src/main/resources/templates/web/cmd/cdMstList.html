@@ -36,8 +36,8 @@
 						<td th:text="${itm.desc}">desc</td>
 						<td>
 							<div class="pull-right">
-								<a th:href="@{/cmd/cdMstForm(id=${itm.id})}" style="padding:2px;" class="btn btn-primary btn-sm">detail</a>
-								<a th:href="@{/cmd/cdItmList(cdmst=${itm.cdMst})}" style="padding:2px;" class="btn btn-primary btn-sm">items</a>
+								<a th:href="@{'/cmd/cdMstForm'(id=${itm.id})}" style="padding:2px;" class="btn btn-primary btn-sm">detail</a>
+								<a th:href="@{'/cmd/cdItmList/' + ${itm.cdMst}}" style="padding:2px;" class="btn btn-primary btn-sm">items</a>
 								<button type="button" style="padding:2px;" class="btn btn-primary btn-sm" id="btnDelete">delete</button>
 							</div>
 						</td>
@@ -46,8 +46,8 @@
 			</table>
 		</div>
 		<div class="pull-right">
-			<a th:href="@{/cmd/cdMstForm}" class="btn btn-danger">create</a>
-			<a th:href="@{/}" class="btn btn-info">home</a>
+			<a th:href="@{'/cmd/cdMstForm'}" class="btn btn-danger">create</a>
+			<a th:href="@{'/'}" class="btn btn-info">home</a>
 		</div>
 		<br/>
 		<!-- page --
