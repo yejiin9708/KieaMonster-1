@@ -29,6 +29,8 @@ public class MonitorController {
 	@Autowired
 	private MonHttpClient monHttpClient;
 	
+	///////////////////////////////////////////////////////////////////////////
+	
 	@RequestMapping(value = {"/cmd/start"}, method = {RequestMethod.GET, RequestMethod.POST})
 	public ResponseEntity<?> cmdStart(HttpEntity<String> httpEntity) throws Exception {
 		log.info("KANG-20200730 >>>>> {} {}", CurrentInfo.get());
@@ -54,4 +56,33 @@ public class MonitorController {
 		
 		return new ResponseEntity<>(resData, headers, HttpStatus.OK);
 	}
+	
+	///////////////////////////////////////////////////////////////////////////
+	
+	@RequestMapping(value = {"/cmd/stop"}, method = {RequestMethod.GET, RequestMethod.POST})
+	public ResponseEntity<?> cmdStop(HttpEntity<String> httpEntity) throws Exception {
+		log.info("KANG-20200730 >>>>> {} {}", CurrentInfo.get());
+		
+		String reqData = null;
+		if (Boolean.TRUE) {
+			HttpHeaders headers = httpEntity.getHeaders();
+			reqData = httpEntity.getBody();
+			IpPrint.print();
+			log.info(">>>>> request.headers: " + headers.toString());
+			log.info(">>>>> request.body: " + reqData);
+		}
+		
+		String httpUrl = this.projEnvUrlProperties.getCommanderUrl() + "/commander/cmd/stop";
+		log.info(">>>>> httpUrl: " + httpUrl);
+		String resData = this.monHttpClient.post(httpUrl, reqData);
+		
+		MultiValueMap<String,String> headers = null;
+		if (Boolean.TRUE) {
+			headers = new LinkedMultiValueMap<>();
+			headers.add(HttpHeaders.CONTENT_TYPE, "application/json; charset=UTF-8");
+		}
+		
+		return new ResponseEntity<>(resData, headers, HttpStatus.OK);
+	}
+	
 }

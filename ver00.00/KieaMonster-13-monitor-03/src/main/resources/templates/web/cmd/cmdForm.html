@@ -215,7 +215,7 @@
 			url: _contextPath_ + "monitor/cmd/start",
 			type: "POST",
 			data: JSON.stringify({
-				msgCode: "MC00000"
+				msgCode: "MC00010"
 			}),
 			contentType: "application/json",
 			header: {
@@ -233,6 +233,24 @@
 	});
 	$('#btnStopSvr').click(function() {
 		console.log('>>>>> btnStopSvr: onClick');
+		$.ajax({
+			url: _contextPath_ + "monitor/cmd/stop",
+			type: "POST",
+			data: JSON.stringify({
+				msgCode: "MC00090"
+			}),
+			contentType: "application/json",
+			header: {
+				"Authorization": "Basic " + btoa("havi" + ":" + "test")
+			},
+			dataType: "json",
+			success: function(data, status) {
+				console.log("data = ", data);
+			},
+			error: function() {
+				alert('FAIL of JOB..');
+			}
+		});
 		return false;
 	});
 	$('#btnCloseSvr').click(function() {
