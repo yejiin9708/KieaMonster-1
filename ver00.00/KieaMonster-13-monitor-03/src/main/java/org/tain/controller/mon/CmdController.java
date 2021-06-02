@@ -1,8 +1,6 @@
 package org.tain.controller.mon;
 
-import java.util.Arrays;
 import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -13,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.tain.mybatis.mappers.CdItmMapper;
 import org.tain.mybatis.mappers.CmdMapper;
 import org.tain.mybatis.mappers.SvrMapper;
 import org.tain.tools.properties.ProjEnvUrlProperties;
@@ -65,6 +64,9 @@ public class CmdController {
 	@Autowired
 	private SvrMapper svrMapper;
 	
+	@Autowired
+	private CdItmMapper cdItmMapper;
+	
 	@RequestMapping(value = {"/cmd/cmdForm"}, method = {RequestMethod.GET, RequestMethod.POST})
 	public String form(@RequestParam(value = "id", defaultValue = "0") Long id, Model model) {
 		log.info("KANG-20200730 >>>>> {} {}", CurrentInfo.get());
@@ -80,8 +82,9 @@ public class CmdController {
 			model.addAttribute("wsUri", wsUri);
 		}
 		
-		// sample data
+		// test sample data
 		if (Boolean.TRUE) {
+			/*
 			if (Boolean.TRUE) {
 				String[] lstSvrCode = new String[] { "TEST01", "TEST02", "TEST03", "TEST04", "TEST05", "TEST06", "TEST07" };
 				log.info("KANG-20200730 >>>>> lstSvrCode: {}", Arrays.deepToString(lstSvrCode));
@@ -105,15 +108,32 @@ public class CmdController {
 				log.info("KANG-20200730 >>>>> lstPrtDir: {}", Arrays.deepToString(lstPrtDir));
 				model.addAttribute("lstPattern", lstPrtDir);
 			}
+			*/
 		}
 		
+		// real data
 		if (Boolean.TRUE) {
 			if (Boolean.TRUE) {
-				List<Map<String,Object>> lstSvr = this.svrMapper.selectAll(null);
-				log.info("KANG-20200730 >>>>> mapSvr: {}", lstSvr);
-				model.addAttribute("lstSvr", lstSvr);
+				List<Map<String,Object>> lstMapSvr = this.svrMapper.selectAll(null);
+				log.info("KANG-20200730 >>>>> lstMapSvr: {}", lstMapSvr);
+				model.addAttribute("lstMapSvr", lstMapSvr);
 			}
 			
+			if (Boolean.TRUE) {
+				Map<String,Object> mapIn = new HashMap<>();
+				mapIn.put("code", "PERIOD");
+				List<Map<String,Object>> lstMapPrd = this.cdItmMapper.selectAllByMst(mapIn);
+				log.info("KANG-20200730 >>>>> lstMapPrd: {}", lstMapPrd);
+				model.addAttribute("lstMapPrd", lstMapPrd);
+			}
+			
+			if (Boolean.TRUE) {
+				Map<String,Object> mapIn = new HashMap<>();
+				mapIn.put("code", "PRN_PATTERN");
+				List<Map<String,Object>> lstMapPttn = this.cdItmMapper.selectAllByMst(mapIn);
+				log.info("KANG-20200730 >>>>> lstMapPttn: {}", lstMapPttn);
+				model.addAttribute("lstMapPttn", lstMapPttn);
+			}
 		}
 		
 		Map<String,Object> mapIn = null;

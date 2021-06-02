@@ -155,7 +155,7 @@
 						<td class="col-sm-1"> multi-server </td>
 						<td class="col-sm-11">
 							<select id="multiSvr" name="multiSvr" multiple="multiple" class="form-control">
-								<option th:each="itm : ${lstSvrCode}" th:value="${itm}" th:text="${itm}"></option>
+								<option th:each="itm : ${lstMapSvr}" th:value="${itm.svrCode}" th:text="${itm.svrCode}"></option>
 							</select>
 						</td>
 					</tr>
@@ -163,7 +163,7 @@
 						<td class="col-sm-1"> server </td>
 						<td class="col-sm-11">
 							<select id="svrSvr" name="svr" class="form-control">
-								<option th:each="itm : ${lstSvrCode}" th:value="${itm}" th:text="${itm}" th:selected="${itm=='TEST03'}"></option>
+								<option th:each="itm : ${lstMapSvr}" th:value="${itm.svrCode}" th:text="${itm.svrCode}" th:selected="${itm.svrCode=='SVR03'}"></option>
 							</select>
 						</td>
 					</tr>
@@ -171,7 +171,7 @@
 						<td class="col-sm-1"> pattern </td>
 						<td class="col-sm-11">
 							<select id="patternSvr" name="pattern" class="form-control">
-								<option th:each="itm : ${lstPattern}" th:value="${itm}" th:text="${itm}"></option>
+								<option th:each="itm : ${lstMapPttn}" th:value="${itm.cdItm}" th:text="${itm.cdVal}" th:selected="${itm.cdItm=='OVERRIDE'}"></option>
 							</select>
 						</td>
 					</tr>
@@ -179,7 +179,7 @@
 						<td class="col-sm-1"> period </td>
 						<td class="col-sm-11">
 							<select id="periodSvr" name="period" class="form-control">
-								<option th:each="ent : ${mapPeriod}" th:value="${ent.key}" th:text="${ent.value}" th:selected="${ent.key=='60'}"></option>
+								<option th:each="itm : ${lstMapPrd}" th:value="${itm.cdItm}" th:text="${itm.cdVal}" th:selected="${itm.cdItm=='60'}"></option>
 							</select>
 						</td>
 					</tr>
