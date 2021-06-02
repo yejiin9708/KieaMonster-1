@@ -33,39 +33,39 @@
 	<table class="table">
 		<tr>
 			<th class="col-sm-2" style="padding:13px 0 0 15px;">id</th>
-			<td class="col-sm-10"><input type="text" class="col-md-1 form-control input-sm" th:value="${itm?.id}" readonly/></td>
+			<td class="col-sm-10"><input id="id" type="text" class="col-md-1 form-control input-sm" th:value="${itm?.id}" readonly/></td>
 		</tr>
 		<tr>
 			<th style="padding:13px 0 0 15px;">mst type</th>
-			<td><input type="text" class="col-md-1 form-control input-sm" th:value="${itm?.mstType}"/></td>
+			<td><input id="mstType" type="text" class="col-md-1 form-control input-sm" th:value="${itm?.mstType}"/></td>
 		</tr>
 		<tr>
 			<th style="padding:13px 0 0 15px;">mst code</th>
-			<td><input type="text" class="col-md-1 form-control input-sm" th:value="${itm?.mstCode}"/></td>
+			<td><input id="mstCode" type="text" class="col-md-1 form-control input-sm" th:value="${itm?.mstCode}"/></td>
 		</tr>
 		<tr>
 			<th style="padding:13px 0 0 15px;">cmd code</th>
-			<td><input type="text" class="col-md-1 form-control input-sm" th:value="${itm?.cmdCode}"/></td>
+			<td><input id="cmdCode" type="text" class="col-md-1 form-control input-sm" th:value="${itm?.cmdCode}"/></td>
 		</tr>
 		<tr>
 			<th style="padding:13px 0 0 15px;">cmd name</th>
-			<td><input type="text" class="col-md-1 form-control input-sm" th:value="${itm?.cmdName}"/></td>
+			<td><input id="cmdName" type="text" class="col-md-1 form-control input-sm" th:value="${itm?.cmdName}"/></td>
 		</tr>
 		<tr>
 			<th style="padding:13px 0 0 15px;">cmd desc</th>
-			<td><input type="text" class="col-md-1 form-control input-sm" th:value="${itm?.cmdDesc}"/></td>
+			<td><input id="cmdDesc" type="text" class="col-md-1 form-control input-sm" th:value="${itm?.cmdDesc}"/></td>
 		</tr>
 		<tr>
 			<th style="padding:13px 0 0 15px;">cmd period</th>
-			<td><input type="text" class="col-md-1 form-control input-sm" th:value="${itm?.cmdPeriod}"/></td>
+			<td><input id="cmdPeriod" type="text" class="col-md-1 form-control input-sm" th:value="${itm?.cmdPeriod}"/></td>
 		</tr>
 		<tr>
 			<th style="padding:13px 0 0 15px;">cmd type</th>
-			<td><input type="text" class="col-md-1 form-control input-sm" th:value="${itm?.cmdType}"/></td>
+			<td><input id="cmdType" type="text" class="col-md-1 form-control input-sm" th:value="${itm?.cmdType}"/></td>
 		</tr>
 		<tr>
 			<th style="padding:13px 0 0 15px;">cmd arr</th>
-			<td><input type="text" class="col-md-1 form-control input-sm" th:value="${itm?.cmdArr}"/></td>
+			<td><input id="cmdArr" type="text" class="col-md-1 form-control input-sm" th:value="${itm?.cmdArr}"/></td>
 		</tr>
 		<tr>
 			<th style="padding:13px 0 0 15px;">content</th>
@@ -117,6 +117,9 @@
 <script>
 	$('#btnViewSvr').click(function() {
 		console.log('>>>>> btnViewSvr: onClick');
+		$("#cmdSvr").val($("#cmdArr").val());
+		//$("#patternSvr").val($("#mstCode").val());
+		$("#periodSvr").val($("#cmdPeriod").val());
 		return true;
 	});
 	$('#btnViewGrp').click(function() {
@@ -151,7 +154,7 @@
 							<input id="cmdSvr" type="text" class="col-md-1 form-control input-sm" placeholder="uname -a"/>
 						</td>
 					</tr>
-					<tr>
+					<tr class="hide">
 						<td class="col-sm-1"> multi-server </td>
 						<td class="col-sm-11">
 							<select id="multiSvr" name="multiSvr" multiple="multiple" class="form-control">
@@ -159,7 +162,7 @@
 							</select>
 						</td>
 					</tr>
-					<tr>
+					<tr class="hide">
 						<td class="col-sm-1"> server </td>
 						<td class="col-sm-11">
 							<select id="svrSvr" name="svr" class="form-control">
@@ -208,7 +211,25 @@
 <script th:inline="javascript">
 	$('#btnStartSvr').click(function() {
 		console.log('>>>>> btnStartSvr: onClick');
-		return false;
+		$.ajax({
+			url: _contextPath_ + "monitor/cmd/start",
+			type: "POST",
+			data: JSON.stringify({
+				msgCode: "MC00000"
+			}),
+			contentType: "application/json",
+			header: {
+				"Authorization": "Basic " + btoa("havi" + ":" + "test")
+			},
+			dataType: "json",
+			success: function(data, status) {
+				console.log("data = ", data);
+			},
+			error: function() {
+				alert('FAIL of JOB..');
+			}
+		});
+		return true;
 	});
 	$('#btnStopSvr').click(function() {
 		console.log('>>>>> btnStopSvr: onClick');
