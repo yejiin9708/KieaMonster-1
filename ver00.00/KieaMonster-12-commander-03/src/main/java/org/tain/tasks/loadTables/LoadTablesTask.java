@@ -46,6 +46,8 @@ public class LoadTablesTask {
 			
 			if (Boolean.TRUE) jobForTbCdMstLoad();
 			if (Boolean.TRUE) jobForTbCdItmLoad();
+			
+			if (Boolean.TRUE) jobForTbBrwLoad();
 		}
 		
 		log.info("KANG-20200721 >>>>> async_0103 END   {} {}", param, CurrentInfo.get());
@@ -180,6 +182,19 @@ public class LoadTablesTask {
 		log.info("KANG-20210405 >>>>> {} {}", CurrentInfo.get());
 		
 		if (Boolean.TRUE) this.tbCdItmWorking.load();
+	}
+	
+	///////////////////////////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////////////////////////
+	
+	@Autowired
+	private TbBrwWorking tbBrwWorking;
+	
+	private void jobForTbBrwLoad() throws Exception {
+		log.info("KANG-20210405 >>>>> {} {}", CurrentInfo.get());
+		
+		if (Boolean.TRUE) this.tbBrwWorking.load();
 	}
 	
 }
