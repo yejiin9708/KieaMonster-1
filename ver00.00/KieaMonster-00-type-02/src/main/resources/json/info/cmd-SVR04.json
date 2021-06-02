@@ -1,5 +1,7 @@
 [
 	{
+		"mstType": "CMD_SVR",
+		"mstCode": "SVR04",
 		"cmdCode": "SVR0400",
 		"cmdName": "java version",
 		"cmdDesc": "java version",
@@ -7,6 +9,8 @@
 		"cmdType": "CMD_NORMAL",
 		"cmdArr": "  java -version "
 	},{
+		"mstType": "CMD_SVR",
+		"mstCode": "SVR04",
 		"cmdCode": "SVR0401",
 		"cmdName": "profile",
 		"cmdDesc": "profile",

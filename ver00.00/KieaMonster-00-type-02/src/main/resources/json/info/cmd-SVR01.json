@@ -1,5 +1,7 @@
 [
 	{
+		"mstType": "CMD_SVR",
+		"mstCode": "SVR01",
 		"cmdCode": "SVR0100",
 		"cmdName": "java version",
 		"cmdDesc": "java version",
@@ -7,6 +9,8 @@
 		"cmdType": "CMD_NORMAL",
 		"cmdArr": "  java -version "
 	},{
+		"mstType": "CMD_SVR",
+		"mstCode": "SVR01",
 		"cmdCode": "SVR0101",
 		"cmdName": "pwd",
 		"cmdDesc": "pwd",

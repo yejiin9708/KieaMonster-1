@@ -1,5 +1,7 @@
 [
 	{
+		"mstType": "CMD_SVR",
+		"mstCode": "SVR03",
 		"cmdCode": "SVR0300",
 		"cmdName": "java version",
 		"cmdDesc": "java version",
