@@ -37,6 +37,12 @@ public class AsyncCommandTask {
 	@Autowired
 	private MonQueueBox monQueueBox;
 	
+	private boolean flgKeep = true;
+	
+	public void stopAsync() {
+		this.flgKeep = false;
+	}
+	
 	// AsyncCommandTask
 	@Async(value = "async_0101")
 	public void async0103(Cmd cmd) throws Exception {
@@ -58,6 +64,7 @@ public class AsyncCommandTask {
 		}
 		
 		if (Boolean.TRUE) {
+			this.flgKeep = true;
 			if (Integer.parseInt(cmd.getCmdPeriod()) == 0) {
 				cmdKeepSingle(cmd);
 			} else {
@@ -71,17 +78,17 @@ public class AsyncCommandTask {
 		
 		if (Boolean.TRUE) {
 			// spring async kill thread
-			for (int idx=0; ; idx++) {
+			for (int idx=0; this.flgKeep; idx++) {
 				log.info(">>>>> cmd: {} {}", cmd, idx);
 				MonJsonNode nodeResult = new MonJsonNode("{}");
 				if (Boolean.TRUE) {
-					nodeResult.put("svrCode", cmd.getSvrCode());
+					//nodeResult.put("svrCode", cmd.getSvrCode());
 					nodeResult.put("msgCode", "CMD_RET");
-					nodeResult.put("cmdCode", cmd.getCmdCode());
-					nodeResult.put("cmdName", cmd.getCmdName());
-					nodeResult.put("cmdDesc", cmd.getCmdDesc());
+					//nodeResult.put("cmdCode", cmd.getCmdCode());
+					//nodeResult.put("cmdName", cmd.getCmdName());
+					//nodeResult.put("cmdDesc", cmd.getCmdDesc());
 					nodeResult.put("cmdPeriod", cmd.getCmdPeriod());
-					nodeResult.put("cmdType", cmd.getCmdType());
+					//nodeResult.put("cmdType", cmd.getCmdType());
 					nodeResult.put("cmdArr", cmd.getCmdArr());
 					//nodeResult.put("cmdDttm", LocalDateTime.now());
 				}
@@ -124,6 +131,14 @@ public class AsyncCommandTask {
 				Sleep.run(Integer.parseInt(cmd.getCmdPeriod()) * 1000);
 			}
 		}
+		
+		if (Boolean.TRUE) {
+			System.out.println("+------------------------------+");
+			System.out.println("|                              |");
+			System.out.println("|       Stop of the Async      |");
+			System.out.println("|                              |");
+			System.out.println("+------------------------------+");
+		}
 	}
 	
 	private void cmdKeepSingle(Cmd cmd) throws Exception {
@@ -134,13 +149,13 @@ public class AsyncCommandTask {
 			log.info(">>>>> cmd: {} {}", cmd);
 			MonJsonNode nodeResult = new MonJsonNode("{}");
 			if (Boolean.TRUE) {
-				nodeResult.put("svrCode", cmd.getSvrCode());
+				//nodeResult.put("svrCode", cmd.getSvrCode());
 				nodeResult.put("msgCode", "CMD_RET");
-				nodeResult.put("cmdCode", cmd.getCmdCode());
-				nodeResult.put("cmdName", cmd.getCmdName());
-				nodeResult.put("cmdDesc", cmd.getCmdDesc());
+				//nodeResult.put("cmdCode", cmd.getCmdCode());
+				//nodeResult.put("cmdName", cmd.getCmdName());
+				//nodeResult.put("cmdDesc", cmd.getCmdDesc());
 				nodeResult.put("cmdPeriod", cmd.getCmdPeriod());
-				nodeResult.put("cmdType", cmd.getCmdType());
+				//nodeResult.put("cmdType", cmd.getCmdType());
 				nodeResult.put("cmdArr", cmd.getCmdArr());
 				//nodeResult.put("cmdDttm", LocalDateTime.now());
 			}
@@ -151,7 +166,7 @@ public class AsyncCommandTask {
 				
 				BufferedReader br = new BufferedReader(new InputStreamReader(process.getInputStream(), "UTF-8"));
 				String line = null;
-				while ((line = br.readLine()) != null) {
+				while ((line = br.readLine()) != null && this.flgKeep) {
 					nodeResult.put("cmdResult", line + "\n");
 					if (Boolean.TRUE) {
 						this.monQueueBox.setQueueSendResult(nodeResult);
@@ -161,6 +176,14 @@ public class AsyncCommandTask {
 				process.waitFor();
 				process.destroy();
 			}
+		}
+		
+		if (Boolean.TRUE) {
+			System.out.println("+------------------------------+");
+			System.out.println("|                              |");
+			System.out.println("|       Stop of the Async      |");
+			System.out.println("|                              |");
+			System.out.println("+------------------------------+");
 		}
 	}
 }

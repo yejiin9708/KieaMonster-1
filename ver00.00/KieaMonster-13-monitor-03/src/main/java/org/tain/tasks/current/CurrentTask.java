@@ -32,22 +32,6 @@ public class CurrentTask {
 	///////////////////////////////////////////////////////////////////////////
 	///////////////////////////////////////////////////////////////////////////
 	
-	/*
-	private MonQueue<MonJsonNode> queue = new MonQueue<>();
-	
-	public void setQueue(MonJsonNode object) {
-		this.queue.set(object);
-	}
-	
-	public MonJsonNode getQueue() {
-		return this.queue.get();
-	}
-	*/
-	
-	///////////////////////////////////////////////////////////////////////////
-	///////////////////////////////////////////////////////////////////////////
-	///////////////////////////////////////////////////////////////////////////
-	
 	@Autowired
 	private MonQueueBox monQueueBox;
 	
@@ -59,7 +43,7 @@ public class CurrentTask {
 		if (Boolean.TRUE) {
 			while (true) {
 				// get reqNode
-				MonJsonNode reqNode = this.monQueueBox.getQueueAuthenticate();
+				MonJsonNode reqNode = this.monQueueBox.getQueueCurrent();
 				
 				// clone copy reqNode to resNode
 				MonJsonNode resNode = null;
@@ -73,10 +57,12 @@ public class CurrentTask {
 				
 				// send resNode to the client
 				//WebSocketServerController.broadCast(resNode.toString());
-				String code = reqNode.getText("svrCode") + "-" + reqNode.getText("cmdCode");
+				//String code = reqNode.getText("svrCode") + "-" + reqNode.getText("cmdCode");
 				for (Map.Entry<String, SessionInfo> entry : WebSocketServerController.peers.entrySet()) {
+					System.out.println("##### (C->M) resNode: " + resNode.toPrettyString());
 					String sections = entry.getValue().getSections();
-					if (sections != null && code.equals(sections)) {
+					//if (sections != null && code.equals(sections)) {
+					if (Boolean.TRUE || sections != null) {
 						WebSocketServerController.sendMessage(entry.getValue().getSession(), resNode.toString());
 					}
 				}

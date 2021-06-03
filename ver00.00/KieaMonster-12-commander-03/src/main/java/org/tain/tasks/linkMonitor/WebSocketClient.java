@@ -10,9 +10,9 @@ public class WebSocketClient {
 
 	private LinkMonitorTask linkMonitorTask = null;
 	
-	public WebSocketClient(LinkMonitorTask sendResultTask) {
+	public WebSocketClient(LinkMonitorTask linkMonitorTask) {
 		System.out.println("KANG-20210405 >>>>> Hello, Starting of WebSocketClient.");
-		this.linkMonitorTask = sendResultTask;
+		this.linkMonitorTask = linkMonitorTask;
 	}
 	
 	///////////////////////////////////////////////////////////////////////////
@@ -23,7 +23,7 @@ public class WebSocketClient {
 	public void onMessage(String message) {
 		System.out.println("[OnMessage] recv message: " + message);
 		
-		if (Boolean.TRUE) {
+		if (!Boolean.TRUE) {
 			if (this.linkMonitorTask != null) {
 				this.linkMonitorTask.recvMessage(message);
 			} else {

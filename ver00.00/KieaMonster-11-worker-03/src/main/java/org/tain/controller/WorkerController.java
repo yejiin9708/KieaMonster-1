@@ -1,5 +1,6 @@
 package org.tain.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -9,6 +10,9 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import org.tain.data.Cmd;
+import org.tain.tasks.asyncCommand.AsyncCommandTask;
+import org.tain.tools.node.MonJsonNode;
 import org.tain.utils.CurrentInfo;
 import org.tain.utils.IpPrint;
 
@@ -20,6 +24,9 @@ import lombok.extern.slf4j.Slf4j;
 public class WorkerController {
 
 	///////////////////////////////////////////////////////////////////////////
+	
+	@Autowired
+	private AsyncCommandTask asyncCommandTask;
 	
 	@RequestMapping(value = {"/cmd/start"}, method = {RequestMethod.GET, RequestMethod.POST})
 	public ResponseEntity<?> cmdStart(HttpEntity<String> httpEntity) throws Exception {
@@ -34,7 +41,20 @@ public class WorkerController {
 			log.info(">>>>> request.body: " + reqData);
 		}
 		
-		String resData = "{\"msgCode\": \"MC00011\", \"status\": \"SUCCESS\"}";  //this.monHttpClient.post(httpUrl, reqData);
+		String resData = null;
+		if (Boolean.TRUE) {
+			MonJsonNode reqNode = new MonJsonNode(reqData);
+			log.info(">>>>> reqNode: " + reqNode.toPrettyString());
+			
+			Cmd cmd = new Cmd();
+			cmd.setId(Long.parseLong(reqNode.getText("id")));
+			cmd.setCmdArr(reqNode.getText("cmdArr"));
+			cmd.setCmdPeriod(reqNode.getText("cmdPeriod"));
+			
+			this.asyncCommandTask.async0103(cmd);
+			
+			resData = "{\"msgCode\": \"MC00011\", \"status\": \"SUCCESS\"}";
+		}
 		
 		MultiValueMap<String,String> headers = null;
 		if (Boolean.TRUE) {
@@ -60,7 +80,15 @@ public class WorkerController {
 			log.info(">>>>> request.body: " + reqData);
 		}
 		
-		String resData = "{\"msgCode\": \"MC00091\", \"status\": \"SUCCESS\"}";  //this.monHttpClient.post(httpUrl, reqData);
+		String resData = null;
+		if (Boolean.TRUE) {
+			MonJsonNode reqNode = new MonJsonNode(reqData);
+			log.info(">>>>> reqNode: " + reqNode.toPrettyString());
+			
+			this.asyncCommandTask.stopAsync();
+			
+			resData = "{\"msgCode\": \"MC00091\", \"status\": \"SUCCESS\"}";
+		}
 		
 		MultiValueMap<String,String> headers = null;
 		if (Boolean.TRUE) {
