@@ -5,7 +5,7 @@ import java.util.HashMap;
 import org.springframework.jdbc.support.JdbcUtils;
 
 @SuppressWarnings("rawtypes")
-public class LowerMap extends HashMap {
+public class CamelMap extends HashMap {
 
 	private static final long serialVersionUID = 0L;
 	
