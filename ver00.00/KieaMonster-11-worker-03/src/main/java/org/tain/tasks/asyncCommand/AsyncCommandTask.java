@@ -93,33 +93,34 @@ public class AsyncCommandTask {
 					//nodeResult.put("cmdDttm", LocalDateTime.now());
 				}
 				
+				StringBuffer sb = null;
+				String line = null;
+				Process process = null;
 				if (Boolean.TRUE) {
 					// run process and get the result
-					Process process = Runtime.getRuntime().exec(cmd.getCmdArr());
-					
-					BufferedReader br = new BufferedReader(new InputStreamReader(process.getInputStream(), "UTF-8"));
-					StringBuffer sb = new StringBuffer();
-					String line = null;
-					//System.out.println("<OUTPUT>");
-					//sb.append("<OUTPUT>").append("\n");
+					sb = new StringBuffer();
+					process = Runtime.getRuntime().exec(cmd.getCmdArr());
+				}
+				
+				if (Boolean.TRUE) {
+					BufferedReader br = new BufferedReader(new InputStreamReader(process.getInputStream(), "UTF-8"));  // OUTPUT ?EUC-KR
 					while ((line = br.readLine()) != null) {
-						//System.out.println("> " + line);
-						//sb.append("> ");
 						sb.append(line).append("\n");
 					}
-					//sb.append("====================================================\n");
-					//System.out.println("</OUTPUT>");
-					//sb.append("</OUTPUT>").append("\n");
-					
+				}
+				
+				if (Boolean.TRUE) {
+					BufferedReader br = new BufferedReader(new InputStreamReader(process.getErrorStream(), "UTF-8"));  // ERROR ?EUC-KR
+					while ((line = br.readLine()) != null) {
+						sb.append(line).append("\n");
+					}
+				}
+				
+				if (Boolean.TRUE) {
 					int exitVal = process.waitFor();
-					//System.out.println("Process exitVal = " + exitVal);
 					int len = sb.length();
-					//sb.insert(0, "----------------------------------------------------\n");
-					//sb.insert(0, String.format("DATE: %s\n", new Date()));
-					//sb.insert(0, String.format("[idx:%d,len:%d] Process exitValue = %d\n", idx, len, exitVal));
 					process.destroy();
 					
-					//System.out.println(sb.toString());
 					nodeResult.put("cmdResult", sb.toString());
 				}
 				
