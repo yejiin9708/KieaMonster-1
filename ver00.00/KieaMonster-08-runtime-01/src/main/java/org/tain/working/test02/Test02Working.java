@@ -190,7 +190,7 @@ public class Test02Working {
 		
 		if (!Flag.flag) {
 			// method-3
-			String[] cmd = new String[] {"netstat", "-n"};
+			String[] cmd = new String[] {"java", "-version"};
 			Process process = new ProcessBuilder(cmd).start();
 			process.waitFor();
 			
@@ -250,7 +250,7 @@ public class Test02Working {
 			fos.close();
 		}
 		
-		if (Flag.flag) {
+		if (!Flag.flag) {
 			// method-6
 			String[] cmd = new String[] {"ping", "-c", "3", "google.com"};
 			cmd = new String[] {"ping"};
@@ -269,10 +269,10 @@ public class Test02Working {
 			process.destroy();
 		}
 		
-		if (!Flag.flag) {
+		if (Flag.flag) {
 			// method-7
 			//String cmd = "ps -ef | head";
-			String cmd = "ps -ef";
+			String cmd = "java -version";
 			Process process = Runtime.getRuntime().exec(cmd);
 			
 			StreamGobbler errorGobbler = new StreamGobbler(process.getErrorStream(), "ERROR");

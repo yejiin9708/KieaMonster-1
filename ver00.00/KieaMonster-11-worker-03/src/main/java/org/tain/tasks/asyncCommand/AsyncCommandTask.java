@@ -2,7 +2,6 @@ package org.tain.tasks.asyncCommand;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.DependsOn;
@@ -73,6 +72,7 @@ public class AsyncCommandTask {
 		}
 	}
 	
+	@SuppressWarnings("unused")
 	private void cmdAgainSingle(Cmd cmd) throws Exception {
 		log.info("KANG-20200721 >>>>> {} {}", CurrentInfo.get());
 		
@@ -107,16 +107,16 @@ public class AsyncCommandTask {
 						//sb.append("> ");
 						sb.append(line).append("\n");
 					}
-					sb.append("====================================================\n");
+					//sb.append("====================================================\n");
 					//System.out.println("</OUTPUT>");
 					//sb.append("</OUTPUT>").append("\n");
 					
 					int exitVal = process.waitFor();
 					//System.out.println("Process exitVal = " + exitVal);
 					int len = sb.length();
-					sb.insert(0, "----------------------------------------------------\n");
-					sb.insert(0, String.format("DATE: %s\n", new Date()));
-					sb.insert(0, String.format("[idx:%d,len:%d] Process exitValue = %d\n", idx, len, exitVal));
+					//sb.insert(0, "----------------------------------------------------\n");
+					//sb.insert(0, String.format("DATE: %s\n", new Date()));
+					//sb.insert(0, String.format("[idx:%d,len:%d] Process exitValue = %d\n", idx, len, exitVal));
 					process.destroy();
 					
 					//System.out.println(sb.toString());
@@ -133,11 +133,11 @@ public class AsyncCommandTask {
 		}
 		
 		if (Boolean.TRUE) {
-			System.out.println("+------------------------------+");
-			System.out.println("|                              |");
-			System.out.println("|       Stop of the Async      |");
-			System.out.println("|                              |");
-			System.out.println("+------------------------------+");
+			System.out.println("+---------------------------------------------+");
+			System.out.println("|                                             |");
+			System.out.println("|       Stop of the Async in cmdAgainSingle   |");
+			System.out.println("|                                             |");
+			System.out.println("+---------------------------------------------+");
 		}
 	}
 	
@@ -173,17 +173,17 @@ public class AsyncCommandTask {
 					}
 				}
 				
+				if (Boolean.TRUE) {
+					System.out.println("+---------------------------------------------+");
+					System.out.println("|                                             |");
+					System.out.println("|       Stop of the Async in cmdKeepSingle    |");
+					System.out.println("|                                             |");
+					System.out.println("+---------------------------------------------+");
+				}
+				
 				process.waitFor();
 				process.destroy();
 			}
-		}
-		
-		if (Boolean.TRUE) {
-			System.out.println("+------------------------------+");
-			System.out.println("|                              |");
-			System.out.println("|       Stop of the Async      |");
-			System.out.println("|                              |");
-			System.out.println("+------------------------------+");
 		}
 	}
 }
