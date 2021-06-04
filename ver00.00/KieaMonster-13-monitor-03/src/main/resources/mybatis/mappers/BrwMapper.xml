@@ -6,7 +6,7 @@
 <mapper namespace="org.tain.mybatis.mappers.BrwMapper">
 
 	<!-- id: selectAll -->
-	<select id="selectAll" parameterType="LowerMap"  resultType="LowerMap">
+	<select id="selectAll" parameterType="CamelMap"  resultType="CamelMap">
 		select
 			id
 			, ip_addr
@@ -18,7 +18,7 @@
 	</select>
 	
 	<!-- id: selectOne -->
-	<select id="selectOne" parameterType="LowerMap"  resultType="LowerMap">
+	<select id="selectOne" parameterType="CamelMap"  resultType="CamelMap">
 		select
 			id
 			, ip_addr
