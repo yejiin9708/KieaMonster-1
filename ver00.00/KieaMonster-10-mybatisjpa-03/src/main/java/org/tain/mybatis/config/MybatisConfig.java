@@ -3,6 +3,7 @@ package org.tain.mybatis.config;
 import javax.sql.DataSource;
 
 import org.apache.ibatis.session.SqlSessionFactory;
+import org.apache.ibatis.type.JdbcType;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.context.annotation.Bean;
@@ -29,6 +30,8 @@ public class MybatisConfig {
 		bean.setMapperLocations(resolver.getResources("classpath:mappers/**/*Mapper.xml"));
 		bean.setTypeAliasesPackage("org.tain.mybatis.models");
 		bean.getObject().getConfiguration().setMapUnderscoreToCamelCase(true);
+		bean.getObject().getConfiguration().setJdbcTypeForNull(JdbcType.NULL);
+		bean.getObject().getConfiguration().setCallSettersOnNulls(true);
 		bean.getObject().getConfiguration().setCacheEnabled(true);
 		
 		return bean.getObject();
