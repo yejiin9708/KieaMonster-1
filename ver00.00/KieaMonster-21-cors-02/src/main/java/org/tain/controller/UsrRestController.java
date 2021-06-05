@@ -26,6 +26,7 @@ public class UsrRestController {
 		Map<String,Object> mapIn = null;
 		if (Boolean.TRUE) {
 			mapIn = new HashMap<>();
+			mapIn.put("id", id);
 			mapIn.put("userId", "kang");
 			mapIn.put("passWd", "seok");
 			mapIn.put("desc", "Time-" + LocalDateTime.now().toString());

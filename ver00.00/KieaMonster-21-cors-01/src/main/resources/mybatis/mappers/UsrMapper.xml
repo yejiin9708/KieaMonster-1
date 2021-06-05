@@ -6,6 +6,9 @@
 <mapper namespace="org.tain.mybatis.mappers.UsrMapper">
 
 	<insert id="insertOne" parameterType="CamelMap">
+	<selectKey keyColumn="id" keyProperty="id" resultType="CamelMap" order="BEFORE">
+		select usr_seq.nextval as id from dual
+	</selectKey>
 		insert into
 			tb_usr
 			(
@@ -16,13 +19,13 @@
 			)
 		values
 			(
-				usr_seq.nextval
+				#{id}
 				, #{userId}
 				, #{passWd}
 				, #{desc}
 			)
-	<selectKey keyProperty="id" resultType="_int" order="AFTER">
-		select usr_seq.currval from dual
+	<selectKey keyColumn="userId" keyProperty="userId" resultType="CamelMap" order="AFTER">
+		select userId from tb_usr where id = #{id}
 	</selectKey>
 	</insert>
 	
