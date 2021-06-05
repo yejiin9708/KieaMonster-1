@@ -12,8 +12,13 @@
 	},
 	{
 		"cdMst": "PERIOD",
-		"cdItm": "0",
+		"cdItm": "-1",
 		"cdVal": "keep",
+		"desc": ""
+	},{
+		"cdMst": "PERIOD",
+		"cdItm": "0",
+		"cdVal": "1 time",
 		"desc": ""
 	},{
 		"cdMst": "PERIOD",

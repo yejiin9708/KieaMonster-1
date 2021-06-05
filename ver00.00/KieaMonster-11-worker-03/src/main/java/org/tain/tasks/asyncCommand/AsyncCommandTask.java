@@ -72,11 +72,12 @@ public class AsyncCommandTask {
 		}
 	}
 	
-	@SuppressWarnings("unused")
 	private void cmdAgainSingle(Cmd cmd) throws Exception {
 		log.info("KANG-20200721 >>>>> {} {}", CurrentInfo.get());
 		
 		if (Boolean.TRUE) {
+			int period = Integer.parseInt(cmd.getCmdPeriod());
+			
 			// spring async kill thread
 			for (int idx=0; this.flgKeep; idx++) {
 				log.info(">>>>> cmd: {} {}", cmd, idx);
@@ -117,7 +118,9 @@ public class AsyncCommandTask {
 				}
 				
 				if (Boolean.TRUE) {
+					@SuppressWarnings("unused")
 					int exitVal = process.waitFor();
+					@SuppressWarnings("unused")
 					int len = sb.length();
 					process.destroy();
 					
@@ -128,7 +131,11 @@ public class AsyncCommandTask {
 					this.monQueueBox.setQueueSendResult(nodeResult);
 				}
 				
-				// wait for period
+				// if period == 0, then to single command
+				if (period == 0)
+					break;
+				
+				// sleep, wait for period
 				Sleep.run(Integer.parseInt(cmd.getCmdPeriod()) * 1000);
 			}
 		}
