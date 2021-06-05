@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.tain.mybatis.mappers.UsrMapper">
+
+	<delete id="deleteOne" parameterType="CamelMap">
+		delete from
+			tb_usr
+		where 1=1
+			and id = #{id}
+	</delete>
+	
+</mapper>
