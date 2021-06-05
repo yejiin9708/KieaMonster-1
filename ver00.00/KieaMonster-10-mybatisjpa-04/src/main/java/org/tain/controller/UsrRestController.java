@@ -30,6 +30,15 @@ public class UsrRestController {
 		return this.usrMapper.selectAll(mapIn);
 	}
 	
+	@GetMapping("/insertOne")
+	public int insertOne() {
+		Map<String,Object> mapIn = new HashMap<>();
+		mapIn.put("userId", "KANG");
+		mapIn.put("passWd", "SEOK");
+		mapIn.put("desc", "HELLO WORLD!");
+		return this.usrMapper.insertOne(mapIn);
+	}
+	
 	@GetMapping("/{id}/delete")
 	public int deleteById(@PathVariable("id") Long id) {
 		Map<String,Object> mapIn = new HashMap<>();

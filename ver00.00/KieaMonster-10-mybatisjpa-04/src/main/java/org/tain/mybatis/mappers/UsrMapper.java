@@ -13,8 +13,11 @@ public interface UsrMapper {
 	// selectAll
 	List<Map<String,Object>> selectAll(Map<String,Object> mapIn);
 
+	// insertOne
+	int insertOne(Map<String,Object> mapIn);
+	
 	// insert
-	@Insert("insert into tb_usr(id, user_id, pass_wd, desc) values (#{id}, #{userId}, #{passWd}, #{desc})")
+	@Insert("insert into tb_usr(id, user_id, pass_wd, desc) values (usr_seq.nextval, #{userId}, #{passWd}, #{desc})")
 	int insert(Map<String,Object> mapIn);
 	
 	// delete
