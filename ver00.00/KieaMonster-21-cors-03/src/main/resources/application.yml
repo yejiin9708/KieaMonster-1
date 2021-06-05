@@ -5,7 +5,7 @@
 # BASE of worker
 
 server:
-  port: 8083
+  port: 8883
   servlet:
     context-path: /v0.1
     encoding:
