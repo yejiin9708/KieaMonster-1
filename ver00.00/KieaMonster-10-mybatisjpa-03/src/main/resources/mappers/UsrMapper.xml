@@ -3,22 +3,22 @@
 	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="org.tain.mybatis.mappers.UserMapper">
+<mapper namespace="org.tain.mybatis.mappers.UsrMapper">
 
-	<!-- selectAllUsers -->
-	<select id="selectAllUsers" resultType="User">
+	<!-- selectAll -->
+	<select id="selectAll" parameterType="CamelMap" resultType="CamelMap">
 		select
 			id
 			, user_id
 			, pass_wd
-			, group_cd
-			, roll_cd
+			, desc
 		from
-			tb_user
+			tb_usr
 		where 1=1
 	<if test='id != null and id != ""'>
 			and id = #{id}
 	</if>
 	</select>
+	
 	
 </mapper>

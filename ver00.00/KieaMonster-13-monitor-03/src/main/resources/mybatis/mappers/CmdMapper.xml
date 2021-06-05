@@ -6,7 +6,7 @@
 <mapper namespace="org.tain.mybatis.mappers.CmdMapper">
 
 	<!-- id: selectAll -->
-	<select id="selectAll" parameterType="LowerMap"  resultType="LowerMap">
+	<select id="selectAll" parameterType="CamelMap"  resultType="CamelMap">
 		select
 			id
 			, mst_type
@@ -23,7 +23,7 @@
 	</select>
 	
 	<!-- id: selectOne -->
-	<select id="selectOne" parameterType="LowerMap"  resultType="LowerMap">
+	<select id="selectOne" parameterType="CamelMap"  resultType="CamelMap">
 		select
 			id
 			, mst_type
@@ -42,7 +42,7 @@
 	
 	<!-- ==================================================================== -->
 	<!-- id: selectAllByGrp -->
-	<select id="selectAllByGrp" parameterType="LowerMap"  resultType="LowerMap">
+	<select id="selectAllByGrp" parameterType="CamelMap"  resultType="CamelMap">
 		select
 			id
 			, mst_type
@@ -61,7 +61,7 @@
 	</select>
 	
 	<!-- id: selectOneByGrp -->
-	<select id="selectOneByGrp" parameterType="LowerMap" resultType="LowerMap">
+	<select id="selectOneByGrp" parameterType="CamelMap" resultType="CamelMap">
 		select
 			id
 			, mst_type
@@ -82,7 +82,7 @@
 	
 	<!-- ==================================================================== -->
 	<!-- id: selectAllBySvr -->
-	<select id="selectAllBySvr" parameterType="LowerMap"  resultType="LowerMap">
+	<select id="selectAllBySvr" parameterType="CamelMap"  resultType="CamelMap">
 		select
 			id
 			, mst_type
@@ -101,7 +101,7 @@
 	</select>
 	
 	<!-- id: selectOneBySvr -->
-	<select id="selectOneBySvr" parameterType="LowerMap" resultType="LowerMap">
+	<select id="selectOneBySvr" parameterType="CamelMap" resultType="CamelMap">
 		select
 			id
 			, mst_type

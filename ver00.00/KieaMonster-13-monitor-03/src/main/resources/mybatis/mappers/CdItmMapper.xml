@@ -6,7 +6,7 @@
 <mapper namespace="org.tain.mybatis.mappers.CdItmMapper">
 
 	<!-- id: selectAll -->
-	<select id="selectAll" parameterType="LowerMap"  resultType="LowerMap">
+	<select id="selectAll" parameterType="CamelMap"  resultType="CamelMap">
 		select
 			id
 			, cd_mst
@@ -19,7 +19,7 @@
 	</select>
 	
 	<!-- id: selectOne -->
-	<select id="selectOne" parameterType="LowerMap"  resultType="LowerMap">
+	<select id="selectOne" parameterType="CamelMap"  resultType="CamelMap">
 		select
 			id
 			, cd_mst
@@ -34,7 +34,7 @@
 	
 	<!-- ==================================================================== -->
 	<!-- id: selectAll -->
-	<select id="selectAllByMst" parameterType="LowerMap"  resultType="LowerMap">
+	<select id="selectAllByMst" parameterType="CamelMap"  resultType="CamelMap">
 		select
 			id
 			, cd_mst
@@ -48,7 +48,7 @@
 	</select>
 	
 	<!-- id: selectOne -->
-	<select id="selectOneByMst" parameterType="LowerMap"  resultType="LowerMap">
+	<select id="selectOneByMst" parameterType="CamelMap"  resultType="CamelMap">
 		select
 			id
 			, cd_mst

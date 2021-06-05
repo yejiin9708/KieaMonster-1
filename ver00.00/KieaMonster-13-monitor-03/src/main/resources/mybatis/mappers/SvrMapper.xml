@@ -6,7 +6,7 @@
 <mapper namespace="org.tain.mybatis.mappers.SvrMapper">
 
 	<!-- id: selectAll -->
-	<select id="selectAll" parameterType="LowerMap"  resultType="LowerMap">
+	<select id="selectAll" parameterType="CamelMap"  resultType="CamelMap">
 		select
 			id
 			, svr_code
@@ -19,7 +19,7 @@
 	</select>
 	
 	<!-- id: selectOne -->
-	<select id="selectOne"  parameterType="LowerMap"  resultType="LowerMap">
+	<select id="selectOne"  parameterType="CamelMap"  resultType="CamelMap">
 		select
 			id
 			, svr_code
@@ -34,7 +34,7 @@
 	
 	<!-- ==================================================================== -->
 	<!-- id: selectAllByGrp -->
-	<select id="selectAllByGrp"  parameterType="LowerMap"  resultType="LowerMap">
+	<select id="selectAllByGrp"  parameterType="CamelMap"  resultType="CamelMap">
 		select
 			svr.id
 			, grp.grp_code
@@ -51,7 +51,7 @@
 	</select>
 	
 	<!-- id: selectOneByGrp -->
-	<select id="selectOneByGrp"  parameterType="LowerMap"  resultType="LowerMap">
+	<select id="selectOneByGrp"  parameterType="CamelMap"  resultType="CamelMap">
 		select
 			svr.id
 			, grp.grp_code

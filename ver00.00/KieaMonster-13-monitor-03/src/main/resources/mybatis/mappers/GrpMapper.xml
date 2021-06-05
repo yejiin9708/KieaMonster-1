@@ -6,7 +6,7 @@
 <mapper namespace="org.tain.mybatis.mappers.GrpMapper">
 
 	<!-- id: selectAll -->
-	<select id="selectAll" parameterType="LowerMap"  resultType="LowerMap">
+	<select id="selectAll" parameterType="CamelMap"  resultType="CamelMap">
 		select
 			id
 			, org_code
@@ -20,7 +20,7 @@
 	</select>
 	
 	<!-- id: selectOne -->
-	<select id="selectOne" parameterType="LowerMap"  resultType="LowerMap">
+	<select id="selectOne" parameterType="CamelMap"  resultType="CamelMap">
 		select
 			id
 			, org_code

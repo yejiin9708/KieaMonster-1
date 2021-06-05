@@ -4,14 +4,12 @@ import java.util.HashMap;
 
 import org.springframework.jdbc.support.JdbcUtils;
 
-@SuppressWarnings("rawtypes")
-public class CamelMap extends HashMap {
+public class CamelMap extends HashMap<String,Object> {
 
 	private static final long serialVersionUID = 0L;
 	
-	@SuppressWarnings("unchecked")
 	@Override
-	public Object put(Object key, Object value) {
-		return super.put(JdbcUtils.convertUnderscoreNameToPropertyName((String) key), value);
+	public Object put(String key, Object value) {
+		return super.put(JdbcUtils.convertUnderscoreNameToPropertyName(key), value);
 	}
 }

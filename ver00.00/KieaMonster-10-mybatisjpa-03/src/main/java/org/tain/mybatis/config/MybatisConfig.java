@@ -30,6 +30,8 @@ public class MybatisConfig {
 		bean.setMapperLocations(resolver.getResources("classpath:mappers/**/*Mapper.xml"));
 		bean.setTypeAliasesPackage("org.tain.mybatis.models");
 		bean.getObject().getConfiguration().setMapUnderscoreToCamelCase(true);
+		bean.getObject().getConfiguration().setJdbcTypeForNull(JdbcType.NULL);
+		bean.getObject().getConfiguration().setCallSettersOnNulls(true);
 		bean.getObject().getConfiguration().setCacheEnabled(true);
 		bean.getObject().getConfiguration().setCallSettersOnNulls(true);
 		bean.getObject().getConfiguration().setJdbcTypeForNull(JdbcType.NULL);

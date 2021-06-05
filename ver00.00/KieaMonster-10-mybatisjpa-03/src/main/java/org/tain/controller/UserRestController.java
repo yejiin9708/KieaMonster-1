@@ -18,7 +18,7 @@ import org.tain.mybatis.models.User;
 
 @RestController
 @RequestMapping("/user")
-public class UserController {
+public class UserRestController {
 
 	@Autowired
 	private UserMapper userMapper;
