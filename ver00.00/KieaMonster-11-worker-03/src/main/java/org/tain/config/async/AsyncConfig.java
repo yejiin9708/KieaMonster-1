@@ -26,9 +26,9 @@ public class AsyncConfig extends AsyncConfigurerSupport {
 	@Bean(name = "async_0101")
 	public Executor _async0101() {
 		ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
-		executor.setCorePoolSize(5);
-		executor.setMaxPoolSize(5);
-		executor.setQueueCapacity(5);
+		executor.setCorePoolSize(2);
+		executor.setMaxPoolSize(2);
+		executor.setQueueCapacity(2);
 		executor.setThreadNamePrefix("Async_0101-");
 		executor.initialize();
 		return executor;

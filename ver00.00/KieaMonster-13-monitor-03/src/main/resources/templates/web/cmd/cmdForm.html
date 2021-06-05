@@ -451,6 +451,18 @@
 				$("#resultGrp").append(jsonRes.cmdResult);
 			}
 		}
+		
+		if (true) {
+			var period = $("#periodSvr").val();
+			if (period == 0) {
+				// single command
+				console.log('>>>>> period: ' + period);
+				if ($("#btnStartSvr").is(":disabled") == true) {
+					$("#btnStartSvr").attr("disabled", false);
+					$("#btnStopSvr").attr("disabled", true);
+				}
+			}
+		}
 	};
 	function sendMessage(message) {
 		ws.send(message);

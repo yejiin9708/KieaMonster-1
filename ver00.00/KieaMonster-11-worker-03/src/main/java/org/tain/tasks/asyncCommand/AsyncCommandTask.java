@@ -64,7 +64,8 @@ public class AsyncCommandTask {
 		
 		if (Boolean.TRUE) {
 			this.flgKeep = true;
-			if (Integer.parseInt(cmd.getCmdPeriod()) == 0) {
+			int period = Integer.parseInt(cmd.getCmdPeriod());
+			if (period < 0) {
 				cmdKeepSingle(cmd);
 			} else {
 				cmdAgainSingle(cmd);
